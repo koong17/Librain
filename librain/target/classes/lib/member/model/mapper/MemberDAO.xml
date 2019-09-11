@@ -32,12 +32,12 @@
 	<!-- 리스트(selectAll) -->
 	<select id="getMemberList" parameterType="hashmap"
 		resultType="lib.member.model.MemberDTO"></select>
-	select * from
+	<!-- select * from
 	(select A.*,ROWNUM r from
 	(select * from member order by
 	parent desc, sort) A
 	)
-	where r >= #{start} and r &lt;= #{end}
+	where r >= #{start} and r &lt;= #{end} -->
 	<!-- 검색(select where) -->
 
 </mapper>
