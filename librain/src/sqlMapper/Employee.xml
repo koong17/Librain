@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="EMPLOYEE">
-	<select id="insert">
-		insert into employee_management(emp_name) values('수아')
-	</select>
+<mapper namespace="lib.employee.model.EmployeeDAO">
+	<insert id="insertaa">
+		insert into employee_management(emp_name) values('aa')
+	</insert>
 </mapper>

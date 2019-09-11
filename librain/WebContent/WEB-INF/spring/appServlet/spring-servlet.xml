@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 	
 	
-	<context:component-scan base-package="lib.*" /> <!-- 수정 -->
+	<context:component-scan base-package="lib.employee.model.*" />
 	
 	<bean class="lib.employee.controller.TestController" />
 	

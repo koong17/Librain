@@ -1,22 +1,25 @@
 package lib.employee.controller;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lib.employee.model.EmployeeDAO;
 
 @Controller
+@Component
 public class TestController {
 	
 	@Autowired
 	private SqlSession sqlsession;
 	
-	@RequestMapping("/index.do")
-	public String insert() {
+	@RequestMapping("/hi.do")
+	public String insertTest() {
 		EmployeeDAO empDAO = sqlsession.getMapper(EmployeeDAO.class);
-		empDAO.insert();
+		empDAO.insertaa();
 		return "test";
 	}
 }
