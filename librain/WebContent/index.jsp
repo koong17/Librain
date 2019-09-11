@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Index.jsp</title>
 </head>
 <body>
-전부 jsp로 해주십시오
+직원로그인 // 도서검색(찌끄맣게 by.수아)
 </body>
 </html>

@@ -1,11 +1,11 @@
 package lib.board.controller;
 
 public class BoardController {
-
-	//Controller´Â ÃëÇâ²¯ ³ª´©½Ê½Ã¿À
-	//(ÀüÃ¼°Ë»ö)selectAll //(°Ë»ö)select //(¼öÁ¤)update //(»ğÀÔ)insert //(»èÁ¦)delete
-	//º¯¼öÀÌ¸§Àº Ã¹±ÛÀÚ ¼Ò¹®ÀÚ camelCase
-	//¸Ş¼Òµå´Â ±â´É ¼³¸íÀÌ °¡´ÉÇÏ°Ô ¸í¸í
-	//º¯¼ö¸í__VO´Â DBÄ®·³¸íÀÌ¶û ¶È°°ÀÌ
 	
+	// ControllerëŠ” ì·¨í–¥ê» ë‚˜ëˆ„ì‹­ì‹œì˜¤
+	// (ì „ì²´ê²€ìƒ‰)selectAll //(ê²€ìƒ‰)select //(ìˆ˜ì •)update //(ì‚½ì…)insert //(ì‚­ì œ)delete
+	// ë³€ìˆ˜ì´ë¦„ì€ ì²«ê¸€ì ì†Œë¬¸ì camelCase
+	// ë©”ì†Œë“œëŠ” ê¸°ëŠ¥ ì„¤ëª…ì´ ê°€ëŠ¥í•˜ê²Œ ëª…ëª…
+	// ë³€ìˆ˜ëª…__VOëŠ” DBì¹¼ëŸ¼ëª…ì´ë‘ ë˜‘ê°™ì´
+
 }
