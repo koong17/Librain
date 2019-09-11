@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib.book.model.BookDAO">
+	<!-- 글쓰기 -->
+	<insert id="insertBoard" parameterType="kr.co.mycom.model.BoardDTO">
+		insert into spring_board(num, name, email, pwd, subject, content, regdate, hit, parent, sort, tab)
+		values( (select NVL(max(num),0)+1 from spring_board), #{name},#{email},#{pwd},#{subject},#{content},SYSDATE,0,(select NVL(max(num),0)+1 from spring_board),0,0)
+	</insert>
+	
+	<!-- 글 가져오기 -->
+	<select id="getBoardList" parameterType="hashmap" resultType="kr.co.mycom.model.BoardDTO">
+		select * from
+	 		(select A.*,ROWNUM r from 
+	 		 	(select * from spring_board order by parent desc, sort) A
+	 	 	)
+ 	 	where r >= #{start} and r &lt;= #{end} <!-- where sal <= 1000 -->
+	</select>
+	
+	<!-- 글 하나 가져오기 -->
+	<select id="getBoard" parameterType="Integer" resultType="kr.co.mycom.model.BoardDTO">
+ 		select * from spring_board where num = #{num}
+ 	</select> 
+ 	
+ 	<update id = "updateBoard" parameterType="kr.co.mycom.model.BoardDTO">
+     update spring_board set name=#{name}, email=#{email}, subject=#{subject}, content=#{content}, regdate = sysdate 
+     where num = #{num} and pwd = #{pwd}
+ </update>
+ 
+ <delete id = "deleteBoard" parameterType="kr.co.mycom.model.BoardDTO">
+     delete from spring_board where num = #{num} and pwd = #{pwd}
+ </delete>
+
+  <update id = "updateHit" parameterType="Integer">
+     update spring_board set
+     	hit = hit + 1
+     where num = #{num}
+ </update>
+ 
+ <select id="getBoardCount" resultType="Integer">
+ 	select count(*) from spring_board
+ </select>
+ 
+ <update id="updateSort" parameterType="kr.co.mycom.model.BoardDTO">
+ 	update spring_board set
+ 		sort = sort + 1
+ 	where parent = #{parent} and sort >= #{sort}  	
+ </update>
+ 
+  <insert id="insertReply" parameterType="kr.co.mycom.model.BoardDTO">
+ 	insert into spring_board(num, name, email, pwd, subject, content, regdate, hit, parent, sort, tab)
+	values( (select NVL(max(num),0)+1 from spring_board), #{name},#{email},#{pwd},#{subject},#{content},SYSDATE,0,#{parent},#{sort},#{tab})
+ </insert> 
+ 
+ 	
+ 	
+</mapper>
