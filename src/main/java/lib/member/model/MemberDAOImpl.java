@@ -13,34 +13,28 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession sqlsession;
 
-	@Override
-	public void insertMember(MemberDTO dto) {
+	@Override	// 권한변경 구현
+	public void rankMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.insertMember(dto);
+		memberDAO.rankMember(dto);
 	}
-
-	@Override
-	public void updateMember(MemberDTO dto) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.updateMember(dto);
-	}
-
-	@Override
+	
+	@Override	// 삭제(탈퇴)
 	public void deleteMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
 		memberDAO.deleteMember(dto);
 	}
 
-	@Override
+	@Override	// 멤버 리스트 출력
 	public List<MemberDTO> getMemberList(HashMap map) {
-		// TODO Auto-generated method stub
-		return null;
+		return SqlSession.getList("getMemberList",map);
 	}
 
-	@Override
+	@Override	// 검색
 	public void selectMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
 		memberDAO.selectMember(dto);
 	}
+
 
 }
