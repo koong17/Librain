@@ -13,11 +13,31 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
+
 	@Override
-	public List<BookDTO> selectBook(String str) {
-		BookDAO bookDAO = sqlsession.getMapper(BookDAO.class);
-		return bookDAO.selectBook(str);
+	public List<BookDTO> searchAll(String str) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public List<BookDTO> searchBookName(String str) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BookDTO> searchAuthor(String str) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BookDTO> searchPub(String str) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }
