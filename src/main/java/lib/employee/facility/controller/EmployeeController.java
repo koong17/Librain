@@ -18,12 +18,9 @@ public class EmployeeController {
 	
 @GetMapping(value = "/aa.do")
 public String check(Model model) {
-	System.out.println("확인");
+	System.out.println("냠냠");
 	List<FacilitiesDTO> list=facilitiesDAO.facSelect();
 	model.addAttribute("list",list);
 	return "employee/erp/facility/example";
-}
-
-	
-	
+	}
 }
