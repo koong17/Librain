@@ -1,5 +1,6 @@
 package lib.employee.model;
 
-public class EmployeeDAO {
 
+public interface EmployeeDAO {
+	public void insertaa();
 }

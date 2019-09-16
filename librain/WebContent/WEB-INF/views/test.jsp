@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-직원로그인 // 도서검색(찌끄맣게 by.수아)
+테스트페이지임니다.
 </body>
 </html>
