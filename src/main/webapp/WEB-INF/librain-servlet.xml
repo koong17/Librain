@@ -10,6 +10,8 @@
 <annotation-driven/>
 <context:component-scan base-package="lib.employee.facility.controller"/>
 <context:component-scan base-package="lib.employee.facility.model"/>
+<context:component-scan base-package="lib.member.book.model"/>
+<context:component-scan base-package="lib.member.book.controller"/>
 
 	 <resources mapping="/resources/**" location="/resources/" />
 
