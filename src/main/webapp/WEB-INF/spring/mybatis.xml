@@ -22,7 +22,7 @@
 		<property name="mapperLocations">
 		<list>
 			<value>classpath:sqlmapper/Facilmapper.xml</value>
-			<value>classpath:sqlmapper/Facilmapper2.xml</value>
+			<value>classpath:sqlmapper/MgmtMapper.xml</value>
 		</list>
 		</property>
 	</bean>
