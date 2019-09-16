@@ -5,10 +5,9 @@
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
-	<enableImports><![CDATA[false]]></enableImports>
+	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>WebContent/WEB-INF/mybatis-context.xml</config>
-		<config>WebContent/WEB-INF/librain-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/mybatis.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
