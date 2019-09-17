@@ -29,7 +29,7 @@
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-1 pt-3">
 					<div class="form-group ">
-						<select id="inputState " class="form-control">
+						<select id="category" class="form-control">
 							<option selected>전체</option>
 							<option>도서명</option>
 							<option>저자명</option>
@@ -37,12 +37,11 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-5">
-					<input class="form-control" type="text" placeholder="검색어를 입력하세요."
-						id="search">
+				<div class="col-md-4">
+					<input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord">
 				</div>
 				<div class="col-md-1">
-					<button type="button" class="btn btn-primary btn-block">검색</button>
+					<button type="button" class="btn btn-primary btn-block" id="searchB tn">검색</button>
 				</div>
 			</div>
 		</div>
