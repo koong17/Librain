@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="lib.member.book.model.BookDAO">
+
+	<select id="searchAll" parameterType="String" resultType="lib.member.book.model.BookDTO">
+		select * from book where book_author like '%#{ searchWord }%' or book_name like '%#{ searchWord }%' or book_pub_house like '%#{ searchWord }%'
+	</select>
+	
+	<select id="searchBookName" parameterType="String" resultType="lib.member.book.model.BookDTO">
+		select * from book where book_name like '%#{ searchWord }%'
+	</select>
+	
+	<select id="searchAuthor" parameterType="String" resultType="lib.member.book.model.BookDTO">
+		select * from book where book_author like '%#{ searchWord }%'
+	</select>
+	
+	<select id="searchPub" parameterType="String" resultType="lib.member.book.model.BookDTO">
+		select * from book where book_pub_house like '%#{ searchWord }%'
+	</select>
+	
+</mapper>

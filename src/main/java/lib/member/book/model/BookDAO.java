@@ -1,8 +1,6 @@
-package lib.member.book.service;
+package lib.member.book.model;
 
 import java.util.List;
-
-import lib.member.book.model.BookDTO;
 
 public interface BookDAO {
 	public List<BookDTO> searchAll(String str); //전체검색
