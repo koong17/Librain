@@ -5,18 +5,16 @@ import java.util.List;
 
 public interface MemberDAO {
 
-	//가입(직원 or 가상의 웹페이지)
-	public void insertMember(MemberDTO dto);
-
-	//수정
-	public void updateMember(MemberDTO dto);
+	//권한 설정(유공자나 블랙리스트 등)
+	public void rankMember(MemberDTO dto);
 	
 	//삭제(탈퇴)
 	public void deleteMember(MemberDTO dto);
+
+	//검색(select where)
+	public void selectMember(MemberDTO dto);
 	
 	//리스트(selectAll)
 	public List<MemberDTO> getMemberList();
 	
-	//검색(select where)
-	public void selectMember(MemberDTO dto);
 }

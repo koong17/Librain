@@ -1,4 +1,4 @@
-package lib.member.model;
+﻿package lib.member.model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,19 +13,13 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession sqlsession;
 
-	@Override
-	public void insertMember(MemberDTO dto) {
+	@Override	// 권한변경 구현
+	public void rankMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.insertMember(dto);
+		memberDAO.rankMember(dto);
 	}
-
-	@Override
-	public void updateMember(MemberDTO dto) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.updateMember(dto);
-	}
-
-	@Override
+	
+	@Override	// 삭제(탈퇴)
 	public void deleteMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
 		memberDAO.deleteMember(dto);
@@ -36,10 +30,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlsession.getMapper(MemberDAO.class).getMemberList();
 	}
 
-	@Override
+	@Override	// 검색
 	public void selectMember(MemberDTO dto) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
 		memberDAO.selectMember(dto);
 	}
-
 }
+
+
