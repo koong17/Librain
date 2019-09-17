@@ -10,7 +10,7 @@
 		insert into member values(#{mem_id}, #{mem_pw},
 		#{mem_name}, #{mem_jumin}, #{mem_address},
 		#{mem_phone}, #{mem_email},
-		#{mem_overdue_period})
+		#{mem_rank})
 	</insert>
 	
 	<!-- 연체기간 자동 ++ => 할거 다 해놓고 하고싶으면 하기. 아마 글쓰기에서 +1이랑 비슷할듯 -->
@@ -33,13 +33,9 @@
 	</delete>
 
 	<!-- 리스트(selectAll) -->
-	<select id="getMemberList" parameterType="hashmap"
+	<select id="getMemberList" 
 		resultType="lib.member.model.MemberDTO">
-		select * from
-		(select A.*,ROWNUM r from
-		(select * from member order by parent desc, sort) A
-		)
-		where r >= #{start} and r &lt;= #{end}
+		select * from member
 	</select>
 
 		<!-- 검색(select where) -->

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="./aa.do">확인</a>
+<a href="./aa.do">confirm</a>
 
 </body>
 </html>

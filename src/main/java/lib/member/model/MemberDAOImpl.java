@@ -32,9 +32,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<MemberDTO> getMemberList(HashMap map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberDTO> getMemberList() {
+		return sqlsession.getMapper(MemberDAO.class).getMemberList();
 	}
 
 	@Override

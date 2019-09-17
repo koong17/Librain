@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-전부 jsp로 해주십시오
+
+<c:forEach var="list" items="${list }">
+${ list.mem_id }
+</c:forEach>
+
 </body>
 </html>

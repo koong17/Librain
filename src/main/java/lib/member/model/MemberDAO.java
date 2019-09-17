@@ -15,7 +15,7 @@ public interface MemberDAO {
 	public void deleteMember(MemberDTO dto);
 	
 	//리스트(selectAll)
-	public List<MemberDTO> getMemberList(HashMap map);
+	public List<MemberDTO> getMemberList();
 	
 	//검색(select where)
 	public void selectMember(MemberDTO dto);

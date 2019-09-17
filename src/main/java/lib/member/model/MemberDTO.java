@@ -9,11 +9,9 @@ public class MemberDTO {
 	private String mem_address;
 	private String mem_phone;
 	private String mem_email;
-	private int mem_overdue_period;
-
+	private int mem_rank;
 	
 	/////////setter and getter
-	
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -70,12 +68,12 @@ public class MemberDTO {
 		this.mem_email = mem_email;
 	}
 
-	public int getMem_overdue_period() {
-		return mem_overdue_period;
+	public int getMem_rank() {
+		return mem_rank;
 	}
 
-	public void setMem_overdue_period(int mem_overdue_period) {
-		this.mem_overdue_period = mem_overdue_period;
+	public void setMem_rank(int mem_rank) {
+		this.mem_rank = mem_rank;
 	}
 
 }
