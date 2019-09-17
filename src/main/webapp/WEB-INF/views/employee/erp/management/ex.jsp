@@ -7,17 +7,15 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 </head>
 <body>
-	<div id="empGrid"></div>
+	<div id="grid" width='200px'></div>
 	<c:forEach var="emp" items="${list }">
-		${emp.empName } / 
+		${ emp.empName } / 
 	</c:forEach>
 </body>
 
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <script type="text/javascript">
-	
-	window.onload = function() {
-		const data = [
+		const gridData = [
 			{
 				name: 'aa'
 			},
@@ -28,7 +26,7 @@
 		
 		const grid = new tui.Grid({
 			el: document.getElementById('grid'),
-			data: data,
+			data: gridData,
 			scrollX: false,
 			scrollY: false,
 			columns: [
@@ -38,8 +36,6 @@
 				}
 			]
 		});
-				
-	}
 	
 	
 </script>
