@@ -10,9 +10,8 @@ public class MemberDTO {
 	private String mem_phone;
 	private String mem_email;
 	private int mem_rank;
-
-	///////// setter and getter
-
+	
+	/////////setter and getter
 	public String getMem_id() {
 		return mem_id;
 	}

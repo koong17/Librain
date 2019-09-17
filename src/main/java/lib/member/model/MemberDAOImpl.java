@@ -1,4 +1,4 @@
-package lib.member.model;
+﻿package lib.member.model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +25,9 @@ public class MemberDAOImpl implements MemberDAO {
 		memberDAO.deleteMember(dto);
 	}
 
-	@Override	// 멤버 리스트 출력
-	public List<MemberDTO> getMemberList(HashMap map) {
-		return sqlsession.selectList("getMemberList",map);
+	@Override
+	public List<MemberDTO> getMemberList() {
+		return sqlsession.getMapper(MemberDAO.class).getMemberList();
 	}
 
 	@Override	// 검색
@@ -35,8 +35,6 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
 		memberDAO.selectMember(dto);
 	}
-
-
 }
 
 

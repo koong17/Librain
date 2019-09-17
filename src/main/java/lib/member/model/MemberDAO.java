@@ -15,6 +15,6 @@ public interface MemberDAO {
 	public void selectMember(MemberDTO dto);
 	
 	//리스트(selectAll)
-	public List<MemberDTO> getMemberList(HashMap map);
+	public List<MemberDTO> getMemberList();
 	
 }

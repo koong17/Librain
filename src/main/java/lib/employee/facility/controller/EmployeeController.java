@@ -16,7 +16,7 @@ public class EmployeeController {
 	@Autowired
 	FacilitiesDAO facilitiesDAO; 
 	
-@GetMapping(value = "/aa.do")
+
 public String check(Model model) {
 	System.out.println("냠냠");
 	List<FacilitiesDTO> list=facilitiesDAO.facSelect();
