@@ -9,6 +9,6 @@
 	Hello world!  kjzdfg;lf,n
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>  예원 HI </P>
 </body>
 </html>
