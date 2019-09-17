@@ -27,7 +27,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override	// 멤버 리스트 출력
 	public List<MemberDTO> getMemberList(HashMap map) {
-		return SqlSession.getList("getMemberList",map);
+		return sqlsession.selectList("getMemberList",map);
 	}
 
 	@Override	// 검색
@@ -38,3 +38,5 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 }
+
+

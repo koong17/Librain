@@ -5,16 +5,11 @@
 
 <mapper namespace="lib.member.model.MemberDAO">
 	
-	<!-- 연체기간 자동 ++ => 할거 다 해놓고 하고싶으면 하기. 아마 글쓰기에서 +1이랑 비슷할듯 -->
-	<!-- <insert id="overdueMember" parameterType="lib.member.model.MemberDTO">
-		insert into member(mem_overdue_period) values ((select NVL(max (rent_enddate)+1,0) from member));
-	</insert> -->
-	
 	<!-- 권한변경 -->
 	<update id="rankMember"
 		parameterType="lib.member.model.MemberDTO">
 		<!-- 권한부여 구문 미완성 -->
-		update from member where mem_id = #{mem_id}
+		update from member where mem_rank = #{mem_rank}
 	</update>
 
 	<!-- 삭제(탈퇴) -->
