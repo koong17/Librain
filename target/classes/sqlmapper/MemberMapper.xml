@@ -8,7 +8,6 @@
 	<!-- 권한변경 -->
 	<update id="rankMember"
 		parameterType="lib.member.model.MemberDTO">
-		<!-- 권한부여 구문 미완성 -->
 		update from member where mem_rank = #{mem_rank}
 	</update>
 
