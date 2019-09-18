@@ -47,6 +47,7 @@
 		</div>
 	</div>
 	<hr>
-	<div class="searchScs"></div>
+	<div id="error" class="error"></div>
+	<div id="success" class="success"></div>
 </body>
 </html>
