@@ -21,30 +21,32 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+	
+	
 <title>도서검색</title>
 </head>
 <body>
-	<form>
-		<div class="container-fluid bg-light ">
-			<div class="row align-items-center justify-content-center">
-				<div class="col-md-1 pt-3">
-					<div class="form-group ">
-						<select id="category" class="form-control">
-							<option selected>전체</option>
-							<option>도서명</option>
-							<option>저자명</option>
-							<option>출판사명</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord">
-				</div>
-				<div class="col-md-1">
-					<button type="button" class="btn btn-primary btn-block" id="searchB tn">검색</button>
+	<div class="container-fluid bg-light ">
+		<div class="row align-items-center justify-content-center">
+			<div class="col-md-1 pt-3">
+				<div class="form-group ">
+					<select id="searchCtgr" class="form-control">
+						<option selected>전체</option>
+						<option>도서명</option>
+						<option>저자명</option>
+						<option>출판사명</option>
+					</select>
 				</div>
 			</div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord">
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="searchBtn" onclick="searchAjax()">검색</button>
+			</div>
 		</div>
-	</form>
+	</div>
+	<hr>
+	<div class="searchScs"></div>
 </body>
 </html>
