@@ -1,5 +1,6 @@
 package lib.member.book.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -29,17 +30,23 @@ public class BookServiceImpl implements BookService {
 		}
 		return list;
 	}
-
-	public JSONArray search(List list) {
-		JSONArray jArray = new JSONArray();
-		JSONObject jObject;
-//		List<BookDTO> list = bookDAO.search();
-		for (int i = 0; i < list.length; i++) {
-//			jObject = new JSONObject();
-//			jObject.put();
-//			jArray.add(jObject);
-//		}
-		return jArray;
+	
+	@Override
+	public JSONArray search(List<BookDTO> list) {
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj;
+		
+		for (int i = 0; i < list.size(); i++) {
+			BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_num", dto.getBook_num());
+			jArr.add(jObj);
+		}
+		return jArr;
 	}
 
 }
