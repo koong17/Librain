@@ -1,17 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 <c:forEach var="list" items="${list }">
-${ list.mem_id }
+ID : ${ list.mem_id } <br>
+PW : ${ list.mem_pw } <br>
+NAME : ${ list.mem_name } <br>
+JUMIN : ${ list.mem_jumin } <br>
+ADDRESS : ${ list.mem_address } <br>
+PHONE : ${ list.mem_phone } <br>
+EMAIL : ${ list.mem_email } <br>
+RANK : ${ list.mem_rank } <br> <hr>
 </c:forEach>
 
 </body>

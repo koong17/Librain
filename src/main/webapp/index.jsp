@@ -8,6 +8,6 @@
 </head>
 <body>
 <a href="./aa.do">confirm</a>
-
+<!-- 여길 실행시켜야 홈페이지가 나옴. -->
 </body>
 </html>
