@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="./aa.do">confirm</a>
+<a href="./rankform.do">confirm</a>
 <!-- 여길 실행시켜야 홈페이지가 나옴. -->
 </body>
 </html>

@@ -14,7 +14,7 @@
 	</legend>
 	<form action="member/rank.do">
 		회원명 : ${ mem_name }
-		회원 ID : ${ mem_pw}
+		회원 ID : ${ mem_id }
 		회원 등급 : <input type="number" name="mem_rank" value="${ mem_rank }">
 		<input type="submit" value="수정하기">
 	</form>

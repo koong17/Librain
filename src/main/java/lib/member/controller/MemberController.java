@@ -36,7 +36,7 @@ public class MemberController {
 		int mem_rank = new Integer(request.getParameter("mem_rank"));
 		MemberDTO dto = memberDAO.getMember(mem_rank);
 		mav.addObject("dto",dto);
-		mav.setViewName("rankUpdate");
+		mav.setViewName("rank_Update");
 		return mav;
 	}
 	
@@ -44,7 +44,7 @@ public class MemberController {
 	public ModelAndView rankMember(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberDAO.rankMember(dto);
-		mav.setViewName("redirect:list.do");
+		mav.setViewName("member/example");
 		return mav;
 	}
 }
