@@ -13,9 +13,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<EmployeeDTO> select() {
-		List<EmployeeDTO> list = sqlsession.getMapper(EmployeeDAO.class).select();
+	public List<EmployeeDTO> empSelectAll() {
+		List<EmployeeDTO> list = sqlsession.getMapper(EmployeeDAO.class).empSelectAll();
 		return list;
+	}
+
+	@Override
+	public void empDelete(EmployeeDTO...dtos) {
+		for (EmployeeDTO dto : dtos) {
+			sqlsession.getMapper(EmployeeDAO.class).empDelete(dto);
+		}
 	}
 
 }

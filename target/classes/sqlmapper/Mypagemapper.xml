@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.mypage.model.CommuteDAO">
+  <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+  	select * from commute_management where cmt_emp_no=#{cmt_emp_no}
+  </select>
+  <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
+    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{cmt_emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
+  </insert>
+</mapper>

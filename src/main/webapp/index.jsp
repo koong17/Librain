@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="./test.do">확인</a>
+<a href="test.do">직원목록</a>
+<a href="commute.do">근태관리</a>
 
 </body>
 </html>

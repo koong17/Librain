@@ -3,18 +3,18 @@ package lib.employee.management.model;
 import java.sql.Timestamp;
 
 public class EmployeeDTO {
-	private String emp_no, empName , emp_telephone ,emp_address, emp_address_number, emp_dept_code, emp_jumin, emp_gender;
+	private String emp_no, emp_name , emp_telephone ,emp_address, emp_address_number, emp_dept_code, emp_jumin, emp_gender;
     private Timestamp emp_join_date, emp_retire_date;
     private String emp_email, emp_rank_position, emp_duty_responsibility, emp_continuous_service_date, emp_bank_name;
     private String emp_account_holder, emp_account_number, emp_picture, emp_attach_file, emp_join_company_division, emp_password;
 	
     public EmployeeDTO() {}
     
-    EmployeeDTO(String emp_no, String empName, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
+    EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
 			String emp_email, String emp_rank_position) {
 		super();
 		this.emp_no = emp_no;
-		this.empName = empName;
+		this.emp_name = emp_name;
 		this.emp_telephone = emp_telephone;
 		this.emp_dept_code = emp_dept_code;
 		this.emp_join_date = emp_join_date;
@@ -22,7 +22,7 @@ public class EmployeeDTO {
 		this.emp_rank_position = emp_rank_position;
 	}
 
-	public EmployeeDTO(String emp_no, String empName, String emp_telephone, String emp_address, String emp_address_number,
+	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_address, String emp_address_number,
 			String emp_dept_code, String emp_jumin, String emp_gender, Timestamp emp_join_date,
 			Timestamp emp_retire_date, String emp_email, String emp_rank_position, String emp_duty_responsibility,
 			String emp_continuous_service_date, String emp_bank_name, String emp_account_holder,
@@ -30,7 +30,7 @@ public class EmployeeDTO {
 			String emp_password) {
 		super();
 		this.emp_no = emp_no;
-		this.empName = empName;
+		this.emp_name = emp_name;
 		this.emp_telephone = emp_telephone;
 		this.emp_address = emp_address;
 		this.emp_address_number = emp_address_number;
@@ -60,12 +60,12 @@ public class EmployeeDTO {
 		this.emp_no = emp_no;
 	}
 
-	public String getEmpName() {
-		return empName;
+	public String getEmp_name() {
+		return emp_name;
 	}
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
 	}
 
 	public String getEmp_telephone() {
