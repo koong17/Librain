@@ -22,7 +22,8 @@
 			url: "commute.do",
 			data: {cmt_status:"on"},
 			success :function(result) {
-				grid.resetData(result)
+				console.log("resetData");
+				grid.resetData(result);
 		    }
 		});
 	});
@@ -34,6 +35,7 @@
 			url: "commute.do",
 			data: {cmt_status:"off"},
 			success :function(result) {
+				console.log("resetData");
 				grid.resetData(result);
 		    }
 		});
@@ -45,9 +47,6 @@
 		scrollX: false,
 		scrollY: false,
 		rowHeaders: ['checkbox'],
-		pageOptions: {
-			perPage: 5
-		},
 		columns: [
 			{
 				header: '사원번호',

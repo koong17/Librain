@@ -10,6 +10,10 @@ public class CommuteDTO {
 	public CommuteDTO() {}
 	
 
+	public CommuteDTO(String cmt_emp_no) {
+		this.cmt_emp_no = cmt_emp_no;
+	}
+	
 	public CommuteDTO(String cmt_emp_no, String cmt_status) {
 		this.cmt_emp_no = cmt_emp_no;
 		this.cmt_status = cmt_status;
