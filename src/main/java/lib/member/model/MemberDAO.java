@@ -6,7 +6,9 @@ import java.util.List;
 public interface MemberDAO {
 
 	//권한 설정(유공자나 블랙리스트 등)
-	public void rankMember(MemberDTO dto);
+	public int rankMember(MemberDTO dto);
+	
+	public MemberDTO getMember(int mem_rank);
 	
 	//삭제(탈퇴)
 	public void deleteMember(MemberDTO dto);
