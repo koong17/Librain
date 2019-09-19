@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="./aa.do">confirm</a>
+<a href="./list.do">confirm</a>
 
 </body>
 </html>

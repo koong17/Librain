@@ -6,9 +6,9 @@
 <mapper namespace="lib.member.model.MemberDAO">
 	
 	<!-- 권한변경 -->
-	<update id="rankMember"
+	<update id="rankMember" 
 		parameterType="lib.member.model.MemberDTO">
-		update from member where mem_rank = #{mem_rank}
+		update member set mem_rank = #{mem_rank}
 	</update>
 
 	<!-- 삭제(탈퇴) -->

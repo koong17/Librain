@@ -14,14 +14,15 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlsession;
 
 	@Override	// 권한변경 구현
-	public int rankMember(MemberDTO dto) {
+	public int rankMember(int mem_rank) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		return memberDAO.rankMember(dto);
+		return memberDAO.rankMember(mem_rank);
 	}
 
 	@Override
 	public MemberDTO getMember(int mem_rank) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		System.out.println("mapper");
 		return dao.getMember(mem_rank);
 	}
 	
