@@ -34,11 +34,6 @@ table tr:ACTIVE{
 	background-color: lightyellow;
 }
 
-#edit {
-	background-color: #87cefa;
-	color: blue;
-}
-
 #delete {
 	background-color: pink;
 	color: red;
@@ -132,8 +127,6 @@ if (message) alert(message);
 					
 					<td><a href="delete_dept2.do?dcode=${ mem_id}"><button
 								id="delete">삭 제</button></a></td>
-					<td><a href="updateform_dept2.do?dcode=${ mem_id}"><button
-								id="edit">수 정</button></a></td>
 					<td id="multi"><input style="width: 30px; height: 30px;" type="checkbox" name="mem_id" value="${mem.id}"> </td>
 				</tr>
 			</c:forEach>
