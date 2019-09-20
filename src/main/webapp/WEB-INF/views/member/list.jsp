@@ -25,7 +25,7 @@
 					
 					<td><a href="delete_member.do?mem_id=${ item.mem_id}"><button
 								id="delete">삭 제</button></a></td>
-					<td><a href="rankform.do?mem_id=${ item.mem_id}"><button
+					<td><a href="rankform.do?mem_rank=${ item.mem_rank}"><button
 								id="edit">수 정</button></a></td>
 				</tr>
 			</c:forEach>

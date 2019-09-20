@@ -42,16 +42,12 @@ public class MemberController {
 	//권한수정
 	@GetMapping(value="/rankform.do")
 	public ModelAndView rankMemberForm(HttpServletRequest request) throws Exception {
-		System.out.println("요기까지");
 		ModelAndView mav = new ModelAndView();
 		System.out.println(request.getParameter("mem_rank"));
 		int mem_rank = new Integer(request.getParameter("mem_rank"));
-		System.out.println("여기22");
-//		MemberDTO dto2 = new MemberDTO(); dto2.setMem_rank(mem_rank);
-//		int dto = memberDAO.rankMember(dto2);
-		int dto = memberDAO.rankMember(mem_rank);
+		MemberDTO dto = memberDAO.rankMember(mem_rank);
 		mav.addObject("dto",dto);
-		mav.setViewName("member/rank_Update");
+		mav.setViewName("member/rankUpdateForm");
 		System.out.println("요기까지 타야 마지막");
 		return mav;
 	}
