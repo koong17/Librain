@@ -13,26 +13,26 @@ public class BookDaoImpl implements BookDAO {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<BookDTO> searchAll(String str) {
-		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchAll(str);
+	public List<BookDTO> searchAll(String searchWord) {
+		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchAll("%" + searchWord + "%");
 		return list;
 	}
 
 	@Override
-	public List<BookDTO> searchBookName(String str) {
-		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchBookName(str);
+	public List<BookDTO> searchBookName(String searchWord) {
+		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchBookName("%" + searchWord + "%");
 		return list;
 	}
 
 	@Override
-	public List<BookDTO> searchAuthor(String str) {
-		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchAuthor(str);
+	public List<BookDTO> searchAuthor(String searchWord) {
+		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchAuthor("%" + searchWord + "%");
 		return list;
 	}
 
 	@Override
-	public List<BookDTO> searchPub(String str) {
-		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchPub(str);
+	public List<BookDTO> searchPub(String searchWord) {
+		List<BookDTO> list = sqlsession.getMapper(BookDAO.class).searchPub("%" + searchWord + "%");
 		return list;
 	}
 

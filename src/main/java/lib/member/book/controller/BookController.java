@@ -4,20 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.member.book.model.JsonResponse;
-import lib.member.book.service.BookServiceImpl;
+import lib.member.book.service.BookService;
 
-@RequestMapping(value = "searh.do")
+@RequestMapping(value = "/search.do")
 @Controller
 public class BookController {
 	
 	@Autowired
-	BookServiceImpl bookService;
+	BookService bookService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchForm() {
@@ -25,18 +26,12 @@ public class BookController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody JsonResponse search(@RequestParam("sendData") String searchCtgr, @RequestParam("sendData") String searchWord, BindingResult result) {
+	public @ResponseBody JsonResponse search(@RequestBody
+			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
 		System.out.println(searchCtgr + " / " + searchWord);
 		JsonResponse res = new JsonResponse();
-		ValidationUtils.rejectIfEmpty(result, "searchWord", "검색어를 입력해주세요.");
-		if(!result.hasErrors()) {
-			res.setStatus("SUCCESS");
-			res.setResult(bookService.search(bookService.searchCtgr(searchCtgr, searchWord)));
-		} else {
-			res.setStatus("FAIL");
-			res.setResult(result.getAllErrors());
-		}
+		System.out.println(bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString());
+		res.setResult(bookService.search(bookService.searchCtgr(searchCtgr, searchWord)));
 		return res;
-		
 	}
 }

@@ -12,10 +12,12 @@ public class BookDTO {
 	private String book_apdx_status; // 부록여부
 	private String book_ctgr_num; // 분류기호
 	private String book_rsrv_status; // 예약여부
+	private String rent; //대출여부
+	
 	public String getBook_num() {
 		return book_num;
 	}
-	public void setBook_num(String book_num) {
+	public void setBook_num(String book_num) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 		this.book_num = book_num;
 	}
 	public String getBook_author() {
@@ -66,7 +68,11 @@ public class BookDTO {
 	public void setBook_rsrv_status(String book_rsrv_status) {
 		this.book_rsrv_status = book_rsrv_status;
 	}
-	
-	
+	public String getRent() {
+		return rent;
+	}
+	public void setRent(String rent) {
+		this.rent = rent;
+	}
 	
 }

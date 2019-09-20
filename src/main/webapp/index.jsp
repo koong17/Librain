@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href="search.do">확인</a>
-
 </body>
 </html>
+
 
