@@ -8,5 +8,8 @@
 </head>
 <body>
 <a href="./list.do">confirm</a>
+<a href="test.do">직원목록</a>
+<a href="commute.do">근태관리</a>
+
 </body>
 </html>
