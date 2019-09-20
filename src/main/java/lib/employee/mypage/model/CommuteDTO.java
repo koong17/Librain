@@ -5,7 +5,8 @@ import java.util.Date;
 
 public class CommuteDTO {
 	private int cmt_no;
-	private String cmt_emp_no, cmt_status, cmt_year, cmt_month, cmt_day, cmt_hour, cmt_minute, cmt_second;
+	private String cmt_emp_no, cmt_status;
+	private int cmt_year, cmt_month, cmt_day, cmt_hour, cmt_minute, cmt_second;
     
 	public CommuteDTO() {}
 	
@@ -18,12 +19,12 @@ public class CommuteDTO {
 		this.cmt_emp_no = cmt_emp_no;
 		this.cmt_status = cmt_status;
 		Calendar cal = Calendar.getInstance();
-		this.cmt_year = cal.get(Calendar.YEAR)+"";
-		this.cmt_month = cal.get(Calendar.MONTH)+1 +"";
-		this.cmt_day =  cal.get(Calendar.DAY_OF_MONTH) +"";
-		this.cmt_hour = cal.get(Calendar.HOUR_OF_DAY) +"";
-		this.cmt_minute = cal.get(Calendar.MINUTE) +"";
-		this.cmt_second = cal.get(Calendar.SECOND) +"";
+		this.cmt_year = cal.get(Calendar.YEAR);
+		this.cmt_month = cal.get(Calendar.MONTH)+1;
+		this.cmt_day =  cal.get(Calendar.DAY_OF_MONTH);
+		this.cmt_hour = cal.get(Calendar.HOUR_OF_DAY);
+		this.cmt_minute = cal.get(Calendar.MINUTE);
+		this.cmt_second = cal.get(Calendar.SECOND);
 	}
 
 
@@ -51,51 +52,51 @@ public class CommuteDTO {
 		this.cmt_status = cmt_status;
 	}
 
-	public String getCmt_year() {
+	public int getCmt_year() {
 		return cmt_year;
 	}
 
-	public void setCmt_year(String cmt_year) {
+	public void setCmt_year(int cmt_year) {
 		this.cmt_year = cmt_year;
 	}
 
-	public String getCmt_month() {
+	public int getCmt_month() {
 		return cmt_month;
 	}
 
-	public void setCmt_month(String cmt_month) {
+	public void setCmt_month(int cmt_month) {
 		this.cmt_month = cmt_month;
 	}
 
-	public String getCmt_day() {
+	public int getCmt_day() {
 		return cmt_day;
 	}
 
-	public void setCmt_DAY(String cmt_day) {
+	public void setCmt_DAY(int cmt_day) {
 		this.cmt_day = cmt_day;
 	}
 
-	public String getCmt_hour() {
+	public int getCmt_hour() {
 		return cmt_hour;
 	}
 
-	public void setCmt_hour(String cmt_hour) {
+	public void setCmt_hour(int cmt_hour) {
 		this.cmt_hour = cmt_hour;
 	}
 
-	public String getCmt_minute() {
+	public int getCmt_minute() {
 		return cmt_minute;
 	}
 
-	public void setCmt_minute(String cmt_minute) {
+	public void setCmt_minute(int cmt_minute) {
 		this.cmt_minute = cmt_minute;
 	}
 
-	public String getCmt_second() {
+	public int getCmt_second() {
 		return cmt_second;
 	}
 	
-	public void setCmt_second(String cmt_second) {
+	public void setCmt_second(int cmt_second) {
 		this.cmt_second = cmt_second;
 	}
 	

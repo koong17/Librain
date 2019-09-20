@@ -27,8 +27,11 @@ public class MypageController {
 	@GetMapping
 	public String list(Model model, HttpSession session) {
 		session.setAttribute("emp_num", "1");
-		JSONArray ja = mypageService.cmtSelectAll(new CommuteDTO((String)session.getAttribute("emp_num")));
+		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"));
+		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
 		model.addAttribute("gridData", ja);
+		ja = mypageService.cmtSelectOnOff(commuteDTO);
+		model.addAttribute("gridTopData", ja);
 		return "employee/mypage/commute";
 	}
 	

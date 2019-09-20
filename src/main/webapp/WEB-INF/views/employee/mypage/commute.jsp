@@ -10,6 +10,10 @@
 <body>
 	<input type="button" id="work" value="출근" >
 	<input type="button" id="leave" value="퇴근">
+	<hr>
+	오늘의 출근현황
+	<div id="gridTop"></div>
+	<hr>
 	<div id="grid"></div>
 </body>
 <script>
@@ -41,12 +45,15 @@
 		});
 	});
 	
-	const grid = new tui.Grid({
+	const gridTop = new tui.Grid({
 		el: document.getElementById('grid'),
-		data: ${gridData},
+		data: ${gridTopData},
 		scrollX: false,
 		scrollY: false,
 		rowHeaders: ['checkbox'],
+		pagination: {
+			perPage: 5
+		},
 		columns: [
 			{
 				header: '사원번호',
@@ -59,15 +66,54 @@
 			{
 				header: '시',
 				name: 'cmt_hour',
-		        sortingType: 'desc',
+		        sortingType: 'asc',
 		        sortable: true
 				
 			},
 			{
 				header: '분',
-				name: 'cmt_second'
+				name: 'cmt_minute',
+		        sortingType: 'asc',
+		        sortable: true
 			}
 		]
+	});
+	const grid = new tui.Grid({
+		el: document.getElementById('grid'),
+		data: ${gridData},
+		scrollX: false,
+		scrollY: false,
+		rowHeaders: ['checkbox'],
+		pagination: {
+			perPage: 5
+		},
+		columns: [
+			{
+				header: '사원번호',
+				name: 'cmt_emp_no',
+			},
+			{
+				header: '상태',
+				name: 'cmt_status'
+			},
+			{
+				header: '시',
+				name: 'cmt_hour',
+		        sortingType: 'asc',
+		        sortable: true
+				
+			},
+			{
+				header: '분',
+				name: 'cmt_minute',
+		        sortingType: 'asc',
+		        sortable: true
+			}
+		]
+	});
+	$(function(){
+		grid.sort('cmt_hour',true,true);
+		grid.sort('cmt_minute',true,true);
 	});
 </script>
 </html>
