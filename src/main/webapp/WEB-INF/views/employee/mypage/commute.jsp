@@ -45,6 +45,14 @@
 		});
 	});
 	
+	function update(result) {
+		grid.resetData(result);
+		grid.gridTop({
+			cmt_status: 'on',
+			
+		}));
+	}
+	
 	const gridTop = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridTopData},
