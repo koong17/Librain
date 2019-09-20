@@ -12,7 +12,7 @@
 	<legend>
 		<h3>회원의 등급을 변경할 수 있습니다.</h3>
 	</legend>
-	<form action="member/rank.do">
+	<form action="/rank.do">
 		회원명 : ${ mem_name }
 		회원 ID : ${ mem_id }
 		회원 등급 : <input type="number" name="mem_rank" value="${ mem_rank }">

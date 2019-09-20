@@ -1,6 +1,5 @@
 ﻿package lib.member.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,15 +13,16 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlsession;
 
 	@Override	// 권한변경 구현
-	public int rankMember(MemberDTO dto) {
+	public MemberDTO rankMember(int mem_rank) {
 		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		return memberDAO.rankMember(dto);
+		return memberDAO.rankMember(mem_rank);
 	}
 
 	@Override
 	public MemberDTO getMember(int mem_rank) {
-		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		return dao.getMember(mem_rank);
+		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
+		System.out.println("mapper");
+		return memberDAO.getMember(mem_rank);
 	}
 	
 	@Override	// 삭제(탈퇴)

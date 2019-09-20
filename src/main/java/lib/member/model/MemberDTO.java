@@ -10,6 +10,7 @@ public class MemberDTO {
 	private String mem_phone;
 	private String mem_email;
 	private int mem_rank;
+	public MemberDTO setMem_rank;
 	
 	/////////setter and getter
 	public String getMem_id() {
@@ -74,6 +75,10 @@ public class MemberDTO {
 
 	public void setMem_rank(int mem_rank) {
 		this.mem_rank = mem_rank;
+	}
+
+	public void setSetMem_rank(MemberDTO setMem_rank) {
+		this.setMem_rank = setMem_rank;
 	}
 
 }
