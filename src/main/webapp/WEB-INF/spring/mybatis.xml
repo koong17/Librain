@@ -22,6 +22,8 @@
 			<value>classpath:sqlmapper/Facilmapper.xml</value>
 			<value>classpath:sqlmapper/Facilmapper2.xml</value>
 			<value>classpath:sqlmapper/MemberMapper.xml</value>
+			<value>classpath:sqlmapper/Mgmtmapper.xml</value>
+			<value>classpath:sqlmapper/Mypagemapper.xml</value>
 		</list>
 		</property>
 	</bean>

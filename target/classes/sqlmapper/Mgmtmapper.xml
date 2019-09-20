@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.management.model.EmployeeDAO">
+  <select id="empSelectAll" resultType="lib.employee.management.model.EmployeeDTO">
+    select emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date
+     from employee_management
+  </select>
+  <delete id="empDelete" parameterType="lib.employee.management.model.EmployeeDTO">
+  	delete employee_management where emp_no=#{emp_no}
+  </delete>
+</mapper>
