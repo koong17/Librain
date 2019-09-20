@@ -61,10 +61,22 @@ button{
 var message = '${message}';
 if (message) alert(message);
 
-
 	function listChange(params) {
 		var url = params.value + "_list.do";
 		window.location.href = url;
+	}
+
+	function multiDelete(){
+		var t= document.getElementsByName("mem_id");
+		var sum = new Array();
+		var j=0;
+		for (var i =0 ; i<t.length; i++){
+			if(t[i].checked){
+				sum[j] = t[i].value;
+				j=j+1;
+			}
+		}
+		window.location.href="multiDelete_Member.do?mem_id="+sum;
 	}
 
 </script>
@@ -73,12 +85,12 @@ if (message) alert(message);
 
 <h3>
 		<form action="search_member.do" method="post">
-			검색어 입력 : <input size="30" type="search" name="keyvalue" placeholder="키워드 검색 가능합니다" list="MemberList"> <input type="submit" value="검색"> <a href=list.do" ><button id="delete">초기화</button></a> 
+			검색어 입력 : <input size="30" type="search" name="keyvalue" placeholder="키워드 검색 가능합니다" list="MemberList"> <input type="submit" value="검색"> <a href="member_list.do" ><button id="delete">초기화</button></a> 
 		</form>
 	</h3> 
 	<datalist id="MemberList">
 	<c:forEach items="${list}" var="mem">
-		<option value="${mem_id}"> ${mem_pw} | ${mem_name} | ${mem_jumin} | ${mem_address} | ${mem_phone} | ${mem_email} | ${mem_rank}</option>
+		<option value="${mem.id}"> ${mem.pw} | ${mem.name} | ${mem.jumin} | ${mem.address} | ${mem.phone} | ${mem.email} | ${mem.rank}</option>
 	</c:forEach>
 	</datalist>
 <hr>
@@ -91,11 +103,11 @@ if (message) alert(message);
 				<option value="member">회원테이블</option>
 			</select>
 			<a href="list.do"><button>추가하기</button></a>&nbsp;&nbsp;
-			<a href="#"><button id="edit" onclick="hide()">다중삭제</button></a>&nbsp;&nbsp;
 			<a href="#"><button id="multi" onclick="multiDelete()">삭제하기</button></a>&nbsp;&nbsp;
+			<a href="#"><button id="edit" onclick="hide()">다중삭제</button></a>&nbsp;&nbsp;			
 		</legend>
 
-		<table cellpadding="6">
+		<table cellpadding="5">
 			<th><B>ID</B></th>
 			<th><B>PW</B></th>
 			<th><B>NAME</B></th>
@@ -109,20 +121,20 @@ if (message) alert(message);
 			<th id="multi"><B></B></th>
 			<c:forEach items="${list}" var="mem" varStatus="status">
 				<tr onclick="test(this)">
-					<td>${mem_id}</td>
-					<td>${mem_pw}</td>
-					<td>${mem_name}</td>
-					<td>${mem_jumin}</td>
-					<td>${mem_address}</td>
-					<td>${mem_phone}</td>
-					<td>${mem_email}</td>
-					<td>${mem_rank}</td>
+					<td>${mem.id}</td>
+					<td>${mem.pw}</td>
+					<td>${mem.name}</td>
+					<td>${mem.jumin}</td>
+					<td>${mem.address}</td>
+					<td>${mem.phone}</td>
+					<td>${mem.email}</td>
+					<td>${mem.rank}</td>
 					
-					<td><a href="updateform_dept2.do?dcode=${ mem_id}"><button
-								id="edit">수 정</button></a></td>
 					<td><a href="delete_dept2.do?dcode=${ mem_id}"><button
 								id="delete">삭 제</button></a></td>
-					<td id="multi"><input style="width: 30px; height: 30px;" type="checkbox" name="id" value="${mem.id}"> </td>
+					<td><a href="updateform_dept2.do?dcode=${ mem_id}"><button
+								id="edit">수 정</button></a></td>
+					<td id="multi"><input style="width: 30px; height: 30px;" type="checkbox" name="mem_id" value="${mem.id}"> </td>
 				</tr>
 			</c:forEach>
 		</table>
