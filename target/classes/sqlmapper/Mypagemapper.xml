@@ -23,4 +23,17 @@
   <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
     insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{cmt_emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
   </insert>
+  <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by cmt_emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by cmt_emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  ) order by cmt_no;
+  </select>
 </mapper>

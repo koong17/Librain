@@ -26,8 +26,8 @@
 			url: "commute.do",
 			data: {cmt_status:"on"},
 			success :function(result) {
-				console.log("resetData");
-				grid.resetData(result);
+				console.log(result);
+				update(result);
 		    }
 		});
 	});
@@ -39,26 +39,24 @@
 			url: "commute.do",
 			data: {cmt_status:"off"},
 			success :function(result) {
-				console.log("resetData");
-				grid.resetData(result);
+				console.log(result);
+				update(result);
 		    }
 		});
 	});
 	
 	function update(result) {
-		grid.resetData(result);
-		grid.gridTop({
-			cmt_status: 'on',
-			
-		}));
+		grid.resetData(result[0]);
+		gridTop.resetData(result[1]);
 	}
-	
+
+	var Grid = tui.Grid;
+	Grid.setLanguage('ko');
 	const gridTop = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridTopData},
 		scrollX: false,
 		scrollY: false,
-		rowHeaders: ['checkbox'],
 		pagination: {
 			perPage: 5
 		},
@@ -70,6 +68,10 @@
 			{
 				header: '상태',
 				name: 'cmt_status'
+			},
+			{
+				header: '상태2',
+				name: 'cmt_status_kr'
 			},
 			{
 				header: '시',
@@ -119,9 +121,11 @@
 			}
 		]
 	});
+	Grid.setLanguage('ko');
 	$(function(){
 		grid.sort('cmt_hour',true,true);
 		grid.sort('cmt_minute',true,true);
+		
 	});
 </script>
 </html>
