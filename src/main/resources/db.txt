@@ -1,0 +1,125 @@
+create table department (
+    dept_code varchar2(20),
+    dept_name varchar2(30)
+    --CONSTRAINT dept_code_pk PRIMARY KEY(department_code)
+);
+
+
+create table pay_check (
+    pay_ck_no number,
+    pay_ck_year varchar2(20),
+    pay_ck_month varchar2(20),
+    pay_ck_check varchar2(20)
+    --constraint pay_no_pk primary key(pay_check_no)
+);
+
+drop table employee_management;
+create table employee_management(
+    emp_no varchar2(10),
+    emp_name varchar2(15),
+    emp_telephone varchar2(30),
+    emp_address varchar2(200),
+    emp_address_number varchar2(20),
+    emp_dept_code varchar2(20),
+    emp_jumin varchar2(25),
+    emp_gender varchar2(10),
+    emp_join_date date,
+    emp_retire_date date,
+    emp_email varchar2(30),
+    emp_rank_position varchar2(30),
+    emp_duty_responsibility varchar(15),
+    emp_continuous_service_date varchar2(20),
+    emp_bank_name varchar2(50),
+    emp_account_holder varchar2(20),
+    emp_account_number varchar2(30),
+    emp_picture varchar2(2000),
+    emp_attach_file varchar2(4000),
+    emp_join_company_division varchar2(10),
+    emp_password varchar2(100)
+    --CONSTRAINT emp_num_pk PRIMARY KEY(emp_num),
+    --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
+);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date) 
+values('6','6','01000000000','suah@suah.koong','001','사장',sysdate);
+select * from employee_management;
+desc employee_management;
+delete employee_management;
+commit;
+
+drop table commute_management;
+create table commute_management(
+    cmt_no number,
+    cmt_emp_no varchar2(10),
+    cmt_status varchar2(100),
+    cmt_year number,
+    cmt_month number,
+    cmt_DAY number,
+    cmt_hour number,
+    cmt_minute number,
+    cmt_second number
+    --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
+);
+delete commute_management where cmt_day=23 and cmt_status='off';
+commit;
+select * 
+    from commute_management 
+    where cmt_no=
+        (select min(cmt_no)
+            from commute_management
+            where  cmt_emp_no=1 and cmt_day=20 and cmt_status='on'
+        ) or cmt_no =
+            (select max(cmt_no)
+                from commute_management
+                where  cmt_emp_no=1 and cmt_day=20 and cmt_status='off'
+            );
+select * 
+    from commute_management 
+    where cmt_no in (
+        select min(cmt_no) from commute_management
+        group by cmt_emp_no, cmt_day, cmt_status
+        having cmt_status='on'
+    ) or cmt_no in (
+        select max(cmt_no) from commute_management
+        group by cmt_emp_no, cmt_day, cmt_status
+        having cmt_status='off'
+    ) order by cmt_no;
+(select min(cmt_no) 
+    from commute_management
+    group by cmt_emp_no, cmt_day, cmt_status
+    having cmt_status='on'
+    );
+
+select * from commute_management where rownum=1;
+select * from commute_management;
+
+-- book
+
+select * from book where book_name like '%b' ;
+select * from book b, rental r where rent_startdate=(
+    select max(rent_startdate) from book b, rental r where b.book_name = r.book_name and name)
+select * from book ;
+
+select max(sysdate) from dual; 
+
+
+commit;
+
+create table pay_management(
+    pay_no number,
+    pay_emp_no varchar2(10),
+    pay_division varchar2(20),
+    pay_total_pay number,
+    pay_real_pay number,
+    pay_income_tax number,
+    pay_residence_tax number,
+    pay_health_insurance number,
+    pay_unemployment_insurance number,
+    pay_nation_pension number,
+    pay_etx_pay number,
+    pay_basic_pay number,
+    pay_bonus number,
+    pay_incentive_pay number,
+    pay_food_pay number,
+    pay_transportation_pay number
+    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
+);

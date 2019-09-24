@@ -23,4 +23,10 @@ public class CommuteDAOImpl implements CommuteDAO {
 		return list;
 	}
 
+	@Override
+	public List<CommuteDTO> cmtSelectOnOff(CommuteDTO commuteDTO) {
+		List<CommuteDTO> list = sqlsession.getMapper(CommuteDAO.class).cmtSelectOnOff(commuteDTO);
+		return list;
+	}
+
 }
