@@ -12,6 +12,7 @@
 <context:component-scan base-package="lib.employee.facility.model"/>
 <context:component-scan base-package="lib.member.controller"/>
 <context:component-scan base-package="lib.member.model"/>
+<context:component-scan base-package="lib.member.service"/>
 <context:component-scan base-package="lib.employee.management.*"/>
 <context:component-scan base-package="lib.employee.mypage.*"/>
 

@@ -8,38 +8,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberDAOImpl implements MemberDAO {
-	
+
 	@Autowired
-	private SqlSession sqlsession;
-
-	@Override	// 권한변경 구현
-	public MemberDTO rankMember(int mem_rank) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		return memberDAO.rankMember(mem_rank);
-	}
-
-	@Override
-	public MemberDTO getMember(int mem_rank) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		System.out.println("mapper");
-		return memberDAO.getMember(mem_rank);
-	}
+	SqlSession sqlsession;
 	
-	@Override	// 삭제(탈퇴)
-	public void deleteMember(MemberDTO dto) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.deleteMember(dto);
+	@Override
+	public List<MemberDTO> memberSelectAll() {
+		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSelectAll();
+		//List<dto이름> 변수명 = sqlsession.getMapper(DAO명.class).함수();
+		return list;
 	}
 
 	@Override
-	public List<MemberDTO> getMemberList() {
-		return sqlsession.getMapper(MemberDAO.class).getMemberList();
-	}
-
-	@Override	// 검색
-	public void selectMember(MemberDTO dto) {
-		MemberDAO memberDAO = sqlsession.getMapper(MemberDAO.class);
-		memberDAO.selectMember(dto);
+	public void memRankModify(MemberDTO... dtos) {
+		for(MemberDTO dto : dtos) {
+			sqlsession.getMapper(MemberDAO.class).memRankModify(dto);
+		}
 	}
 
 }

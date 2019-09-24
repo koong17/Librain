@@ -18,7 +18,7 @@
 	</delete>
 
 	<!-- 리스트(selectAll) -->
-	<select id="getMemberList" 
+	<select id="memberSelectAll" 
 		resultType="lib.member.model.MemberDTO">
 		select * from member
 	</select>
