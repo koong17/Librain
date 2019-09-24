@@ -40,8 +40,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void update(JSONArray ja) {
-		// TODO Auto-generated method stub
+	public void memberRankUpdate(JSONArray ja) {
 		
 	}
 

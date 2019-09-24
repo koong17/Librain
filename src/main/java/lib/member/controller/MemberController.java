@@ -20,5 +20,10 @@ public class MemberController {
 		model.addAttribute("gridData",ja);
 		return "member/memberList";
 	}
+	
+	@GetMapping("/memberRankUpdate.do")
+	public String memRank(Model model) {
+		return null;
+	}
 
 }
