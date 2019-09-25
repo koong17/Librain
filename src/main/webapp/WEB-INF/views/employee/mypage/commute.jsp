@@ -121,11 +121,9 @@
 			}
 		]
 	});
-	Grid.setLanguage('ko');
 	$(function(){
 		grid.sort('cmt_hour',true,true);
 		grid.sort('cmt_minute',true,true);
-		
 	});
 </script>
 </html>

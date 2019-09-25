@@ -99,6 +99,13 @@ public class CommuteDTO {
 	public void setCmt_second(int cmt_second) {
 		this.cmt_second = cmt_second;
 	}
+
+	@Override
+	public String toString() {
+		return "CommuteDTO [cmt_no=" + cmt_no + ", cmt_emp_no=" + cmt_emp_no + ", cmt_status=" + cmt_status
+				+ ", cmt_year=" + cmt_year + ", cmt_month=" + cmt_month + ", cmt_day=" + cmt_day + ", cmt_hour="
+				+ cmt_hour + ", cmt_minute=" + cmt_minute + ", cmt_second=" + cmt_second + "]";
+	}
 	
 }
 

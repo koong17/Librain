@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="test.do">직원목록</a>
+<a href="mgmt/emplist.do">직원목록</a><br>
+<a href="mgmt/emplist2.do">직원목록-관리자</a><br>
+<a href="mgmt/cmtlist.do">근태목록</a><br>
 <a href="commute.do">근태관리</a>
 
 </body>

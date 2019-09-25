@@ -11,4 +11,24 @@
   <delete id="empDelete" parameterType="lib.employee.management.model.EmployeeDTO">
   	delete employee_management where emp_no=#{emp_no}
   </delete>
+  <insert id="empInsert" parameterType="lib.employee.management.model.EmployeeDTO">
+    insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date)
+     values(#{emp_no},#{emp_name},#{emp_telephone},#{emp_email},#{emp_dept_code},#{emp_rank_position},sysdate)
+  </insert>
+  <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by cmt_emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by cmt_emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  ) order by cmt_no
+  </select>
+  <update id="cmtUpdate" parameterType="lib.employee.mypage.model.CommuteDTO">
+  	update commute_management set cmt_status=#{cmt_status},cmt_hour=#{cmt_hour},cmt_minute=#{cmt_minute} where cmt_no=#{cmt_no}
+  </update>
 </mapper>

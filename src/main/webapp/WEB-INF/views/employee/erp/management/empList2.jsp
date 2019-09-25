@@ -5,18 +5,42 @@
 <html><head><meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
 	<div>
 		사원 목록 조회
 	</div>
-	<div id="grid" style="width: 500"></div>
+	<input type="button" id="insert" value="직원 추가">
+	<input type="button" id="delete" value="직원 삭제">
+	<div id="grid"></div>
 	
 </body>
 
 <script type="text/javascript">
-		
+	$("#delete").click(function(){
+	   	$.ajax({											
+			type: "POST",
+			contentType : 'application/json;charset=UTF-8',
+			dataType : 'json',
+			url: "empDelete.do",
+			data: JSON.stringify(grid.getCheckedRows()),
+			success :function(result) {
+				console.log(result);
+				grid.resetData(result);
+		    }
+		});
+	});
+	$("#insert").click(function(){
+		popup = window.open("empInsert.do", '사원 추가', 'width=450, height=600, status=no, toolbar=no, location=no, top=200, left=200');
+        timer = setInterval(function(){
+           if(popup.closed){
+        	   location.href=""
+           }
+        }, 1000);
+	});
+	
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridData},
