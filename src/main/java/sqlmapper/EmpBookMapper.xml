@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib.employee.book.model.EmpBookDAO">
+	<select id="select" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN,nvl2(book_apdx_status, 'O', 'X') book_apdx_status, nvl2(rent_enddate, '예약대기', '예약중') book_rsrv_status , book_ctgr_num, nvl2(rent_enddate, '대여가능', '대여중') rent 
+			from (select * from book where book_name like '%a%' or book_author like '%a%' or book_pub_house like '%a%') b 
+			join (select * from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+			on b.book_num = r.book_num
+	</select>
+	
+	<select id="searchAll" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN,nvl2(book_apdx_status, 'O', 'X') book_apdx_status, nvl2(rent_enddate, '예약대기', '예약중') book_rsrv_status , book_ctgr_num, nvl2(rent_enddate, '대여가능', '대여중') rent
+			from (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }) b 
+			join (select * from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+			on b.book_num = r.book_num
+	</select>
+	
+	<select id="searchBookName" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN,nvl2(book_apdx_status, 'O', 'X') book_apdx_status, nvl2(rent_enddate, '예약대기', '예약중') book_rsrv_status , book_ctgr_num, nvl2(rent_enddate, '대여가능', '대여중') rent
+			from (select * from book where book_name like #{ searchWord }) b 
+			join (select * from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+			on b.book_num = r.book_num
+	</select>
+	
+	<select id="searchAuthor" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN,nvl2(book_apdx_status, 'O', 'X') book_apdx_status, nvl2(rent_enddate, '예약대기', '예약중') book_rsrv_status , book_ctgr_num, nvl2(rent_enddate, '대여가능', '대여중') rent
+			from (select * from book where book_author like #{ searchWord }) b 
+			join (select * from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+			on b.book_num = r.book_num
+	</select>
+	
+	<select id="searchPub" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN,nvl2(book_apdx_status, 'O', 'X') book_apdx_status, nvl2(rent_enddate, '예약대기', '예약중') book_rsrv_status , book_ctgr_num, nvl2(rent_enddate, '대여가능', '대여중') rent
+			from (select * from book where book_pub_house like #{ searchWord }) b 
+			join (select * from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+			on b.book_num = r.book_num
+	</select>
+	
+</mapper>
