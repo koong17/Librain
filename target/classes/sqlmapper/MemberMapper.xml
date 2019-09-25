@@ -8,7 +8,7 @@
 	<!-- 권한변경 -->
 	<update id="memberRankUpdate" 
 		parameterType="lib.member.model.MemberDTO">
-		update member set mem_rank = #{mem_rank}
+		update member set mem_rank = #{mem_rank} where mem_id = #{mem_id}
 	</update>
 
 	<!-- 리스트(selectAll) -->

@@ -20,12 +20,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memRankModify(MemberDTO... dtos) {
+	public void memberSearch(MemberDTO... dtos) {
 		for(MemberDTO dto : dtos) {
-			sqlsession.getMapper(MemberDAO.class).memRankModify(dto);
+			sqlsession.getMapper(MemberDAO.class).memberSearch(dto);
 		}
 	}
 
+	@Override
+	public void memberRankUpdate(MemberDTO dto) {
+		sqlsession.getMapper(MemberDAO.class).memberRankUpdate(dto);
+	}
 }
 
 

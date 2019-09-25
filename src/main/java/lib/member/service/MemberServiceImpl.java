@@ -40,8 +40,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void memberRankUpdate(JSONArray ja) {
+	public void memberSearch(MemberDTO dto) {
 		
+	}
+
+	@Override
+	public void memberRankUpdate(List<MemberDTO> dtos) {
+		for (MemberDTO memberDTO : dtos) {
+			memberDAO.memberRankUpdate(memberDTO);
+		}
 	}
 
 }

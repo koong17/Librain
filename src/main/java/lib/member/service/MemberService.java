@@ -1,6 +1,10 @@
 package lib.member.service;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
+
+import lib.member.model.MemberDTO;
 
 public interface MemberService {
 
@@ -8,9 +12,9 @@ public interface MemberService {
 	public JSONArray memberSelectAll();
 	
 	//멤버검색
-	public void memberSearch(JSONArray ja);
+	public void memberSearch(MemberDTO dto);
 	
 	//권한수정
-	public void memberRankUpdate(JSONArray ja);
+	public void memberRankUpdate(List<MemberDTO> dtos);
 	
 }

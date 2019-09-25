@@ -4,7 +4,13 @@ import java.util.List;
 
 public interface MemberDAO {
 	
+	//전체출력
 	public List<MemberDTO> memberSelectAll();
-	public void memRankModify(MemberDTO ...dtos );
+	
+	//멤버검색
+	public void memberSearch(MemberDTO ...dtos);
+	
+	//권한변경
+	public void memberRankUpdate(MemberDTO dto );
 	
 }

@@ -12,6 +12,11 @@ public class MemberDTO {
 	private int mem_rank;
 	
 	///////////constructor///////////
+	
+	public MemberDTO() {
+		
+	}
+	
 	public MemberDTO(String mem_id, String mem_pw, String mem_name, String mem_jumin, String mem_address,
 			String mem_phone, String mem_email, int mem_rank) {
 		this.mem_id = mem_id;
