@@ -25,7 +25,6 @@
 			<value>classpath:sqlmapper/Facilmapper2.xml</value>
 			<value>classpath:sqlmapper/EmpBookMapper.xml</value>
 			<value>classpath:sqlmapper/MemBookMapper.xml</value>
-			<value>classpath:sqlmapper/MgmtMapper.xml</value>
 		</list>
 		</property>
 	</bean>

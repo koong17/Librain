@@ -34,7 +34,6 @@ public class EmpBookController {
 	
 	@RequestMapping(value = "/empBookInput.do", method = RequestMethod.GET)
 	public @ResponseBody String search(Model model) {
-		System.out.println(bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString());
-		return bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString();
+		return "employee/book/empSearch";
 	}
 }
