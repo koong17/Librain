@@ -27,15 +27,22 @@ public class MypageController {
 	@GetMapping
 	public String list(Model model, HttpSession session) {
 		session.setAttribute("emp_num", "1");
-		JSONArray ja = mypageService.cmtSelectAll(new CommuteDTO((String)session.getAttribute("emp_num")));
+		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"));
+		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
 		model.addAttribute("gridData", ja);
+		ja = mypageService.cmtSelectOnOff(commuteDTO);
+		model.addAttribute("gridTopData", ja);
 		return "employee/mypage/commute";
 	}
 	
-	@PostMapping
+	@PostMapping(produces = "application/text; charset=utf-8")
 	public @ResponseBody String insert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
-		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"), cmt_status);
+		String emp_num = (String)session.getAttribute("emp_num");
+		CommuteDTO commuteDTO = new CommuteDTO(emp_num, cmt_status);
 		mypageService.cmtInsert(commuteDTO);
-		return mypageService.cmtSelectAll(new CommuteDTO((String)session.getAttribute("emp_num"))).toString();
+		JSONArray ja = new JSONArray();
+		ja.add(mypageService.cmtSelectAll(commuteDTO));
+		ja.add(mypageService.cmtSelectOnOff(commuteDTO));
+		return ja.toString();
 	}
 }

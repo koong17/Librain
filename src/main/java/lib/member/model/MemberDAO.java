@@ -1,22 +1,16 @@
 package lib.member.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface MemberDAO {
-
-	//권한 설정(유공자나 블랙리스트 등)
-	public MemberDTO rankMember(int mem_rank);
 	
-	public MemberDTO getMember(int mem_rank);
+	//전체출력
+	public List<MemberDTO> memberSelectAll();
 	
-	//삭제(탈퇴)
-	public void deleteMember(MemberDTO dto);
-
-	//검색(select where)
-	public void selectMember(MemberDTO dto);
+	//멤버검색
+	public void memberSearch(MemberDTO ...dtos);
 	
-	//리스트(selectAll)
-	public List<MemberDTO> getMemberList();
+	//권한변경
+	public void memberRankUpdate(MemberDTO dto );
 	
 }

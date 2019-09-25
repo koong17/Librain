@@ -6,19 +6,13 @@
 <mapper namespace="lib.member.model.MemberDAO">
 	
 	<!-- 권한변경 -->
-	<update id="rankMember" 
+	<update id="memberRankUpdate" 
 		parameterType="lib.member.model.MemberDTO">
-		update member set mem_rank = #{mem_rank}
+		update member set mem_rank = #{mem_rank} where mem_id = #{mem_id}
 	</update>
 
-	<!-- 삭제(탈퇴) -->
-	<delete id="deleteMember"
-		parameterType="lib.member.model.MemberDTO">
-		delete from member where mem_id = #{mem_id}
-	</delete>
-
 	<!-- 리스트(selectAll) -->
-	<select id="getMemberList" 
+	<select id="memberSelectAll" 
 		resultType="lib.member.model.MemberDTO">
 		select * from member
 	</select>
