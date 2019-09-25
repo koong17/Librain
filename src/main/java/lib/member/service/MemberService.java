@@ -12,7 +12,7 @@ public interface MemberService {
 	public JSONArray memberSelectAll();
 	
 	//멤버검색
-	public void memberSearch(MemberDTO dto);
+	public void memberSearch(List<MemberDTO> dtos);
 	
 	//권한수정
 	public void memberRankUpdate(List<MemberDTO> dtos);

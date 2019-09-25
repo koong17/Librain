@@ -40,8 +40,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void memberSearch(MemberDTO dto) {
-		
+	public void memberSearch(List<MemberDTO> dtos) {
+		for (MemberDTO memberDTO : dtos) {
+			memberDAO.memberRankUpdate(memberDTO);
+		}
 	}
 
 	@Override

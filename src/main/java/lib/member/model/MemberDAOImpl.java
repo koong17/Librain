@@ -20,10 +20,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberSearch(MemberDTO... dtos) {
-		for(MemberDTO dto : dtos) {
-			sqlsession.getMapper(MemberDAO.class).memberSearch(dto);
-		}
+	public void memberSearch(MemberDTO dto) {
+		sqlsession.getMapper(MemberDAO.class).memberSearch(dto);
 	}
 
 	@Override

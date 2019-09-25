@@ -24,6 +24,8 @@
 			<value>classpath:sqlmapper/MemberMapper.xml</value>
 			<value>classpath:sqlmapper/Mgmtmapper.xml</value>
 			<value>classpath:sqlmapper/Mypagemapper.xml</value>
+			<value>classpath:sqlmapper/EmpBookMapper.xml</value>
+			<value>classpath:sqlmapper/MemBookMapper.xml</value>
 		</list>
 		</property>
 	</bean>
