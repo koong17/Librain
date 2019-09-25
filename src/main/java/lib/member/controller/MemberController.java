@@ -27,22 +27,16 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	@GetMapping("/memberSearch.do")
-	public String memSearch(Model model) {
-		return "member/memberSearch";
+	@GetMapping("/memberSearchID.do")
+	public @ResponseBody String memSearch(@RequestBody List<MemberDTO> dtos) {
+		memberService.memberSearch(dtos);
+		return "{\"result\":\"success\"}";
 	}
 	
 	@PostMapping("/memberRankUpdate.do")
 	public @ResponseBody String memRank(@RequestBody List<MemberDTO> dtos) {
 		memberService.memberRankUpdate(dtos);
 		return "{\"result\":\"success\"}";
-	}
-
-	@GetMapping("/memberRankUpdateForm.do")
-	@ResponseBody
-	public String memRankForm(MemberDTO dto) {
-		System.out.println(dto.getMem_rank());
-		return "member/memberRankUpdateForm";
 	}
 
 }

@@ -8,9 +8,9 @@ public interface MemberDAO {
 	public List<MemberDTO> memberSelectAll();
 	
 	//멤버검색
-	public void memberSearch(MemberDTO ...dtos);
+	public void memberSearch(MemberDTO dto);
 	
 	//권한변경
-	public void memberRankUpdate(MemberDTO dto );
+	public void memberRankUpdate(MemberDTO dto);
 	
 }

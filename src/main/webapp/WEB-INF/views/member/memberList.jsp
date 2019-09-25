@@ -26,10 +26,6 @@
 	function rankUpdate() {
 		var data = grid.getCheckedRows();
 		console.log(data);
-		/* var mem_id = data[0].mem_id;
-		var mem_rank = data[0].mem_rank;
-		console.log(mem_id);
-		console.log(mem_rank); */
 		
 		$.ajax({
 			type : "POST",
@@ -42,10 +38,6 @@
 			}
 		});
 	}
-	
-	/* function update(result){
-		grid.resetData(result[0]);
-	} */
 
 	var Grid = tui.Grid;
 	Grid.setLanguage('ko');
@@ -81,6 +73,8 @@
 			},
 			{
 				header: '회원 등급',
+				sortingType: 'desc',
+		        sortable: true,
 				name: 'mem_rank',
 				editor: {
 					type: 'select',
