@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="search.do">확인</a>
+<a href="memSearch.do">고객 검색</a> <br />
+<a href="empSearch.do">직원 검색</a>
 </body>
 </html>
 
