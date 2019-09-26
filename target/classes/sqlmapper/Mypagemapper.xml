@@ -3,7 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="lib.employee.mypage.model.CommuteDAO">
+<mapper namespace="lib.employee.mypage.model.MypageDAO">
+  <select id="empSelectOne" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
+    select * from employee_management where emp_no=#{emp_no}
+  </select>
+  <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
+    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_email=#{emp_email} where emp_no=#{emp_no}
+  </update>
   <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
   	select * from commute_management where cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day}
   </select>

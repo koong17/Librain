@@ -13,19 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lib.employee.management.model.EmployeeDTO;
 import lib.employee.management.service.MgmtServiceImpl;
 import lib.employee.mypage.model.CommuteDTO;
 import lib.employee.mypage.service.MypageService;
 
 @Controller
-@RequestMapping("/commute.do")
+@RequestMapping("/mypage")
 public class MypageController {
 	
 	@Autowired
 	MypageService mypageService;
 	
-	@GetMapping
-	public String list(Model model, HttpSession session) {
+	@GetMapping("/info.do")
+	public String info(Model model, HttpSession session) {
+		session.setAttribute("emp_num", "1");
+		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_num"));
+		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
+		return "employee/mypage/info";
+	}
+	
+	@PostMapping("/info.do")
+	public String infoUpdate(HttpSession session, EmployeeDTO employeeDTO) {
+		mypageService.empUpdate(employeeDTO);
+		return "employee/mypage/info";
+	}
+	
+	@GetMapping("/commute.do")
+	public String cmtList(Model model, HttpSession session) {
 		session.setAttribute("emp_num", "1");
 		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"));
 		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
@@ -35,8 +50,8 @@ public class MypageController {
 		return "employee/mypage/commute";
 	}
 	
-	@PostMapping(produces = "application/text; charset=utf-8")
-	public @ResponseBody String insert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
+	@PostMapping(value = "/commute.do",produces = "application/text; charset=utf-8")
+	public @ResponseBody String cmtInsert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
 		String emp_num = (String)session.getAttribute("emp_num");
 		CommuteDTO commuteDTO = new CommuteDTO(emp_num, cmt_status);
 		mypageService.cmtInsert(commuteDTO);

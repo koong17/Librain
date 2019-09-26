@@ -10,9 +10,12 @@ public class EmployeeDTO {
 	
     public EmployeeDTO() {}
     
-    EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
+    public EmployeeDTO(String emp_no) {
+		this.emp_no = emp_no;
+	}
+
+	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
 			String emp_email, String emp_rank_position) {
-		super();
 		this.emp_no = emp_no;
 		this.emp_name = emp_name;
 		this.emp_telephone = emp_telephone;
