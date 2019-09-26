@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 목록 조회</title>
 <!-- grid -->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
@@ -39,6 +39,7 @@
 		});
 	}
 
+	// 그리드 출력
 	var Grid = tui.Grid;
 	Grid.setLanguage('ko');
 		
