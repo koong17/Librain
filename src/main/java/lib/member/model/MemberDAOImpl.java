@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberDAOImpl implements MemberDAO {
 
-	@Autowired
+	@Autowired	//bean 자동주입
 	SqlSession sqlsession;
 	
 	@Override
