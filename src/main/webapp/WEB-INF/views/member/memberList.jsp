@@ -4,24 +4,97 @@
 
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 목록 조회</title>
 <!-- grid -->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- boostrap -->
+<!-- boostrap -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 </head>
 <body>
-	<div>
-		회원 목록 조회
+	<div class="container-fluid bg-light " align="center">
+		<div class="row align-items-center justify-content-center" align="center">
+			<div class="col-md-2 pt-3">
+				<div class="form-group ">
+					<select id="searchCtgr" name="searchCtgr" class="form-control">
+						<option selected>전체</option>
+						<option>회원 ID</option>
+						<option>회원명</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="검색어를 입력하세요."
+					id="searchWord" name="searchWord">
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="searchBtn">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/memberList.do'">
+					<i class="fa fa-home"></i>
+				</button>
+			</div>
+		</div>
 	</div>
+	<hr>
 	<div id="grid"></div>
-	<input type="button" value="선택 수정" onclick="rankUpdate()">
+	<input type="button" class="btn btn-primary btn-block" value="선택 수정" onclick="rankUpdate()">
 	
 </body>
 
 <script type="text/javascript">
+
+	function searchAjax(){
+		
+		console.log($('#searchCtgr').val());
+		console.log($('#searchWord').val());
+		
+		if($('#searchWord').val()==""){
+			alert("검색어를 입력해주세요.")
+		}
+		else {
+			console.log(data);
+			$.ajax({
+				type : "POST",
+				url : "/memberSearch.do",
+				data : {
+					searchCtgr : $("#searchCtgr").val(),
+					searchWord : $("#searchWord").val()
+				},
+				dataType : "json",
+				contentType : "application/x-www-form-urlencoded;charset=UTF-8", //클라이언트 -> 서버
+				success: function(response) {
+					console.log(response);
+					grid.resetData(response);
+				},
+				error: function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}
+	}
 	
 	function rankUpdate() {
 		var data = grid.getCheckedRows();

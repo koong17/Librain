@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.member.model.MemberDTO;
@@ -27,10 +30,12 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	@GetMapping("/memberSearchID.do")
-	public @ResponseBody String memSearch(@RequestBody List<MemberDTO> dtos) {
-		memberService.memberSearch(dtos);
-		return "{\"result\":\"success\"}";
+	@PostMapping("/memberSearch.do")
+	public @ResponseBody String memberSearch(@RequestBody
+			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
+		System.out.println("컨트롤러 탐");
+		System.out.println(searchCtgr + " / " + searchWord);
+		return memberService.memberSearch(memberService.memberSearchCtgr(searchCtgr, searchWord)).toString();
 	}
 	
 	@PostMapping("/memberRankUpdate.do")
