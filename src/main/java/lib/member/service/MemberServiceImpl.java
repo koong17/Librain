@@ -68,20 +68,21 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List memberSearchCtgr(String searchCtgr, String searchWord) {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		if(searchCtgr.equals("전체")) {
-			System.out.println("전체"+searchWord);
-			list = memberDAO.memberSearchAll(searchWord);
-			for(MemberDTO memberDTO : list) {
-				System.out.println(memberDTO.getMem_name()+" / ");
-			}
-		} else if(searchCtgr.equals("회원 ID")) {
-			list = memberDAO.memberSearchID(searchWord);
-		} else if(searchCtgr.equals("회원명")) {
-			list = memberDAO.memberSearchName(searchWord);
-		}
-		return list;
+		return list = memberDAO.memberSearchAll(searchWord);
 	}
 
+	@Override
+	public List memberSearchID(String searchWord) {
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		return list = memberDAO.memberSearchID(searchWord);
+	}
+	
+	@Override
+	public List memberSearchName(String searchWord) {
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		return list = memberDAO.memberSearchName(searchWord);
+	}
+	
 	@Override
 	public void memberRankUpdate(List<MemberDTO> dtos) {
 		for (MemberDTO memberDTO : dtos) {

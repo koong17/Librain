@@ -52,7 +52,7 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/memberList.do'">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/memberList.do'">
 					<i class="fa fa-home"></i>
 				</button>
 			</div>
@@ -66,6 +66,15 @@
 
 <script type="text/javascript">
 
+	$(document).ready(function() {
+	    
+	    $('#searchBtn').click(function() {
+	    	$('#grid').show(); 
+	        searchAjax();
+	    });
+	
+	});
+
 	function searchAjax(){
 		
 		console.log($('#searchCtgr').val());
@@ -75,7 +84,6 @@
 			alert("검색어를 입력해주세요.")
 		}
 		else {
-			console.log(data);
 			$.ajax({
 				type : "POST",
 				url : "/memberSearch.do",

@@ -19,26 +19,31 @@ import lib.member.service.MemberService;
 
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	MemberService memberService;
-	
+
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {
 		JSONArray ja = memberService.memberSelectAll();
-		model.addAttribute("gridData",ja);
-		return "member/memberList";
+		model.addAttribute("gridData", ja);
+		return "employee/member/memberList";
 	}
-	
-	@PostMapping("/memberSearch.do")
-	public @ResponseBody String memberSearch(@RequestBody
-			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
-		System.out.println("컨트롤러 탐");
-		System.out.println(searchCtgr + " / " + searchWord);
-		return memberService.memberSearch(memberService.memberSearchCtgr(searchCtgr, searchWord)).toString();
+
+	@PostMapping(value="/memberSearch.do", produces = "application/text; charset=utf8")
+	public @ResponseBody String memberSearch(@RequestBody @RequestParam("searchCtgr") String searchCtgr,
+			@RequestParam("searchWord") String searchWord) {
+		if (searchCtgr.equals("전체")) {
+			return memberService.memberSearch(memberService.memberSearchCtgr(searchCtgr, searchWord)).toString();
+		} else if (searchCtgr.equals("회원 ID")) {
+			return memberService.memberSearch(memberService.memberSearchID(searchWord)).toString();
+		} else if (searchCtgr.equals("회원명")) {
+			return memberService.memberSearch(memberService.memberSearchName(searchWord)).toString();
+		} else
+			return null;
 	}
-	
-	@PostMapping("/memberRankUpdate.do")
+
+	@PostMapping(value="/memberRankUpdate.do", produces = "application/text; charset=utf8")
 	public @ResponseBody String memRank(@RequestBody List<MemberDTO> dtos) {
 		memberService.memberRankUpdate(dtos);
 		return "{\"result\":\"success\"}";
