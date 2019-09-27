@@ -1,6 +1,8 @@
 package lib.employee.book.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EmpBookDTO {
 	private String book_num; // 도서번호
@@ -13,6 +15,24 @@ public class EmpBookDTO {
 	private String book_ctgr_num; // 분류기호
 	private String book_rsrv_status; // 예약여부
 	private String rent; //대출여부
+	
+	
+//	public EmpBookDTO() {
+//		SimpleDateFormat fm = new SimpleDateFormat ( "yyyy-MM-dd");
+//		Date date = new Date();
+//		String today = fm.format(date).substring(0, 10);
+//		
+//		book_num = "입력";
+//		book_author = "입력";
+//		book_name = "입력";
+//		book_pub_house = "입력";
+//		book_pub_date = today;
+//		book_ISBN = "입력";
+//		book_apdx_status = "선택";
+//		book_ctgr_num = "입력";
+//		book_rsrv_status = "선택";
+//		rent = "선택";
+//	}
 	
 	public String getBook_num() {
 		return book_num;
