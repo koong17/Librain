@@ -16,23 +16,22 @@
 
 </head>
 <body>
-	<div> &lt 회원 목록 조회 &gt <!-- </div>
-	<div class="col-md-4"> -->
-		<input class="form-control" type="text" placeholder="검색어를 입력하세요."
-			id="searchMember" name="searchMember">
-	<!-- </div>
-	<div class="col-md-1"> -->
-		<button type="button" class="btn btn-primary btn-block" id="searchBtn">
-			<i class="fa fa-search">검색</i>
-		</button>
-	<!-- </div>
-	<div class="col-md-1"> -->
+	<div> &lt 회원 목록 조회 &gt &nbsp;
+
+            <select name="searchMember">
+                <option value="0">전체</option>
+                <option value="1">아이디</option>
+                <option value="2">이름</option>
+            </select>
+            <input type="text" size="20" name="condition"/>&nbsp;
+            <input type="submit" value="검색"/>&nbsp;
+
 		<button type="button" class="btn btn-primary btn-block" id="homeBtn"
 			onclick="location.href='index.jsp'">
 			<i class="fa fa-home">home</i>
 		</button>
-	</div><br>
-	<div id="grid"></div>
+	</div><p>
+	<div id="grid"></div><p>
 	<input type="button" value="선택 수정" onclick="rankUpdate()">
 
 </body>
