@@ -1,6 +1,5 @@
 package lib.employee.book.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
-import lib.member.book.model.MemBookDTO;
 
 @Service
 public class EmpBookServiceImpl implements EmpBookService {
@@ -20,9 +18,23 @@ public class EmpBookServiceImpl implements EmpBookService {
 	EmpBookDAO bookDAO;
 	
 	@Override
-	public List select() {
+	public List select(int Perpage, int page) {
+
+		 //
+		//Perpage 한번에 보여줄 게시물
+		//int page  현재페이지 초기로딩시 page=1
+		
+//		wherew rownum r>startnu and endnom>rownum;
+//		Perpage*page-Perpage 
+//		   5    1   - 5   0
+//		   5     2   -5   5   
+//		   
+//		   
+//		   Perpage*page
+		int startRowNum = Perpage * page - Perpage;
+		int endRowNum = Perpage * page;
 		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
-		list = bookDAO.select();
+		list = bookDAO.select(startRowNum, endRowNum);
 		return list;
 	}
 
@@ -32,10 +44,10 @@ public class EmpBookServiceImpl implements EmpBookService {
 		
 		if(searchCtgr.equals("전체")) {
 			list = bookDAO.searchAll(searchWord);
-			System.out.println("전체들어옴 "+searchWord);
-			for (EmpBookDTO bookDTO : list) {
-				System.out.println(bookDTO.getBook_name()+" / ");
-			}
+//			System.out.println("전체들어옴 "+searchWord);
+//			for (EmpBookDTO bookDTO : list) {
+//				System.out.println(bookDTO.getBook_name()+" / ");
+//			}
 		} else if(searchCtgr.equals("도서명")) {
 			list = bookDAO.searchBookName(searchWord);
 		} else if(searchCtgr.equals("저자명")) {
@@ -50,12 +62,11 @@ public class EmpBookServiceImpl implements EmpBookService {
 	public JSONArray search(List<EmpBookDTO> list) {
 		System.out.println("ListToJArr");
 		JSONArray jArr = new JSONArray();
-		JSONObject jObj;
+		JSONObject jObj = null;
+		
 		for (int i = 0; i < list.size(); i++) {
 			EmpBookDTO dto = list.get(i);
 			jObj = new JSONObject();
-			
-			System.out.println(dto.getBook_num());
 			
 			jObj.put("book_num", dto.getBook_num());
 			jObj.put("book_name", dto.getBook_name());
@@ -69,8 +80,13 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("rent", dto.getRent());
 			jArr.add(jObj);
 		}
-		System.out.println(jArr.get(0).toString());
 		return jArr;
 	}
 
+	@Override
+	public void insert() {
+		bookDAO.insertBook();
+	}
+	
+	
 }
