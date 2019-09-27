@@ -6,7 +6,10 @@ Fac_address varchar2(30)    --위치
 );
 create table Facilities_inspection(   --시설물 점검
 FacIn_INSPECTION_DATE date default sysdate,    -- 점검일 
-FacIn_serialnum  number                            --점검한것 Facilities의 fk
+FacIn_serialnum  number  ,
+FacIn_status varchar2(30)
+
+--점검한것 Facilities의 fk
 );
 
 select * from Facilities_inspection;
@@ -23,7 +26,10 @@ select * from Facilities join (select FacIn_INSPECTION_DATE,FacIn_serialnum Fac_
 on Facilities.Fac_serialnum=Facilities_inspection.Fac_serialnum;
 
 
+select * from Facilities;
 
+delete from Facilities where fac_name is null;
+commit;
 select * from Facilities join on Facilities.Fac_serialnum=Facilities_inspection.FacIn_serialnum;
 
 insert into Facilities values(1,'소화기','1층화단');
@@ -52,8 +58,9 @@ select *from  Facilities natural join (select  FacIn_serialnum Fac_serialnum ,ca
                                                                                        case when (sysdate-FacIn_INSPECTION_DATE)>60 then FacIn_INSPECTION_DATE+180
                                                                                              
  then 13 end aa from Facilities,Facilities_inspection;  --FK확실하게 정해지면 natural join으로 해결할것.
-
- select 
+select * from Facilities_inspection;
+ select * from  Facilities;
+ update Facilities set fac_name='승강기' where fac_serialnum;
  
  
 
