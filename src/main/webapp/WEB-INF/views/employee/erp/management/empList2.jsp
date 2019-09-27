@@ -19,7 +19,8 @@
 </body>
 
 <script type="text/javascript">
-	$("#delete").click(function(){
+
+ 	$("#delete").click(function(){
 	   	$.ajax({											
 			type: "POST",
 			contentType : 'application/json;charset=UTF-8',
@@ -31,7 +32,7 @@
 				grid.resetData(result);
 		    }
 		});
-	});
+	}); 
 	$("#insert").click(function(){
 		popup = window.open("empInsert.do", '사원 추가', 'width=450, height=600, status=no, toolbar=no, location=no, top=200, left=200');
         timer = setInterval(function(){
@@ -44,8 +45,6 @@
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridData},
-		scrollX: false,
-		scrollY: false,
 		rowHeaders: ['checkbox'],
 		columns: [
 			{
@@ -72,7 +71,7 @@
 			},
 			{
 				header: '직책',
-				name: 'emp_rank_position'
+				name: 'emp_position'
 			},
 			{
 				header: '입사일',

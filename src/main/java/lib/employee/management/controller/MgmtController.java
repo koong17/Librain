@@ -23,6 +23,11 @@ public class MgmtController {
 	@Autowired
 	MgmtService mgmtService;
 	
+	@RequestMapping(value = "/totalpay.do")
+	public String totalPay() {
+		return "employee/erp/management/totalPay";
+	}
+	
 	@RequestMapping("/emplist2.do")
 	public String empList2(Model model) {
 		JSONArray ja = mgmtService.empSelectAll();

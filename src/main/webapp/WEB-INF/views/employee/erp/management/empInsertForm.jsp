@@ -34,7 +34,7 @@
 				<input type="text" name="emp_join_date" class="form-control" placeholder="입사일" required="required">
 			</div> -->
 			<div class="form-group">
-				<input type="text" name="emp_rank_position" class="form-control" placeholder="직책" required="required">
+				<input type="text" name="emp_position" class="form-control" placeholder="직책" required="required">
 			</div>
 			<div class="form-group">
 	          <input type="submit" value="사원 추가" class="btn btn-success btn-block btn-lg" tabindex="7">

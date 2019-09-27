@@ -8,10 +8,10 @@
 	<form action="totalpay.do" method="post">
 		<div class="col-md-6 col-xs-12">
 			<div class="form-group">
-				<input type="number" name="emp_no" class="form-control" value=${employeeDTO.emp_no} readOnly>
+				<input type="number" name="emp_no" class="form-control" value="" readOnly>
 			</div>
 			<div class="form-group">
-				<input type="text" name="emp_name" class="form-control" value=${employeeDTO.emp_name} required="required">
+				<input type="date" name="emp_name" class="form-control" required="required">
 			</div>
 		</div>
 	</form>

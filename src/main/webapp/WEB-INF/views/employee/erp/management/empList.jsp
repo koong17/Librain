@@ -48,7 +48,7 @@
 			},
 			{
 				header: '직책',
-				name: 'emp_rank_position'
+				name: 'emp_position'
 			},
 			{
 				header: '입사일',

@@ -5,15 +5,15 @@
   
 <mapper namespace="lib.employee.management.model.EmployeeDAO">
   <select id="empSelectAll" resultType="lib.employee.management.model.EmployeeDTO">
-    select emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date
+    select emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_position,emp_join_date
      from employee_management
   </select>
   <delete id="empDelete" parameterType="lib.employee.management.model.EmployeeDTO">
   	delete employee_management where emp_no=#{emp_no}
   </delete>
   <insert id="empInsert" parameterType="lib.employee.management.model.EmployeeDTO">
-    insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date)
-     values(#{emp_no},#{emp_name},#{emp_telephone},#{emp_email},#{emp_dept_code},#{emp_rank_position},sysdate)
+    insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_position,emp_join_date)
+     values(#{emp_no},#{emp_name},#{emp_telephone},#{emp_email},#{emp_dept_code},#{emp_position},sysdate)
   </insert>
   <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
 	select * 

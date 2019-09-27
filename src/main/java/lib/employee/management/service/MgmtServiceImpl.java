@@ -33,7 +33,7 @@ public class MgmtServiceImpl implements MgmtService{
 			jo.put("emp_telephone",dto.getEmp_telephone());
 			jo.put("emp_email",dto.getEmp_email());
 			jo.put("emp_dept_code",dto.getEmp_dept_code());
-			jo.put("emp_rank_position",dto.getEmp_rank_position());
+			jo.put("emp_position",dto.getEmp_position());
 			jo.put("emp_join_date",dto.getEmp_join_date().toString().substring(0,10));
 			ja.add(jo);
 		}
