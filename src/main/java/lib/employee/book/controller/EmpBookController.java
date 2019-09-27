@@ -1,5 +1,7 @@
 package lib.employee.book.controller;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lib.employee.book.model.EmpBookDTO;
 import lib.employee.book.service.EmpBookService;
 
 @Controller
@@ -54,9 +57,21 @@ public class EmpBookController {
 		return bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString();
 	}
 	
-	@RequestMapping(value="/empBookInput.do", method = RequestMethod.GET)
-	public @ResponseBody String insert(Model model) {
-		bookService.insert();
-		return "{\"flag\":\"success\"}";
+	@RequestMapping(value="/empBookInput.do", method = RequestMethod.POST)
+	public @ResponseBody String insert(@RequestBody List<EmpBookDTO> dto) {
+		bookService.insert(dto);
+		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value="/empBookDelete.do", method = RequestMethod.POST)
+	public @ResponseBody String delete(@RequestBody List<EmpBookDTO> dto) {
+		bookService.delete(dto);
+		return "{\"result\":\"success\"}";
+	}
+
+	@RequestMapping(value="/empBookUpdate1.do", method = RequestMethod.POST)
+	public @ResponseBody String update(@RequestBody List<EmpBookDTO> dto) {
+		bookService.update(dto);
+		return "{\"result\":\"success\"}";
 	}
 }

@@ -5,15 +5,22 @@
 <head>
 <meta charset="UTF-8">
 
+
 <!-- Toast pagination -->
    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-  <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
+ <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
+ 
+ 
+ 
+ 
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
+	
+	
 
 <!-- boostrap -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -27,10 +34,20 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
 <!-- Toast Grid -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+<!--  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" /> -->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+ <!-- Toast Grid DatePicker -->
+	<!-- <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script> -->
+	<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+
+
+
+
 
 
 <title>도서검색</title>
@@ -38,7 +55,7 @@
 <body>
 	<div class="container-fluid bg-light ">
 		<div class="row align-items-center justify-content-center">
-			<div class="col-md-1 pt-3">
+			<div class="col-md-2 pt-3">
 				<div class="form-group ">
 					<select id="searchCtgr" name="searchCtgr" class="form-control">
 						<option selected>전체</option>
@@ -62,7 +79,7 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
+				<button type="button" class="btn btn-primary btn-block" id="addRowBtn">
 					행 추가
 				</button>
 			</div>
@@ -72,12 +89,12 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
+				<button type="button" class="btn btn-primary btn-block" id="updateBtn">
 					선택 수정
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
+				<button type="button" class="btn btn-primary btn-block" id="deleteBtn">
 					선택 삭제
 				</button>
 			</div>
@@ -93,11 +110,9 @@
 <script src="resources/js/empBook.js?after"></script>
 <script type="text/javascript">
 
-function confirmGrid(){
-	grid.readData(1,true);
-	inputGrid.readData(1,true);
+function confirm(){
+	grid.readData(1,true)
 }
-
 
 var Grid = tui.Grid;
 Grid.setLanguage('ko');
@@ -120,43 +135,87 @@ const grid = new tui.Grid({
 	columns: [
 		{
 			header: '도서번호',
-			name: 'book_num'
+			name: 'book_num',
+			editor: 'text'
 		},
 		{
 			header: '도서명',
-			name: 'book_name'
+			name: 'book_name',
+			editor: 'text'
 		},
 		{
 			header: '저자명',
-			name: 'book_author'
+			name: 'book_author',
+			editor: 'text'
 		},
 		{
 			header: '출판사명',
-			name: 'book_pub_house'
+			name: 'book_pub_house',
+			editor: 'text'
 		},
 		{
 			header: '발행일',
-			name: 'book_pub_date'
+			name: 'book_pub_date',
+			editor: 'datePicker'
+			
 		},
 		{
 			header: 'ISBN',
-			name: 'book_ISBN'
+			name: 'book_ISBN',
+			editor: 'text'
 		},
 		{
 			header: '부록여부',
-			name: 'book_apdx_status'
+			name: 'book_apdx_status',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: 'O', value: 'O' },
+						{ text: 'X', value: 'X' },
+					]
+				}
+			}
 		},
 		{
 			header: '분류기호',
-			name: 'book_ctgr_num'
+			name: 'book_ctgr_num',
+			editor: {
+				type: 'select',
+				options: {
+					listItems: [
+						{ text: '1', value: '1' },
+						{ text: '2', value: '2' },
+						{ text: '3', value: '3' }
+					]
+				}
+			}
 		},
 		{
-			header: '대출여부',
-			name: 'rent'
+			header: '대여여부',
+			name: 'rent',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '대여가능', value: '대여가능' },
+						{ text: '대여중', value: '대여중' },
+					]
+				}
+			}
 		},
 		{
 			header: '예약여부',
-			name: 'book_rsrv_status'
+			name: 'book_rsrv_status',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '예약가능', value: '예약가능' },
+						{ text: '예약중', 예약중: '예약중' },
+					]
+				}
+			}
 		}
 	]
 });

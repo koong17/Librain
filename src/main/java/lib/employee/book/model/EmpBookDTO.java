@@ -95,4 +95,12 @@ public class EmpBookDTO {
 		this.rent = rent;
 	}
 	
+	@Override
+	public String toString() {
+		return "EmpBookDTO [book_num=" + book_num + ", book_author=" + book_author + ", book_name=" + book_name
+				+ ", book_pub_house=" + book_pub_house + ", book_pub_date=" + book_pub_date + ", book_ISBN=" + book_ISBN
+				+ ", book_apdx_status=" + book_apdx_status + ", book_ctgr_num=" + book_ctgr_num + ", book_rsrv_status="
+				+ book_rsrv_status + ", rent=" + rent + "]";
+	}
+	
 }
