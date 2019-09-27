@@ -18,15 +18,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="mapperLocations">
-		<list>
-			<value>classpath:sqlmapper/Facilmapper.xml</value>
-			<value>classpath:sqlmapper/Facilmapper2.xml</value>
-			<value>classpath:sqlmapper/MemberMapper.xml</value>
-			<value>classpath:sqlmapper/Mgmtmapper.xml</value>
-			<value>classpath:sqlmapper/Mypagemapper.xml</value>
-			<value>classpath:sqlmapper/EmpBookMapper.xml</value>
-			<value>classpath:sqlmapper/MemBookMapper.xml</value>
-		</list>
+			<value>classpath:sqlmapper/*.xml</value>
 		</property>
 	</bean>
 
