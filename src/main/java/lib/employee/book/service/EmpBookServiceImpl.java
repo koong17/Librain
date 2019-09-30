@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
@@ -32,7 +33,9 @@ public class EmpBookServiceImpl implements EmpBookService {
 //		   
 //		   Perpage*page
 		int startRowNum = Perpage * page - Perpage;
+		System.out.println(startRowNum);
 		int endRowNum = Perpage * page;
+		System.out.println(endRowNum);
 		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
 		list = bookDAO.select(startRowNum, endRowNum);
 		return list;
@@ -82,11 +85,31 @@ public class EmpBookServiceImpl implements EmpBookService {
 		}
 		return jArr;
 	}
+	
+	
 
 	@Override
-	public void insert() {
-		bookDAO.insertBook();
+	public void insert(List<EmpBookDTO> dto) {
+		for (EmpBookDTO empBookDTO : dto) {
+			bookDAO.insertBook(empBookDTO);
+		}
 	}
+
+	@Override
+	public void delete(List<EmpBookDTO> dto) {
+		for (EmpBookDTO empBookDTO : dto) {
+			bookDAO.deleteBook(empBookDTO);
+		}
+	}
+
+	@Override
+	public void update(List<EmpBookDTO> dto) {
+		for (EmpBookDTO empBookDTO : dto) {
+			bookDAO.updateBook(empBookDTO);
+		}
+	}
+	
+	
 	
 	
 }

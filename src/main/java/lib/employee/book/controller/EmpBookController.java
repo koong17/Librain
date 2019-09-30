@@ -1,5 +1,7 @@
 package lib.employee.book.controller;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lib.employee.book.model.EmpBookDAO;
+import lib.employee.book.model.EmpBookDTO;
 import lib.employee.book.service.EmpBookService;
 
 @Controller
@@ -18,6 +22,8 @@ public class EmpBookController {
 	
 	@Autowired
 	EmpBookService bookService;
+	@Autowired
+	EmpBookDAO bookDAO;
 	
 	@RequestMapping(value = "/empSearch.do", method = RequestMethod.GET)
 	public String searchForm(Model model) {
@@ -28,14 +34,13 @@ public class EmpBookController {
 	@ResponseBody
 	public JSONObject searchForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
-	//	model.addAttribute("gridData", bookService.search(bookService.select()));
-	//	JSONObject ja=bookService.search(bookService.select());
+		
 		JSONObject resultJO = new JSONObject();
 		JSONObject contentJO = new JSONObject();
 		JSONObject pageJO = new JSONObject();
-		//select count(*) from 테이블;
-		pageJO.put("page",page);  // 현재 페이지 
-		pageJO.put("totalCount",100); 
+		
+		pageJO.put("page", page);  // 현재 페이지 
+		pageJO.put("totalCount", bookDAO.selectRowNum()); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.search(bookService.select(perPage, page))); //내용물 
 		resultJO.put("result", true);
@@ -45,7 +50,8 @@ public class EmpBookController {
 		
 		return  resultJO;
 	}
-
+	
+	
 	@RequestMapping(value = "/empSearch.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String search(@RequestBody
 			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
@@ -54,9 +60,21 @@ public class EmpBookController {
 		return bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString();
 	}
 	
-	@RequestMapping(value="/empBookInput.do", method = RequestMethod.GET)
-	public @ResponseBody String insert(Model model) {
-		bookService.insert();
-		return "{\"flag\":\"success\"}";
+	@RequestMapping(value="/empBookInput.do", method = RequestMethod.POST)
+	public @ResponseBody String insert(@RequestBody List<EmpBookDTO> dto) {
+		bookService.insert(dto);
+		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value="/empBookDelete.do", method = RequestMethod.POST)
+	public @ResponseBody String delete(@RequestBody List<EmpBookDTO> dto) {
+		bookService.delete(dto);
+		return "{\"result\":\"success\"}";
+	}
+
+	@RequestMapping(value="/empBookUpdate1.do", method = RequestMethod.POST)
+	public @ResponseBody String update(@RequestBody List<EmpBookDTO> dto) {
+		bookService.update(dto);
+		return "{\"result\":\"success\"}";
 	}
 }
