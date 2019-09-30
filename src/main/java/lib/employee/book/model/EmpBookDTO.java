@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EmpBookDTO {
-	private String book_num; // 도서번호
+	private int book_num; // 도서번호
 	private String book_author; // 저자
 	private String book_name; // 도서명
 	private String book_pub_house; // 출판사
@@ -34,10 +34,10 @@ public class EmpBookDTO {
 //		rent = "선택";
 //	}
 	
-	public String getBook_num() {
+	public int getBook_num() {
 		return book_num;
 	}
-	public void setBook_num(String book_num) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+	public void setBook_num(int book_num) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 		this.book_num = book_num;
 	}
 	public String getBook_author() {

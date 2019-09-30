@@ -4,14 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="lib.employee.book.model.EmpBookDAO">
+	
+	<select id="selectRowNum" resultType="int">
+		select nvl(max(rnum),0) from
+		    (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, 
+		            decode(rent_enddate,'o','대여중','대여가능') rent
+		            from  book b 
+		            left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+		            on (b.book_num = r.book_num))
+	</select>	
+	
 	<select id="select" resultType="lib.employee.book.model.EmpBookDTO" parameterType="int">
 	<![CDATA[
-		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, 
-            decode(rent_enddate,'o','대여중','대여가능') rent
-			from book b 
-			left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-			on b.book_num = r.book_num
-			where rownum > #{ startRowNum } and rownum <= #{ endRowNum }
+		select * from
+		    (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, 
+		            decode(rent_enddate,'o','대여중','대여가능') rent
+		            from  book b 
+		            left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+		            on (b.book_num = r.book_num)
+		            order by book_num desc)
+		     where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
 	]]>
 	</select>
 	
@@ -48,7 +60,7 @@
 	</select>
 	
 	<insert id="insertBook" parameterType="lib.employee.book.model.EmpBookDTO">
-		insert into book VALUES (#{ book_num }, #{ book_author }, #{ book_name }, #{ book_pub_house }, 
+		insert into book VALUES ((select nvl(max(book_num)+1,1000001) from book), #{ book_author }, #{ book_name }, #{ book_pub_house }, 
 		#{ book_pub_date }, #{ book_ISBN }, #{ book_apdx_status }, #{ book_ctgr_num }, #{ book_rsrv_status } )
 	</insert>
 	

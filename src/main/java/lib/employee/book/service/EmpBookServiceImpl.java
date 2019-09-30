@@ -33,7 +33,9 @@ public class EmpBookServiceImpl implements EmpBookService {
 //		   
 //		   Perpage*page
 		int startRowNum = Perpage * page - Perpage;
+		System.out.println(startRowNum);
 		int endRowNum = Perpage * page;
+		System.out.println(endRowNum);
 		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
 		list = bookDAO.select(startRowNum, endRowNum);
 		return list;
@@ -83,6 +85,8 @@ public class EmpBookServiceImpl implements EmpBookService {
 		}
 		return jArr;
 	}
+	
+	
 
 	@Override
 	public void insert(List<EmpBookDTO> dto) {

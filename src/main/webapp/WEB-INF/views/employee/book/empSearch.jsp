@@ -5,49 +5,34 @@
 <head>
 <meta charset="UTF-8">
 
-
 <!-- Toast pagination -->
    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
  <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
- 
- 
- 
- 
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
 	
-	
-
 <!-- boostrap -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
 <!-- Toast Grid -->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
-<!--  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" /> -->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+
  <!-- Toast Grid DatePicker -->
-	<!-- <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script> -->
-	<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-
-
-
-
 
 
 <title>도서검색</title>
@@ -107,11 +92,12 @@
 </body>
 
 <!-- bookJS -->
-<script src="resources/js/empBook.js?after"></script>
+<script src="resources/js/empBook.js"></script>
 <script type="text/javascript">
 
 function confirm(){
-	grid.readData(1,true)
+	grid.readData(1,true);
+	grid.sort("book_num",false);
 }
 
 var Grid = tui.Grid;
@@ -136,7 +122,8 @@ const grid = new tui.Grid({
 		{
 			header: '도서번호',
 			name: 'book_num',
-			editor: 'text'
+			sortingType: 'desc',
+			sortable: true
 		},
 		{
 			header: '도서명',
@@ -180,16 +167,7 @@ const grid = new tui.Grid({
 		{
 			header: '분류기호',
 			name: 'book_ctgr_num',
-			editor: {
-				type: 'select',
-				options: {
-					listItems: [
-						{ text: '1', value: '1' },
-						{ text: '2', value: '2' },
-						{ text: '3', value: '3' }
-					]
-				}
-			}
+			editor: 'text'
 		},
 		{
 			header: '대여여부',
@@ -219,7 +197,6 @@ const grid = new tui.Grid({
 		}
 	]
 });
-
 </script>
 
    

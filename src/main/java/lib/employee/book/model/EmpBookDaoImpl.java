@@ -12,6 +12,12 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	@Autowired
 	SqlSession sqlsession;
 	
+	
+	@Override
+	public int selectRowNum() {
+		return sqlsession.getMapper(EmpBookDAO.class).selectRowNum();
+	}
+
 	@Override
 	public List<EmpBookDTO> select(int startRowNum,int endRowNum) {
 		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).select(startRowNum,endRowNum);

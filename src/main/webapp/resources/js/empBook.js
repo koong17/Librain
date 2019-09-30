@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$('#updateBtn').click(function() {
 		updateAjax();
 	});
-
+	
 });
 
 function searchAjax() {
@@ -54,6 +54,7 @@ function inputAjax() {
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
+			confirm();
 		},
 		error : function(e) {
 			alert('Error : ' + e);
@@ -78,13 +79,30 @@ function addRowData() {
 	today = yyyy + "-" + mm + "-" + dd;
    
    var rowData = {
-	   book_num:"입력",  book_name:"입력", book_author:"입력", book_pub_house:"입력", book_pub_date: today, 
+	   book_num:"",  book_name:"입력", book_author:"입력", book_pub_house:"입력", book_pub_date: today, 
 	   book_ISBN:"입력", book_apdx_status:"X", book_ctgr_num:"1", rent:"대여가능", book_rsrv_status:"예약가능"
    };
+/*//   
+//   $.ajax({
+//		type : "GET",
+//		contentType : "application/json;charset=UTF-8",
+//		dataType : "json",
+//		data : JSON.stringify(grid.getCheckedRows()),
+//		url : "empGetBookNum.do",
+//		success : function(data) {
+//		   rowData.book_num = data.book_num;
+//		},
+//		error : function(e) {
+//			alert('Error : ' + e);
+//		}
+//	});
+//   
+*/   
    var option = {
       at:0,
       focus:true
    };
+   
 	grid.appendRow(rowData,option);
     grid.check(grid.getRowAt(0).rowKey);
 }
