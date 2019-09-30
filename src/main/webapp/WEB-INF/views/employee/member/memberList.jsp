@@ -170,10 +170,43 @@
 			}
 		]
 	});
-		
+	
 	grid.on('check', function() {
 		console.log(grid.getCheckedRows());
 		console.log(grid.getModifiedRows());
+	});
+	
+	/* paging */
+	
+	var page = -1;
+	var totalPage = -1;
+
+	gridView.setPaging(true, 10);
+
+	page = gridView.getPage();
+	totalPage = gridView.getPageCount();
+
+	$(".current-page-view").text(page);
+	$(".total-page-view").text(pageCount);
+	
+	gridView.onPageChanged = function(grid, page) {
+	  $(".current-page-view").text(page);
+	}
+
+	gridView.onPageCountChanged = function(grid, pageCount) {
+	  $(".total-page-view").text(pageCount);
+	}
+		
+	gridView.onPageChanged = function(grid, page) {
+	  $(".current-page-view").text(page);
+	}
+
+	gridView.onPageCountChanged = function(grid, pageCount) {
+	  $(".total-page-view").text(pageCount);
+	}
+
+	$('#setPage10').click(function() {
+	  gridView.setPage(5);
 	});
 	
 </script>
