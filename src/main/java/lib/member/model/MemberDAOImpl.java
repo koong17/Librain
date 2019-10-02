@@ -19,15 +19,30 @@ public class MemberDAOImpl implements MemberDAO {
 		return list;
 	}
 
+	//검색
 	@Override
-	public void memberSearch(MemberDTO dto) {
-		sqlsession.getMapper(MemberDAO.class).memberSearch(dto);
+	public List<MemberDTO> memberSearchAll(String searchWord) {
+		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSearchAll("%" + searchWord + "%");
+		return list;
+	}
+	
+	@Override
+	public List<MemberDTO> memberSearchID(String searchWord) {
+		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSearchID("%" + searchWord + "%");
+		return list;
+	}
+
+	@Override
+	public List<MemberDTO> memberSearchName(String searchWord) {
+		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSearchName("%" + searchWord + "%");
+		return list;
 	}
 
 	@Override
 	public void memberRankUpdate(MemberDTO dto) {
 		sqlsession.getMapper(MemberDAO.class).memberRankUpdate(dto);
 	}
+	
 }
 
 

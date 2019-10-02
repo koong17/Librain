@@ -67,14 +67,3 @@ const grid = new tui.Grid({
 		}
 	]
 });
-
-
-
-
-
-
-
-
-
-
-

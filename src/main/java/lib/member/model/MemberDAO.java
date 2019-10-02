@@ -7,8 +7,14 @@ public interface MemberDAO {
 	//전체출력
 	public List<MemberDTO> memberSelectAll();
 	
-	//멤버검색
-	public void memberSearch(MemberDTO dto);
+	//전체검색
+	public List<MemberDTO> memberSearchAll(String searchWord);
+	
+	//멤버ID검색
+	public List<MemberDTO> memberSearchID(String searchWord);
+	
+	//멤버이름검색
+	public List<MemberDTO> memberSearchName(String searchWord);
 	
 	//권한변경
 	public void memberRankUpdate(MemberDTO dto);
