@@ -1,6 +1,7 @@
 package lib.employee.management.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.employee.management.model.EmployeeDTO;
@@ -24,7 +26,14 @@ public class MgmtController {
 	MgmtService mgmtService;
 	
 	@RequestMapping(value = "/totalpay.do")
-	public String totalPay() {
+	public String totalPay(Model model) {
+		//model.addAttribute("gridData", mgmtService.cmtAdminSelectOne());
+		return "employee/erp/management/totalPay";
+	}
+	@RequestMapping(value = "/totalpay.do", method = RequestMethod.POST)
+	public String totalPayPro(@RequestBody Map<String, Object> param) {
+		EmployeeDTO employeeDTO = new EmployeeDTO((String)param.get("emp_name"), (String)param.get("emp_dept_code"));
+		mgmtService.empSelectPay(employeeDTO);
 		return "employee/erp/management/totalPay";
 	}
 	

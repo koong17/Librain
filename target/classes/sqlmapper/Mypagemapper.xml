@@ -5,7 +5,7 @@
   
 <mapper namespace="lib.employee.mypage.model.MypageDAO">
   <select id="empSelectOne" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
-    select * from employee_management where emp_no=#{emp_no}
+    select * from employee_management emp,department dept where emp.emp_dept_code = dept.dept_code and emp_no=#{emp_no}
   </select>
   <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
     update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_email=#{emp_email} where emp_no=#{emp_no}

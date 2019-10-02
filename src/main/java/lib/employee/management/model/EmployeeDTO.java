@@ -6,11 +6,19 @@ public class EmployeeDTO {
 	private String emp_no, emp_name , emp_telephone ,emp_address, emp_address_number, emp_dept_code, emp_jumin, emp_gender;
     private Timestamp emp_join_date, emp_retire_date;
     private String emp_email, emp_position, emp_bank_name, emp_account_number, emp_picture, emp_password;
+    private String dept_name;
+    private int emp_basic_pay;
 	
     public EmployeeDTO() {}
     
     public EmployeeDTO(String emp_no) {
 		this.emp_no = emp_no;
+	}
+    
+	public EmployeeDTO(String emp_name, String emp_dept_code) {
+		super();
+		this.emp_name = emp_name;
+		this.emp_dept_code = emp_dept_code;
 	}
 
 	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
@@ -23,30 +31,21 @@ public class EmployeeDTO {
 		this.emp_email = emp_email;
 		this.emp_position = emp_position;
 	}
+	
+	public int getEmp_basic_pay() {
+		return emp_basic_pay;
+	}
 
-	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_address, String emp_address_number,
-			String emp_dept_code, String emp_jumin, String emp_gender, Timestamp emp_join_date,
-			Timestamp emp_retire_date, String emp_email, String emp_rank_position, String emp_duty_responsibility,
-			String emp_continuous_service_date, String emp_bank_name, String emp_account_holder,
-			String emp_account_number, String emp_picture, String emp_attach_file, String emp_join_company_division,
-			String emp_password) {
-		super();
-		this.emp_no = emp_no;
-		this.emp_name = emp_name;
-		this.emp_telephone = emp_telephone;
-		this.emp_address = emp_address;
-		this.emp_address_number = emp_address_number;
-		this.emp_dept_code = emp_dept_code;
-		this.emp_jumin = emp_jumin;
-		this.emp_gender = emp_gender;
-		this.emp_join_date = emp_join_date;
-		this.emp_retire_date = emp_retire_date;
-		this.emp_email = emp_email;
-		this.emp_position = emp_rank_position;
-		this.emp_bank_name = emp_bank_name;
-		this.emp_account_number = emp_account_number;
-		this.emp_picture = emp_picture;
-		this.emp_password = emp_password;
+	public void setEmp_basic_pay(int emp_basic_pay) {
+		this.emp_basic_pay = emp_basic_pay;
+	}
+
+	public String getDept_name() {
+		return dept_name;
+	}
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
 	}
 
 	public String getEmp_no() {

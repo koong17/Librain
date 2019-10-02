@@ -22,13 +22,13 @@
 				<input type="text" name="emp_email" class="form-control" value=${employeeDTO.emp_email} required="required">
 			</div>
 			<div class="form-group">
-				<input type="text" name="emp_dept_code" class="form-control" value=${employeeDTO.emp_dept_code} readOnly>
+				<input type="text" name="emp_dept_code" class="form-control" value=${employeeDTO.dept_name} readOnly>
 			</div>
-			<!-- <div class="form-group">
-				<input type="text" name="emp_join_date" class="form-control" value=${employeeDTO.emp_no} readOnly>
-			</div> -->
 			<div class="form-group">
 				<input type="text" name="emp_position" class="form-control" value=${employeeDTO.emp_position} readOnly>
+			</div>
+			<div class="form-group">
+				입사일 <input type="text" name="emp_join_date" class="form-control" value=${employeeDTO.emp_join_date} readOnly>
 			</div>
 			<div class="form-group">
 	          <input type="submit" value="수정" class="btn btn-success btn-block btn-lg" tabindex="7">

@@ -15,6 +15,9 @@
     insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_position,emp_join_date)
      values(#{emp_no},#{emp_name},#{emp_telephone},#{emp_email},#{emp_dept_code},#{emp_position},sysdate)
   </insert>
+  <select id="empSelectPay" resultType="String" parameterType="lib.employee.management.model.EmployeeDTO">
+    select emp_basic_pay from employee_management where emp_dept_code=#{emp_dept_code}, emp_name=#{emp_name}
+  </select>
   <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
 	select * 
 	  from commute_management 

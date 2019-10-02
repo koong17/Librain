@@ -8,6 +8,7 @@ public interface EmployeeDAO {
 	public List<EmployeeDTO> empSelectAll();
 	public void empDelete(EmployeeDTO dto);
 	public void empInsert(EmployeeDTO dto);
+	public String empSelectPay(EmployeeDTO dto);
 	public List<CommuteDTO> cmtAdminSelectAll();
 	public void cmtUpdate(CommuteDTO commuteDTO);
 }

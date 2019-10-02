@@ -27,8 +27,8 @@ public class MypageController {
 	
 	@GetMapping("/info.do")
 	public String info(Model model, HttpSession session) {
-		session.setAttribute("emp_num", "1");
-		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_num"));
+		session.setAttribute("emp_no", "1000001");
+		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_no"));
 		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
 		return "employee/mypage/info";
 	}
@@ -41,8 +41,8 @@ public class MypageController {
 	
 	@GetMapping("/commute.do")
 	public String cmtList(Model model, HttpSession session) {
-		session.setAttribute("emp_num", "1");
-		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"));
+		session.setAttribute("emp_no", "1000001");
+		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_no"));
 		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
 		model.addAttribute("gridData", ja);
 		ja = mypageService.cmtSelectOnOff(commuteDTO);

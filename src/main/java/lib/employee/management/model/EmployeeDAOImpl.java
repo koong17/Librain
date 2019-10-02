@@ -41,4 +41,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		sqlsession.getMapper(EmployeeDAO.class).empInsert(employeeDTO);
 	}
 
+	@Override
+	public String empSelectPay(EmployeeDTO employeeDTO) {
+		return sqlsession.getMapper(EmployeeDAO.class).empSelectPay(employeeDTO);
+	}
+
 }
