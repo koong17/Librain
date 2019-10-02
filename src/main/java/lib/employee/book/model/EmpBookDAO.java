@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface EmpBookDAO {
 	
+	public List<EmpBookDTO> rentBookCheck(int book_num); //대여 도서번호 검색
 	public int selectRowNum(); //rownum 갯수
 	public List<EmpBookDTO> select(@Param(value = "startRowNum") int startRowNum,@Param(value = "endRowNum") int endRowNum); //전체출력
 	public List<EmpBookDTO> searchAll(String str); //전체검색

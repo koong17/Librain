@@ -1,5 +1,6 @@
 package lib.employee.book.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -72,9 +73,21 @@ public class EmpBookController {
 		return "{\"result\":\"success\"}";
 	}
 
-	@RequestMapping(value="/empBookUpdate1.do", method = RequestMethod.POST)
+	@RequestMapping(value="/empBookUpdate.do", method = RequestMethod.POST)
 	public @ResponseBody String update(@RequestBody List<EmpBookDTO> dto) {
 		bookService.update(dto);
 		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value = "/empRentBook.do", method = RequestMethod.GET)
+	public String rentBookForm(Model model) {
+		return "employee/book/empRentBook";
+	}
+	
+	@RequestMapping(value = "/empRent/bookCheck.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String rentBookCheck(@RequestParam("book_num") String book_num) {
+		System.out.println(bookService.rentBookCheck(book_num).toString());
+		
+		return bookService.rentBookCheck(book_num).toString();
 	}
 }

@@ -14,12 +14,18 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	
 	
 	@Override
+	public List<EmpBookDTO> rentBookCheck(int book_num) {
+		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).rentBookCheck(book_num);
+		return list;
+	}
+
+	@Override
 	public int selectRowNum() {
 		return sqlsession.getMapper(EmpBookDAO.class).selectRowNum();
 	}
 
 	@Override
-	public List<EmpBookDTO> select(int startRowNum,int endRowNum) {
+	public List<EmpBookDTO> select(int startRowNum, int endRowNum) {
 		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).select(startRowNum,endRowNum);
 		return list;
 	}

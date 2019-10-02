@@ -19,6 +19,28 @@ public class EmpBookServiceImpl implements EmpBookService {
 	EmpBookDAO bookDAO;
 	
 	@Override
+	public JSONArray rentBookCheck(String book_num) {
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
+		list = bookDAO.rentBookCheck(Integer.parseInt(book_num));
+		
+		for (int i = 0; i < list.size(); i++) {
+			EmpBookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_num", dto.getBook_num());
+			jObj.put("rent", dto.getRent());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+
+	@Override
 	public List select(int Perpage, int page) {
 
 		 //
@@ -81,6 +103,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
 			jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
 			jObj.put("rent", dto.getRent());
+			jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
 			jArr.add(jObj);
 		}
 		return jArr;

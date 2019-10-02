@@ -36,4 +36,16 @@ public class MemBookDaoImpl implements MemBookDAO {
 		return list;
 	}
 
+	@Override
+	public List<MemBookDTO> newBook(int startRowNum, int endRowNum) {
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).newBook(startRowNum, endRowNum);
+		return list;
+	}
+	
+	@Override
+	public List<MemBookDTO> mostRent(int startRowNum, int endRowNum) {
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).mostRent(startRowNum, endRowNum);
+		return list;
+	}
+	
 }
