@@ -90,4 +90,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public List<MemberDTO> select(int perPage, int page) {
+		int startRowNum = perPage * page - perPage;
+		System.out.println(startRowNum);
+		int endRowNum = perPage * page;
+		System.out.println(endRowNum);
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		list = memberDAO.select(startRowNum, endRowNum);
+		return list;
+	}
+
 }

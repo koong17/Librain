@@ -2,9 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <title>회원 목록 조회</title>
+
+<!-- Toast pagination -->
+ <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+ <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
 <!-- grid -->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
@@ -69,7 +75,6 @@
 	$(document).ready(function() {
 	    
 	    $('#searchBtn').click(function() {
-	    	$('#grid').show(); 
 	        searchAjax();
 	    });
 	
@@ -122,13 +127,23 @@
 
 	var Grid = tui.Grid;
 	Grid.setLanguage('ko');
+	
+	var gridData =
+	{
+		api: {
+			readData: { url: 'http://localhost:8080/memberList.do/readData', method: 'GET' }
+		}
+	}
 		
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
-		data: ${gridData},
+		data: gridData,
 		scrollX: false,
 		scrollY: false,
-		rowHeaders: ['checkbox'],
+		rowHeaders: ['rowNum','checkbox'],
+		pageOptions: {
+			perPage: 10
+		},
 		columns: [
 			{
 				header: '회원 ID',
@@ -178,36 +193,6 @@
 	
 	/* paging */
 	
-	var page = -1;
-	var totalPage = -1;
-
-	gridView.setPaging(true, 10);
-
-	page = gridView.getPage();
-	totalPage = gridView.getPageCount();
-
-	$(".current-page-view").text(page);
-	$(".total-page-view").text(pageCount);
-	
-	gridView.onPageChanged = function(grid, page) {
-	  $(".current-page-view").text(page);
-	}
-
-	gridView.onPageCountChanged = function(grid, pageCount) {
-	  $(".total-page-view").text(pageCount);
-	}
-		
-	gridView.onPageChanged = function(grid, page) {
-	  $(".current-page-view").text(page);
-	}
-
-	gridView.onPageCountChanged = function(grid, pageCount) {
-	  $(".total-page-view").text(pageCount);
-	}
-
-	$('#setPage10').click(function() {
-	  gridView.setPage(5);
-	});
 	
 </script>
 </html>

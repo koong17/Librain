@@ -20,4 +20,7 @@ public interface MemberService {
 	//권한수정
 	public void memberRankUpdate(List<MemberDTO> dtos);
 
+	//페이징
+	public List<MemberDTO> select(int perPage, int page);
+
 }

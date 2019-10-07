@@ -32,6 +32,17 @@
 	<select id="memberSearchName" resultType="lib.member.model.MemberDTO">
 		select * from member where mem_name like #{searchWord}
 	</select>
+	
+	<!-- 페이징 -->
+	<select id="select" resultType="lib.member.model.MemberDTO" parameterType="int">
+	<![CDATA[
+		select * from (select rownum r, mem_id, mem_pw, mem_name, mem_jumin, mem_address, mem_phone, mem_email, mem_rank from member) where r > #{ startRowNum } and r < #{ endRowNum }
+	]]>
+	</select>
+	
+	<select id="selectRowNum" resultType="int">
+		select nvl(max(rnum),0) from (select rownum rnum, mem_id from member) member
+	</select>
 
 </mapper>
 
