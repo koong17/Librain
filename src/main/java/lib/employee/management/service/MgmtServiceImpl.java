@@ -61,7 +61,7 @@ public class MgmtServiceImpl implements MgmtService{
 			jo = new JSONObject();
 			CommuteDTO dto = list.get(i);
 			jo.put("cmt_no",dto.getCmt_no());
-			jo.put("cmt_emp_no",dto.getCmt_emp_no());
+			jo.put("emp_no",dto.getEmp_no());
 			jo.put("cmt_status",dto.getCmt_status());
 			jo.put("cmt_year",dto.getCmt_year());
 			jo.put("cmt_month",dto.getCmt_month());
@@ -89,17 +89,18 @@ public class MgmtServiceImpl implements MgmtService{
 		SalaryDTO salaryDTO = new SalaryDTO();
 		int sal_basic_pay = Integer.parseInt(employeeDAO.empSelectPay(employeeDTO));
 		JSONObject jo = new JSONObject();
-		jo.put("sal_total", sal_basic_pay+150000);
-		jo.put("sal_real", sal_basic_pay+150000-sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
-		jo.put("sal_national_pension", sal_basic_pay*0.045);
-		jo.put("sal_health_insurance", sal_basic_pay*0.0323);
-		jo.put("sal_longterm_care_insurance", sal_basic_pay*0.0323*0.0851);
-		jo.put("sal_employment_insurance", sal_basic_pay*0.0065);
-		jo.put("sal_income_tax", sal_basic_pay*0.007375);
-		jo.put("sal_local_income_tax", sal_basic_pay*0.007375*0.1);
-		jo.put("sal_deducted", sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
 		jo.put("sal_basic_pay", sal_basic_pay);
-		jo.put("sal_food_pay", 150000);
+//		jo.put("sal_total", sal_basic_pay+150000);
+//		jo.put("sal_real", sal_basic_pay+150000-sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
+//		jo.put("sal_national_pension", sal_basic_pay*0.045);
+//		jo.put("sal_health_insurance", sal_basic_pay*0.0323);
+//		jo.put("sal_longterm_care_insurance", sal_basic_pay*0.0323*0.0851);
+//		jo.put("sal_employment_insurance", sal_basic_pay*0.0065);
+//		jo.put("sal_income_tax", sal_basic_pay*0.007375);
+//		jo.put("sal_local_income_tax", sal_basic_pay*0.007375*0.1);
+//		jo.put("sal_deducted", sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
+//		jo.put("sal_basic_pay", sal_basic_pay);
+//		jo.put("sal_food_pay", 150000);
 		return jo;
 	}
 	

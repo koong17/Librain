@@ -11,7 +11,7 @@
     update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_email=#{emp_email} where emp_no=#{emp_no}
   </update>
   <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
-  	select * from commute_management where cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day}
+  	select * from commute_management where emp_no=#{emp_no} and cmt_day=#{cmt_day}
   </select>
   <select id="cmtSelectOnOff" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
   	select * 
@@ -19,14 +19,14 @@
     where cmt_no=
         (select min(cmt_no)
             from commute_management
-            where  cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day} and cmt_status='on'
+            where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='on'
         ) or cmt_no =
             (select max(cmt_no)
                 from commute_management
-                where  cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
+                where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
             )
   </select>
   <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
-    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{cmt_emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
+    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
   </insert>
 </mapper>

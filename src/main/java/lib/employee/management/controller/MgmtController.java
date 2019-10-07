@@ -32,6 +32,7 @@ public class MgmtController {
 	}
 	@RequestMapping(value = "/totalpay.do", method = RequestMethod.POST)
 	public String totalPayPro(@RequestBody Map<String, Object> param) {
+		System.out.println((String)param.get("emp_name")+param.get("emp_dept_code"));
 		EmployeeDTO employeeDTO = new EmployeeDTO((String)param.get("emp_name"), (String)param.get("emp_dept_code"));
 		mgmtService.empSelectPay(employeeDTO);
 		return "employee/erp/management/totalPay";

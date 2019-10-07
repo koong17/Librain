@@ -25,6 +25,14 @@ public class MypageController {
 	@Autowired
 	MypageService mypageService;
 	
+	@GetMapping("/pay.do")
+	public String pay(Model model, HttpSession session) {
+		session.setAttribute("emp_no", "1000001");
+		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_no"));
+		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
+		return "employee/mypage/pay";
+	}
+	
 	@GetMapping("/info.do")
 	public String info(Model model, HttpSession session) {
 		session.setAttribute("emp_no", "1000001");
@@ -34,15 +42,17 @@ public class MypageController {
 	}
 	
 	@PostMapping("/info.do")
-	public String infoUpdate(HttpSession session, EmployeeDTO employeeDTO) {
+	public String infoUpdate(Model model, HttpSession session, EmployeeDTO employeeDTO) {
 		mypageService.empUpdate(employeeDTO);
+		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
 		return "employee/mypage/info";
 	}
 	
 	@GetMapping("/commute.do")
 	public String cmtList(Model model, HttpSession session) {
 		session.setAttribute("emp_no", "1000001");
-		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_no"));
+		System.out.println(session.getAttribute("emp_no"));
+		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")));
 		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
 		model.addAttribute("gridData", ja);
 		ja = mypageService.cmtSelectOnOff(commuteDTO);
@@ -52,8 +62,8 @@ public class MypageController {
 	
 	@PostMapping(value = "/commute.do",produces = "application/text; charset=utf-8")
 	public @ResponseBody String cmtInsert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
-		String emp_num = (String)session.getAttribute("emp_num");
-		CommuteDTO commuteDTO = new CommuteDTO(emp_num, cmt_status);
+		session.setAttribute("emp_no", "1000001");
+		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")), cmt_status);
 		mypageService.cmtInsert(commuteDTO);
 		JSONArray ja = new JSONArray();
 		ja.add(mypageService.cmtSelectAll(commuteDTO));

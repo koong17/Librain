@@ -23,11 +23,11 @@
 	  from commute_management 
 	  where cmt_no in (
 	      select min(cmt_no) from commute_management
-	      	group by cmt_emp_no, cmt_day, cmt_status
+	      	group by emp_no, cmt_day, cmt_status
 	      	having cmt_status='on'
 	  ) or cmt_no in (
 	      select max(cmt_no) from commute_management
-	     	group by cmt_emp_no, cmt_day, cmt_status
+	     	group by emp_no, cmt_day, cmt_status
 	      	having cmt_status='off'
 	  ) order by cmt_no
   </select>

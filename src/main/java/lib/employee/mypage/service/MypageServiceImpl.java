@@ -33,11 +33,11 @@ public class MypageServiceImpl implements MypageService{
 		for (int i = 0; i < list.size(); i++) {
 			jo = new JSONObject();
 			CommuteDTO dto = list.get(i);
-			jo.put("cmt_emp_no", dto.getCmt_emp_no());
+			jo.put("emp_no", dto.getEmp_no());
 			jo.put("cmt_status", dto.getCmt_status());
 			jo.put("cmt_hour", dto.getCmt_hour());
 			jo.put("cmt_minute", dto.getCmt_minute());
-			System.out.println(dto.getCmt_emp_no());
+			System.out.println(dto.getEmp_no());
 			ja.add(jo);
 		}
 		return ja;
@@ -55,7 +55,7 @@ public class MypageServiceImpl implements MypageService{
 			String cmt_status = dto.getCmt_status();
 			int cmt_hour = dto.getCmt_hour();
 			int cmt_minute = dto.getCmt_minute();
-			jo.put("cmt_emp_no", dto.getCmt_emp_no());
+			jo.put("emp_no", dto.getEmp_no());
 			jo.put("cmt_status", cmt_status);
 			jo.put("cmt_hour", cmt_hour);
 			jo.put("cmt_minute", dto.getCmt_minute());

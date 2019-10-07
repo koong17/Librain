@@ -87,14 +87,12 @@
 </body>
 <script>
 	$("#check").click(function(){
-		var info = new Object();
-		info.
 	   	$.ajax({											
 			type: "POST",
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			contentType : 'application/json;charset=UTF-8',
 			dataType : 'json',
 			url: "totalpay.do",
-			data: 
+			data: JSON.stringify($('form[name="infoForm"]').serializeComponent()),
 			/* {
 				cmt_year: $('#cmt_year').val(),
 				cmt_month: $('#cmt_month').val(),
@@ -110,7 +108,7 @@
 	
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
-		data: null,
+		data: ${gridData},
 		scrollX: false,
 		scrollY: false,
 		rowHeaders: ['checkbox'],

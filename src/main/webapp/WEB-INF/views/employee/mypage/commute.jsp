@@ -63,7 +63,7 @@
 		columns: [
 			{
 				header: '사원번호',
-				name: 'cmt_emp_no',
+				name: 'emp_no',
 			},
 			{
 				header: '상태',
@@ -94,13 +94,10 @@
 		scrollX: false,
 		scrollY: false,
 		rowHeaders: ['checkbox'],
-		pagination: {
-			perPage: 5
-		},
 		columns: [
 			{
 				header: '사원번호',
-				name: 'cmt_emp_no',
+				name: 'emp_no',
 			},
 			{
 				header: '상태',

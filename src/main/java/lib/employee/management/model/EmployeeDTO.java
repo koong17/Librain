@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class EmployeeDTO {
 	private String emp_no, emp_name , emp_telephone ,emp_address, emp_address_number, emp_dept_code, emp_jumin, emp_gender;
-    private Timestamp emp_join_date, emp_retire_date;
+    private String emp_join_date, emp_retire_date;
     private String emp_email, emp_position, emp_bank_name, emp_account_number, emp_picture, emp_password;
     private String dept_name;
     private int emp_basic_pay;
@@ -21,7 +21,7 @@ public class EmployeeDTO {
 		this.emp_dept_code = emp_dept_code;
 	}
 
-	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, Timestamp emp_join_date,
+	public EmployeeDTO(String emp_no, String emp_name, String emp_telephone, String emp_dept_code, String emp_join_date,
 			String emp_email, String emp_position) {
 		this.emp_no = emp_no;
 		this.emp_name = emp_name;
@@ -112,19 +112,19 @@ public class EmployeeDTO {
 		this.emp_gender = emp_gender;
 	}
 
-	public Timestamp getEmp_join_date() {
+	public String getEmp_join_date() {
 		return emp_join_date;
 	}
 
-	public void setEmp_join_date(Timestamp emp_join_date) {
+	public void setEmp_join_date(String emp_join_date) {
 		this.emp_join_date = emp_join_date;
 	}
 
-	public Timestamp getEmp_retire_date() {
+	public String getEmp_retire_date() {
 		return emp_retire_date;
 	}
 
-	public void setEmp_retire_date(Timestamp emp_retire_date) {
+	public void setEmp_retire_date(String emp_retire_date) {
 		this.emp_retire_date = emp_retire_date;
 	}
 
