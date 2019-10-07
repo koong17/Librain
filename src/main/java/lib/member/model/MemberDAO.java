@@ -2,6 +2,8 @@ package lib.member.model;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MemberDAO {
 	
 	//전체출력
@@ -18,5 +20,10 @@ public interface MemberDAO {
 	
 	//권한변경
 	public void memberRankUpdate(MemberDTO dto);
+
+	//페이징
+	public Object selectRowNum();
+
+	public List<MemberDTO> select(@Param(value = "startRowNum") int startRowNum, @Param(value = "endRowNum") int endRowNum);
 	
 }

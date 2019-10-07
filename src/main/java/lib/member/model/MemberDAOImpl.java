@@ -42,7 +42,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public void memberRankUpdate(MemberDTO dto) {
 		sqlsession.getMapper(MemberDAO.class).memberRankUpdate(dto);
 	}
-	
+
+	@Override
+	public Object selectRowNum() {
+		return sqlsession.getMapper(MemberDAO.class).selectRowNum();
+	}
+
+	@Override
+	public List<MemberDTO> select(int startRowNum, int endRowNum) {
+		System.out.println("DAO select 탔다");
+		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).select(startRowNum, endRowNum);
+		return list;
+	}
 }
-
-
