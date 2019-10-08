@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class BoardDTO {		//Lombok을 이용해서 생성자와 getter/setter, toString()만들어냄. 그래서 @Data 필요
+public class NoticeDTO {		
 
 	private Long board_no;
 	private String board_title;

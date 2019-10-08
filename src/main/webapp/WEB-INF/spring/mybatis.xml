@@ -23,6 +23,7 @@
 			<value>classpath:sqlmapper/Facilmapper.xml</value>
 			<value>classpath:sqlmapper/Facilmapper2.xml</value>
 			<value>classpath:sqlmapper/BoardMapper.xml</value>
+			<value>classpath:sqlmapper/NoticeMapper.xml</value>
 			<value>classpath:sqlmapper/BoardAttachMapper.xml</value>
 		</list>
 		</property>

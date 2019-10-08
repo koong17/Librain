@@ -42,8 +42,10 @@
 						</div>
 								<button data-oper='modify' class="btn btn-default">Modify</button>
 								<button data-oper='list' class="btn btn-info">List</button><br><br>
-								<button data-oper='getPrev' class="btn btn-default">이전글</button>
-								<button data-oper='getNext' class="btn btn-default">다음글</button>
+								<button data-oper='getPrevNotice' class="btn btn-default">이전공지</button>
+								<button data-oper='getNextNotice' class="btn btn-default">다음공지</button>
+								
+								
 								<form id='operForm' action="${pageContext.request.contextPath}/employee/board/modify" method="get">
 									<input type='hidden' id='board_no' name='board_no' 
 										value='<c:out value="${board.board_no }"/>'>
@@ -98,7 +100,7 @@
 		var operForm = $("#operForm");
 		$("button[data-oper='modify']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/modify").submit();
+			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/modifyNotice").submit();
 		});
 		
 		$("button[data-oper='list']").on("click", function(e){
@@ -108,14 +110,14 @@
 			operForm.submit();
 		});
 		
-		$("button[data-oper='getNext']").on("click", function(e){
+		$("button[data-oper='getNextNotice']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNext").submit();
+			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNextNotice").submit();
 		});
 		
-		$("button[data-oper='getPrev']").on("click", function(e){
+		$("button[data-oper='getPrevNotice']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getPrev").submit()
+			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getPrevNotice").submit()
 		});
 	});
 	</script>
@@ -126,7 +128,7 @@
 		(function(){
 			var board_no = '<c:out value="${board.board_no}"/>';
 			//화면에 보여주기
-			$.getJSON("${pageContext.request.contextPath}/employee/board/getAttachList", {board_no:board_no}, function(arr){
+			$.getJSON("${pageContext.request.contextPath}/employee/board/getNoticeAttachList", {board_no:board_no}, function(arr){
 				console.log(arr);
 				
 				var str = "";

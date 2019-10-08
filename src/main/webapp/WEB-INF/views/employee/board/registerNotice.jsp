@@ -7,13 +7,12 @@
 
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Board Register</h1>
+      <h1 class="page-header">Notice Register</h1>
    </div>
    <!--  /.col-lg-12 -->
    </div>
    <!--  /.row -->
-   
-    <!-- 첨부파일 관련 코드 -->
+     <!-- 첨부파일 관련 코드 -->
    <div class="row">
       <div class="col-lg-12">
          <div class="panel panel-default">
@@ -41,15 +40,13 @@
       </div>
       <!-- /.row -->
       
-   
    <div class="row">
       <div class="col-lg-12">
          <div class="panel panel-default">
-            <div class="panel-heading">Board Register</div>
+            <div class="panel-heading">Notice Register</div>
             <!--  /.panel-heading -->
-            
             <div class="panel-body">
-               <form role="form" action="${pageContext.request.contextPath}/employee/board/register" method="post">
+               <form role="form" action="${pageContext.request.contextPath}/employee/board/registerNotice" method="post">
                   <div class="form-group">
                   <label>Title</label>   <input id="board_title" class="form-control" name="board_title" required>
                   </div>
@@ -73,7 +70,7 @@
    </div>
    <!-- /.row -->
    
-  
+ 
       <!-- 첨부파일 처리 -->
       <script>
       $(document).ready(function (e){
@@ -203,7 +200,7 @@
                uploadUL.append(str);
                
             }//showUploadResult end
-            
+
             //x버튼 누르면 서버에서 삭제
             $(".uploadResult").on("click", "button", function(e){
                console.log("delete file");

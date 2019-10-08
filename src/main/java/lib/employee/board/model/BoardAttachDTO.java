@@ -9,6 +9,6 @@ public class BoardAttachDTO {
 	private String fileName;
 	private boolean fileType;
 	
-	private Long bno;
+	private Long board_no;
 
 }

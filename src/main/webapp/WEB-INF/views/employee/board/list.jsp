@@ -18,39 +18,56 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Board List Page
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
-					New Board</button>
+				<button id='regBtn' type="button" class="btn btn-xs pull-right" style='margin-right:5px'>
+					Register New Board</button>
+				<button id='noticeBtn' type="button" class="btn btn-xs pull-right">
+					Register New Notice</button>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>#번호</th>
+							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>수정일</th>
 						</tr>
 					</thead>
+					<!-- 공지글 -->
+					<c:forEach items="${notice }" var="notice">
+						<tr>
+							<td><c:out value="공지" /></td>
+							<td>
+								<a class='moveN' href='<c:out value="${notice.board_no}"/>'>
+									<c:out value="${notice.board_title }"/></a>
+							</td>
+							<td><c:out value="${notice.board_writer }" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${notice.board_regdate }" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${notice.board_updateDate }" /></td>
+						</tr>
+					</c:forEach>
+					<tr><td colspan="5"></td></tr>
+					<!-- 일반 글 -->
 					<c:forEach items="${list }" var="board">
 						<tr>
-							<td><c:out value="${board.bno }" /></td>
-							<!-- 새 탭에서 뜨게 하려면 a태그의 속성으로 다음을 지정 : target='_blank' -->
-						<%-- 	<td><a href='/board/get?bno=<c:out value="${board.bno }"/>'>
-									<c:out value="${board.title }" /> --%>
+							<td><c:out value="${board.board_no }" /></td>
 							<td>
-								<a class='move' href='<c:out value="${board.bno}"/>'>
-									<c:out value="${board.title }"/></a>
+								<a class='move' href='<c:out value="${board.board_no}"/>'>
+									<c:out value="${board.board_title }"/></a>
 							</td>
-							<td><c:out value="${board.writer }" /></td>
+							<td><c:out value="${board.board_writer }" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.regdate }" /></td>
+									value="${board.board_regdate }" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.updateDate }" /></td>
+									value="${board.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
 				</table>
+			
 				<!-- 검색 -->
 		<div class="row">
 			<div class="col-lg-12">
@@ -71,16 +88,8 @@
 						<c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
 					<option value="TWC"
 						<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
-					
-				
-					<!-- <option value="">--</option>
-						<option value="T">제목</option>
-						<option value="C">내용</option>
-						<option value="W">작성자</option>
-						<option value="TC">제목 or 내용</option>
-						<option value="TW">제목 or 작성자</option>
-						<option value="TWC">제목 or 내용 or 작성자</option> -->
 				</select>
+				
 					<input type='text' name='keyword'
 						value='<c:out value="${pageMaker.cri.keyword}"/>'/>
 					<input type='hidden' name='pageNum'
@@ -88,15 +97,11 @@
 					<input type='hidden' name='amount'
 						value='<c:out value="${pageMaker.cri.amount}"/>'/>
 				
-			<!-- 	<input type="text" name="keyword"/>
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> -->
 				<button class="btn btn-default">Search</button>
 			</form>
 		</div>
 	</div>
-				
-				<!-- 페이지 처리 추가... 검색 후 페이지 이동시에됴 조건 가져가야 함 -->
+				<!-- 페이지 처리 추가... 검색 후 페이지 이동시에도 조건 가져가야 함 -->
 				<div class='pull-right'>
 					<ul class="pagination">
 					
@@ -162,24 +167,25 @@
 	</div>
 </div>
 <!-- /.row -->
+
 <script type="text/javascript">
 $(document).ready(function(){
 	var result = '<c:out value="${result}"/>';
-	
 	checkModal(result);
-	
 	history.replaceState({}, null, null);
 	
 	function checkModal(result){
 		if(result=='' || history.state){//뒤로가기 처리
 			return;
 		}
+		
 		if (parseInt(result) > 0){
 			$(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
 		}
+		
 		$("#myModal").modal("show");
 	}
-	
+//일반글	
 	$("#regBtn").on("click", function(){
 		self.location="${pageContext.request.contextPath}/employee/board/register";
 	});
@@ -191,18 +197,41 @@ $(document).ready(function(){
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	});
+	
 	//제목 클릭시 상세보기로 이동
 	$(".move").on("click", function(e){
 		e.preventDefault();
-		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
+		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
 		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/get");
 		actionForm.submit();
-});	
+});	//end .move
+
+
+//공지글
+$("#noticeBtn").on("click", function(){
+		self.location="${pageContext.request.contextPath}/employee/board/registerNotice";
+	});
+	
+	var actionForm = $("#actionForm");
+	$(".paginate_button a").on("click", function(e){
+		e.preventDefault();
+		console.log('click');
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	});
+	
+	//제목 클릭시 상세보기로 이동
+	$(".moveN").on("click", function(e){
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
+		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNotice");
+		actionForm.submit();
+});	//end .move
+
+
 	//검색버튼 이벤트
    	var searchForm = $("#searchForm");
-	
 	$("#searchForm button").on("click", function(e){
-		
 		if(!searchForm.find("option:selected").val()){
 			alert("검색 종류를 선택하세요");
 			return false;
@@ -215,10 +244,8 @@ $(document).ready(function(){
 		
 		searchForm.find("input[name='pageNum']").val("1");	//3페이지 보다가 거기서 검색하면 검색결과도 3페이지를 보여주는 것 막음
 		e.preventDefault();
-		
 		searchForm.submit(); 
-});
-});
+	});	//검색버튼 이벤트 끝
+});	//end document
 </script>
-
 <%@include file="../includes/footer.jsp"%>

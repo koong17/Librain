@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lib.employee.board.model.BoardAttachDTO;
-import lib.employee.board.model.BoardDTO;
 import lib.employee.board.model.Criteria;
-import lib.employee.board.model.PageDTO;
-import lib.employee.board.service.BoardService;
+import lib.employee.board.model.NoticeDTO;
 import lib.employee.board.service.NoticeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,60 +29,47 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("employee/board/*") 
 @AllArgsConstructor
-public class BoardController {
+public class NoticeController {
 
-	private BoardService boardService;
-	private NoticeService noticeService;
+	private NoticeService service;
 
-	@GetMapping("/list")
-	public void boardSelectAll(Criteria cri, Model model) {
-		model.addAttribute("list", boardService.boardSelectAll(cri));
-		
-		//전체 데이터 수 
-		int total = boardService.boardGetTotal(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		//공지사항 출력
-		model.addAttribute("notice", noticeService.getNotices());
-
-	}
-
-	@GetMapping("/register")
+	@GetMapping("/registerNotice")
 	public void boardRegisterForm() {}
 
-	@PostMapping("/register")
-	public String boardInsert(BoardDTO board, RedirectAttributes rttr) {
+	@PostMapping("/registerNotice")
+	public String noticeInsert(NoticeDTO notice, RedirectAttributes rttr) {
 		//첨부파일 처리
-		if (board.getAttachList() != null) {	
-			board.getAttachList().forEach(attach -> log.info(attach));
+		if (notice.getAttachList() != null) {	
+			notice.getAttachList().forEach(attach -> log.info(attach));
 					//for(attach : board.getAttachList) { log.info(attach)};
 		}
 		
-		boardService.boardInsert(board);
-		rttr.addFlashAttribute("result", board.getBoard_no());
+		service.noticeInsert(notice);
+		rttr.addFlashAttribute("result", notice.getBoard_no());
 		return "redirect:/employee/board/list";
 	}
 
-	@GetMapping({ "/get", "/modify" })	//읽기 또는 수정폼
+	@GetMapping({ "/getNotice", "/modifyNotice" })
 	public void boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", boardService.boardSelectOne(board_no));
+		model.addAttribute("board", service.noticeSelectOne(board_no));
 		System.out.println("일반글 상세보기 : " + model.toString()  );
 	}
 	
-	@GetMapping({"/getNext"})
+	@GetMapping({"/getNextNotice"})
 	public void boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", boardService.boardSelectNext(board_no));
+		model.addAttribute("board", service.noticeSelectNext(board_no));
 	}
 	
-	@GetMapping({"/getPrev"})
+	@GetMapping({"/getPrevNotice"})
 	public void boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", boardService.boardSelectPrev(board_no));
+		model.addAttribute("board", service.noticeSelectPrev(board_no));
 	}
+	
 
-	@PostMapping("/modify")
-	public String boardUpdate(BoardDTO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	@PostMapping("/modifyNotice")
+	public String boardUpdate(NoticeDTO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
-		if (boardService.boardUpdate(board)) { // true(작업 완료 후 정상종료)일 때만 값 전달
+		if (service.noticeUpdate(notice)) { // true(정상종료)일 때만 값 전달
 			rttr.addFlashAttribute("result", "success");
 		}
 		
@@ -96,12 +81,12 @@ public class BoardController {
 		return "redirect:/employee/board/list";
 	}
 
-	@PostMapping("/remove")
+	@PostMapping("/removeNotice")
 	public String boardDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
-		List<BoardAttachDTO> attachList = boardService.getAttachList(board_no);
+		List<BoardAttachDTO> attachList = service.getAttachList(board_no);
 		
-		if (boardService.boardDelete(board_no)) {
+		if (service.noticeDelete(board_no)) {
 			//게시글 삭제시 서버, 디비에서 첨부파일도 같이 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
@@ -115,10 +100,10 @@ public class BoardController {
 	}
 	
 	//첨부파일 - 한글처리 필요
-	@GetMapping(value= "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value= "/getNoticeAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachDTO>> getAttachList(Long board_no){
-		return new ResponseEntity<List<BoardAttachDTO>>(boardService.getAttachList(board_no), HttpStatus.OK);
+		return new ResponseEntity<List<BoardAttachDTO>>(service.getAttachList(board_no), HttpStatus.OK);
 	}
 	
 	//파일 삭제 

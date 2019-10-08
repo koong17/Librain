@@ -5,49 +5,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 인터페이스의 경로를 적어줌 -->
 <mapper namespace="lib.employee.board.mapper.BoardMapper">
 
-	<!-- 게시판 목록 조회 -->
-<!-- 	<select id="getList" resultType="lib.employee.board.model.BoardVO">
-<![CDATA[
-select * from tbl_board where bno > 0
-]]>
-	</select> -->
-
-<!-- 단순 값 입력 - int(쿼리 결과 갯수)반환 -->
-	<insert id="insert">
-		insert into tbl_board 
-			(
-			bno , title , content , writer ) 
-		values ( 
-			seq_board.nextval ,#{title}, #{content}, #{writer} )
-</insert>
-
-<!-- @SelectKey라는 MyBatis의 annotation 이용. PK값을 미리(BEFORE) SQL을 통해 처리해두고 특정한 이름(bno)으로 결과를 보관하는 방식.
-@Insert할 때 sql문을 보면 #{bno}과 같이 이미 처리 된 결과를 이용하는 것을 볼 수 있음 -->
+<!-- PK값을 미리 SQL을 통해 처리해두고 특정한 이름(board_no)으로 결과를 보관하는 방식. -->
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE"
+		<selectKey keyProperty="board_no" order="BEFORE"
 			resultType="long">
 			select seq_board.nextval from dual
 		</selectKey>
-		insert into tbl_board (bno, title, content, writer)
-		values (#{bno},	#{title}, #{content}, #{writer})
+		insert into board (board_no, board_title, board_content, board_writer)
+		values (#{board_no},	#{board_title}, #{board_content}, #{board_writer})
 	</insert>
 	
 	<select id="read" resultType="lib.employee.board.model.BoardDTO">
-		select * from tbl_board where bno = #{bno}
+		select * from board where board_no = #{board_no}
+	</select>
+		
+	<select id="readNext" resultType="lib.employee.board.model.BoardDTO">
+			select * from board
+			where board_no in (
+				(
+					select max(board_no)
+					from board
+					where #{board_no} > board_no
+				)
+			)
+	</select>
+	
+	<select id="readPrev" resultType="lib.employee.board.model.BoardDTO">
+			select * from board
+			where board_no in (
+				(
+					select min(board_no)
+					from board
+					where board_no > #{board_no}
+				)
+			)
 	</select>
 	
 	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
+		delete from board where board_no = #{board_no}
 	</delete>
 	
 	<!-- updateDate칼럼 : 최종 수정시간 의미. regDate : 최초 등록시간 의미. 따라서 regDate은 바뀌지 않음. -->
 	<update id="update" >
-		update tbl_board
-			set title =#{title},
-			content = #{content},
-			writer = #{writer},
-			updateDate = sysdate
-			where bno = #{bno}
+		update board
+			set board_title =#{board_title},
+			board_content = #{board_content},
+			board_writer = #{board_writer},
+			board_updateDate = sysdate
+			where board_no = #{board_no}
 	</update>
 
 	<!-- 목록과 데이터개수 처리 -->
@@ -57,13 +62,13 @@ select * from tbl_board where bno > 0
 			<trim prefix="OR">
 				<choose>
 					<when test="type == 'T'.toString()">
-						title like '%' || #{keyword} ||'%'
+						board_title like '%' || #{keyword} ||'%'
 					</when>
 					<when test="type == 'C'.toString()">
-						content like '%'|| #{keyword} ||'%'
+						board_content like '%'|| #{keyword} ||'%'
 					</when>
 					<when test="type == 'W'.toString()">
-						writer like '%' || #{keyword} ||'%'
+						board_writer like '%' || #{keyword} ||'%'
 					</when>
 				</choose>
 			</trim>
@@ -74,13 +79,13 @@ select * from tbl_board where bno > 0
 	<select id="getListWithPaging" resultType="lib.employee.board.model.BoardDTO">
 		<![CDATA[
 			select
-				bno, title, content, writer, regdate, updatedate
+				board_no, board_title, board_content, board_writer, board_regdate, board_updatedate
 			from
 				(
-				select /*+INDEX_DESC(tbl_board pk_board2) */
-					rownum rn, bno, title, content, writer, regdate, updatedate
+				select /*+INDEX_DESC(board pk_board) */
+					rownum rn, board_no, board_title, board_content, board_writer, board_regdate, board_updatedate
 				from
-					tbl_board
+					board
 				where
 		]]>
 		
@@ -94,10 +99,10 @@ select * from tbl_board where bno > 0
 	</select>
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from tbl_board 
+		select count(*) from board 
 		where 
 		<include refid="criteria"></include>
-		bno > 0
+		board_no > 0
 	</select>
 </mapper>
 	

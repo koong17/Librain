@@ -4,13 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="../includes/header.jsp"%>
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">Board Modify</h1>
-	</div>
-	<!--  /.col-lg-12 -->
-</div>
-<!--  /.row -->
+
 <!-- 첨부파일 시작 -->
 <div class='bigPictureWrapper'>
    <div class='bigPicture'>
@@ -45,13 +39,20 @@
 
 <div class="row">
 	<div class="col-lg-12">
+		<h1 class="page-header">Board Modify</h1>
+	</div>
+	<!--  /.col-lg-12 -->
+</div>
+<!--  /.row -->
+<div class="row">
+	<div class="col-lg-12">
 		<div class="panel panel-default">
 
 			<div class="panel-heading">Board Modify Page</div>
 			<!--  /.panel-heading -->
 			<div class="panel-body">
 
-				<form role="form" action="${pageContext.request.contextPath}/employee/board/modify" method="post">
+				<form role="form" action="${pageContext.request.contextPath}/employee/board/modifyNotice" method="post">
 
 					<!-- 페이지 관련 추가 -->
 					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
@@ -96,7 +97,6 @@
 
 
 
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		var formObj = $("form");
@@ -110,7 +110,7 @@
 			console.log(operation);
 
 			if (operation === 'remove') {
-				formObj.attr("action", "${pageContext.request.contextPath}/employee/board/remove");
+				formObj.attr("action", "${pageContext.request.contextPath}/employee/board/removeNotice");
 			} else if (operation === 'list') {
 				formObj.attr("action", "${pageContext.request.contextPath}/employee/board/list").attr("method", "get");
 				var pageNumTag = $("input[name='pageNum']").clone();
@@ -300,6 +300,7 @@ $(document).ready(function(){
 });	//document end
 
 </script>
+
 <style>
    .uploadResult{
       width:100%;
@@ -352,5 +353,4 @@ $(document).ready(function(){
       width: 600px;
    }
    </style>
-
 <%@include file="../includes/footer.jsp"%>

@@ -2,52 +2,51 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 인터페이스의 경로를 적어줌 -->
-<mapper namespace="lib.employee.board.mapper.BoardMapper">
+<mapper namespace="lib.employee.board.mapper.NoticeMapper">
 
-<!-- PK값을 미리 SQL을 통해 처리해두고 특정한 이름(board_no)으로 결과를 보관하는 방식. -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="board_no" order="BEFORE"
 			resultType="long">
 			select seq_board.nextval from dual
 		</selectKey>
-		insert into board (board_no, board_title, board_content, board_writer)
+		insert into notice (board_no, board_title, board_content, board_writer)
 		values (#{board_no},	#{board_title}, #{board_content}, #{board_writer})
 	</insert>
 	
-	<select id="read" resultType="lib.employee.board.model.BoardDTO">
-		select * from board where board_no = #{board_no}
+	<select id="read" resultType="lib.employee.board.model.NoticeDTO">
+		select * from notice where board_no = #{board_no}
 	</select>
-		
-	<select id="readNext" resultType="lib.employee.board.model.BoardDTO">
-			select * from board
+	
+	<select id="readNext" resultType="lib.employee.board.model.NoticeDTO">
+			select * from notice
 			where board_no in (
 				(
 					select max(board_no)
-					from board
+					from notice
 					where #{board_no} > board_no
 				)
 			)
 	</select>
 	
-	<select id="readPrev" resultType="lib.employee.board.model.BoardDTO">
-			select * from board
+	
+	<select id="readPrev" resultType="lib.employee.board.model.NoticeDTO">
+			select * from notice
 			where board_no in (
 				(
 					select min(board_no)
-					from board
+					from notice
 					where board_no > #{board_no}
 				)
 			)
 	</select>
 	
+	
 	<delete id="delete">
-		delete from board where board_no = #{board_no}
+		delete from notice where board_no = #{notice_no}
 	</delete>
 	
-	<!-- updateDate칼럼 : 최종 수정시간 의미. regDate : 최초 등록시간 의미. 따라서 regDate은 바뀌지 않음. -->
 	<update id="update" >
-		update board
+		update notice
 			set board_title =#{board_title},
 			board_content = #{board_content},
 			board_writer = #{board_writer},
@@ -55,7 +54,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where board_no = #{board_no}
 	</update>
 
-	<!-- 목록과 데이터개수 처리 -->
 	<sql id="criteria">
 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 		<foreach item='type' collection="typeArr">
@@ -76,30 +74,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</trim>
 </sql>
 
-	<select id="getListWithPaging" resultType="lib.employee.board.model.BoardDTO">
-		<![CDATA[
-			select
-				board_no, board_title, board_content, board_writer, board_regdate, board_updatedate
-			from
-				(
-				select /*+INDEX_DESC(board pk_board) */
-					rownum rn, board_no, board_title, board_content, board_writer, board_regdate, board_updatedate
-				from
-					board
-				where
-		]]>
-		
-		<include refid="criteria"></include>		
-		
-		<![CDATA[
-			rownum <= #{pageNum} * #{amount}
-			)
-		where rn > (#{pageNum}-1) * #{amount}
-		]]>
-	</select>
+<select id="getNotices" resultType="lib.employee.board.model.NoticeDTO">
+	select * 
+		from notice 
+			order by board_no desc
+</select>
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from board 
+		select count(*) from notice
 		where 
 		<include refid="criteria"></include>
 		board_no > 0
