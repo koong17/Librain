@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,11 +32,12 @@ public class MgmtController {
 		return "employee/erp/management/totalPay";
 	}
 	@RequestMapping(value = "/totalpay.do", method = RequestMethod.POST)
-	public String totalPayPro(@RequestBody Map<String, Object> param) {
-		System.out.println((String)param.get("emp_name")+param.get("emp_dept_code"));
-		EmployeeDTO employeeDTO = new EmployeeDTO((String)param.get("emp_name"), (String)param.get("emp_dept_code"));
-		mgmtService.empSelectPay(employeeDTO);
-		return "employee/erp/management/totalPay";
+	public @ResponseBody String totalPayPro(@RequestBody EmployeeDTO employeeDTO) {
+//		System.out.println((String)param.get("emp_name")+param.get("emp_dept_code"));
+//		EmployeeDTO employeeDTO = new EmployeeDTO((String)param.get("emp_name"), (String)param.get("emp_dept_code"));
+		
+		JSONObject emp_basic_pay = mgmtService.empSelectPay(employeeDTO);
+		return mgmtService.empSelectPay(employeeDTO).toString();
 	}
 	
 	@RequestMapping("/emplist2.do")

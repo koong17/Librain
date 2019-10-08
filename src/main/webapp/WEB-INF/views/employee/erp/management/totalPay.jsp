@@ -13,26 +13,26 @@
 	<form action="totalpay.do" method="post" name="infoForm">
 		<div class="col-md-6 col-xs-12">
 			<div class="form-group">
-				<select class="mdb-select md-form" name="cmt_year">
+				<select class="mdb-select md-form" id="cmt_year">
 				  <option value="" disabled selected>년</option>
 				  <option value="2019">2019</option>
 				  <option value="2020">2020</option>
 				  <option value="2021">2021</option>
 				</select>
-				<select class="mdb-select md-form" name="cmt_month">
+				<select class="mdb-select md-form" id="cmt_month">
 				  <option value="" disabled selected>월</option>
 				  <option value="9">9</option>
 				  <option value="10">10</option>
 				  <option value="11">11</option>
 				</select>
-				<select class="mdb-select md-form" name="emp_dept_code">
+				<select class="mdb-select md-form" id="emp_dept_code">
 				  <option value="" disabled selected>부서</option>
 				  <option value="000">관장</option>
 				  <option value="001">총무부</option>
 				  <option value="002">교육부</option>
 				  <option value="003">정보부</option>
 				</select>
-				<input type="text" name="emp_name" class="form-control" placeholder="이름">
+				<input type="text" id="emp_name" class="form-control" placeholder="이름">
 				<input type="button" value="확인" id="check" class="btn btn-success btn-block btn-lg">
 				<input type="submit" value="확인" class="btn btn-success btn-block btn-lg" tabindex="7">
 			</div>
@@ -47,7 +47,7 @@
 				<input type="text" name="emp_name" class="form-control" value="" readOnly>
 			</div>
 			<div class="form-group">
-				<input type="number" name="emp_basic_pay" class="form-control" value="" readOnly>
+				<input type="number" name="sal_basic_pay" class="form-control" value="" readOnly>
 			</div>
 			<div class="form-group">
 				<input type="number" name="sal_food_pay" class="form-control" value="" readOnly>
@@ -88,22 +88,21 @@
 <script>
 	$("#check").click(function(){
 		var info = new Object();
-		info.
+		info.emp_dept_code = $("#emp_dept_code option:selected").val();
+		info.emp_name = $("#emp_name").val();
+		console.log($("#emp_dept_code option:selected").val());
+		console.log($("#emp_name").val());
 	   	$.ajax({											
 			type: "POST",
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			contentType : 'application/json;charset=UTF-8',
 			dataType : 'json',
 			url: "totalpay.do",
-			data: 
-			/* {
-				cmt_year: $('#cmt_year').val(),
-				cmt_month: $('#cmt_month').val(),
-				emp_dept_code: $('#emp_dept_code').val(),
-				emp_name: $('#emp_name').val()
-			}, */
+			data: JSON.stringify(info),
 			success :function(result) {
+				console.log('aa');
 				console.log(result);
-				grid.resetData(result);
+				$('input[name=sal_basic_pay]').val(result.sal_basic_pay);
+				//grid.resetData([result]);
 		    }
 		});
 	});
