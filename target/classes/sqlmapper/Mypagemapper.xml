@@ -24,7 +24,7 @@
             (select max(cmt_no)
                 from commute_management
                 where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
-            )
+        )
   </select>
   <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
     insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})

@@ -7,7 +7,7 @@ insert into department values('000', '관장');
 insert into department values('001', '총무부');
 insert into department values('002', '교육부');
 insert into department values('003', '정보부');
-select * from department;
+commit;
 
 create table sal_check (
     sal_ck_no number,
@@ -18,7 +18,6 @@ create table sal_check (
     --constraint pay_no_pk primary key(pay_check_no)
 );
 
-drop table employee_management;
 create table employee_management(
     emp_no number,
     emp_name varchar2(15),
@@ -51,16 +50,8 @@ insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_
 values(1000005,'박예원','01088430059',3000000,'yeahwoni@librain.org','003','팀장',sysdate-772);
 insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
 values(1000006,'김승수','01078963225',2500000,'iamseungsu@librain.org','003','사원',sysdate-150);
-
-update employee_management set emp_email='soyoung@librain.org' where emp_no=1000002;
-
-select * from employee_management;
-desc employee_management;
 commit;
 
-select * from employee_management emp,department dept where emp.emp_dept_code = dept.dept_code and emp_no=1000001;
-
-drop table commute_management;
 create table commute_management(
     cmt_no number,
     cmt_emp_no varchar2(10),
@@ -73,53 +64,6 @@ create table commute_management(
     cmt_second number
     --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
 );
-delete commute_management where cmt_day=23 and cmt_status='off';
-commit;
-select * 
-    from commute_management 
-    where cmt_no=
-        (select min(cmt_no)
-            from commute_management
-            where  cmt_emp_no=1 and cmt_day=20 and cmt_status='on'
-        ) or cmt_no =
-            (select max(cmt_no)
-                from commute_management
-                where  cmt_emp_no=1 and cmt_day=20 and cmt_status='off'
-            );
-            
-select * 
-    from commute_management 
-    where cmt_no in (
-        select min(cmt_no) from commute_management
-        group by cmt_emp_no, cmt_day, cmt_status
-        having cmt_status='on'
-    ) or cmt_no in (
-        select max(cmt_no) from commute_management
-        group by cmt_emp_no, cmt_day, cmt_status
-        having cmt_status='off'
-    ) order by cmt_no;
-    
-(select min(cmt_no) 
-    from commute_management
-    group by cmt_emp_no, cmt_day, cmt_status
-    having cmt_status='on'
-    );
-desc commute_management;
-select * from commute_management where rownum=1;
-select * from commute_management;
-update commute_management set cmt_no=0,cmt_emp_no=2 where cmt_no=0;
-commit;
--- book
-
-select * from book where book_name like '%b' ;
-select * from book b, rental r where rent_startdate=(
-    select max(rent_startdate) from book b, rental r where b.book_name = r.book_name and name).
-select * from book ;
-
-select max(sysdate) from dual; 
-
-
-commit;
 
 create table salary_management(
     sal_no number,
@@ -136,6 +80,7 @@ create table salary_management(
     sal_basic_pay number, -- 200만원
     sal_bonus number,
     sal_food_pay number, -- 15만원
-    sal_date date
+    sal_year number,
+    sal_month number
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );

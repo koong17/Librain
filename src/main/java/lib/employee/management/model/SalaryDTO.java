@@ -5,8 +5,7 @@ import java.sql.Timestamp;
 public class SalaryDTO {
 	private int sal_no, emp_no, sal_total, sal_real, sal_national_pension, sal_health_insurance, sal_longterm_care_insurance;
 	private int sal_employment_insurance, sal_income_tax, sal_local_income_tax, sal_deducted;
-	private int sal_basic_pay, sal_bonus, sal_food_pay;
-	private Timestamp sal_date;
+	private int sal_basic_pay, sal_bonus, sal_food_pay, sal_year, sal_month;
 	
 	public SalaryDTO() {}
 
@@ -122,11 +121,20 @@ public class SalaryDTO {
 		this.sal_food_pay = sal_food_pay;
 	}
 
-	public Timestamp getSal_date() {
-		return sal_date;
+	public int getSal_year() {
+		return sal_year;
 	}
 
-	public void setSal_date(Timestamp sal_date) {
-		this.sal_date = sal_date;
+	public void setSal_year(int sal_year) {
+		this.sal_year = sal_year;
 	}
+
+	public int getSal_month() {
+		return sal_month;
+	}
+
+	public void setSal_month(int sal_month) {
+		this.sal_month = sal_month;
+	}
+	
 }

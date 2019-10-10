@@ -87,21 +87,46 @@ public class MgmtServiceImpl implements MgmtService{
 	@Override
 	public JSONObject empSelectPay(EmployeeDTO employeeDTO) {
 		SalaryDTO salaryDTO = new SalaryDTO();
-		int sal_basic_pay = Integer.parseInt(employeeDAO.empSelectPay(employeeDTO));
 		JSONObject jo = new JSONObject();
-		jo.put("sal_basic_pay", sal_basic_pay);
-//		jo.put("sal_total", sal_basic_pay+150000);
-//		jo.put("sal_real", sal_basic_pay+150000-sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
-//		jo.put("sal_national_pension", sal_basic_pay*0.045);
-//		jo.put("sal_health_insurance", sal_basic_pay*0.0323);
-//		jo.put("sal_longterm_care_insurance", sal_basic_pay*0.0323*0.0851);
-//		jo.put("sal_employment_insurance", sal_basic_pay*0.0065);
-//		jo.put("sal_income_tax", sal_basic_pay*0.007375);
-//		jo.put("sal_local_income_tax", sal_basic_pay*0.007375*0.1);
-//		jo.put("sal_deducted", sal_basic_pay*0.045+sal_basic_pay*0.0323+sal_basic_pay*0.0323*0.0851+sal_basic_pay*0.0065+sal_basic_pay*0.007375+sal_basic_pay*0.007375*0.1);
-//		jo.put("sal_basic_pay", sal_basic_pay);
-//		jo.put("sal_food_pay", 150000);
+		employeeDTO = employeeDAO.empSelectPay(employeeDTO);
+		jo.put("sal_basic_pay", employeeDTO.getEmp_basic_pay());
+		jo.put("emp_no", employeeDTO.getEmp_no());
 		return jo;
+	}
+
+	@Override
+	public JSONArray cmtAdminSelectOne(CommuteDTO commuteDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		
+		List<CommuteDTO> list = employeeDAO.cmtAdminSelectOne(commuteDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			CommuteDTO dto = list.get(i);
+			String cmt_status = dto.getCmt_status();
+			int cmt_hour = dto.getCmt_hour();
+			int cmt_minute = dto.getCmt_minute();
+			jo.put("cmt_day", dto.getCmt_day());
+			jo.put("cmt_hour", cmt_hour);
+			jo.put("cmt_minute", dto.getCmt_minute());
+			jo.put("cmt_status", cmt_status);
+			if(cmt_status.equals("on")) {
+				if(cmt_hour<9 || (cmt_hour==9&&cmt_minute==0))
+					jo.put("cmt_status_kr", "정상출근");
+				else jo.put("cmt_status_kr", "지각");
+			} else {
+				if(cmt_hour>=17 )
+					jo.put("cmt_status_kr", "정상퇴근");
+				else jo.put("cmt_status_kr", "조퇴");
+			}
+			ja.add(jo);
+		}
+		return ja;
+	}
+
+	@Override
+	public void salInsert(SalaryDTO salaryDTO) {
+		employeeDAO.salInsert(salaryDTO);
 	}
 	
 }
