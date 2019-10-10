@@ -1,3 +1,4 @@
+----수아
 create table department (
     dept_code varchar2(20),
     dept_name varchar2(30)
@@ -54,7 +55,7 @@ commit;
 
 create table commute_management(
     cmt_no number,
-    cmt_emp_no varchar2(10),
+    emp_no number,
     cmt_status varchar2(100),
     cmt_year number,
     cmt_month number,
@@ -85,7 +86,7 @@ create table salary_management(
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
 
-----
+----소영
 -- 게시판 테이블 생성
 create table board(
 board_no number not null,      --게시물 번호
