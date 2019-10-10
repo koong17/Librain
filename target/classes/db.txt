@@ -54,7 +54,7 @@ commit;
 
 create table commute_management(
     cmt_no number,
-    cmt_emp_no varchar2(10),
+    emp_no varchar2(10),
     cmt_status varchar2(100),
     cmt_year number,
     cmt_month number,
