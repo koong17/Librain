@@ -52,6 +52,7 @@
 
 	var Grid = tui.Grid;
 	Grid.setLanguage('ko');
+	
 	const gridTop = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridTopData},

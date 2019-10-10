@@ -14,6 +14,7 @@ mgmt/cmtlist.do <a href="mgmt/cmtlist.do">근태목록</a><br>
 mypage/commute.do <a href="mypage/commute.do">근태관리</a><br>
 mypage/info.do <a href="mypage/info.do">개인정보 수정</a><br>
 mypage/pay.do <a href="mypage/pay.do">개인 급여</a>
+<a href="memberList.do">회원조회</a>
 
 <div class="searchForm" align="right">
 	<a href="#">도서검색</a>
@@ -46,4 +47,7 @@ mypage/pay.do <a href="mypage/pay.do">개인 급여</a>
 	</table>
 	</form>
 </div>
+</body>
 </html>
+
+
