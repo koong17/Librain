@@ -1,6 +1,7 @@
 package lib.employee.book.controller;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.RentalDTO;
 import lib.employee.book.service.EmpBookService;
 
 @Controller
@@ -84,10 +86,35 @@ public class EmpBookController {
 		return "employee/book/empRentBook";
 	}
 	
+	@RequestMapping(value = "/empReturnBook.do", method = RequestMethod.POST)
+	public @ResponseBody String returnBook(@RequestBody List<RentalDTO> dto) {
+		bookService.returnBook(dto); 
+		return  "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value = "/empRentBook.do", method = RequestMethod.POST)
+	public @ResponseBody String rentBook(@RequestBody List<RentalDTO> dto) {
+		bookService.rentBook(dto); 
+		return  "{\"result\":\"success\"}";
+	}
+	
 	@RequestMapping(value = "/empRent/bookCheck.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String rentBookCheck(@RequestParam("book_num") String book_num) {
 		System.out.println(bookService.rentBookCheck(book_num).toString());
 		
 		return bookService.rentBookCheck(book_num).toString();
 	}
+	
+	@RequestMapping(value = "/empRent/memCheck.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String rentMemCheck(@RequestParam("mem_id") String mem_id) {
+		System.out.println(bookService.rentMemCheck(mem_id).toString());
+		return bookService.rentMemCheck(mem_id).toString();
+	}
+	
+	@RequestMapping(value = "/empRent/memBookCheck.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String rentMemBookCheck(@RequestParam("mem_id") String mem_id) {
+		System.out.println(bookService.rentMemBookCheck(mem_id).toString());
+		return bookService.rentMemBookCheck(mem_id).toString();
+	}
+	
 }

@@ -61,7 +61,7 @@
 			    </div>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="rentBtn">
+				<button type="button" class="btn btn-primary btn-block" id="rentBtn"> 
 					대여
 				</button>
 			</div>
@@ -74,7 +74,7 @@
 	</div>
 	<hr>
 	<div>
-		<div id="memGrid"></div>
+		<div id="memGrid"></div> 
 		<div id="bookGrid"></div>
 	</div>
 </body>

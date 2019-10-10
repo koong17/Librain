@@ -4,10 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import lib.member.model.MemberDTO;
+
 
 public interface EmpBookDAO {
 	
-	public List<EmpBookDTO> rentBookCheck(int book_num); //대여 도서번호 검색
+	public void returnBook(RentalDTO dto); //반납
+	public void rentBook(RentalDTO dto); //대여
+	public List<EmpBookDTO> rentMemBookCheck(String mem_id); //멤버의 대여중인 책 검색
+	public List<MemberDTO> rentMemCheck(String mem_id); //대여할 회원 검색
+	public EmpBookDTO rentBookCheck(int book_num); //대여할 도서번호 검색
 	public int selectRowNum(); //rownum 갯수
 	public List<EmpBookDTO> select(@Param(value = "startRowNum") int startRowNum,@Param(value = "endRowNum") int endRowNum); //전체출력
 	public List<EmpBookDTO> searchAll(String str); //전체검색

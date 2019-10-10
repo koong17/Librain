@@ -7,10 +7,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.RentalDTO;
+import lib.member.model.MemberDTO;
 
 @Service
 public class EmpBookServiceImpl implements EmpBookService {
@@ -18,13 +19,28 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Autowired
 	EmpBookDAO bookDAO;
 	
+	
 	@Override
-	public JSONArray rentBookCheck(String book_num) {
+	public void returnBook(List<RentalDTO> dto) {
+		for (RentalDTO rentalDTO : dto) {
+			bookDAO.returnBook(rentalDTO);
+		}
+	}
+
+	@Override
+	public void rentBook(List<RentalDTO> dto) {
+		for (RentalDTO rentalDTO : dto) {
+			bookDAO.rentBook(rentalDTO);
+		}
+	}
+
+	@Override
+	public JSONArray rentMemBookCheck(String mem_id) {
 		JSONArray jArr = new JSONArray();
 		JSONObject jObj = null;
 		
 		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
-		list = bookDAO.rentBookCheck(Integer.parseInt(book_num));
+		list = bookDAO.rentMemBookCheck(mem_id);
 		
 		for (int i = 0; i < list.size(); i++) {
 			EmpBookDTO dto = list.get(i);
@@ -38,6 +54,46 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jArr.add(jObj);
 		}
 		return jArr;
+	}
+
+	@Override
+	public JSONArray rentMemCheck(String mem_id) {
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		list = bookDAO.rentMemCheck(mem_id);
+		
+		for (int i = 0; i < list.size(); i++) {
+			MemberDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("mem_id", dto.getMem_id());
+			jObj.put("mem_name", dto.getMem_name());
+			jObj.put("mem_phone", dto.getMem_phone());
+			jObj.put("mem_address", dto.getMem_address());
+			jObj.put("mem_email", dto.getMem_email());
+			jObj.put("mem_rank", dto.getMem_rank());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+
+	@Override
+	public JSONObject rentBookCheck(String book_num) {
+		
+		JSONObject jObj = null;
+		
+		EmpBookDTO dto = bookDAO.rentBookCheck(Integer.parseInt(book_num));
+		
+		jObj = new JSONObject();
+		jObj.put("book_name", dto.getBook_name());
+		jObj.put("book_author", dto.getBook_author());
+		jObj.put("book_pub_house", dto.getBook_pub_house());
+		jObj.put("book_num", dto.getBook_num());
+		jObj.put("rent", dto.getRent());
+		
+		return jObj;
 	}
 
 	@Override

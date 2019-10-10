@@ -2,9 +2,12 @@ package lib.employee.book.model;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import lib.member.model.MemberDTO;
 
 @Repository
 public class EmpBookDaoImpl implements EmpBookDAO {
@@ -14,9 +17,31 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	
 	
 	@Override
-	public List<EmpBookDTO> rentBookCheck(int book_num) {
-		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).rentBookCheck(book_num);
+	public void returnBook(RentalDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).returnBook(dto);
+	}
+
+	@Override
+	public void rentBook(RentalDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).rentBook(dto);
+	}
+
+	@Override
+	public List<EmpBookDTO> rentMemBookCheck(String mem_id) {
+		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).rentMemBookCheck(mem_id);
 		return list;
+	}
+
+	@Override
+	public List<MemberDTO> rentMemCheck(String mem_id) {
+		List<MemberDTO> list = sqlsession.getMapper(EmpBookDAO.class).rentMemCheck(mem_id);
+		return list;
+	}
+
+	@Override
+	public EmpBookDTO rentBookCheck(int book_num) {
+		EmpBookDTO empBookDTO = sqlsession.getMapper(EmpBookDAO.class).rentBookCheck(book_num);
+		return empBookDTO;
 	}
 
 	@Override
