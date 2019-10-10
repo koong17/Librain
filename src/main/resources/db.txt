@@ -1,3 +1,4 @@
+----수아
 create table department (
     dept_code varchar2(20),
     dept_name varchar2(30)
@@ -54,7 +55,7 @@ commit;
 
 create table commute_management(
     cmt_no number,
-    cmt_emp_no varchar2(10),
+    emp_no number,
     cmt_status varchar2(100),
     cmt_year number,
     cmt_month number,
@@ -84,3 +85,62 @@ create table salary_management(
     sal_month number
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
+
+----소영
+-- 게시판 테이블 생성
+create table board(
+board_no number not null,      --게시물 번호
+board_title varchar2(200) not null,   --제목
+board_content varchar2(4000),      --내용
+board_writer varchar2(50) not null,   --이름
+board_regdate date default sysdate,   --작성일자
+board_updatedate date default sysdate
+--,board_viewcnt number default 0   --조회수
+);
+
+alter table board add constraint pk_board
+primary key (board_no);
+
+create sequence seq_board;
+--------------------------------------------------------
+--더미 입력
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+commit;
+
+-----------------------------------
+--파일첨부 테이블 생성
+create table tbl_attach (
+	uuid varchar2(100) not null,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	filetype char(1) default 'I',
+	board_no number(10,0)
+);
+
+alter table tbl_attach add constraint pk_attach primary key(uuid);
+
+--------------------------------------------------------
+
+create table notice( --공지게시판
+board_no number not null,      --게시물 번호
+board_title varchar2(200) not null,   --제목
+board_content varchar2(4000),      --내용
+board_writer varchar2(50) not null,   --이름
+board_regdate date default sysdate,   --작성일자
+board_updatedate date default sysdate
+);
+
+
+alter table notice add constraint pk_notice
+primary key (board_no);
