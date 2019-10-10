@@ -41,7 +41,6 @@ public class NoticeController {
 		//첨부파일 처리
 		if (notice.getAttachList() != null) {	
 			notice.getAttachList().forEach(attach -> log.info(attach));
-					//for(attach : board.getAttachList) { log.info(attach)};
 		}
 		
 		service.noticeInsert(notice);

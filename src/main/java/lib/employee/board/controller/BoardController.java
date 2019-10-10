@@ -68,7 +68,6 @@ public class BoardController {
 	@GetMapping({ "/get", "/modify" })	//읽기 또는 수정폼
 	public void boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", boardService.boardSelectOne(board_no));
-		System.out.println("일반글 상세보기 : " + model.toString()  );
 	}
 	
 	@GetMapping({"/getNext"})
