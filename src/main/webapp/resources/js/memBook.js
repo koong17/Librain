@@ -7,6 +7,7 @@ $(document).ready(function() {
     });
 
 });
+
 function searchAjax() {
 	console.log($('#searchCtgr').val());
 	console.log($('#searchWord').val());
@@ -35,8 +36,27 @@ function searchAjax() {
 	}
 }
 
+function confirm(){
+	grid.readData(1,true);
+	grid.sort("book_num",false);
+}
+
 var Grid = tui.Grid;
 Grid.setLanguage('ko');
+
+var gridData =
+{
+	api: {
+			readData: { url: 'http://localhost:8080/memSearch.do/readData', method: 'GET' }
+	}
+}
+
+var gridData2 =
+{
+	api: {
+			readData: { url: 'http://localhost:8080/memSearch.do/readData2', method: 'GET' }
+	}
+}
 
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
@@ -67,3 +87,83 @@ const grid = new tui.Grid({
 		}
 	]
 });
+
+const newBookGrid = new tui.Grid({
+	el: document.getElementById('newBookGrid'),
+	data: gridData,
+	 header: {
+	      height: 70,
+	      complexColumns: [
+	        {
+	          header: '신간도서',
+	          name: '신간도서',
+	          childNames: ['book_num', 'book_name', 'book_author']
+	        }
+	      ]
+	    },
+	rowHeaders: ['rowNum'],
+	pageOptions: {
+		perPage: 5
+	},
+	scrollX: false,
+	scrollY: false,
+	columns: [
+		{
+			header: '도서번호',
+			name: 'book_num'
+		},
+		{
+			header: '도서명',
+			name: 'book_name'
+		},
+		{
+			header: '저자명',
+			name: 'book_author'
+		}
+	]
+});
+
+const mostRentGrid = new tui.Grid({
+	el: document.getElementById('mostRentGrid'),
+	data: gridData2,
+	header: {
+		height: 70,
+		complexColumns: [
+			{
+				header: '최다대여도서',
+				name: '최다대여도서',
+				childNames: ['book_num', 'book_name', 'book_author']
+			}
+			]
+	},
+	rowHeaders: ['rowNum'],
+	pageOptions: {
+		perPage: 5
+	},
+	scrollX: false,
+	scrollY: false,
+	columns: [
+		{
+			header: '도서번호',
+			name: 'book_num'
+		},
+		{
+			header: '도서명',
+			name: 'book_name'
+		},
+		{
+			header: '저자명',
+			name: 'book_author'
+		}
+		]
+});
+
+
+
+
+
+
+
+
+
+

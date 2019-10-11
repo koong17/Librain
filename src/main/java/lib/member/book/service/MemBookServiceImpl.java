@@ -56,4 +56,54 @@ public class MemBookServiceImpl implements MemBookService {
 		return jArr;
 	}
 
+	@Override
+	public JSONArray newBook(int Perpage, int page) {
+		int startRowNum = Perpage * page - Perpage;
+		System.out.println(startRowNum);
+		int endRowNum = Perpage * page;
+		System.out.println(endRowNum);
+		
+		List<MemBookDTO> list = new ArrayList<MemBookDTO>();
+		list = bookDAO.newBook(startRowNum, endRowNum);
+		
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj;
+		
+		for (int i = 0; i < list.size(); i++) {
+			MemBookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_num", dto.getBook_num());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
+	public JSONArray mostRent(int Perpage, int page) {
+		int startRowNum = Perpage * page - Perpage;
+		System.out.println(startRowNum);
+		int endRowNum = Perpage * page;
+		System.out.println(endRowNum);
+		
+		List<MemBookDTO> list = new ArrayList<MemBookDTO>();
+		list = bookDAO.mostRent(startRowNum, endRowNum);
+		
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj;
+		
+		for (int i = 0; i < list.size(); i++) {
+			MemBookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_num", dto.getBook_num());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+
 }
