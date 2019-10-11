@@ -3,9 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="lib.employee.mypage.model.CommuteDAO">
+<mapper namespace="lib.employee.mypage.model.MypageDAO">
+  <select id="empSelectOne" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
+    select * from employee_management emp,department dept where emp.emp_dept_code = dept.dept_code and emp_no=#{emp_no}
+  </select>
+  <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
+    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_email=#{emp_email} where emp_no=#{emp_no}
+  </update>
   <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
-  	select * from commute_management where cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day}
+  	select * from commute_management where emp_no=#{emp_no} and cmt_day=#{cmt_day}
   </select>
   <select id="cmtSelectOnOff" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
   	select * 
@@ -13,27 +19,14 @@
     where cmt_no=
         (select min(cmt_no)
             from commute_management
-            where  cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day} and cmt_status='on'
+            where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='on'
         ) or cmt_no =
             (select max(cmt_no)
                 from commute_management
-                where  cmt_emp_no=#{cmt_emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
-            )
+                where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
+        )
   </select>
   <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
-    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{cmt_emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
+    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
   </insert>
-  <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
-	select * 
-	  from commute_management 
-	  where cmt_no in (
-	      select min(cmt_no) from commute_management
-	      	group by cmt_emp_no, cmt_day, cmt_status
-	      	having cmt_status='on'
-	  ) or cmt_no in (
-	      select max(cmt_no) from commute_management
-	     	group by cmt_emp_no, cmt_day, cmt_status
-	      	having cmt_status='off'
-	  ) order by cmt_no;
-  </select>
 </mapper>

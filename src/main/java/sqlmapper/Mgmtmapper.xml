@@ -5,10 +5,53 @@
   
 <mapper namespace="lib.employee.management.model.EmployeeDAO">
   <select id="empSelectAll" resultType="lib.employee.management.model.EmployeeDTO">
-    select emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date
+    select emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_position,emp_join_date
      from employee_management
   </select>
   <delete id="empDelete" parameterType="lib.employee.management.model.EmployeeDTO">
   	delete employee_management where emp_no=#{emp_no}
   </delete>
+  <insert id="empInsert" parameterType="lib.employee.management.model.EmployeeDTO">
+    insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_position,emp_join_date)
+     values(#{emp_no},#{emp_name},#{emp_telephone},#{emp_email},#{emp_dept_code},#{emp_position},sysdate)
+  </insert>
+  <select id="empSelectPay" resultType="lib.employee.management.model.EmployeeDTO" parameterType="lib.employee.management.model.EmployeeDTO">
+    select emp_basic_pay,emp_no from employee_management where emp_dept_code=#{emp_dept_code} and emp_name=#{emp_name}
+  </select>
+  <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  ) order by cmt_no
+  </select>
+  <select id="cmtAdminSelectOne" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  ) and cmt_month=#{cmt_month} and cmt_year=#{cmt_year} and emp_no=#{emp_no}
+      order by cmt_no
+  </select>
+  <update id="cmtUpdate" parameterType="lib.employee.mypage.model.CommuteDTO">
+  	update commute_management set cmt_status=#{cmt_status},cmt_hour=#{cmt_hour},cmt_minute=#{cmt_minute} where cmt_no=#{cmt_no}
+  </update>
+  <insert id="salInsert" parameterType="lib.employee.management.model.SalaryDTO">
+    insert into salary_management(sal_no, emp_no, sal_total, sal_real, sal_national_pension, sal_health_insurance, sal_longterm_care_insurance
+    	,sal_employment_insurance, sal_income_tax, sal_local_income_tax, sal_deducted, sal_basic_pay, sal_bonus, sal_food_pay, sal_year, sal_month)
+     values((select nvl(max(sal_no)+1,0) from salary_management),#{emp_no},#{sal_total},#{sal_real},#{sal_national_pension},#{sal_health_insurance},#{sal_longterm_care_insurance},#{sal_employment_insurance}
+     	,#{sal_income_tax},#{sal_local_income_tax},#{sal_deducted},#{sal_basic_pay},#{sal_bonus},#{sal_food_pay},#{sal_year},#{sal_month})
+  </insert>
 </mapper>

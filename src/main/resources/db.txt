@@ -1,21 +1,26 @@
+----수아
 create table department (
     dept_code varchar2(20),
     dept_name varchar2(30)
     --CONSTRAINT dept_code_pk PRIMARY KEY(department_code)
 );
+insert into department values('000', '관장');
+insert into department values('001', '총무부');
+insert into department values('002', '교육부');
+insert into department values('003', '정보부');
+commit;
 
-
-create table pay_check (
-    pay_ck_no number,
-    pay_ck_year varchar2(20),
-    pay_ck_month varchar2(20),
-    pay_ck_check varchar2(20)
+create table sal_check (
+    sal_ck_no number,
+    emp_no number,
+    sal_ck_year varchar2(20),
+    sal_ck_month varchar2(20),
+    sal_ck_check varchar2(20)
     --constraint pay_no_pk primary key(pay_check_no)
 );
 
-drop table employee_management;
 create table employee_management(
-    emp_no varchar2(10),
+    emp_no number,
     emp_name varchar2(15),
     emp_telephone varchar2(30),
     emp_address varchar2(200),
@@ -26,30 +31,31 @@ create table employee_management(
     emp_join_date date,
     emp_retire_date date,
     emp_email varchar2(30),
-    emp_rank_position varchar2(30),
-    emp_duty_responsibility varchar(15),
-    emp_continuous_service_date varchar2(20),
+    emp_position varchar2(30),
+    emp_basic_pay number,
     emp_bank_name varchar2(50),
-    emp_account_holder varchar2(20),
     emp_account_number varchar2(30),
-    emp_picture varchar2(2000),
-    emp_attach_file varchar2(4000),
-    emp_join_company_division varchar2(10),
     emp_password varchar2(100)
     --CONSTRAINT emp_num_pk PRIMARY KEY(emp_num),
     --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
 );
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_email,emp_dept_code,emp_rank_position,emp_join_date) 
-values('6','6','01000000000','suah@suah.koong','001','사장',sysdate);
-select * from employee_management;
-desc employee_management;
-delete employee_management;
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date) 
+values(1000001,'강수아','01068618619',10000000,'koongmom@librain.org','000','관장',sysdate-1000);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
+values(1000002,'이소영','01037869424',3000000,'soyount@librain.org','001','팀장',sysdate-254);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
+values(1000003,'남민지','01022574895',3000000,'minjeenam@librain.org','002','팀장',sysdate-720);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
+values(1000004,'문혜수','01016852036',2500000,'mhs96@librain.org','002','사원',sysdate-300);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
+values(1000005,'박예원','01088430059',3000000,'yeahwoni@librain.org','003','팀장',sysdate-772);
+insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
+values(1000006,'김승수','01078963225',2500000,'iamseungsu@librain.org','003','사원',sysdate-150);
 commit;
 
-drop table commute_management;
 create table commute_management(
     cmt_no number,
-    cmt_emp_no varchar2(10),
+    emp_no number,
     cmt_status varchar2(100),
     cmt_year number,
     cmt_month number,
@@ -59,67 +65,82 @@ create table commute_management(
     cmt_second number
     --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
 );
-delete commute_management where cmt_day=23 and cmt_status='off';
-commit;
-select * 
-    from commute_management 
-    where cmt_no=
-        (select min(cmt_no)
-            from commute_management
-            where  cmt_emp_no=1 and cmt_day=20 and cmt_status='on'
-        ) or cmt_no =
-            (select max(cmt_no)
-                from commute_management
-                where  cmt_emp_no=1 and cmt_day=20 and cmt_status='off'
-            );
-select * 
-    from commute_management 
-    where cmt_no in (
-        select min(cmt_no) from commute_management
-        group by cmt_emp_no, cmt_day, cmt_status
-        having cmt_status='on'
-    ) or cmt_no in (
-        select max(cmt_no) from commute_management
-        group by cmt_emp_no, cmt_day, cmt_status
-        having cmt_status='off'
-    ) order by cmt_no;
-(select min(cmt_no) 
-    from commute_management
-    group by cmt_emp_no, cmt_day, cmt_status
-    having cmt_status='on'
-    );
 
-select * from commute_management where rownum=1;
-select * from commute_management;
-
--- book
-
-select * from book where book_name like '%b' ;
-select * from book b, rental r where rent_startdate=(
-    select max(rent_startdate) from book b, rental r where b.book_name = r.book_name and name)
-select * from book ;
-
-select max(sysdate) from dual; 
-
-
-commit;
-
-create table pay_management(
-    pay_no number,
-    pay_emp_no varchar2(10),
-    pay_division varchar2(20),
-    pay_total_pay number,
-    pay_real_pay number,
-    pay_income_tax number,
-    pay_residence_tax number,
-    pay_health_insurance number,
-    pay_unemployment_insurance number,
-    pay_nation_pension number,
-    pay_etx_pay number,
-    pay_basic_pay number,
-    pay_bonus number,
-    pay_incentive_pay number,
-    pay_food_pay number,
-    pay_transportation_pay number
+create table salary_management(
+    sal_no number,
+    emp_no number,
+    sal_total number,
+    sal_real number,
+    sal_national_pension number, -- 국민연금 4.5
+    sal_health_insurance number, -- 건강보험 3.23
+    sal_longterm_care_insurance number, -- 장기요양 건보 8.51
+    sal_employment_insurance number, -- 고용보험 0.65
+    sal_income_tax number, -- 소득세 0.7375
+    sal_local_income_tax number, -- 소득세 10퍼
+    sal_deducted number, -- 공제액 합
+    sal_basic_pay number, -- 200만원
+    sal_bonus number,
+    sal_food_pay number, -- 15만원
+    sal_year number,
+    sal_month number
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
+
+----소영
+-- 게시판 테이블 생성
+create table board(
+board_no number not null,      --게시물 번호
+board_title varchar2(200) not null,   --제목
+board_content varchar2(4000),      --내용
+board_writer varchar2(50) not null,   --이름
+board_regdate date default sysdate,   --작성일자
+board_updatedate date default sysdate
+--,board_viewcnt number default 0   --조회수
+);
+
+alter table board add constraint pk_board
+primary key (board_no);
+
+create sequence seq_board;
+--------------------------------------------------------
+--더미 입력
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+insert into board (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '테스트제목', '테스트내용', 'user00');
+commit;
+
+-----------------------------------
+--파일첨부 테이블 생성
+create table tbl_attach (
+	uuid varchar2(100) not null,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	filetype char(1) default 'I',
+	board_no number(10,0)
+);
+
+alter table tbl_attach add constraint pk_attach primary key(uuid);
+
+--------------------------------------------------------
+
+create table notice( --공지게시판
+board_no number not null,      --게시물 번호
+board_title varchar2(200) not null,   --제목
+board_content varchar2(4000),      --내용
+board_writer varchar2(50) not null,   --이름
+board_regdate date default sysdate,   --작성일자
+board_updatedate date default sysdate
+);
+
+
+alter table notice add constraint pk_notice
+primary key (board_no);

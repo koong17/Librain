@@ -49,10 +49,15 @@ public class EmpBookController {
 		JSONObject contentJO = new JSONObject();
 		JSONObject pageJO = new JSONObject();
 		
+		System.out.println("page");
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", bookDAO.selectRowNum()); 
+		pageJO.put("totalCount", bookDAO.selectRowNum());
+		
+		System.out.println("content");
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.search(bookService.select(perPage, page))); //내용물 
+		
+		System.out.println("result");
 		resultJO.put("result", true);
 		resultJO.put("data",  contentJO);
 		

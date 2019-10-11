@@ -12,8 +12,6 @@
 		사원 목록 조회
 	</div>
 	<div id="grid" style="width: 500"></div>
-	<input type="button" id="insert" value="직원 추가">
-	<input type="button" id="delete" value="직원 삭제">
 	
 </body>
 
@@ -50,7 +48,7 @@
 			},
 			{
 				header: '직책',
-				name: 'emp_rank_position'
+				name: 'emp_position'
 			},
 			{
 				header: '입사일',

@@ -9,35 +9,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lib.employee.management.model.EmployeeDTO;
-import lib.employee.mypage.model.CommuteDAO;
+import lib.employee.mypage.model.MypageDAO;
 import lib.employee.mypage.model.CommuteDTO;
 
 @Service
 public class MypageServiceImpl implements MypageService{
 	
 	@Autowired
-	CommuteDAO commuteDAO;
+	MypageDAO mypageDAO;
 
 	@Override
 	public void cmtInsert(CommuteDTO commuteDTO) {
-		commuteDAO.cmtInsert(commuteDTO);
+		mypageDAO.cmtInsert(commuteDTO);
 	}
 
 	@Override
 	public JSONArray cmtSelectAll(CommuteDTO commuteDTO) {
 		System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 		commuteDTO.setCmt_DAY(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		List<CommuteDTO> list = commuteDAO.cmtSelectAll(commuteDTO);
+		List<CommuteDTO> list = mypageDAO.cmtSelectAll(commuteDTO);
 		JSONArray ja = new JSONArray();
 		JSONObject jo;
 		for (int i = 0; i < list.size(); i++) {
 			jo = new JSONObject();
 			CommuteDTO dto = list.get(i);
-			jo.put("cmt_emp_no", dto.getCmt_emp_no());
+			jo.put("emp_no", dto.getEmp_no());
 			jo.put("cmt_status", dto.getCmt_status());
 			jo.put("cmt_hour", dto.getCmt_hour());
 			jo.put("cmt_minute", dto.getCmt_minute());
-			System.out.println(dto.getCmt_emp_no());
+			System.out.println(dto.getEmp_no());
 			ja.add(jo);
 		}
 		return ja;
@@ -46,7 +46,7 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public JSONArray cmtSelectOnOff(CommuteDTO commuteDTO) {
 		commuteDTO.setCmt_DAY(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		List<CommuteDTO> list = commuteDAO.cmtSelectOnOff(commuteDTO);
+		List<CommuteDTO> list = mypageDAO.cmtSelectOnOff(commuteDTO);
 		JSONArray ja = new JSONArray();
 		JSONObject jo;
 		for (int i = 0; i < list.size(); i++) {
@@ -55,7 +55,7 @@ public class MypageServiceImpl implements MypageService{
 			String cmt_status = dto.getCmt_status();
 			int cmt_hour = dto.getCmt_hour();
 			int cmt_minute = dto.getCmt_minute();
-			jo.put("cmt_emp_no", dto.getCmt_emp_no());
+			jo.put("emp_no", dto.getEmp_no());
 			jo.put("cmt_status", cmt_status);
 			jo.put("cmt_hour", cmt_hour);
 			jo.put("cmt_minute", dto.getCmt_minute());
@@ -71,6 +71,16 @@ public class MypageServiceImpl implements MypageService{
 			ja.add(jo);
 		}
 		return ja;
+	}
+
+	@Override
+	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO) {
+		return mypageDAO.empSelectOne(employeeDTO);
+	}
+
+	@Override
+	public void empUpdate(EmployeeDTO employeeDTO) {
+		mypageDAO.empUpdate(employeeDTO);
 	}
 	
 }
