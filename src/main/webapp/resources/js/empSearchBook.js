@@ -118,7 +118,7 @@ function updateAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empBookUpdate1.do",
+		url : "empBookUpdate.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();

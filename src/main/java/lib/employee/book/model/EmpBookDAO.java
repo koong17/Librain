@@ -10,6 +10,7 @@ import lib.member.model.MemberDTO;
 public interface EmpBookDAO {
 	
 	public void returnBook(RentalDTO dto); //반납
+	public void addRentCnt(int book_num); //대여 횟수 증가
 	public void rentBook(RentalDTO dto); //대여
 	public List<EmpBookDTO> rentMemBookCheck(String mem_id); //멤버의 대여중인 책 검색
 	public List<MemberDTO> rentMemCheck(String mem_id); //대여할 회원 검색
@@ -23,4 +24,8 @@ public interface EmpBookDAO {
 	public void insertBook(EmpBookDTO dto); //책 추가
 	public void deleteBook(EmpBookDTO dto); //책 삭제
 	public void updateBook(EmpBookDTO dto); //책 수정
+	public List<New_BookDTO> newSelect(); //신간출력
+	public void newInsertBook(New_BookDTO dto); //신간 책 추가
+	public void newDeleteBook(New_BookDTO dto); //신간 책 삭제
+	public void newUpdateBook(New_BookDTO dto); //신간 책 수정
 }

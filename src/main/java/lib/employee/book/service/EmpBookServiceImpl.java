@@ -8,8 +8,10 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lib.employee.book.model.Discard_BookDTO;
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.New_BookDTO;
 import lib.employee.book.model.RentalDTO;
 import lib.member.model.MemberDTO;
 
@@ -31,6 +33,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 	public void rentBook(List<RentalDTO> dto) {
 		for (RentalDTO rentalDTO : dto) {
 			bookDAO.rentBook(rentalDTO);
+			bookDAO.addRentCnt(rentalDTO.getBook_num());
 		}
 	}
 
@@ -188,7 +191,45 @@ public class EmpBookServiceImpl implements EmpBookService {
 		}
 	}
 	
+	@Override
+	public JSONArray newSelect() {
+		
+		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.newSelect();
+		
+		for (int i = 0; i < list.size(); i++) {
+			New_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
 	
+	@Override
+	public void newInsert(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newInsertBook(newBookDTO);
+		}
+	}
 	
+	@Override
+	public void newDelete(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newDeleteBook(newBookDTO);
+		}
+	}
 	
+	@Override
+	public void newUpdate(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newUpdateBook(newBookDTO);
+		}
+	}
 }
