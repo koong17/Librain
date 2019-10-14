@@ -34,7 +34,7 @@ function inputAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empNewBook/input.do",
+		url : "./empNewBook/input.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
@@ -54,7 +54,7 @@ function deleteAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empNewBook/delete.do",
+		url : "./empNewBook/delete.do",
 		success : function(data){
 			console.log(data.result);
 			confirm();
@@ -72,7 +72,7 @@ function updateAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empNewBook/update.do",
+		url : "./empNewBook/update.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
@@ -95,7 +95,7 @@ Grid.setLanguage('ko');
 var gridData =
 {
 	api: {
-			readData: { url: '${pageContext.request.contextPath}/empNewBook.do/readData', method: 'GET' }
+			readData: { url: './empNewBook.do/readData', method: 'GET' }
 	}
 }
 const grid = new tui.Grid({

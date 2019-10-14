@@ -74,7 +74,7 @@ function rentAjax() {
 		object.book_num = book[i].book_num;
 		bookArr.push(object);
 	}
-	
+	console.log(bookArr.toString());
 	if(bookArr.length == 0) {
 		alert("대여할 책이 선택되지 않았습니다.")
 	} else {

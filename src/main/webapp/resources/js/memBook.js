@@ -110,7 +110,9 @@ const newBookGrid = new tui.Grid({
    columns: [
       {
          header: '도서번호',
-         name: 'book_num'
+         name: 'book_num',
+         sortingType: 'desc',
+ 		sortable: true
       },
       {
          header: '도서명',
