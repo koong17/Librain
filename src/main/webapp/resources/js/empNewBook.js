@@ -95,7 +95,7 @@ Grid.setLanguage('ko');
 var gridData =
 {
 	api: {
-			readData: { url: 'http://localhost:8080/empNewBook.do/readData', method: 'GET' }
+			readData: { url: '${pageContext.request.contextPath}/empNewBook.do/readData', method: 'GET' }
 	}
 }
 const grid = new tui.Grid({
