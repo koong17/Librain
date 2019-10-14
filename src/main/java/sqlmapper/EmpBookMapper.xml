@@ -10,7 +10,7 @@
 	</update>
 	
 	<insert id="rentBook" parameterType="lib.employee.book.model.RentalDTO">
-		insert into rental values((select nvl(max(rent_num)+1,1) from rental), #{ book_num }, #{ mem_id }, sysdate, null, 'X', 'X')
+		insert into rental values((select nvl(max(rent_num)+1,1) from rental), #{ book_num }, #{ mem_id }, sysdate, null, 'X', 'X', '대여중')
 	</insert>
 	
 	<select id="rentMemCheck" resultType="lib.member.model.MemberDTO" parameterType="java.lang.String">
@@ -56,6 +56,7 @@
 		           left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
 		           on (b.book_num = r.book_num))
 		     where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+		     order by book_num desc
 	]]>
 	</select>
 	
