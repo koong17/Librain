@@ -40,9 +40,9 @@ public class EmpBookController {
 		return "employee/book/empSearch";
 	}
 	
-	@RequestMapping(value = "/empSearch.do/readData", method = RequestMethod.GET)
+	@RequestMapping(value = "/empSearch.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONObject searchForm(@RequestParam int perPage, @RequestParam int page) {
+	public String searchForm(@RequestParam(value="perPage", required = true ) int perPage, @RequestParam(value="page", required = true ) int page) {
 		System.out.println(perPage+"rnqns"+page);
 		
 		JSONObject resultJO = new JSONObject();
@@ -63,7 +63,7 @@ public class EmpBookController {
 		
 		System.out.println("찍히나 확인");
 		
-		return  resultJO;
+		return  resultJO.toString();
 	}
 	
 	
@@ -93,9 +93,9 @@ public class EmpBookController {
 		return "{\"result\":\"success\"}";
 	}
 	
-	@RequestMapping(value = "/empNewBook.do/readData", method = RequestMethod.GET)
+	@RequestMapping(value = "/empNewBook.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONObject NewForm(@RequestParam int perPage, @RequestParam int page) {
+	public String NewForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
 		
 		JSONObject resultJO = new JSONObject();
@@ -111,7 +111,7 @@ public class EmpBookController {
 		
 		System.out.println("찍히나 확인");
 		
-		return  resultJO;
+		return  resultJO.toString();
 	}
 	
 	@RequestMapping(value="/empNewBook/input.do", method = RequestMethod.POST)
