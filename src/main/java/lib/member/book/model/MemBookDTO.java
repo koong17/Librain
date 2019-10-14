@@ -13,6 +13,8 @@ public class MemBookDTO {
 	private String book_ctgr_num; // 분류기호
 	private String book_rsrv_status; // 예약여부
 	private String rent; //대출여부
+	private int book_rent_cnt; //대출 횟수
+    private Timestamp book_input_date;
 	
 	public String getBook_num() {
 		return book_num;
@@ -73,6 +75,18 @@ public class MemBookDTO {
 	}
 	public void setRent(String rent) {
 		this.rent = rent;
+	}
+	public int getBook_rent_cnt() {
+		return book_rent_cnt;
+	}
+	public void setBook_rent_cnt(int book_rent_cnt) {
+		this.book_rent_cnt = book_rent_cnt;
+	}
+	public Timestamp getBook_input_date() {
+		return book_input_date;
+	}
+	public void setBook_input_date(Timestamp book_input_date) {
+		this.book_input_date = book_input_date;
 	}
 	
 }

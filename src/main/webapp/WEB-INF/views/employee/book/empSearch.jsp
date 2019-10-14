@@ -92,7 +92,7 @@
 </body>
 
 <!-- bookJS -->
-<script src="resources/js/empBook.js"></script>
+<script src="resources/js/empSearchBook.js?after"></script>
 <script type="text/javascript">
 
 function confirm(){
@@ -190,10 +190,15 @@ const grid = new tui.Grid({
 				options: {
 					listItems: [
 						{ text: '예약가능', value: '예약가능' },
-						{ text: '예약중', 예약중: '예약중' },
+						{ text: '예약중', value: '예약중' },
 					]
 				}
 			}
+		},
+		{
+			header: '입력일',
+			name: 'book_input_date',
+			
 		}
 	]
 });

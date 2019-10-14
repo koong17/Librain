@@ -7,10 +7,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import lib.employee.book.model.Discard_BookDTO;
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.New_BookDTO;
+import lib.employee.book.model.RentalDTO;
+import lib.member.model.MemberDTO;
 
 @Service
 public class EmpBookServiceImpl implements EmpBookService {
@@ -18,6 +21,84 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Autowired
 	EmpBookDAO bookDAO;
 	
+	
+	@Override
+	public void returnBook(List<RentalDTO> dto) {
+		for (RentalDTO rentalDTO : dto) {
+			bookDAO.returnBook(rentalDTO);
+		}
+	}
+
+	@Override
+	public void rentBook(List<RentalDTO> dto) {
+		for (RentalDTO rentalDTO : dto) {
+			bookDAO.rentBook(rentalDTO);
+			bookDAO.addRentCnt(rentalDTO.getBook_num());
+		}
+	}
+
+	@Override
+	public JSONArray rentMemBookCheck(String mem_id) {
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
+		list = bookDAO.rentMemBookCheck(mem_id);
+		
+		for (int i = 0; i < list.size(); i++) {
+			EmpBookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_num", dto.getBook_num());
+			jObj.put("rent", dto.getRent());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+
+	@Override
+	public JSONArray rentMemCheck(String mem_id) {
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		list = bookDAO.rentMemCheck(mem_id);
+		
+		for (int i = 0; i < list.size(); i++) {
+			MemberDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("mem_id", dto.getMem_id());
+			jObj.put("mem_name", dto.getMem_name());
+			jObj.put("mem_phone", dto.getMem_phone());
+			jObj.put("mem_address", dto.getMem_address());
+			jObj.put("mem_email", dto.getMem_email());
+			jObj.put("mem_rank", dto.getMem_rank());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+
+	@Override
+	public JSONObject rentBookCheck(String book_num) {
+		
+		JSONObject jObj = null;
+		
+		EmpBookDTO dto = bookDAO.rentBookCheck(Integer.parseInt(book_num));
+		
+		jObj = new JSONObject();
+		jObj.put("book_name", dto.getBook_name());
+		jObj.put("book_author", dto.getBook_author());
+		jObj.put("book_pub_house", dto.getBook_pub_house());
+		jObj.put("book_num", dto.getBook_num());
+		jObj.put("rent", dto.getRent());
+		
+		return jObj;
+	}
+
 	@Override
 	public List select(int Perpage, int page) {
 
@@ -81,6 +162,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
 			jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
 			jObj.put("rent", dto.getRent());
+			jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
 			jArr.add(jObj);
 		}
 		return jArr;
@@ -109,7 +191,45 @@ public class EmpBookServiceImpl implements EmpBookService {
 		}
 	}
 	
+	@Override
+	public JSONArray newSelect() {
+		
+		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.newSelect();
+		
+		for (int i = 0; i < list.size(); i++) {
+			New_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
 	
+	@Override
+	public void newInsert(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newInsertBook(newBookDTO);
+		}
+	}
 	
+	@Override
+	public void newDelete(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newDeleteBook(newBookDTO);
+		}
+	}
 	
+	@Override
+	public void newUpdate(List<New_BookDTO> dto) {
+		for (New_BookDTO newBookDTO : dto) {
+			bookDAO.newUpdateBook(newBookDTO);
+		}
+	}
 }

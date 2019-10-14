@@ -15,24 +15,8 @@ public class EmpBookDTO {
 	private String book_ctgr_num; // 분류기호
 	private String book_rsrv_status; // 예약여부
 	private String rent; //대출여부
-	
-	
-//	public EmpBookDTO() {
-//		SimpleDateFormat fm = new SimpleDateFormat ( "yyyy-MM-dd");
-//		Date date = new Date();
-//		String today = fm.format(date).substring(0, 10);
-//		
-//		book_num = "입력";
-//		book_author = "입력";
-//		book_name = "입력";
-//		book_pub_house = "입력";
-//		book_pub_date = today;
-//		book_ISBN = "입력";
-//		book_apdx_status = "선택";
-//		book_ctgr_num = "입력";
-//		book_rsrv_status = "선택";
-//		rent = "선택";
-//	}
+    private int book_rent_cnt; //대출 횟수
+    private Timestamp book_input_date;
 	
 	public int getBook_num() {
 		return book_num;
@@ -93,6 +77,18 @@ public class EmpBookDTO {
 	}
 	public void setRent(String rent) {
 		this.rent = rent;
+	}
+	public int getBook_rent_cnt() {
+		return book_rent_cnt;
+	}
+	public void setBook_rent_cnt(int book_rent_cnt) {
+		this.book_rent_cnt = book_rent_cnt;
+	}
+	public Timestamp getBook_input_date() {
+		return book_input_date;
+	}
+	public void setBook_input_date(Timestamp book_input_date) {
+		this.book_input_date = book_input_date;
 	}
 	
 	@Override
