@@ -24,6 +24,9 @@ mypage/pay.do <a href="mypage/pay.do">개인 급여</a><br>
 <a href="empRentBook.do">도서 대여</a>
 <!-- <a href="empNewBook.do">도서 구입 신청</a>
 <a href="empRentBook.do">도서 폐기 신청</a> -->
+<br><br>
+<a href="./facility">facility </a><br>
+<a href="./facilityapproval">facilityapproval	</a>
 <hr>
  <br />
 <!--  <hr>
