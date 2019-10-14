@@ -23,16 +23,16 @@ mypage/pay.do <a href="mypage/pay.do">개인 급여</a><br>
 <a href="memSearch.do">고객 검색</a> 
 <a href="empSearch.do">직원 검색</a>
 <a href="empRentBook.do">도서 대여</a>
-<a href="empNewBook.do">도서 구입 신청</a>
-<a href="empRentBook.do">도서 폐기 신청</a>
+<!-- <a href="empNewBook.do">도서 구입 신청</a>
+<a href="empRentBook.do">도서 폐기 신청</a> -->
 <hr>
  <br />
  <hr>
-<h3>admin 도서</h3> 
+<!-- <h3>admin 도서</h3> 
 <a href="empRentBook.do">도서 구입 승인</a>
 <a href="empRentBook.do">도서 폐기 승인</a>
 <hr>
-
+ -->
 <div class="searchForm" align="right">
 	<a href="#">도서검색</a>
 </div>
