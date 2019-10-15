@@ -30,7 +30,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/1027/Desktop/lombokfolder/lombok.jar">
+	<classpathentry kind="lib" path="C:/Users/1027/Desktop/구멍가게코딩단/ex02 관련 자료/개발환경셋팅/lombok.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
