@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}">Librain</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Librain</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -206,9 +206,9 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-user fa-fw"></i> 근태관리</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-check" aria-hidden="true"></i> 근태관리</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-envelope fa-fw"></i>개인급여</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;개인급여</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
                         </li>
@@ -244,7 +244,7 @@
                             /.nav-second-level
                         </li> -->
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 도서관리<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-book" aria-hidden="true"></i> 도서관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/empSearch.do">도서검색</a>
