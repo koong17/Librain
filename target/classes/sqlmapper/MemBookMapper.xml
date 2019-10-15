@@ -43,6 +43,7 @@
 		            on (b.book_num = r.book_num) where rownum<=20)
              where book_input_date<= sysdate and book_input_date >=sysdate-30 
             		and rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+            		order by book_num desc
 	]]>
 	</select>
 	
@@ -54,8 +55,9 @@
 		            from   (select * from book order by book_rent_cnt desc) b
 		            left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
 		            on (b.book_num = r.book_num)  where rownum <= 20 )
-             where book_input_date<= sysdate and book_input_date >=sysdate-30
-                    and rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+             where book_input_date<= sysdate and book_input_date >=sysdate-30 
+             		and rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+             order by book_rent_cnt desc
 	]]>
 	</select>
 	

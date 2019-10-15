@@ -27,9 +27,9 @@ public class MemBookController {
 		return "member/memSearch";
 	}
 	
-	@RequestMapping(value = "/memSearch.do/readData", method = RequestMethod.GET)
+	@RequestMapping(value = "/memSearch.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONObject searchForm(@RequestParam int perPage, @RequestParam int page) {
+	public String searchForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
 		
 		JSONObject resultJO = new JSONObject();
@@ -37,7 +37,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 20); 
+		pageJO.put("totalCount", 5); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.newBook(perPage, page)); //내용물 
 		resultJO.put("result", true);
@@ -45,12 +45,12 @@ public class MemBookController {
 		
 		System.out.println("찍히나 확인");
 		
-		return  resultJO;		
+		return  resultJO.toString();		
 	}
 
-	@RequestMapping(value = "/memSearch.do/readData2", method = RequestMethod.GET)
+	@RequestMapping(value = "/memSearch.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONObject searchForm2(@RequestParam int perPage, @RequestParam int page) {
+	public String searchForm2(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
 		
 		JSONObject resultJO = new JSONObject();
@@ -58,7 +58,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 20); 
+		pageJO.put("totalCount", 5); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.mostRent(perPage, page)); //내용물 
 		resultJO.put("result", true);
@@ -66,7 +66,7 @@ public class MemBookController {
 		
 		System.out.println("찍히나 확인");
 		
-		return  resultJO;		
+		return  resultJO.toString();		
 	}
 	
 	
