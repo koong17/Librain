@@ -24,6 +24,11 @@ public class MemberController {
 	MemberService memberService;
 	@Autowired
 	MemberDAO memberDAO;
+	
+	@GetMapping("/memberjoin.do")
+	public String memberjoin(Model model) {
+		return "member/memberjoin";
+	}
 
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {
@@ -66,8 +71,6 @@ public class MemberController {
 		contentJO.put("contents", memberService.memberSearch(memberService.select(perPage, page)));
 		resultJO.put("result", true);
 		resultJO.put("data", contentJO);
-		
-		System.out.println("^ㅁ^");
 		
 		return resultJO;
 	}

@@ -91,7 +91,7 @@
 		else {
 			$.ajax({
 				type : "POST",
-				url : "/memberSearch.do",
+				url : "memberSearch.do",
 				data : {
 					searchCtgr : $("#searchCtgr").val(),
 					searchWord : $("#searchWord").val()
@@ -190,9 +190,6 @@
 		console.log(grid.getCheckedRows());
 		console.log(grid.getModifiedRows());
 	});
-	
-	/* paging */
-	
 	
 </script>
 </html>

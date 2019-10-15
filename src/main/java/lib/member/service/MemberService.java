@@ -7,6 +7,9 @@ import org.json.simple.JSONArray;
 import lib.member.model.MemberDTO;
 
 public interface MemberService {
+	
+	//회원가입
+	public void memberjoin(List<MemberDTO> dtos);
 
 	//전체목록
 	public JSONArray memberSelectAll();

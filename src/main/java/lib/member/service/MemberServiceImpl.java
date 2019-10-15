@@ -18,6 +18,14 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO memberDAO;
 	
+	//회원가입
+	@Override
+	public void memberjoin(List<MemberDTO> dtos) {
+		for (MemberDTO memberDTO : dtos) {
+			memberDAO.memberjoin(memberDTO);
+		}
+	}
+
 	//전체검색
 	@Override
 	public JSONArray memberSelectAll() {
@@ -100,5 +108,6 @@ public class MemberServiceImpl implements MemberService {
 		list = memberDAO.select(startRowNum, endRowNum);
 		return list;
 	}
+
 
 }
