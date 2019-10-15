@@ -123,3 +123,17 @@ create table pay_management(
     pay_transportation_pay number
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
+
+create table member( -- 회원
+    mem_id varchar2(20), --회원아이디
+    mem_pw varchar2(30), --회원비밀번호
+    mem_name varchar2(20), --회원이름
+    mem_jumin varchar2(30), --주민번호
+    mem_address varchar2(50), --회원주소
+    mem_phone varchar2(30), --회원폰번호
+    mem_email varchar2(30), --회원이메일
+    mem_rank number default 2 -- 권한 변경(1. 블랙리스트/ 2. 일반회원/ 3. 국가유공자)
+   --constraint member_pk primary key (m_id)
+);
+
+commit;

@@ -7,6 +7,7 @@
 <title>Home</title>
 </head>
 <body>
+<a href="join.do">회원가입</a>
 <a href="memberList.do">회원조회</a>
 <a href="test.do">직원목록</a>
 <a href="commute.do">근태관리</a>
