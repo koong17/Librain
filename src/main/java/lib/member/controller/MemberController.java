@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,14 @@ public class MemberController {
 	MemberDAO memberDAO;
 	
 	@GetMapping("/memberjoin.do")
-	public String memberjoin(Model model) {
+	public String memberjoin() {
+		return "member/memberjoin";
+	}
+	
+	@PostMapping("/memberjoin.do")
+	public String memberjoin(@ModelAttribute MemberDTO memberDTO) {
+		System.out.println("join컨트롤탐");
+		memberService.memberjoin(memberDTO);
 		return "member/memberjoin";
 	}
 
@@ -34,6 +42,7 @@ public class MemberController {
 	public String memList(Model model) {
 		JSONArray ja = memberService.memberSelectAll();
 		model.addAttribute("gridData", ja);
+		System.out.println("list.do탐");
 		return "employee/member/memberList";
 	}
 
@@ -71,6 +80,8 @@ public class MemberController {
 		contentJO.put("contents", memberService.memberSearch(memberService.select(perPage, page)));
 		resultJO.put("result", true);
 		resultJO.put("data", contentJO);
+		
+		System.out.println("list/readdate탐");
 		
 		return resultJO;
 	}

@@ -20,10 +20,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	//회원가입
 	@Override
-	public void memberjoin(List<MemberDTO> dtos) {
-		for (MemberDTO memberDTO : dtos) {
-			memberDAO.memberjoin(memberDTO);
-		}
+	public void memberjoin(MemberDTO dto) {
+		memberDAO.memberjoin(dto);
 	}
 
 	//전체검색

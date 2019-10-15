@@ -30,49 +30,48 @@
 
 </head>
 <body>
-	<div>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="아이디를 입력하세요."
-				id="mem_id" name="mem_id">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="비밀번호를 입력하세요."
-				id="mem_pw" name="mem_pw">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="이름을 입력하세요."
-				id="mem_name" name="mem_name">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="주민번호를 입력하세요."
-				id="mem_jumin" name="mem_jumin">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="주소를 입력하세요."
-				id="mem_address" name="mem_address">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="전화번호를 입력하세요."
-				id="mem_phone" name="mem_phone">
-		</div><br><br>
-		<div class="col-md-4">
-			<input class="form-control" type="text" placeholder="이메일을 입력하세요."
-				id="mem_email" name="mem_email">
-		</div><br><br>
-		<div class="col-md-1">
-			<button type="button" class="btn btn-primary btn-block" id="joinBtn"
-				onclick="location.href='memberjoin.do'">
-				<i class="fa fa-join">회원가입</i>
-			</button>
-		</div>
-		<div class="col-md-1">
-			<button type="button" class="btn btn-primary btn-block" id="homeBtn"
-				onclick="location.href='index.jsp'">
-				<i class="fa fa-home">돌아가기</i>
-			</button>
-		</div>
-	</div><p>
-	<div id="grid"></div><p>
+	<form action="memberjoin.do" method="post">
+		<div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="아이디를 입력하세요."
+					id="mem_id" name="mem_id">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="비밀번호를 입력하세요."
+					id="mem_pw" name="mem_pw">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="이름을 입력하세요."
+					id="mem_name" name="mem_name">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="주민번호를 입력하세요."
+					id="mem_jumin" name="mem_jumin">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="주소를 입력하세요."
+					id="mem_address" name="mem_address">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="전화번호를 입력하세요."
+					id="mem_phone" name="mem_phone">
+			</div><br><br>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="이메일을 입력하세요."
+					id="mem_email" name="mem_email">
+			</div><br><br>
+			<div class="col-md-1">
+				<input type="submit" class="btn btn-primary btn-block" id="joinBtn" value="회원가입"
+					onclick="location.href='/mvc/memberjoin.do'">
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn"
+					onclick="location.href='index.jsp'">
+					<i class="fa fa-home">돌아가기</i>
+				</button>
+			</div>
+		</div><p>
+	</form>
 </body>
 </html>
 
