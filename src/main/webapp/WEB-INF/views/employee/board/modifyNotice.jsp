@@ -243,7 +243,7 @@ $(document).ready(function(){
       }//for end
       
       $.ajax({
-         url : '${pageContext.request.contextPath}/board/uploadAjaxAction',
+         url : '${pageContext.request.contextPath}/board/uploadAjaxAction.do',
          processData: false,
          contentType: false,
          data: formData,

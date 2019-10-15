@@ -259,7 +259,16 @@ board_updatedate date default sysdate
 alter table notice add constraint pk_notice
 primary key (board_no);
 
-
+-------------- 더미 입력
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '필독', '공지사항을 꾸준히 확인하세요', 'admin');
+commit;
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '필독!!', '공지사항을 꾸준히 확인하세요', 'admin');
+commit;
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, 'Librain 프로그램 사전 교육[파일첨부]', '꼭 읽기', 'admin');
+commit;
 -------------------승수 
 create table Facilities( --시설물
 Fac_serialnum number  ,          --일련번호 PK

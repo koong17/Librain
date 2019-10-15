@@ -56,7 +56,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
+<!--                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -132,10 +132,13 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-tasks -->
+                    /.dropdown-tasks
                 </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
+                /.dropdown -->
+                
+                
+                
+               <!--  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -192,7 +195,10 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-alerts -->
+                    /.dropdown-alerts -->
+                    
+                    
+                    
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -260,88 +266,63 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>직원메뉴<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/mgmt/emplist.do">직원목록</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i>시설관리<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                            </ul>
+                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-sitemap fa-fw"></i>직원보기</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
                         </li>
-<%--                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> 마이페이지<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/mypage/commute.do">근태관리</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/mypage/info.do">개인정보수정</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/mypage/pay.do">개인급여</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li> --%>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i>관리자<span class="fa arrow"></span></a>
+    <!--                     <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>몰라요<span class="fa arrow"></span></a>
                         	 <ul class="nav nav-second-level">
-                                 <li>
-                                    <a href="${pageContext.request.contextPath}/mgmt/emplist2.do">직원관리</a>
-                                </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/mgmt/cmtlist.do">근태목록</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/mgmt/totalpay.do">급여관리</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/empRentBook.do">도서 구입 승인</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/empRentBook.do">도서 폐기 승인</a>
+                                    <a href="#">ddd</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            /.nav-second-level
+                        </li> -->
                         
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 관리자<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                 <li>
+                                    <a href="#">직원관리 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/emplist2.do">직원목록</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/cmtlist.do">근태목록</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/totalpay.do">급여관리</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
+                                
+                               <li>
+                                    <a href="#">도서관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서구입승인</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서폐기승인</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                
+                            	<li>
+                                    <a href="#">시설관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/facility">시설</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li> 
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

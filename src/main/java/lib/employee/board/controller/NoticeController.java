@@ -65,7 +65,7 @@ public class NoticeController {
 	@GetMapping({"/getNextNotice.do"})
 	public String noticeSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectNext(board_no));
-		return "employee/board/getNextnotice"; 
+		return "employee/board/getNextNotice"; 
 	}
 	
 	@GetMapping({"/getPrevNotice.do"})

@@ -38,15 +38,15 @@
 					<!-- 공지글 -->
 					<c:forEach items="${notice }" var="notice">
 						<tr>
-							<td><img src="../resources/img/notice.png" width="20px"/></td>
-							<td>
+							<td style="width: 6%"><img src="../resources/img/ico_notice.png" width="25px"/></td>
+							<td style="width: 49%; font-weight:bold">
 								<a class='moveN' href='<c:out value="${notice.board_no}"/>'>
 									<c:out value="${notice.board_title }"/></a>
 							</td>
-							<td><c:out value="${notice.board_writer }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><c:out value="${notice.board_writer }" /></td>
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${notice.board_regdate }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${notice.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
@@ -54,15 +54,15 @@
 					<!-- 일반 글 -->
 					<c:forEach items="${list }" var="board">
 						<tr>
-							<td><c:out value="${board.board_no }" /></td>
-							<td>
+							<td style="width: 6%"><c:out value="${board.board_no }" /></td>
+							<td style="width: 49%">
 								<a class='move' href='<c:out value="${board.board_no}"/>'>
 									<c:out value="${board.board_title }"/></a>
 							</td>
-							<td><c:out value="${board.board_writer }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><c:out value="${board.board_writer }" /></td>
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.board_regdate }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
@@ -149,10 +149,8 @@
 							</div>
 							<div class="modal-body">처리가 완료되었습니다.</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save
-									changes</button>
 							</div>
 						</div>
 						<!--  /.modal-comment -->
