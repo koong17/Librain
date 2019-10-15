@@ -128,7 +128,7 @@
 		(function(){
 			var board_no = '<c:out value="${board.board_no}"/>';
 			//화면에 보여주기
-			$.getJSON("${pageContext.request.contextPath}/board/getNoticeAttachLis.do", {board_no:board_no}, function(arr){
+			$.getJSON("${pageContext.request.contextPath}/board/getNoticeAttachList.do", {board_no:board_no}, function(arr){
 				console.log(arr);
 				
 				var str = "";
@@ -147,7 +147,7 @@
 					} else {
 						str += "<li data-path='" + attach.uploadPath + "' data-uuid = '"+attach.uuid + "' data-filename = '"+attach.fileName +"' data-type='"+attach.fileType +"'><div>";
 						str += "<span> " + attach.fileName + "</span><br/>";
-						str += "<img src = '../../resources/img/attach.png' width=30px>";
+						str += "<img src = '../resources/img/attach.png' width=30px>";
 						str += "</div>";
 						str += "</li>";
 					}
