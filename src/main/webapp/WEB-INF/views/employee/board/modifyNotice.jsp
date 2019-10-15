@@ -52,7 +52,7 @@
 			<!--  /.panel-heading -->
 			<div class="panel-body">
 
-				<form role="form" action="${pageContext.request.contextPath}/employee/board/modifyNotice" method="post">
+				<form role="form" action="${pageContext.request.contextPath}/board/modifyNotice.do" method="post">
 
 					<!-- 페이지 관련 추가 -->
 					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
@@ -110,9 +110,9 @@
 			console.log(operation);
 
 			if (operation === 'remove') {
-				formObj.attr("action", "${pageContext.request.contextPath}/employee/board/removeNotice");
+				formObj.attr("action", "${pageContext.request.contextPath}/board/removeNotice.do");
 			} else if (operation === 'list') {
-				formObj.attr("action", "${pageContext.request.contextPath}/employee/board/list").attr("method", "get");
+				formObj.attr("action", "${pageContext.request.contextPath}/board/list.do").attr("method", "get");
 				var pageNumTag = $("input[name='pageNum']").clone();
 				var amountTag = $("input[name='amount']").clone();
 				//검색조건
@@ -156,7 +156,7 @@ $(document).ready(function(){
    (function(){
       
       var board_no = '<c:out value="${board.board_no}"/>';
-      $.getJSON("${pageContext.request.contextPath}/employee/board/getAttachList", {board_no: board_no}, function(arr){
+      $.getJSON("${pageContext.request.contextPath}/board/getAttachList.do", {board_no: board_no}, function(arr){
          console.log(arr);
          var str = "";
          $(arr).each(function(i, attach){	//파일 불러오기, 수정/삭제 가능하게 만들기
@@ -168,7 +168,7 @@ $(document).ready(function(){
                str += "<span> " + attach.fileName + "</span>";
                str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='image' ";
                str += "class='btn btn-warning btn-Circle'><i class='fa fa-times'></i></button><br>";
-               str += "<img src='${pageContext.request.contextPath}/employee/board/display?fileName="+fileCallPath+"'>";
+               str += "<img src='${pageContext.request.contextPath}/board/display?fileName="+fileCallPath+"'>";
                str += "</div>";
                str += "</li>";
             } else {
@@ -177,7 +177,7 @@ $(document).ready(function(){
                str += "<span> " + attach.fileName +"</span><br/>";
                str += "<button type='button' data-file=\'" + fileCallPath + "\'data-type='file'";
                str += " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-               str += "<img src='../../resources/img/attach.png'></a>";
+               str += "<img src='../resources/img/attach.png'></a>";
                str += "</div>";
                str += "</li>";
                
@@ -243,7 +243,7 @@ $(document).ready(function(){
       }//for end
       
       $.ajax({
-         url : '${pageContext.request.contextPath}/employee/board/uploadAjaxAction',
+         url : '${pageContext.request.contextPath}/board/uploadAjaxAction',
          processData: false,
          contentType: false,
          data: formData,
@@ -276,7 +276,7 @@ $(document).ready(function(){
               str += "<span>" + obj.fileName+"</span>";
               str += "<button type='button' data-file= \'"+ fileCallPath +"\'"
               str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-              str += "<img src = '${pageContext.request.contextPath}/employee/board/display?fileName="+fileCallPath+"'>";
+              str += "<img src = '${pageContext.request.contextPath}/board/display?fileName="+fileCallPath+"'>";
               str += "</div>";
               str += "</li>";
               
@@ -288,7 +288,7 @@ $(document).ready(function(){
             	str += "data-path='"+obj.uploadPath+"'data-uuid='"+obj.uuid+"'data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
             	str += "<span>" + obj.fileName+"</span>";
                str += "<button type='button' data-file= \'"+ fileCallPath +"\'data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-               str += "<img src= '../../resources/img/attach.png'></a>";
+               str += "<img src= '../resources/img/attach.png'></a>";
                str += "</div>";
                str += "</li>";
            }

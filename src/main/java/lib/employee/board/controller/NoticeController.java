@@ -27,16 +27,18 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("employee/board/*") 
+@RequestMapping("board/*") 
 @AllArgsConstructor
 public class NoticeController {
 
 	private NoticeService service;
 
-	@GetMapping("/registerNotice")
-	public void boardRegisterForm() {}
+	@GetMapping("/registerNotice.do")
+	public String boardRegisterForm() {
+		return "employee/board/registerNotice";
+	}
 
-	@PostMapping("/registerNotice")
+	@PostMapping("/registerNotice.do")
 	public String noticeInsert(NoticeDTO notice, RedirectAttributes rttr) {
 		//첨부파일 처리
 		if (notice.getAttachList() != null) {	
@@ -45,28 +47,36 @@ public class NoticeController {
 		
 		service.noticeInsert(notice);
 		rttr.addFlashAttribute("result", notice.getBoard_no());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 
-	@GetMapping({ "/getNotice", "/modifyNotice" })
-	public void boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/getNotice.do")
+	public String noticeSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectOne(board_no));
-		System.out.println("일반글 상세보기 : " + model.toString()  );
+		return "employee/board/getNotice";
 	}
 	
-	@GetMapping({"/getNextNotice"})
-	public void boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/modifyNotice.do")
+	public String noticeModifyForm(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("board", service.noticeSelectOne(board_no));
+		return "employee/board/modifyNotice";
+	}
+	
+	@GetMapping({"/getNextNotice.do"})
+	public String noticeSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectNext(board_no));
+		return "employee/board/getNextnotice"; 
 	}
 	
-	@GetMapping({"/getPrevNotice"})
-	public void boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping({"/getPrevNotice.do"})
+	public String noticeSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectPrev(board_no));
+		return "employee/board/getPrevNotice";
 	}
 	
 
-	@PostMapping("/modifyNotice")
-	public String boardUpdate(NoticeDTO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	@PostMapping("/modifyNotice.do")
+	public String noticeUpdate(NoticeDTO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
 		if (service.noticeUpdate(notice)) { // true(정상종료)일 때만 값 전달
 			rttr.addFlashAttribute("result", "success");
@@ -77,11 +87,11 @@ public class NoticeController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 
-	@PostMapping("/removeNotice")
-	public String boardDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	@PostMapping("/removeNotice.do")
+	public String noticeDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
 		List<BoardAttachDTO> attachList = service.getAttachList(board_no);
 		
@@ -95,11 +105,11 @@ public class NoticeController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 	
 	//첨부파일 - 한글처리 필요
-	@GetMapping(value= "/getNoticeAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value= "/getNoticeAttachList.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachDTO>> getAttachList(Long board_no){
 		return new ResponseEntity<List<BoardAttachDTO>>(service.getAttachList(board_no), HttpStatus.OK);

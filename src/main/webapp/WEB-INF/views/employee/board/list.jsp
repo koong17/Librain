@@ -38,7 +38,7 @@
 					<!-- 공지글 -->
 					<c:forEach items="${notice }" var="notice">
 						<tr>
-							<td><c:out value="공지" /></td>
+							<td><img src="../resources/img/notice.png" width="20px"/></td>
 							<td>
 								<a class='moveN' href='<c:out value="${notice.board_no}"/>'>
 									<c:out value="${notice.board_title }"/></a>
@@ -72,7 +72,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 			
-			<form id="searchForm" action="${pageContext.request.contextPath}/employee/board/list" method="get">
+			<form id="searchForm" action="${pageContext.request.contextPath}/board/list.do" method="get">
 				<select name="type">
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
@@ -125,7 +125,7 @@
 					</ul>
 				</div>
 
-				<form id='actionForm' action="${pageContext.request.contextPath}/employee/board/list" method='get'>
+				<form id='actionForm' action="${pageContext.request.contextPath}/board/list.do" method='get'>
 					<input type='hidden' name='pageNum'
 						value='${pageMaker.cri.pageNum }'> 
 					<input type='hidden'name='amount' 
@@ -187,7 +187,7 @@ $(document).ready(function(){
 	}
 //일반글	
 	$("#regBtn").on("click", function(){
-		self.location="${pageContext.request.contextPath}/employee/board/register";
+		self.location="${pageContext.request.contextPath}/board/register.do";
 	});
 	
 	var actionForm = $("#actionForm");
@@ -202,14 +202,14 @@ $(document).ready(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/get");
+		actionForm.attr("action", "${pageContext.request.contextPath}/board/get.do");
 		actionForm.submit();
 });	//end .move
 
 
 //공지글
 $("#noticeBtn").on("click", function(){
-		self.location="${pageContext.request.contextPath}/employee/board/registerNotice";
+		self.location="${pageContext.request.contextPath}/board/registerNotice.do";
 	});
 	
 	var actionForm = $("#actionForm");
@@ -224,7 +224,7 @@ $("#noticeBtn").on("click", function(){
 	$(".moveN").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNotice");
+		actionForm.attr("action", "${pageContext.request.contextPath}/board/getNotice.do");
 		actionForm.submit();
 });	//end .move
 

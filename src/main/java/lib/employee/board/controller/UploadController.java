@@ -35,15 +35,11 @@ import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
-@RequestMapping("employee/board/*")
+@RequestMapping("board/*")
 @Log4j
 public class UploadController {
 
-	@GetMapping("/uploadForm")
-	public void uploadForm() {
-	}
-
-	@PostMapping("/uploadFormAction")
+	@PostMapping("/uploadFormAction.do")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 
 		String uploadFolder = "C:\\upload";
@@ -64,7 +60,7 @@ public class UploadController {
 
 	}
 
-	@GetMapping("/uploadAjax")
+	@GetMapping("/uploadAjax.do")
 	public void uploadAjax() {
 	}
 
@@ -88,7 +84,7 @@ public class UploadController {
 	}
 
 	// 브라우저로 파일 전송
-	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/uploadAjaxAction.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(@RequestParam("uploadFile") MultipartFile[] uploadFile) {
 		if (uploadFile != null) {
@@ -208,7 +204,7 @@ public class UploadController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 
-	@PostMapping("/deleteFile")
+	@PostMapping("/deleteFile.do")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type) {
 

@@ -29,15 +29,15 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("employee/board/*") 
+@RequestMapping("board/*") 
 @AllArgsConstructor
 public class BoardController {
 
 	private BoardService boardService;
 	private NoticeService noticeService;
 
-	@GetMapping("/list")
-	public void boardSelectAll(Criteria cri, Model model) {
+	@GetMapping("/list.do")
+	public String boardSelectAll(Criteria cri, Model model) {
 		model.addAttribute("list", boardService.boardSelectAll(cri));
 		
 		//전체 데이터 수 
@@ -46,13 +46,17 @@ public class BoardController {
 		
 		//공지사항 출력
 		model.addAttribute("notice", noticeService.getNotices());
+		
+		return "employee/board/list";
 
 	}
 
-	@GetMapping("/register")
-	public void boardRegisterForm() {}
+	@GetMapping("/register.do")
+	public String boardRegisterForm() {
+		return "employee/board/register";
+	}
 
-	@PostMapping("/register")
+	@PostMapping("/register.do")
 	public String boardInsert(BoardDTO board, RedirectAttributes rttr) {
 		//첨부파일 처리
 		if (board.getAttachList() != null) {	
@@ -62,25 +66,34 @@ public class BoardController {
 		
 		boardService.boardInsert(board);
 		rttr.addFlashAttribute("result", board.getBoard_no());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 
-	@GetMapping({ "/get", "/modify" })	//읽기 또는 수정폼
-	public void boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/get.do")	//읽기폼
+	public String boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", boardService.boardSelectOne(board_no));
+		return "employee/board/get";
 	}
 	
-	@GetMapping({"/getNext"})
-	public void boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/modify.do" )	//수정폼
+	public String boardModifyForm(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("board", boardService.boardSelectOne(board_no));
+		return "employee/board/modify";
+	}
+	
+	@GetMapping({"/getNext.do"})
+	public String boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", boardService.boardSelectNext(board_no));
+		return "employee/board/getNext";
 	}
 	
-	@GetMapping({"/getPrev"})
-	public void boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping({"/getPrev.do"})
+	public String boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", boardService.boardSelectPrev(board_no));
+		return "employee/board/getPrev";
 	}
 
-	@PostMapping("/modify")
+	@PostMapping("/modify.do")
 	public String boardUpdate(BoardDTO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
 		if (boardService.boardUpdate(board)) { // true(작업 완료 후 정상종료)일 때만 값 전달
@@ -92,10 +105,10 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 
-	@PostMapping("/remove")
+	@PostMapping("/remove.do")
 	public String boardDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
 		List<BoardAttachDTO> attachList = boardService.getAttachList(board_no);
@@ -110,11 +123,11 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/employee/board/list";
+		return "redirect:./list.do";
 	}
 	
 	//첨부파일 - 한글처리 필요
-	@GetMapping(value= "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value= "/getAttachList.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachDTO>> getAttachList(Long board_no){
 		return new ResponseEntity<List<BoardAttachDTO>>(boardService.getAttachList(board_no), HttpStatus.OK);
