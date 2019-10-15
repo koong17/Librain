@@ -128,5 +128,27 @@ public class MgmtServiceImpl implements MgmtService{
 	public void salInsert(SalaryDTO salaryDTO) {
 		employeeDAO.salInsert(salaryDTO);
 	}
+
+	@Override
+	public JSONArray salSelect(SalaryDTO salaryDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		
+		List<SalaryDTO> list = employeeDAO.salSelect(salaryDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			SalaryDTO dto = list.get(i);
+			jo.put("emp_no",dto.getEmp_no());
+			jo.put("sal_basic_pay",dto.getSal_basic_pay());
+			jo.put("sal_food_pay",dto.getSal_food_pay());
+			jo.put("sal_bonus",dto.getSal_bonus());
+			jo.put("sal_total",dto.getSal_total());
+			jo.put("sal_deducted",dto.getSal_deducted());
+			jo.put("sal_real",dto.getSal_real());
+			ja.add(jo);
+		}
+		
+		return ja;
+	}
 	
 }

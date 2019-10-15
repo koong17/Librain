@@ -54,4 +54,7 @@
      values((select nvl(max(sal_no)+1,0) from salary_management),#{emp_no},#{sal_total},#{sal_real},#{sal_national_pension},#{sal_health_insurance},#{sal_longterm_care_insurance},#{sal_employment_insurance}
      	,#{sal_income_tax},#{sal_local_income_tax},#{sal_deducted},#{sal_basic_pay},#{sal_bonus},#{sal_food_pay},#{sal_year},#{sal_month})
   </insert>
+  <select id="salSelect" resultType="lib.employee.management.model.SalaryDTO" parameterType="lib.employee.management.model.SalaryDTO">
+    select * from salary_management where sal_year=#{sal_year} and sal_month=#{sal_month}
+  </select>
 </mapper>

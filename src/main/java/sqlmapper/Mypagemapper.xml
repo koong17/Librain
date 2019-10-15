@@ -29,4 +29,7 @@
   <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
     insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
   </insert>
+  <select id="salSelectOne" resultType="lib.employee.management.model.SalaryDTO" parameterType="lib.employee.management.model.SalaryDTO">
+  	select * from salary_management where sal_year=#{sal_year} and sal_month=#{sal_month} and emp_no=#{emp_no}
+  </select>
 </mapper>

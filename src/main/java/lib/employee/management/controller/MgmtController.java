@@ -31,21 +31,34 @@ public class MgmtController {
 	@Autowired
 	MgmtService mgmtService;
 	
+	@GetMapping("/totalpaylist.do")
+	public String totalPayList() {
+		return "employee/erp/management/totalPayList";
+	}
+	
+	@PostMapping("/totalpaylist.do")
+	public @ResponseBody String totalPayListPro(@RequestBody SalaryDTO salaryDTO) {
+		JSONArray ja = mgmtService.salSelect(salaryDTO);
+		return ja.toString();
+	}
+	
 	@GetMapping("/totalpay.do")
-	public String totalPay(Model model) {
-		//model.addAttribute("gridData", mgmtService.cmtAdminSelectOne());
+	public String totalPay() {
 		return "employee/erp/management/totalPay";
 	}
+	
 	@PostMapping("/totalpay.do")
 	public String totalPayPro(SalaryDTO salaryDTO) {
 		mgmtService.salInsert(salaryDTO);
 		return "redirect:./totalpay.do";
 	}
+	
 	@PostMapping("/totalpay1.do")
 	public @ResponseBody String totalPay1(@RequestBody EmployeeDTO employeeDTO) {
 		JSONObject jo = mgmtService.empSelectPay(employeeDTO);
 		return jo.toString();
 	}
+	
 	@PostMapping(value = "/totalpay2.do", produces = "application/json;charset=UTF-8")
 	public @ResponseBody String totalPay2(@RequestBody CommuteDTO commuteDTO) {
 		JSONArray ja = mgmtService.cmtAdminSelectOne(commuteDTO);

@@ -3,17 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사원 목록 조회</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<div>
+	<div class="container">
+		<div class="text-left col-md-6">
 		사원 목록 조회
+		<input class="btn btn-primary btn-sm" type="button" id="insert" value="직원 추가">
+		<input class="btn btn-primary btn-sm" type="button" id="delete" value="직원 삭제">
+		</div>
 	</div>
-	<input type="button" id="insert" value="직원 추가">
-	<input type="button" id="delete" value="직원 삭제">
 	<div id="grid"></div>
 	
 </body>
