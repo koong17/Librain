@@ -51,9 +51,9 @@ public class MemberController {
 		return "{\"result\":\"success\"}";
 	}
 	
-	@GetMapping(value="/memberList.do/readData")
+	@GetMapping(value="/memberList.do/readData", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONObject memberListForm(@RequestParam int perPage, @RequestParam int page) {
+	public String memberListForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
 		
 		JSONObject resultJO = new JSONObject();
@@ -69,6 +69,6 @@ public class MemberController {
 		
 		System.out.println("^ㅁ^");
 		
-		return resultJO;
+		return resultJO.toString();
 	}
 }

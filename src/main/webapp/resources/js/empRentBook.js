@@ -34,7 +34,7 @@ function returnAjax() {
 			contentType : "application/json;charset=UTF-8",
 			dataType : "json",
 			data : JSON.stringify(bookGrid.getCheckedRows()),
-			url : "empReturnBook.do",
+			url : "./empReturnBook.do",
 			success : function(data){
 				console.log(data.result);
 				memBookAjax();
@@ -74,7 +74,7 @@ function rentAjax() {
 		object.book_num = book[i].book_num;
 		bookArr.push(object);
 	}
-	
+	console.log(bookArr.toString());
 	if(bookArr.length == 0) {
 		alert("대여할 책이 선택되지 않았습니다.")
 	} else {
@@ -83,7 +83,7 @@ function rentAjax() {
 			contentType : "application/json;charset=UTF-8",
 			dataType : "json",
 			data : JSON.stringify(bookArr),
-			url : "empRentBook.do",
+			url : "./empRentBook.do",
 			success : function(data){
 				console.log(data.result);
 				memBookAjax();
@@ -109,7 +109,7 @@ function bookAjax() {
 	} else {
 		$.ajax({
 			type: "Post",
-			url: "/empRent/bookCheck.do",
+			url: "./empRent/bookCheck.do",
 			data: {
 				book_num: $("#book_num").val()
 			},
@@ -150,7 +150,7 @@ function memAjax() {
 	else {
 		$.ajax({
 			type: "Post",
-			url: "/empRent/memCheck.do",
+			url: "./empRent/memCheck.do",
 			data: {
 				mem_id: $("#mem_id").val()
 			},
@@ -171,7 +171,7 @@ function memAjax() {
 function memBookAjax() {
 	$.ajax({
 		type: "Post",
-		url: "/empRent/memBookCheck.do",
+		url: "./empRent/memBookCheck.do",
 		data: {
 			mem_id: $("#mem_id").val()
 		},

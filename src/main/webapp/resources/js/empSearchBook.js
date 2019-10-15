@@ -26,7 +26,7 @@ function searchAjax() {
 	} else {
 		$.ajax({
 			type : "Post",
-			url : "empSearch.do",
+			url : "./empSearch.do",
 			data : {
 				searchCtgr : $("#searchCtgr").val(),
 				searchWord : $("#searchWord").val()
@@ -50,7 +50,7 @@ function inputAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empBookInput.do",
+		url : "./empBookInput.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
@@ -100,7 +100,7 @@ function deleteAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empBookDelete.do",
+		url : "./empBookDelete.do",
 		success : function(data){
 			console.log(data.result);
 			confirm();
@@ -118,7 +118,7 @@ function updateAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "empBookUpdate.do",
+		url : "./empBookUpdate.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
