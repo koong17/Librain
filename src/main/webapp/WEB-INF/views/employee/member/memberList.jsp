@@ -58,7 +58,7 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/memberList.do'">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/memberList.do'">
 					<i class="fa fa-home"></i>
 				</button>
 			</div>
@@ -131,7 +131,7 @@
 	var gridData =
 	{
 		api: {
-			readData: { url: 'http://localhost:8080/memberList.do/readData', method: 'GET' }
+			readData: { url: 'http://localhost:8080/mvc/memberList.do/readData', method: 'GET' }
 		}
 	}
 		
