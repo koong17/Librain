@@ -38,31 +38,31 @@
 					<!-- 공지글 -->
 					<c:forEach items="${notice }" var="notice">
 						<tr>
-							<td><c:out value="공지" /></td>
-							<td>
+							<td style="width: 6%"><img src="../resources/img/ico_notice.png" width="25px"/></td>
+							<td style="width: 49%; font-weight:bold">
 								<a class='moveN' href='<c:out value="${notice.board_no}"/>'>
 									<c:out value="${notice.board_title }"/></a>
 							</td>
-							<td><c:out value="${notice.board_writer }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><c:out value="${notice.board_writer }" /></td>
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${notice.board_regdate }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${notice.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
-					<tr><td colspan="5"></td></tr>
+					<!-- <tr><td colspan="5"></td></tr> -->
 					<!-- 일반 글 -->
 					<c:forEach items="${list }" var="board">
 						<tr>
-							<td><c:out value="${board.board_no }" /></td>
-							<td>
+							<td style="width: 6%"><c:out value="${board.board_no }" /></td>
+							<td style="width: 49%">
 								<a class='move' href='<c:out value="${board.board_no}"/>'>
 									<c:out value="${board.board_title }"/></a>
 							</td>
-							<td><c:out value="${board.board_writer }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><c:out value="${board.board_writer }" /></td>
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.board_regdate }" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
+							<td style="width: 15%"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
@@ -72,7 +72,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 			
-			<form id="searchForm" action="${pageContext.request.contextPath}/employee/board/list" method="get">
+			<form id="searchForm" action="${pageContext.request.contextPath}/board/list.do" method="get">
 				<select name="type">
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
@@ -125,7 +125,7 @@
 					</ul>
 				</div>
 
-				<form id='actionForm' action="${pageContext.request.contextPath}/employee/board/list" method='get'>
+				<form id='actionForm' action="${pageContext.request.contextPath}/board/list.do" method='get'>
 					<input type='hidden' name='pageNum'
 						value='${pageMaker.cri.pageNum }'> 
 					<input type='hidden'name='amount' 
@@ -149,10 +149,8 @@
 							</div>
 							<div class="modal-body">처리가 완료되었습니다.</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save
-									changes</button>
 							</div>
 						</div>
 						<!--  /.modal-comment -->
@@ -187,7 +185,7 @@ $(document).ready(function(){
 	}
 //일반글	
 	$("#regBtn").on("click", function(){
-		self.location="${pageContext.request.contextPath}/employee/board/register";
+		self.location="${pageContext.request.contextPath}/board/register.do";
 	});
 	
 	var actionForm = $("#actionForm");
@@ -202,14 +200,14 @@ $(document).ready(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/get");
+		actionForm.attr("action", "${pageContext.request.contextPath}/board/get.do");
 		actionForm.submit();
 });	//end .move
 
 
 //공지글
 $("#noticeBtn").on("click", function(){
-		self.location="${pageContext.request.contextPath}/employee/board/registerNotice";
+		self.location="${pageContext.request.contextPath}/board/registerNotice.do";
 	});
 	
 	var actionForm = $("#actionForm");
@@ -224,7 +222,7 @@ $("#noticeBtn").on("click", function(){
 	$(".moveN").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='board_no' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNotice");
+		actionForm.attr("action", "${pageContext.request.contextPath}/board/getNotice.do");
 		actionForm.submit();
 });	//end .move
 

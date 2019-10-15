@@ -49,7 +49,7 @@
             <!--  /.panel-heading -->
             
             <div class="panel-body">
-               <form role="form" action="${pageContext.request.contextPath}/employee/board/register" method="post">
+               <form role="form" action="${pageContext.request.contextPath}/board/register.do" method="post">
                   <div class="form-group">
                   <label>Title</label>   <input id="board_title" class="form-control" name="board_title" required>
                   </div>
@@ -150,7 +150,7 @@
                }//for end
                
                $.ajax({
-                  url : '${pageContext.request.contextPath}/employee/board/uploadAjaxAction',
+                  url : '${pageContext.request.contextPath}/board/uploadAjaxAction.do',
                   processData: false,
                   contentType: false,
                   data: formData,
@@ -183,7 +183,7 @@
                        str += "<span>" + obj.fileName+"</span>";
                        str += "<button type='button' data-file= \'"+ fileCallPath +"\'"
                        str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-                       str += "<img src = '${pageContext.request.contextPath}/employee/board/display?fileName="+fileCallPath+"'>";
+                       str += "<img src = '${pageContext.request.contextPath}/board/display?fileName="+fileCallPath+"'>";
                        str += "</div>";
                        str += "</li>";
                        
@@ -195,7 +195,7 @@
                      	str += "data-path='"+obj.uploadPath+"'data-uuid='"+obj.uuid+"'data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
                      	str += "<span>" + obj.fileName+"</span>";
                         str += "<button type='button' data-file= \'"+ fileCallPath +"\'data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-                        str += "<img src= '../../resources/img/attach.png'></a>";
+                        str += "<img src= '../resources/img/attach.png'></a>";
                         str += "</div>";
                         str += "</li>";
                     }
@@ -214,7 +214,7 @@
                var targetLi = $(this).closest("li");
                
                $.ajax({
-                  url : '${pageContext.request.contextPath}/employee/board/deleteFile',
+                  url : '${pageContext.request.contextPath}/board/deleteFile.do',
                   data : {fileName: targetFile, type:type},
                   dataType : 'text',
                   type : 'POST',

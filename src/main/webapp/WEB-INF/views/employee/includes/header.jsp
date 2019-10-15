@@ -12,22 +12,22 @@
     <title>공지게시판</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../../resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="../resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="../../resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="../../resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="../resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../../resources/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../resources/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../../resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,63 +51,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/employee/board/list">Home</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}">Librain</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
+<!--                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -183,10 +132,13 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-tasks -->
+                    /.dropdown-tasks
                 </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
+                /.dropdown -->
+                
+                
+                
+               <!--  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -243,7 +195,10 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-alerts -->
+                    /.dropdown-alerts -->
+                    
+                    
+                    
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -251,9 +206,11 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-user fa-fw"></i> 근태관리</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-envelope fa-fw"></i>개인급여</a>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -268,7 +225,7 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                       <!--  <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -277,92 +234,95 @@
                                 </button>
                             </span>
                             </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
+                            /input-group
+                        </li> -->
+<!--                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li><a href="#"></a></li>
+                            </ul>
+                            /.nav-second-level
+                        </li> -->
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 도서관리<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="${pageContext.request.contextPath}/empSearch.do">도서검색</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="${pageContext.request.contextPath}/empRentBook.do">대여</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/empNewBook.do">도서 구입 신청</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/empRentBook.do">도서 폐기 신청</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/memberList.do">회원조회</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-sitemap fa-fw"></i>직원보기</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+    <!--                     <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>몰라요<span class="fa arrow"></span></a>
+                        	 <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
+                                    <a href="#">ddd</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            /.nav-second-level
+                        </li> -->
+                        
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 관리자<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                 <li>
+                                    <a href="#">직원관리 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/emplist2.do">직원목록</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/cmtlist.do">근태목록</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="${pageContext.request.contextPath}/mgmt/totalpay.do">급여관리</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
+                                
+                               <li>
+                                    <a href="#">도서관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서구입승인</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서폐기승인</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
+                                
+                            	<li>
+                                    <a href="#">시설관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/facility">시설</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li> 
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
