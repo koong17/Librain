@@ -275,3 +275,40 @@ FacIn_name varchar2(30),
 FacIn_INSPECTION_DATE date default sysdate,    -- 점검일 
 FacIn_INSPECTION_DUE_DATE date
 );
+create table pay_management(
+    pay_no number,
+    pay_emp_no varchar2(10),
+    pay_division varchar2(20),
+    pay_total_pay number,
+    pay_real_pay number,
+    pay_income_tax number,
+    pay_residence_tax number,
+    pay_health_insurance number,
+    pay_unemployment_insurance number,
+    pay_nation_pension number,
+    pay_etx_pay number,
+    pay_basic_pay number,
+    pay_bonus number,
+    pay_incentive_pay number,
+    pay_food_pay number,
+    pay_transportation_pay number
+    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
+);
+
+create table member( -- 회원
+    mem_id varchar2(20), --회원아이디
+    mem_pw varchar2(30), --회원비밀번호
+    mem_name varchar2(20), --회원이름
+    mem_jumin varchar2(30), --주민번호
+    mem_address varchar2(50), --회원주소
+    mem_phone varchar2(30), --회원폰번호
+    mem_email varchar2(30), --회원이메일
+    mem_rank number default 2 -- 권한 변경(1. 블랙리스트/ 2. 일반회원/ 3. 국가유공자)
+   --constraint member_pk primary key (m_id)
+);
+
+insert into member values('nmj', '1234', '남민지', '930729-2111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '010-8534-0280', 'ming_0729@naver.com', 1);
+insert into member values('pyw', '4321', '박예원', '971111-2111111', '서울시 종로구 비트캠프', '010-1111-1111', 'pyw@naver.com', 2);
+insert into member values('captainss', '1234', '김승수', '931013-1111111', '서울시 종로구의 어느 고시원', '010-2222-2222', 'kss@naver.com', 3);
+
+commit;
