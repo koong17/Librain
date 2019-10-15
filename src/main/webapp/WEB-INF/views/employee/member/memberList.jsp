@@ -37,37 +37,37 @@
 
 </head>
 <body>
-   <div class="container-fluid bg-light " align="center">
-      <div class="row align-items-center justify-content-center" align="center">
-         <div class="col-md-2 pt-3">
-            <div class="form-group ">
-               <select id="searchCtgr" name="searchCtgr" class="form-control">
-                  <option selected>전체</option>
-                  <option>회원 ID</option>
-                  <option>회원명</option>
-               </select>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="검색어를 입력하세요."
-               id="searchWord" name="searchWord">
-         </div>
-         <div class="col-md-1">
-            <button type="button" class="btn btn-primary btn-block" id="searchBtn">
-               <i class="fa fa-search"></i>
-            </button>
-         </div>
-         <div class="col-md-1">
-            <button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/memberList.do'">
-               <i class="fa fa-home"></i>
-            </button>
-         </div>
-      </div>
-   </div>
-   <hr>
-   <div id="grid"></div>
-   <input type="button" class="btn btn-primary btn-block" value="선택 수정" onclick="rankUpdate()">
-   
+	<div class="container-fluid bg-light " align="center">
+		<div class="row align-items-center justify-content-center" align="center">
+			<div class="col-md-2 pt-3">
+				<div class="form-group ">
+					<select id="searchCtgr" name="searchCtgr" class="form-control">
+						<option selected>전체</option>
+						<option>회원 ID</option>
+						<option>회원명</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="검색어를 입력하세요."
+					id="searchWord" name="searchWord">
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="searchBtn">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/memberList.do'">
+					<i class="fa fa-home"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="grid"></div>
+	<input type="button" class="btn btn-primary btn-block" value="선택 수정" onclick="rankUpdate()">
+	
 </body>
 
 <script type="text/javascript">
@@ -125,74 +125,74 @@
       });
    }
 
-   var Grid = tui.Grid;
-   Grid.setLanguage('ko');
-   
-   var gridData =
-   {
-      api: {
-         readData: { url: './memberList.do/readData', method: 'GET' }
-      }
-   }
-      
-   const grid = new tui.Grid({
-      el: document.getElementById('grid'),
-      data: gridData,
-      scrollX: false,
-      scrollY: false,
-      rowHeaders: ['rowNum','checkbox'],
-      pageOptions: {
-         perPage: 10
-      },
-      columns: [
-         {
-            header: '회원 ID',
-            name: 'mem_id',
-              sortingType: 'desc',
-              sortable: true
-         },
-         {
-            header: '회원명',
-            name: 'mem_name'
-         },
-         {
-            header: '주소',
-            name: 'mem_address'
-         },
-         {
-            header: '전화번호',
-            name: 'mem_phone'
-         },
-         {
-            header: '이메일',
-            name: 'mem_email'
-         },
-         {
-            header: '회원 등급',
-            sortingType: 'desc',
-              sortable: true,
-            name: 'mem_rank',
-            editor: {
-               type: 'select',
-               options: {
-                  listItems: [
-                     { text: '플러스 회원', value: '1' },
-                     { text: '일반 회원', value: '2' },
-                     { text: '마이너스 회원', value: '3' }
-                  ]
-               }
-            }
-         }
-      ]
-   });
-   
-   grid.on('check', function() {
-      console.log(grid.getCheckedRows());
-      console.log(grid.getModifiedRows());
-   });
-   
-   /* paging */
-   
-   
+	var Grid = tui.Grid;
+	Grid.setLanguage('ko');
+	
+	var gridData =
+	{
+		api: {
+			readData: { url: 'http://localhost:8080/mvc/memberList.do/readData', method: 'GET' }
+		}
+	}
+		
+	const grid = new tui.Grid({
+		el: document.getElementById('grid'),
+		data: gridData,
+		scrollX: false,
+		scrollY: false,
+		rowHeaders: ['rowNum','checkbox'],
+		pageOptions: {
+			perPage: 10
+		},
+		columns: [
+			{
+				header: '회원 ID',
+				name: 'mem_id',
+		        sortingType: 'desc',
+		        sortable: true
+			},
+			{
+				header: '회원명',
+				name: 'mem_name'
+			},
+			{
+				header: '주소',
+				name: 'mem_address'
+			},
+			{
+				header: '전화번호',
+				name: 'mem_phone'
+			},
+			{
+				header: '이메일',
+				name: 'mem_email'
+			},
+			{
+				header: '회원 등급',
+				sortingType: 'desc',
+		        sortable: true,
+				name: 'mem_rank',
+				editor: {
+					type: 'select',
+					options: {
+						listItems: [
+							{ text: '플러스 회원', value: '1' },
+							{ text: '일반 회원', value: '2' },
+							{ text: '마이너스 회원', value: '3' }
+						]
+					}
+				}
+			}
+		]
+	});
+	
+	grid.on('check', function() {
+		console.log(grid.getCheckedRows());
+		console.log(grid.getModifiedRows());
+	});
+	
+	/* paging */
+	
+	
 </script>
 </html>
