@@ -50,7 +50,7 @@
 									value="${notice.board_updateDate }" /></td>
 						</tr>
 					</c:forEach>
-					<tr><td colspan="5"></td></tr>
+					<!-- <tr><td colspan="5"></td></tr> -->
 					<!-- 일반 글 -->
 					<c:forEach items="${list }" var="board">
 						<tr>
