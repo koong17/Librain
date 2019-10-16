@@ -1,6 +1,6 @@
 package lib.employee.login.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,11 +21,16 @@ public class LoginServiceImpl implements LoginService{
 		boolean result = dao.loginCheck(dto);
 		if(result == true) {
 			session.setAttribute("emp_no",  dto.getEmp_no());
-			
 		}
 		return result;
 	}
 
+	@Override
+	public ArrayList<EmployeeDTO> selectSessionInfo(EmployeeDTO dto){
+		 ArrayList<EmployeeDTO> list = dao.selectSessionInfo(dto);
+		System.out.println("LoginServiceImpl list 출력 : " + list);	//ok
+		return list;
+	}
 	@Override
 	public void logout(HttpSession session) {
 		dao.logout(session);

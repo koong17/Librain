@@ -206,18 +206,22 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                   	    <c:choose>	 
+						<c:when test='${!empty sessionScope.emp_no }'>
                         <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-check" aria-hidden="true"></i> 근태관리</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;개인급여</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
                         </li>
-                        <c:choose>
-						<c:when test='${!empty sessionScope.emp_no }'>
                         <li class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                         </c:when>
+                        <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/login.do"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                        </li>
+                        </c:otherwise>
                         </c:choose>
                     </ul>
                     <!-- /.dropdown-user -->

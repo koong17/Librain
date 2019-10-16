@@ -1,6 +1,6 @@
 package lib.employee.login.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,4 +11,6 @@ public interface LoginService {
 	public boolean loginCheck(EmployeeDTO dto, HttpSession session);
 	//로그아웃
 	public void logout(HttpSession session);
+	
+	public ArrayList<EmployeeDTO> selectSessionInfo(EmployeeDTO dto);
 }

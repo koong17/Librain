@@ -11,5 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE emp_no = #{emp_no} AND emp_password = #{emp_password}
 	]]>
 </select>
+
+<select id="selectSessionInfo" resultType="lib.employee.management.model.EmployeeDTO">
+	<![CDATA[
+		SELECT * FROM employee_management
+		WHERE emp_no = #{emp_no}
+	]]>
+	
+</select>
 </mapper>
 	
