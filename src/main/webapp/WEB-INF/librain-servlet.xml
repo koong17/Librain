@@ -14,9 +14,9 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-<annotation-driven/>
 <context:component-scan base-package="lib.employee.board.task"/>
 <task:annotation-driven/>
+<annotation-driven/>
 <context:component-scan base-package="lib.employee.facility.controller"/>
 <context:component-scan base-package="lib.employee.facility.model"/>
 <context:component-scan base-package="lib.member.*"/>
@@ -27,10 +27,13 @@
 <!-- <context:component-scan base-package="lib.member.book.*" /> -->
 
  
- <context:component-scan base-package="lib.employee.board.controller"/>
+<context:component-scan base-package="lib.employee.board.controller"/>
+<context:component-scan base-package="lib.employee.login.controller"/>
 <context:component-scan base-package="lib.employee.board.model"/>
+<context:component-scan base-package="lib.employee.login.model"/>
 <!-- 서비스 등록 -->
 <context:component-scan base-package="lib.employee.board.service"/>
+<context:component-scan base-package="lib.employee.login.service"/>
 <mybatis-spring:scan base-package="lib.employee.board.mapper" />
 
 

@@ -25,34 +25,11 @@ board/list.do<a href="board/list.do">게시판</a>
 <a href="./facility">facility </a><br>
 <a href="./facilityapproval">facilityapproval	</a>
 <hr>
- <br />
- <hr>
 <h3>admin 도서</h3> 
 <a href="empRentBook.do">도서 구입 승인</a>
 <a href="empRentBook.do">도서 폐기 승인</a>
 <hr>
-
-<div class="loginForm" align="center">
-<form action="#" method="post">
-	<table>
-		<tr>
-			<td>id : </td>
-			<td><input type="text" name="id" placeholder="아이디 입력"></td>
-		</tr>
-		
-		<tr>
-			<td>pw : </td>
-			<td><input type="password" name="pw" placeholder="비밀번호 입력"></td>
-		</tr>
-		
-		<tr>
-			<td align="right" colspan="2">
-				<input type="submit" value="로그인"><input type="reset" value="취소">
-			</td>
-		</tr>	
-	</table>
-	</form>
-</div>
+<a href="login.do">직원로그인</a>
 </body>
 </html>
 

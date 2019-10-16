@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +33,7 @@ public class FileCheckTask {
 		return str.replace("-", File.separator);
 	}
 	
-	@Scheduled(cron="0 0 2 * * *")//0 0 15 * * * : 매일 오후 세시 // 매일 새벽 두 시 : 0 0 2 * * *	//1분마다 : 0 * * * * *
+	@Scheduled(cron="0 * * * * *")//0 0 15 * * * : 매일 오후 세시 // 매일 새벽 두 시 : 0 0 2 * * *	//1분마다 : 0 * * * * *
 	public void checkFiles() throws Exception {
 		log.warn("file Check task run.........");
 		log.warn(new Date());

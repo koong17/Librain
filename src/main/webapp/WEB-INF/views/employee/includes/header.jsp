@@ -212,9 +212,13 @@
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
                         </li>
+                        <c:choose>
+						<c:when test='${!empty sessionScope.emp_no }'>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="${pageContext.request.contextPath}/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
+                        </c:when>
+                        </c:choose>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

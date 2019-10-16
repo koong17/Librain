@@ -13,4 +13,6 @@ public interface EmployeeDAO {
 	public List<CommuteDTO> cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
 	public void salInsert(SalaryDTO salaryDTO);
+	
+
 }
