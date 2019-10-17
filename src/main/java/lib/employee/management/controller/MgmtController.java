@@ -89,11 +89,30 @@ public class MgmtController {
 		return "employee/erp/management/close";
 	}
 	
+	@GetMapping(value = "/empUpdate.do")
+	public String empUpdate(@ModelAttribute("employeeDTO") EmployeeDTO employeeDTO, Model model) {
+		model.addAttribute("employeeDTO", mgmtService.empSelectOne(employeeDTO));
+		return "employee/erp/management/empUpdateForm";
+	}
+	
+	@PostMapping(value = "/empUpdate.do")
+	public String empUpdatePro(@ModelAttribute EmployeeDTO employeeDTO) {
+		System.out.println(employeeDTO);
+		mgmtService.empUpdate(employeeDTO);
+		return "employee/erp/management/close";
+	}
+	
 	@GetMapping("/emplist.do")
 	public String empList(Model model) {
 		JSONArray ja = mgmtService.empSelectAll();
 		model.addAttribute("gridData", ja);
 		return "employee/erp/management/empList";
+	}
+	
+	@PostMapping(value = "/empSearch.do", produces = "application/text; charset=utf8")
+	public @ResponseBody String empSearch(@RequestParam("searchType") String searchType, @RequestParam("searchWord") String searchWord) {
+		JSONArray ja = mgmtService.empSearch(searchType, searchWord);
+		return ja.toString();
 	}
 	
 	@GetMapping("/cmtlist.do")

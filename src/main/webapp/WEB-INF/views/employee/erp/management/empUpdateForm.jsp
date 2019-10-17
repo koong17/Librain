@@ -3,32 +3,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
-<title>Insert title here</title>
+<title>직원 수정</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
 <div class="container">
 	<br>
-	<form action="empInsert.do" method="post" name="f" onsubmit="javascript:return formCheck();">
+	<form action="empUpdate.do" method="post" onsubmit="javascript:return formCheck();">
 		<div class="form-group">
+			<input hidden="emp_no" value=${ employeeDTO.emp_no }>
+		    <div class="row form-group" id="divName">
+                <label for="inputEmpno" class="col-xs-2 control-label">사원번호</label>
+                <div class="col-xs-5">
+                    <input type="text" name="emp_no" class="form-control" value=${ employeeDTO.emp_no } maxlength="10" readOnly>
+                </div>
+            </div>
 		    <div class="row form-group" id="divName">
                 <label for="inputId" class="col-xs-2 control-label">이름</label>
                 <div class="col-xs-4">
-                    <input type="text" name="emp_name" class="form-control" placeholder="홍길동" id="id" maxlength="10" required>
+                    <input type="text" name="emp_name" class="form-control" value=${ employeeDTO.emp_name } id="id" maxlength="10" required>
                 </div>
                 <label for="inputPhoneNumber" class="col-xs-2 control-label">휴대폰 번호</label>
                 <div class="col-xs-4">
-                    <input type="tel" name="emp_telephone" class="form-control" id="emp_telephone" placeholder="-를 제외한 숫자만 입력" maxlength="11" required>
+                    <input type="tel" name="emp_telephone" class="form-control" id="emp_telephone" value=${ employeeDTO.emp_telephone } maxlength="11" required>
                 </div>
-            </div><!-- 
-            <div class="row form-group" id="divTel">
-            </div> -->
+            </div>
             <div class="row form-group" id="divEmail">
                 <label for="inputEmail" class="col-xs-2 control-label">이메일</label>
                 <div class="col-xs-10">
-                    <input type="email" name="emp_email" class="form-control" id="emp_email" placeholder="ex) librain@librain.org" maxlength="40" required>
+                    <input type="email" name="emp_email" class="form-control" id="emp_email" value=${ employeeDTO.emp_email } maxlength="40" required>
                 </div>
             </div>
             <div class="row form-group" id="divDept">
@@ -44,33 +50,33 @@
                 </div>
                 <label for="inputPosition" class="col-xs-2 control-label">직책</label>
                 <div class="col-xs-4">
-                    <input type="text" name="emp_position" class="form-control" placeholder="사원" id="emp_position" maxlength="10" required>
+                    <input type="text" name="emp_position" class="form-control" value=${ employeeDTO.emp_position } id="emp_position" maxlength="10" required>
                 </div>
             </div>
             <div class="row form-group" id="divPos">
                 <label for="inputPosition" class="col-xs-2 control-label">기본급</label>
                 <div class="col-xs-3">
-                    <input type="number" name="emp_basic_pay" class="form-control" placeholder="2500000" id="emp_basic_pay" maxlength="8" required>
+                    <input type="number" name="emp_basic_pay" class="form-control" value=${ employeeDTO.emp_basic_pay } id="emp_basic_pay" maxlength="8" required>
                 </div>
                 <div class="col-xs-1">
                     원
                 </div>
                 <label for="inputPosition" class="col-xs-2 control-label">은행명</label>
                 <div class="col-xs-4">
-                    <input type="text" name="emp_bank_name" class="form-control" placeholder="우리" id="emp_bank_name" maxlength="20" required>
+                    <input type="text" name="emp_bank_name" class="form-control" value=${ employeeDTO.emp_bank_name } id="emp_bank_name" maxlength="20" required>
                 </div>
             </div>
             <div class="row form-group" id="divPos">
                 <label for="inputPosition" class="col-xs-2 control-label">계좌번호</label>
                 <div class="col-xs-10">
-                    <input type="text" name="emp_account_number" class="form-control" placeholder="-를 제외한 숫자만 입력" id="emp_account_number" maxlength="30" required>
+                    <input type="text" name="emp_account_number" class="form-control" value=${ employeeDTO.emp_account_number } id="emp_account_number" maxlength="30" required>
                 </div>
             </div>
 		    <div class="row form-group" id="divAddrNum">
 		    	<input type="hidden" id="emp_address" name="emp_address" value="">
                 <label for="inputAddressNumber" class="col-xs-2 control-label">우편번호</label>
                 <div class="col-xs-2">
-                    <input type="text" name="emp_address_number" class="form-control" placeholder="00000" id="emp_address_number" maxlength="30" required readOnly>
+                    <input type="text" name="emp_address_number" class="form-control" value=${ employeeDTO.emp_address_number } id="emp_address_number" maxlength="30" required readOnly>
                 </div>
                 <div class="col-xs-2">
                 	<input type="button" class="btn" value="검색" onclick="daumPostcode()">
@@ -82,7 +88,7 @@
 		    <div class="row form-group" id="divAddr">
                 <label for="inputId" class="col-xs-2 control-label">주소</label>
                 <div class="col-xs-10">
-                    <input type="text" name="emp_address2" class="form-control" id="emp_address2" placeholder="상세주소" maxlength="30" required>
+                    <input type="text" name="emp_address" class="form-control" id="emp_address2" maxlength="30" required>
                     
                 </div>
             </div>
@@ -98,7 +104,7 @@
                 <input type="hidden" id="emp_join_day" name="emp_join_day" value="">
                 <label for="inputJoindate" class="col-xs-2 control-label">입사일</label>
                	<div class="col-xs-2">
-               		<input class="form-control" type="number" name="emp_join_year" id="emp_join_year" placeholder="년" required>
+               		<input class="form-control" type="number" name="emp_join_year" id="emp_join_year" value=${ employeeDTO.emp_join_date } required>
                	</div>
                	<div class="col-xs-2">
                    <select class="form-control" name="emp_join_month" id="emp_join_month" required>
@@ -126,7 +132,7 @@
             	<input type="hidden" id="emp_jumin" name="emp_jumin" value="">
                 <label for="inputPosition" class="col-xs-2 control-label">주민번호</label>
                 <div class="col-xs-5">
-                    <input type="text" name="emp_jumin1" class="form-control" placeholder="920101" id="emp_jumin1" maxlength="6" required onclick="console.log( document.getElementById('emp_address_number').value)">
+                    <input type="text" name="emp_jumin1" class="form-control" placeholder="920101" id="emp_jumin1" maxlength="6" required>
                 </div>
                 <div class="col-xs-5">
                     <input type="text" name="emp_jumin2" class="form-control" placeholder="2222222" id="emp_jumin2" maxlength="7" required>
@@ -134,7 +140,7 @@
             </div>
 			<div class="row form-group">
 				<div class="col-xs-6">
-					<input type="submit" value="사원 추가" class="btn btn-success btn-block btn-lg" tabindex="7">
+					<input type="submit" value="수정" class="btn btn-success btn-block btn-lg" tabindex="7">
                	</div>
 				<div class="col-xs-6">
 					<input type="button" value="취소" onclick="window.close()" class="btn btn-primary btn-block btn-lg" tabindex="7">
@@ -146,6 +152,22 @@
 </body>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+	$(function() {
+		var addrSplit = ("${employeeDTO.emp_address}").split(",",2);
+		document.getElementById("emp_address1").value =addrSplit[0];
+		document.getElementById("emp_address2").value =addrSplit[1];
+		$("#emp_dept_code").val("${employeeDTO.emp_dept_code}").prop("selected", true);
+		$("#emp_gender").val("${employeeDTO.emp_gender}").prop("selected", true);
+		document.getElementById("emp_jumin1").value =("${employeeDTO.emp_jumin}").substring(0,6);
+		document.getElementById("emp_jumin2").value =("${employeeDTO.emp_jumin}").substring(6);
+		document.getElementById("emp_join_year").value =("${employeeDTO.emp_join_date}").substring(0,4);
+		$("#emp_join_month").val(("${employeeDTO.emp_join_date}").substring(5,7)).prop("selected", true);
+		var joinDay = ("${employeeDTO.emp_join_date}").substring(8,10);
+		if(joinDay.startsWith("0")) joinDay = joinDay.substring(1);
+		console.log(joinDay);
+		document.getElementById("emp_join_dayInt").value = joinDay;
+	});
+	
 	function formCheck() {
 		var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 		var regJumin1 = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/;
@@ -163,7 +185,7 @@
 		var today = new Date();
 		var year = document.getElementById("emp_join_year").value;
 		if(!regTel.test(document.getElementById("emp_telephone").value)) {
-			alert("전화번호를 확인하세요"); f.emp_telephone.focus(); return false;
+			alert("전화번호를 확인하세요"); return false;
 		} else if(document.getElementById("emp_basic_pay").value*1 <= 100000 || document.getElementById("emp_basic_pay").value*1 > 20000000 ) {
 			alert("기본급을 확인하세요"); return false;
 		} else if(document.getElementById("emp_account_number").value.length <= 8) {
@@ -173,11 +195,11 @@
 		} else if(document.getElementById("emp_address1").value.length < 2) {
 			alert("기본주소를 입력하세요"); return false;
 		} else if(year < 1950 || year > today.getFullYear() || day < 1 || day > 31) {
-			alert("입사일을 입력하세요"); return false;
+			alert("입사일을 확인하세요"); return false;
 		} else if(!regJumin1.test(document.getElementById("emp_jumin1").value) || !regJumin2.test(document.getElementById("emp_jumin2").value)) {
 			alert("주민번호를 확인하세요"); return false;
 		} else {
-			alert("사원이 추가되었습니다.");
+			alert("사원이 수정되었습니다.");
 			return true;
 		}
 	}
@@ -209,7 +231,7 @@
 	            } */
 	            document.getElementById('emp_address_number').value = data.zonecode;
 	            document.getElementById("emp_address1").value = addr;
-	            document.getElementById("emp_address2").focus();
+	            document.getElementById("emp_address1").focus();
 	        }
 	    }).open();
 	}
