@@ -22,12 +22,12 @@ public class MemBookController {
 	@Autowired
 	MemBookDAO bookDAO;
 	
-	@RequestMapping(value = "/memSearch.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/book/search.do", method = RequestMethod.GET)
 	public String searchForm() {
 		return "member/memSearch";
 	}
 	
-	@RequestMapping(value = "/memSearch.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/member/book/search.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String searchForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
@@ -48,7 +48,7 @@ public class MemBookController {
 		return  resultJO.toString();		
 	}
 
-	@RequestMapping(value = "/memSearch.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/member/book/search.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String searchForm2(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
@@ -70,7 +70,7 @@ public class MemBookController {
 	}
 	
 	
-	@RequestMapping(value = "/memSearch.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/member/book/search.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String search(@RequestBody
 			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
 		System.out.println(searchCtgr + " / " + searchWord);

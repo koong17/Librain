@@ -1,11 +1,15 @@
 package lib.employee.book.model;
 
+import java.sql.Timestamp;
+
 public class New_BookDTO {
 	private int new_book_num; //신청 번호
 	private String book_author; //저자
 	private String book_name; //도서명
 	private String book_pub_house; //출판사
-	
+	private int book_price; //도서가격
+	private String new_status; //승인상태 
+	private Timestamp new_input_date; //신청일
 	
 	public int getNew_book_num() {
 		return new_book_num;
@@ -30,6 +34,24 @@ public class New_BookDTO {
 	}
 	public void setBook_pub_house(String book_pub_house) {
 		this.book_pub_house = book_pub_house;
+	}
+	public int getBook_price() {
+		return book_price;
+	}
+	public void setBook_price(int book_price) {
+		this.book_price = book_price;
+	}
+	public String getNew_status() {
+		return new_status;
+	}
+	public void setNew_status(String new_status) {
+		this.new_status = new_status;
+	}
+	public Timestamp getNew_input_date() {
+		return new_input_date;
+	}
+	public void setNew_input_date(Timestamp new_input_date) {
+		this.new_input_date = new_input_date;
 	}
 	
 	

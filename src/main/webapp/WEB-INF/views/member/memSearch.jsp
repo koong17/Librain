@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- boostrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- Toast pagination -->
    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
  <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
@@ -15,13 +20,6 @@
    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
    crossorigin="anonymous"></script>
 
-<!-- boostrap -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -30,7 +28,7 @@
    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
    crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <!-- Toast Grid -->
 <link rel="stylesheet"
@@ -64,7 +62,7 @@
             </button>
          </div>
          <div class="col-md-1">
-            <button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='./memSearch.do'">
+            <button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='./member/book/search.do'">
                <i class="fa fa-home"></i>
             </button>
          </div>
@@ -78,5 +76,5 @@
    </div>
 </body>
 <!-- bookJS -->
-<script src="resources/js/memBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/memBook.js"></script>
 </html>

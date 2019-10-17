@@ -1,6 +1,8 @@
 package lib.employee.book.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -8,7 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lib.employee.book.model.Discard_BookDTO;
+import lib.employee.book.model.BookRentDisDTO;
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
 import lib.employee.book.model.New_BookDTO;
@@ -90,12 +92,18 @@ public class EmpBookServiceImpl implements EmpBookService {
 		EmpBookDTO dto = bookDAO.rentBookCheck(Integer.parseInt(book_num));
 		
 		jObj = new JSONObject();
+		jObj.put("book_num", dto.getBook_num());
 		jObj.put("book_name", dto.getBook_name());
 		jObj.put("book_author", dto.getBook_author());
 		jObj.put("book_pub_house", dto.getBook_pub_house());
-		jObj.put("book_num", dto.getBook_num());
+		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+		jObj.put("book_ISBN", dto.getBook_ISBN());
+		jObj.put("book_apdx_status", dto.getBook_apdx_status());
+		jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
+		jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
 		jObj.put("rent", dto.getRent());
-		
+		jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
+
 		return jObj;
 	}
 
@@ -193,6 +201,9 @@ public class EmpBookServiceImpl implements EmpBookService {
 	
 	@Override
 	public JSONArray newSelect() {
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		Date date = new Date();
+		String today = format.format(date);
 		
 		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
 		JSONArray jArr = new JSONArray();
@@ -207,6 +218,16 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("new_status", dto.getNew_status());
+			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", today);
+			jObj.put("book_ISBN", "입력");
+			jObj.put("book_apdx_status", "입력");
+			jObj.put("book_ctgr_num", "입력");
+			jObj.put("book_rsrv_status", "예약가능");
+			jObj.put("rent", "대여가능");
+			jObj.put("book_input_date", today);
 			jArr.add(jObj);
 		}
 		return jArr;
@@ -232,4 +253,76 @@ public class EmpBookServiceImpl implements EmpBookService {
 			bookDAO.newUpdateBook(newBookDTO);
 		}
 	}
+
+	@Override
+	public JSONObject disSearch(String book_num) {
+
+		JSONObject jObj = null;
+		
+		BookRentDisDTO dto = bookDAO.disSearch(Integer.parseInt(book_num));
+		
+		jObj = new JSONObject();
+		jObj.put("book_num", dto.getBook_num());
+		jObj.put("book_name", dto.getBook_name());
+		jObj.put("book_author", dto.getBook_author());
+		jObj.put("book_pub_house", dto.getBook_pub_house());
+		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+		jObj.put("book_ISBN", dto.getBook_ISBN());
+		jObj.put("book_apdx_status", dto.getBook_apdx_status());
+		jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
+		jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
+		jObj.put("rent", dto.getRent());
+		jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
+		if(dto.getDis_book_num() != 0)
+			jObj.put("dis_book_num", dto.getDis_book_num());
+		if(dto.getDis_input_date() != null)
+			jObj.put("dis_input_date", dto.getDis_input_date().toString().substring(0, 10));
+		jObj.put("dis_status", dto.getDis_status());
+
+		return jObj;
+	}
+	
+	@Override
+	public JSONArray disSelect() {
+		List<BookRentDisDTO> list = new ArrayList<BookRentDisDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.disSelect();
+		
+		for (int i = 0; i < list.size(); i++) {
+			BookRentDisDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj = new JSONObject();
+			jObj.put("book_num", dto.getBook_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
+			jObj.put("book_apdx_status", dto.getBook_apdx_status());
+			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
+			jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
+			jObj.put("rent", dto.getRent());
+			jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
+			if(dto.getDis_book_num() != 0)
+				jObj.put("dis_book_num", dto.getDis_book_num());
+			if(dto.getDis_input_date() != null)
+				jObj.put("dis_input_date", dto.getDis_input_date().toString().substring(0, 10));
+			jObj.put("dis_status", dto.getDis_status());
+			
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
+	public void disInsert(List<BookRentDisDTO> dto) {
+		for (BookRentDisDTO bookRentDisDTO : dto) {
+			bookDAO.disInsertBook(bookRentDisDTO);
+		}
+	}
+	
+	
+	
 }

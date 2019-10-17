@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import lib.employee.book.model.Discard_BookDTO;
+import lib.employee.book.model.BookRentDisDTO;
 import lib.employee.book.model.EmpBookDTO;
 import lib.employee.book.model.New_BookDTO;
 import lib.employee.book.model.RentalDTO;
@@ -26,4 +26,7 @@ public interface EmpBookService {
 	public JSONArray rentMemBookCheck(String mem_id); //rent 회원에 해당하는 책 검색
 	public void rentBook(List<RentalDTO> dto); //책 대여
 	public void returnBook(List<RentalDTO> dto); //책 반납
+	public JSONObject disSearch(String book_num); //폐기 책 검색
+	public JSONArray disSelect(); //폐기 승인 요청 목록 보기
+	public void disInsert(List<BookRentDisDTO> dto); //폐기 요청 추가
 }

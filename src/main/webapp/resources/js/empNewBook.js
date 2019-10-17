@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	$('#book').hide();
+	
 	$('#addRowBtn').click(function() {
 		addRowData();
 	});
@@ -11,12 +13,28 @@ $(document).ready(function() {
 	$('#updateBtn').click(function() {
 		updateAjax();
 	});
+	$('#inputBookBtn').click(function() {
+		inputBookAjax();
+	});
+	showBookGrid();
 	
 });
 
+function showBookGrid() {
+	
+	setTimeout(function() {
+		if(grid.getData()[0].new_status.toString()=="승인") {
+			$('#book').show();
+				console.log(grid.getData()[0]);
+				console.log(grid.getData()[0].new_status);
+				bookGrid.checkAll();
+		}
+	}, 100); 
+}
+
 function addRowData() {
 	var rowData = {
-			book_name:"입력", book_author:"입력", book_pub_house:"입력"
+			book_name:"입력", book_author:"입력", book_pub_house:"입력", book_price:0
 	};
 	
 	var option = {
@@ -29,21 +47,25 @@ function addRowData() {
 }
 
 function inputAjax() {
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./empNewBook/input.do",
-		success : function(data){
-			console.log(data.result);
-			grid.uncheckAll();
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
+	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
+	grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
+	setTimeout(function() {
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(grid.getCheckedRows()),
+			url : "./newApply/input.do",
+			success : function(data){
+				console.log(data.result);
+				grid.uncheckAll();
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+	}, 100); 
 }
 
 
@@ -54,7 +76,7 @@ function deleteAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./empNewBook/delete.do",
+		url : "./newApply/delete.do",
 		success : function(data){
 			console.log(data.result);
 			confirm();
@@ -72,7 +94,7 @@ function updateAjax() {
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
 		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./empNewBook/update.do",
+		url : "./newApply/update.do",
 		success : function(data){
 			console.log(data.result);
 			grid.uncheckAll();
@@ -84,9 +106,31 @@ function updateAjax() {
 	});
 }
 
+function inputBookAjax() {
+	console.log(bookGrid.getCheckedRows());
+	$.ajax({
+		type : "POST",
+		contentType : "application/json;charset=UTF-8",
+		dataType : "json",
+		data : JSON.stringify(bookGrid.getCheckedRows()),
+		url : "./newApply/inputBook.do",
+		success : function(data){
+			console.log(data.result);
+			confirm();
+		},
+		error : function(e) {
+			alert('Error : ' + e);
+		}
+	});
+	
+	grid.checkAll();
+	deleteAjax();
+	console.log("complete");
+}
 
 function confirm(){
 	grid.readData(1,true);
+	bookGrid.readData(1,true);
 }
 
 var Grid = tui.Grid;
@@ -95,7 +139,7 @@ Grid.setLanguage('ko');
 var gridData =
 {
 	api: {
-			readData: { url: './empNewBook.do/readData', method: 'GET' }
+			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData', method: 'GET' }
 	}
 }
 const grid = new tui.Grid({
@@ -126,6 +170,130 @@ const grid = new tui.Grid({
 			header: '출판사명',
 			name: 'book_pub_house',
 			editor: 'text'
+		},
+		{
+			header: '신청일',
+			name: 'new_input_date'
+		},
+		{
+			header: '도서가격',
+			name: 'book_price',
+			editor: 'text'
+		},
+		{
+			header: '상태',
+			name: 'new_status'
+		}
+	],
+	summary: {
+		height: 40,
+		position: 'bottom', // or 'top'
+		columnContent: {
+			book_price: {
+				template: function(valueMap) {
+					return `합계: ${valueMap.sum}`;
+				}
+			},
+			new_status: {
+				template: function(valueMap) {
+					return `권수: ${valueMap.cnt}`;
+				}
+			}
+		},
+		
+	}
+});
+
+const bookGrid = new tui.Grid({
+	el: document.getElementById('bookGrid'),
+	data: gridData,
+	rowHeaders: ['rowNum','checkbox'],
+	pageOptions: {
+		perPage: 10
+	},
+	scrollX: false,
+	scrollY: false,
+	columns: [
+		{
+			header: '도서번호',
+			name: 'book_num',
+			sortingType: 'desc',
+			sortable: true
+		},
+		{
+			header: '도서명',
+			name: 'book_name',
+			editor: 'text'
+		},
+		{
+			header: '저자명',
+			name: 'book_author',
+			editor: 'text'
+		},
+		{
+			header: '출판사명',
+			name: 'book_pub_house',
+			editor: 'text'
+		},
+		{
+			header: '발행일',
+			name: 'book_pub_date',
+			editor: 'datePicker'
+			
+		},
+		{
+			header: 'ISBN',
+			name: 'book_ISBN',
+			editor: 'text'
+		},
+		{
+			header: '부록여부',
+			name: 'book_apdx_status',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: 'O', value: 'O' },
+						{ text: 'X', value: 'X' },
+					]
+				}
+			}
+		},
+		{
+			header: '분류기호',
+			name: 'book_ctgr_num',
+			editor: 'text'
+		},
+		{
+			header: '대여여부',
+			name: 'rent',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '대여가능', value: '대여가능' },
+						{ text: '대여중', value: '대여중' },
+					]
+				}
+			}
+		},
+		{
+			header: '예약여부',
+			name: 'book_rsrv_status',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '예약가능', value: '예약가능' },
+						{ text: '예약중', value: '예약중' },
+					]
+				}
+			}
+		},
+		{
+			header: '입력일',
+			name: 'book_input_date',
+			
 		}
 	]
 });

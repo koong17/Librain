@@ -5,37 +5,38 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- boostrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <!-- Toast pagination -->
    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
  <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
+ 
+ <!-- Toast Grid DatePicker -->
+ <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
+
+
+
+<!-- Toast Grid -->
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 	
 
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
-
 <title>도서검색</title>
-<!-- boostrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Toast Grid -->
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-
- <!-- Toast Grid DatePicker -->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
 	<div class="container-fluid bg-light ">
@@ -92,118 +93,7 @@
 </body>
 
 <!-- bookJS -->
-<script src="resources/js/empSearchBook.js?after"></script>
-<script type="text/javascript">
+<script src="${pageContext.request.contextPath}/resources/js/empSearchBook.js?after"></script>
 
-function confirm(){
-	grid.readData(1,true);
-	grid.sort("book_num",false);
-}
-
-var Grid = tui.Grid;
-Grid.setLanguage('ko');
-
-var gridData =
-{
-	api: {
-			readData: { url: './empSearch.do/readData', method: 'GET' }
-	}
-}
-const grid = new tui.Grid({
-	el: document.getElementById('grid'),
-	data: gridData,
-	rowHeaders: ['rowNum','checkbox'],
-	pageOptions: {
-		perPage: 10
-	},
-	scrollX: false,
-	scrollY: false,
-	columns: [
-		{
-			header: '도서번호',
-			name: 'book_num',
-			sortingType: 'desc',
-			sortable: true
-		},
-		{
-			header: '도서명',
-			name: 'book_name',
-			editor: 'text'
-		},
-		{
-			header: '저자명',
-			name: 'book_author',
-			editor: 'text'
-		},
-		{
-			header: '출판사명',
-			name: 'book_pub_house',
-			editor: 'text'
-		},
-		{
-			header: '발행일',
-			name: 'book_pub_date',
-			editor: 'datePicker'
-			
-		},
-		{
-			header: 'ISBN',
-			name: 'book_ISBN',
-			editor: 'text'
-		},
-		{
-			header: '부록여부',
-			name: 'book_apdx_status',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: 'O', value: 'O' },
-						{ text: 'X', value: 'X' },
-					]
-				}
-			}
-		},
-		{
-			header: '분류기호',
-			name: 'book_ctgr_num',
-			editor: 'text'
-		},
-		{
-			header: '대여여부',
-			name: 'rent',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: '대여가능', value: '대여가능' },
-						{ text: '대여중', value: '대여중' },
-					]
-				}
-			}
-		},
-		{
-			header: '예약여부',
-			name: 'book_rsrv_status',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: '예약가능', value: '예약가능' },
-						{ text: '예약중', value: '예약중' },
-					]
-				}
-			}
-		},
-		{
-			header: '입력일',
-			name: 'book_input_date',
-			
-		}
-	]
-});
-</script>
-
-   
    
 </html>

@@ -29,7 +29,7 @@
 	
 	<select id="rentBookCheck" resultType="lib.employee.book.model.EmpBookDTO" parameterType="int">
 		 select * from
-		    (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, 
+		    (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
 		            decode(rent_enddate,'o','대여중','대여가능') rent
 		            from  (select * from book where book_num = #{ book_num }) b
 		            left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental
@@ -113,7 +113,7 @@
 	</select>
 	
 	<insert id="newInsertBook" parameterType="lib.employee.book.model.New_BookDTO">
-		insert into new_book VALUES ((select nvl(max(new_book_num)+1,1) from new_book), #{ book_author }, #{ book_name }, #{ book_pub_house })
+		insert into new_book VALUES ((select nvl(max(new_book_num)+1,1) from new_book), #{ book_author }, #{ book_name }, #{ book_pub_house }, #{ book_price }, '요청 완료', sysdate)
 	</insert>
 	
 	<delete id="newDeleteBook" parameterType="lib.employee.book.model.New_BookDTO">
@@ -121,11 +121,34 @@
 	</delete>
 	
 	<update id="newUpdateBook" parameterType="lib.employee.book.model.New_BookDTO">
-		update new_book set book_author=#{ book_author }, book_name=#{ book_name }, book_pub_house=#{ book_pub_house } 
+		update new_book set book_author=#{ book_author }, book_name=#{ book_name }, book_pub_house=#{ book_pub_house }, book_price=#{ book_price } 
 			where new_book_num = #{ new_book_num }
 	</update>
 	
 	<update id="addRentCnt" parameterType="int">
 		update book set book_rent_cnt = book_rent_cnt+1 where book_num = #{ book_num }
 	</update>
+	
+	<select id="disSearch" parameterType="int" resultType="lib.employee.book.model.BookRentDisDTO">
+		select t.*,  dis_book_num, dis_input_date, dis_status 
+		    from (select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date, nvl(r.rent_status, '대여가능') rent
+	                from  (select * from book where book_num = #{ book_num }) b
+	                left outer join rental r
+	                on (b.book_num = r.book_num)) t
+	                left outer join discard_book d on d.book_num = t.book_num
+	</select>
+	
+	<select id="disSelect"  resultType="lib.employee.book.model.BookRentDisDTO">
+		select t.*,  dis_book_num, dis_input_date, dis_status 
+		    from (select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date, nvl(r.rent_status, '대여가능') rent
+	                from  (select * from book) b
+	                left outer join rental r
+	                on (b.book_num = r.book_num)) t
+	                join discard_book d on d.book_num = t.book_num
+	        order by dis_book_num desc
+	</select>
+	
+	<insert id="disInsertBook" parameterType="lib.employee.book.model.BookRentDisDTO">
+		insert into discard_book values((select nvl(max(dis_book_num)+1,1) from discard_book), #{ book_num }, sysdate, '요청 완료')
+	</insert>
 </mapper>
