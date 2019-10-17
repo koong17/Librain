@@ -1,7 +1,5 @@
 package lib.employee.management.model;
 
-import java.sql.Timestamp;
-
 public class EmployeeDTO {
 	private String emp_no, emp_name , emp_telephone ,emp_address, emp_address_number, emp_dept_code, emp_jumin, emp_gender;
     private String emp_join_date, emp_retire_date;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lib.employee.management.model.EmployeeDTO;
+import lib.employee.management.model.SalaryDTO;
 import lib.employee.mypage.model.MypageDAO;
 import lib.employee.mypage.model.CommuteDTO;
 
@@ -81,6 +82,26 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public void empUpdate(EmployeeDTO employeeDTO) {
 		mypageDAO.empUpdate(employeeDTO);
+	}
+
+	@Override
+	public JSONObject salSelectOne(SalaryDTO salaryDTO) {
+		JSONObject jo = new JSONObject();
+		SalaryDTO dto = mypageDAO.salSelectOne(salaryDTO);
+		System.out.println(dto);
+		jo.put("sal_basic_pay",dto.getSal_basic_pay());
+		jo.put("sal_food_pay",dto.getSal_food_pay());
+		jo.put("sal_bonus",dto.getSal_bonus());
+		jo.put("sal_total",dto.getSal_total());
+		jo.put("sal_national_pension",dto.getSal_national_pension());
+		jo.put("sal_health_insurance",dto.getSal_health_insurance());
+		jo.put("sal_longterm_care_insurance",dto.getSal_longterm_care_insurance());
+		jo.put("sal_employment_insurance",dto.getSal_employment_insurance());
+		jo.put("sal_income_tax",dto.getSal_income_tax());
+		jo.put("sal_local_income_tax",dto.getSal_local_income_tax());
+		jo.put("sal_deducted",dto.getSal_deducted());
+		jo.put("sal_real",dto.getSal_real());
+		return jo;
 	}
 	
 }

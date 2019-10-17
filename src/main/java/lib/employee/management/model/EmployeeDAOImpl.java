@@ -1,7 +1,9 @@
 package lib.employee.management.model;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,6 +56,31 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public void salInsert(SalaryDTO salaryDTO) {
 		sqlsession.getMapper(EmployeeDAO.class).salInsert(salaryDTO);
+	}
+
+	@Override
+	public List<SalaryDTO> salSelect(SalaryDTO salaryDTO) {
+		return sqlsession.getMapper(EmployeeDAO.class).salSelect(salaryDTO);
+	}
+
+	@Override
+	public List<EmployeeDTO> empSearch(Map<String, String> parameters) {
+		return sqlsession.getMapper(EmployeeDAO.class).empSearch(parameters);
+	}
+
+	@Override
+	public void empUpdate(EmployeeDTO dto) {
+		sqlsession.getMapper(EmployeeDAO.class).empUpdate(dto);
+	}
+
+	@Override
+	public EmployeeDTO empSelectOne(EmployeeDTO dto) {
+		return sqlsession.getMapper(EmployeeDAO.class).empSelectOne(dto);
+	}
+
+	@Override
+	public List<CommuteDTO> cmtSearch(CommuteDTO commuteDTO) {
+		return sqlsession.getMapper(EmployeeDAO.class).cmtSearch(commuteDTO);
 	}
 
 }

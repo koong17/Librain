@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.employee.management.model.EmployeeDTO;
+import lib.employee.management.model.SalaryDTO;
 import lib.employee.management.service.MgmtServiceImpl;
 import lib.employee.mypage.model.CommuteDTO;
 import lib.employee.mypage.service.MypageService;
@@ -26,11 +28,16 @@ public class MypageController {
 	MypageService mypageService;
 	
 	@GetMapping("/pay.do")
-	public String pay(Model model, HttpSession session) {
-		session.setAttribute("emp_no", "1000001");
-		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_no"));
-		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
+	public String pay() {
 		return "employee/mypage/pay";
+	}
+	
+	@PostMapping("/pay.do")
+	public @ResponseBody String payPro(HttpSession session, @RequestBody SalaryDTO salaryDTO) {
+		session.setAttribute("emp_no", "1000001");
+		salaryDTO.setEmp_no(Integer.parseInt((String)session.getAttribute("emp_no")));
+		JSONObject jo = mypageService.salSelectOne(salaryDTO);
+		return jo.toString();
 	}
 	
 	@GetMapping("/info.do")

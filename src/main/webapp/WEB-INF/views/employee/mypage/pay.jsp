@@ -9,139 +9,93 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<div id="grid" />
-	<form action="totalpay.do" method="post" name="infoForm">
-		<div class="col-md-6 col-xs-12">
-			<div class="form-group">
-				<select class="mdb-select md-form" name="cmt_year">
-				  <option value="" disabled selected>년</option>
-				  <option value="2019">2019</option>
-				  <option value="2020">2020</option>
-				  <option value="2021">2021</option>
-				</select>
-				<select class="mdb-select md-form" name="cmt_month">
-				  <option value="" disabled selected>월</option>
-				  <option value="9">9</option>
-				  <option value="10">10</option>
-				  <option value="11">11</option>
-				</select>
-				<select class="mdb-select md-form" name="emp_dept_code">
-				  <option value="" disabled selected>부서</option>
-				  <option value="000">관장</option>
-				  <option value="001">총무부</option>
-				  <option value="002">교육부</option>
-				  <option value="003">정보부</option>
-				</select>
-				<input type="text" name="emp_name" class="form-control" placeholder="이름">
-				<input type="button" value="확인" id="check" class="btn btn-success btn-block btn-lg">
-				<input type="submit" value="확인" class="btn btn-success btn-block btn-lg" tabindex="7">
-			</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="form-group">
+			<select class="mdb-select md-form" id="sal_year">
+			  <option value="" disabled selected>년</option>
+			  <option value="2019">2019</option>
+			  <option value="2020">2020</option>
+			  <option value="2021">2021</option>
+			</select>
+			<select class="mdb-select md-form" id="sal_month">
+			  <option value="" disabled selected>월</option>
+			  <option value="9">9</option>
+			  <option value="10">10</option>
+			  <option value="11">11</option>
+			</select>
+			<input type="button" value="확인" id="check" class="btn btn-success btn-block btn-lg">
 		</div>
-	</form>
-	<form action="totalpay.do" method="post">
-		<div class="col-md-6 col-xs-12">
-			<div class="form-group">
-				<input type="number" name="emp_no" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="text" name="emp_name" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="emp_basic_pay" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_food_pay" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_bonus_pay" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_total" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_national_pension" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_health_insurance" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_longterm_care_insurance" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_employment_insurance" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_income_tax" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_local_income_tax" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_deducted" class="form-control" value="" readOnly>
-			</div>
-			<div class="form-group">
-				<input type="number" name="sal_real" class="form-control" value="" readOnly>
-			</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="form-group">
+			기본급<input type="number" name="sal_basic_pay" class="form-control" value="" readOnly>
 		</div>
-	</form>
+		<div class="form-group">
+			식대<input type="number" name="sal_food_pay" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			보너스<input type="number" name="sal_bonus" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			급여계<input type="number" name="sal_total" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			국민연금<input type="number" name="sal_national_pension" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			건강보험<input type="number" name="sal_health_insurance" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			장기요양<input type="number" name="sal_longterm_care_insurance" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			고용보험<input type="number" name="sal_employment_insurance" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			소득세<input type="number" name="sal_income_tax" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			지방소득세<input type="number" name="sal_local_income_tax" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			공제합계<input type="number" name="sal_deducted" class="form-control" value="" readOnly>
+		</div>
+		<div class="form-group">
+			차감수령액<input type="number" name="sal_real" class="form-control" value="" readOnly>
+		</div>
+	</div>
 </body>
 <script>
 	$("#check").click(function(){
-	   	$.ajax({											
+		
+	   	var date = new Object();
+		date.sal_year = $("#sal_year").val();
+		date.sal_month = $("#sal_month").val();
+		
+		$.ajax({											
 			type: "POST",
 			contentType : 'application/json;charset=UTF-8',
 			dataType : 'json',
-			url: "totalpay.do",
-			data: JSON.stringify($('form[name="infoForm"]').serializeComponent()),
-			/* {
-				cmt_year: $('#cmt_year').val(),
-				cmt_month: $('#cmt_month').val(),
-				emp_dept_code: $('#emp_dept_code').val(),
-				emp_name: $('#emp_name').val()
-			}, */
+			url: "pay.do",
+			data: JSON.stringify(date),
 			success :function(result) {
-				console.log(result);
-				grid.resetData(result);
+				$('input[name=emp_no]').val(result.emp_no);
+				$('input[name=sal_basic_pay]').val(result.sal_basic_pay);
+				$('input[name=sal_total]').val(result.sal_total);
+				$('input[name=sal_national_pension]').val(result.sal_national_pension);
+				$('input[name=sal_health_insurance]').val(result.sal_health_insurance);
+				$('input[name=sal_longterm_care_insurance]').val(result.sal_longterm_care_insurance);
+				$('input[name=sal_employment_insurance]').val(result.sal_employment_insurance);
+				$('input[name=sal_income_tax]').val(result.sal_income_tax);
+				$('input[name=sal_local_income_tax]').val(result.sal_local_income_tax);
+				$('input[name=sal_deducted]').val(result.sal_deducted);
+				$('input[name=sal_food_pay]').val(result.sal_food_pay);
+				$('input[name=sal_real]').val(result.sal_real);
+				$('input[name=sal_bonus]').val(result.sal_bonus);
+				$('input[name=sal_year]').val(result.sal_year);
+				$('input[name=sal_month]').val(result.sal_month);
 		    }
 		});
-	});
-	
-	const grid = new tui.Grid({
-		el: document.getElementById('grid'),
-		data: ${gridData},
-		scrollX: false,
-		scrollY: false,
-		rowHeaders: ['checkbox'],
-		columns: [
-			{
-				header: 'no',
-				name: 'cmt_no'
-			},
-			{
-				header: '사원번호',
-				name: 'cmt_emp_no',
-			},
-			{
-				header: '상태',
-				name: 'cmt_status',
-			},
-			{
-				header: '상태2',
-				name: 'cmt_status2',
-			},
-			{
-				header: '일',
-				name: 'cmt_day'
-			},
-			{
-				header: '시',
-				name: 'cmt_hour'
-			},
-			{
-				header: '분',
-				name: 'cmt_minute'
-			}
-		]
 	});
 </script>
 </html>

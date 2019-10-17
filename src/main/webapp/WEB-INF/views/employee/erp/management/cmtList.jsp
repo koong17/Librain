@@ -1,23 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8">
+<html>
+<head>
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<div>
-		근태 조회
+	<div class="container-fluid bg-light " align="center">
+		<br>
+		<div class="row align-items-center justify-content-center" align="center">
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<select id="cmt_year" name="cmt_year" class="form-control">
+						<option value="" disabled selected>년</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<select id="cmt_month" name="cmt_month" class="form-control">
+						<option value="" disabled selected>월</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+			</div>
+				<div class="col-md-1">
+					<input type="button" class="btn btn-primary btn-block" id="search" value="검색">
+				</div>
+				<div class="col-md-2">
+					<input type="button" class="btn btn-primary btn-block" id="update" value="선택 수정">
+				</div>
+			<div class="form-group">
+			</div>
+			<div class="form-group">
+			</div>
+		</div>
+		<div class="form-group">
+			<div id="grid"></div>
+		</div>
 	</div>
-	<div id="grid"></div>
-	<input type="button" id="update" value="선택 수정" >
-	
+
 </body>
 
 <script type="text/javascript">	
+	$("#search").click(function(){
+		var year = document.getElementById("cmt_year");
+		var month = document.getElementById("cmt_month");
+		var cmtObject = new Object();
+		cmtObject.cmt_year = year.options[year.selectedIndex].value;
+		cmtObject.cmt_month = month.options[month.selectedIndex].value;
+		
+		if (cmtObject.cmt_year != "" 
+				&& cmtObject.cmt_month != "") {
+		   	$.ajax({											
+				type: "POST",
+				contentType : 'application/json;charset=UTF-8',
+				dataType : 'json',
+				url: "cmtSearch.do",
+				data: JSON.stringify(cmtObject),
+				success :function(result) {
+					console.log(result);
+					grid.resetData(result);
+			    }
+			});
+		} else alert("년, 월을 선택하세요.");
+	});
 	$("#update").click(function(){
 		console.log(grid.getCheckedRows());
 		console.log("========================")
