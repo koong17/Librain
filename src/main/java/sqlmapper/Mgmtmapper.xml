@@ -70,4 +70,17 @@
     , emp_dept_code=#{emp_dept_code}, emp_jumin=#{emp_jumin}, emp_gender=#{emp_gender}, emp_join_date=to_date(#{emp_join_date},'YYYYMMDD'), emp_email=#{emp_email}
     , emp_position=#{emp_position},emp_basic_pay=#{emp_basic_pay},emp_bank_name=#{emp_bank_name},emp_account_number=#{emp_account_number},emp_password=#{emp_password} where emp_no=#{emp_no}
   </update>
+  <select id="cmtSearch" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+    select * 
+	  from commute_management 
+	  where (cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  )) and cmt_year=#{cmt_year} and cmt_month=#{cmt_month} order by cmt_no
+  </select>
 </mapper>

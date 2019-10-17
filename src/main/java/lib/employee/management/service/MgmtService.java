@@ -18,6 +18,7 @@ public interface MgmtService {
 	public JSONArray cmtAdminSelectAll();
 	public JSONArray cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
+	public JSONArray cmtSearch(CommuteDTO commuteDTO);
 	public JSONObject empSelectPay(EmployeeDTO employeeDTO);
 	public void salInsert(SalaryDTO salaryDTO);
 	public JSONArray salSelect(SalaryDTO salaryDTO);

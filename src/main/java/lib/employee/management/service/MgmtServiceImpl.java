@@ -185,5 +185,27 @@ public class MgmtServiceImpl implements MgmtService{
 	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO) {
 		return employeeDAO.empSelectOne(employeeDTO);
 	}
+
+	@Override
+	public JSONArray cmtSearch(CommuteDTO commuteDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		
+		List<CommuteDTO> list = employeeDAO.cmtSearch(commuteDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			CommuteDTO dto = list.get(i);
+			jo.put("cmt_no",dto.getCmt_no());
+			jo.put("emp_no",dto.getEmp_no());
+			jo.put("cmt_status",dto.getCmt_status());
+			jo.put("cmt_year",dto.getCmt_year());
+			jo.put("cmt_month",dto.getCmt_month());
+			jo.put("cmt_day",dto.getCmt_day());
+			jo.put("cmt_hour",dto.getCmt_hour()+"");
+			jo.put("cmt_minute",dto.getCmt_minute()+"");
+			ja.add(jo);
+		}
+		return ja;
+	}
 	
 }
