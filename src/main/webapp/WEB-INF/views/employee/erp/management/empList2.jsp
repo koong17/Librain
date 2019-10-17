@@ -10,6 +10,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+<%@include file="../../includes/header.jsp"%>
 	<div class="container-fluid bg-light " align="center">
 	<br>
       <div class="row align-items-center justify-content-center" align="center">
@@ -40,7 +41,7 @@
       </div>
 	<div id="grid"></div>
    </div>
-	
+<%@include file="../../includes/footer.jsp"%>
 </body>
 
 <script type="text/javascript">

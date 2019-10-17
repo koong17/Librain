@@ -27,6 +27,10 @@ public class MypageController {
 	@Autowired
 	MypageService mypageService;
 	
+	@GetMapping("/test.do")
+	public String test() {
+		return "employee/mypage/searchTest";
+	}
 	@GetMapping("/pay.do")
 	public String pay() {
 		return "employee/mypage/pay";

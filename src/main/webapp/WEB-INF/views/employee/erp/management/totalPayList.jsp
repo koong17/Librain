@@ -9,6 +9,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+<%@include file="../../includes/header.jsp"%>
 	<div class="col-md-6 col-xs-12">
 		<div class="form-group">
 			<select class="mdb-select md-form" id="sal_year">
@@ -27,6 +28,7 @@
 		</div>
 	</div>
 	<div id="grid"></div>
+<%@include file="../../includes/footer.jsp"%>
 </body>
 <script>
 	$("#search").click(function(){

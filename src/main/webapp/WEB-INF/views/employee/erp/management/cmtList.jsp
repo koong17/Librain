@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@include file="../../includes/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+
 	<div class="container-fluid bg-light " align="center">
 		<br>
 		<div class="row align-items-center justify-content-center" align="center">
@@ -192,3 +194,4 @@
 	
 </script>
 </html>
+<%@include file="../../includes/footer.jsp"%>

@@ -208,9 +208,9 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-check" aria-hidden="true"></i> 근태관리</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;개인급여</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;정보수정</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 개인급여</a>
                         </li>
                         <c:choose>
 						<c:when test='${!empty sessionScope.emp_no }'>
@@ -262,15 +262,15 @@
                                 <li>
                                     <a href="${pageContext.request.contextPath}/empRentBook.do">도서 폐기 신청</a>
                                 </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/memberList.do">회원조회</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-sitemap fa-fw"></i>직원보기</a>
+                            <a href="${pageContext.request.contextPath}/memberList.do"><i class="fa fa-sitemap fa-fw"></i>회원조회</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-users fa-fw"></i>직원보기</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
@@ -299,6 +299,9 @@
                                         </li>
                                         <li>
                                             <a href="${pageContext.request.contextPath}/mgmt/totalpay.do">급여관리</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/mgmt/totalpaylist.do">급여목록</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->

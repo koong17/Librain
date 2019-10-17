@@ -9,6 +9,8 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+
+<%@include file="../includes/header.jsp"%>
 	<div class="col-md-6 col-xs-12">
 		<div class="form-group">
 			<select class="mdb-select md-form" id="sal_year">
@@ -64,6 +66,8 @@
 			차감수령액<input type="number" name="sal_real" class="form-control" value="" readOnly>
 		</div>
 	</div>
+	
+<%@include file="../includes/footer.jsp"%>
 </body>
 <script>
 	$("#check").click(function(){

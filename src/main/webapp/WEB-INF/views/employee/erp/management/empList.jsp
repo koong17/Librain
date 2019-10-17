@@ -10,6 +10,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+<%@include file="../../includes/header.jsp"%>
 	<div class="container-fluid bg-light " align="center">
 	<br>
       <div class="row align-items-center justify-content-center" align="center">
@@ -29,9 +30,13 @@
             <input type="button" class="btn btn-primary btn-block" id="search" value="검색">
          </div>
       </div>
-	<div id="grid"></div>
+      <div class="row align-items-center justify-content-center" align="center">
+      	<div class="col-md-12">
+			<div id="grid"></div>
+      	</div>
+      </div>
    </div>
-	
+<%@include file="../../includes/footer.jsp"%>
 </body>
 
 <script type="text/javascript">
