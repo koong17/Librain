@@ -16,18 +16,17 @@ mypage/info.do <a href="mypage/info.do">개인정보 수정</a><br>
 <!-- mypage/pay.do <a href="mypage/pay.do">개인 급여</a><br><hr> -->
  <hr>
 memberList.do<a href="memberList.do">회원조회</a><br><hr>
-memSearch.do<a href="memSearch.do">고객 도서 검색</a> <br>
-empSearch.do<a href="empSearch.do">직원 도서 검색</a><br>
-empRentBook.do<a href="empRentBook.do">도서 대여</a><br>
-empNewBook.do<a href="empNewBook.do">도서 구입 신청</a><br>
-<!-- empRentBook.do<a href="empRentBook.do">도서 폐기 신청</a><br> -->
+
+member/book/search.do<a href="member/book/search.do">고객 도서 검색</a> <br>
+book/search.do<a href="book/search.do">직원 도서 검색</a><br>
+book/rent.do<a href="book/rent.do">도서 대여</a><br>
+book/newApply.do<a href="book/newApply.do">도서 구입 신청</a><br>
+book/discardApply.do<a href="book/discardApply.do">도서 폐기 신청</a><br>
  <br />
  <hr>
-<!-- <h3>admin 도서</h3> 
-<a href="empRentBook.do">도서 구입 승인</a>
-<a href="empRentBook.do">도서 폐기 승인</a>
+admin/book/approve/newBook.do<a href="admin/book/approve/newBook.do">도서 구입 승인</a><br>
+admin/book/approve/disBook.do<a href="admin/book/approve/disBook.do">도서 폐기 승인</a>
 <hr>
- -->
 <div class="boardTest">
 	/employee/board/list<a href="${pageContext.request.contextPath}/employee/board/list">게시판</a>
 </div><hr>

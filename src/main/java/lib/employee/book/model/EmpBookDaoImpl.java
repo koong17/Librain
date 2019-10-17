@@ -120,5 +120,22 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	public void newUpdateBook(New_BookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).newUpdateBook(dto);
 	}
+
+	@Override
+	public BookRentDisDTO disSearch(int book_num) {
+		BookRentDisDTO bookRentDisDTO = sqlsession.getMapper(EmpBookDAO.class).disSearch(book_num);
+		return bookRentDisDTO;
+	}
+	
+	@Override
+	public List<BookRentDisDTO> disSelect() {
+		List<BookRentDisDTO> list = sqlsession.getMapper(EmpBookDAO.class).disSelect();
+		return list;
+	}
+	
+	@Override
+	public void disInsertBook(BookRentDisDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).disInsertBook(dto);
+	}
 	
 }
