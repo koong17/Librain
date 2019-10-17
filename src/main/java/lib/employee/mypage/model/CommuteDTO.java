@@ -4,19 +4,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CommuteDTO {
-	private int cmt_no;
-	private String cmt_emp_no, cmt_status;
+	private int cmt_no, emp_no;
+	private String cmt_status;
 	private int cmt_year, cmt_month, cmt_day, cmt_hour, cmt_minute, cmt_second;
     
 	public CommuteDTO() {}
 	
 
-	public CommuteDTO(String cmt_emp_no) {
-		this.cmt_emp_no = cmt_emp_no;
+	public CommuteDTO(int emp_no) {
+		this.emp_no = emp_no;
 	}
 	
-	public CommuteDTO(String cmt_emp_no, String cmt_status) {
-		this.cmt_emp_no = cmt_emp_no;
+	public CommuteDTO(int emp_no, String cmt_status) {
+		this.emp_no = emp_no;
 		this.cmt_status = cmt_status;
 		Calendar cal = Calendar.getInstance();
 		this.cmt_year = cal.get(Calendar.YEAR);
@@ -36,12 +36,12 @@ public class CommuteDTO {
 		this.cmt_no = cmt_no;
 	}
 
-	public String getCmt_emp_no() {
-		return cmt_emp_no;
+	public int getEmp_no() {
+		return emp_no;
 	}
 
-	public void setCmt_emp_no(String cmt_emp_no) {
-		this.cmt_emp_no = cmt_emp_no;
+	public void setEmp_no(int emp_no) {
+		this.emp_no = emp_no;
 	}
 
 	public String getCmt_status() {
@@ -98,6 +98,13 @@ public class CommuteDTO {
 	
 	public void setCmt_second(int cmt_second) {
 		this.cmt_second = cmt_second;
+	}
+
+	@Override
+	public String toString() {
+		return "CommuteDTO [cmt_no=" + cmt_no + ", emp_no=" + emp_no + ", cmt_status=" + cmt_status
+				+ ", cmt_year=" + cmt_year + ", cmt_month=" + cmt_month + ", cmt_day=" + cmt_day + ", cmt_hour="
+				+ cmt_hour + ", cmt_minute=" + cmt_minute + ", cmt_second=" + cmt_second + "]";
 	}
 	
 }

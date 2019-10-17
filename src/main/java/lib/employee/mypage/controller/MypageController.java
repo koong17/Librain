@@ -9,25 +9,57 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lib.employee.management.model.EmployeeDTO;
+import lib.employee.management.model.SalaryDTO;
 import lib.employee.management.service.MgmtServiceImpl;
 import lib.employee.mypage.model.CommuteDTO;
 import lib.employee.mypage.service.MypageService;
 
 @Controller
-@RequestMapping("/commute.do")
+@RequestMapping("/mypage")
 public class MypageController {
 	
 	@Autowired
 	MypageService mypageService;
 	
-	@GetMapping
-	public String list(Model model, HttpSession session) {
-		session.setAttribute("emp_num", "1");
-		CommuteDTO commuteDTO = new CommuteDTO((String)session.getAttribute("emp_num"));
+	@GetMapping("/pay.do")
+	public String pay() {
+		return "employee/mypage/pay";
+	}
+	
+	@PostMapping("/pay.do")
+	public @ResponseBody String payPro(HttpSession session, @RequestBody SalaryDTO salaryDTO) {
+		session.setAttribute("emp_no", "1000001");
+		salaryDTO.setEmp_no(Integer.parseInt((String)session.getAttribute("emp_no")));
+		JSONObject jo = mypageService.salSelectOne(salaryDTO);
+		return jo.toString();
+	}
+	
+	@GetMapping("/info.do")
+	public String info(Model model, HttpSession session) {
+		session.setAttribute("emp_no", "1000001");
+		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_no"));
+		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
+		return "employee/mypage/info";
+	}
+	
+	@PostMapping("/info.do")
+	public String infoUpdate(Model model, HttpSession session, EmployeeDTO employeeDTO) {
+		mypageService.empUpdate(employeeDTO);
+		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
+		return "employee/mypage/info";
+	}
+	
+	@GetMapping("/commute.do")
+	public String cmtList(Model model, HttpSession session) {
+		session.setAttribute("emp_no", "1000001");
+		System.out.println(session.getAttribute("emp_no"));
+		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")));
 		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
 		model.addAttribute("gridData", ja);
 		ja = mypageService.cmtSelectOnOff(commuteDTO);
@@ -35,10 +67,10 @@ public class MypageController {
 		return "employee/mypage/commute";
 	}
 	
-	@PostMapping(produces = "application/text; charset=utf-8")
-	public @ResponseBody String insert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
-		String emp_num = (String)session.getAttribute("emp_num");
-		CommuteDTO commuteDTO = new CommuteDTO(emp_num, cmt_status);
+	@PostMapping(value = "/commute.do",produces = "application/text; charset=utf-8")
+	public @ResponseBody String cmtInsert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
+		session.setAttribute("emp_no", "1000001");
+		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")), cmt_status);
 		mypageService.cmtInsert(commuteDTO);
 		JSONArray ja = new JSONArray();
 		ja.add(mypageService.cmtSelectAll(commuteDTO));

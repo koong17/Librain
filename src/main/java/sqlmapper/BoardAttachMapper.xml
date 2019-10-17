@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 인터페이스의 경로를 적어줌 -->
+<mapper namespace="lib.employee.board.mapper.BoardAttachMapper">
+	<insert id="insert">
+		insert into tbl_attach (uuid, uploadpath, filename, filetype, board_no)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{board_no})
+	</insert>
+	
+	<delete id="delete">
+		delete from tbl_attach where uuid = #{uuid}
+	</delete>
+	
+	<select id="findByBno" resultType="lib.employee.board.model.BoardAttachDTO">
+		select * from tbl_attach where board_no = #{board_no}
+	</select>
+	
+	<delete id="deleteAll">
+		delete tbl_attach where board_no = #{board_no}
+	</delete>
+	
+	<!-- 서버에 잘못 남아있는 파일 처리 -->
+	<select id="getOldFiles" resultType="lib.employee.board.model.BoardAttachDTO">
+		select * from tbl_attach where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')
+	</select>
+
+</mapper>
+	

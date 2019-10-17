@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class RentalDTO {
     private String rent_num; //대여번호
-    private String book_num; //도서번호
+    private int book_num; //도서번호
     private String mem_id; //회원번호
     private Timestamp rent_startdate; //대여일
     private Timestamp rent_enddate; //반납일
@@ -17,10 +17,10 @@ public class RentalDTO {
 	public void setRent_num(String rent_num) {
 		this.rent_num = rent_num;
 	}
-	public String getBook_num() {
+	public int getBook_num() {
 		return book_num;
 	}
-	public void setBook_num(String book_num) {
+	public void setBook_num(int book_num) {
 		this.book_num = book_num;
 	}
 	public String getMem_id() {
