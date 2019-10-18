@@ -39,12 +39,12 @@
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="approveBtn">
-					승인
+					선택 승인
 				</button>
 			</div>
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="returnBtn">
-					반려
+					선택 반려
 				</button>
 			</div>
 			<div class="col-md-1">

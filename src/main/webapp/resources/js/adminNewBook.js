@@ -9,40 +9,48 @@ $(document).ready(function() {
 });
 
 function approveAjax() {
-	console.log(grid.getData());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getData()),
-		url : "./newBook/approve.do",
-		success : function(data){
-			console.log(data.result);
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getData());
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(grid.getCheckedRows()),
+			url : "./newBook/approve.do",
+			success : function(data){
+				console.log(data.result);
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+	} else {
+		alert("신간 구입을 승인할 신청번호를 선택해주세요.");
+	}
 }
 
 function returnAjax() {
-	console.log(grid.getData());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getData()),
-		url : "./newBook/return.do",
-		success : function(data){
-			console.log(data.result);
-			grid.uncheckAll();
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getData());
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(grid.getCheckedRows()),
+			url : "./newBook/return.do",
+			success : function(data){
+				console.log(data.result);
+				grid.uncheckAll();
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+	} else {
+		alert("신간 구입을 반려할 신청번호를 선택해주세요.");
+	}
 }
 
 function confirm(){
@@ -61,7 +69,7 @@ var gridData =
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
 	data: gridData,
-	rowHeaders: ['rowNum'],
+	rowHeaders: ['rowNum','checkbox'],
 	pageOptions: {
 		perPage: 1000
 	},
@@ -73,24 +81,16 @@ const grid = new tui.Grid({
 			name: 'new_book_num'
 		},
 		{
-			header: '도서명',
-			name: 'book_name'
-		},
-		{
-			header: '저자명',
-			name: 'book_author'
-		},
-		{
-			header: '출판사명',
-			name: 'book_pub_house'
-		},
-		{
-			header: '신청일',
-			name: 'new_input_date'
+			header: '권수',
+			name: 'bookCnt'
 		},
 		{
 			header: '도서가격',
 			name: 'book_price'
+		},
+		{
+			header: '신청일',
+			name: 'new_input_date'
 		},
 		{
 			header: '상태',
@@ -106,9 +106,9 @@ const grid = new tui.Grid({
 					return `합계: ${valueMap.sum}`;
 				}
 			},
-			new_status: {
+			bookCnt: {
 				template: function(valueMap) {
-					return `권수: ${valueMap.cnt}`;
+					return `권수: ${valueMap.sum}`;
 				}
 			}
 		},

@@ -74,33 +74,43 @@ function rentAjax() {
 		alert("대여할 도서를 검색한 후 선택해주세요.")
 	} else if(bookGrid.getCheckedRows()[0].rent == "대여가능") {
 		var book= bookGrid.getCheckedRows();
-		var mem_id = memGrid.getData()[0].mem_id;
-		var bookArr = new Array();
+		console.log(book);
+		var flag = 0;
 		for (var i = 0; i < book.length; i++) {
-			var object = new Object();
-			object.mem_id = mem_id;
-			object.book_num = book[i].book_num;
-			bookArr.push(object);
+			if(book[i].rent == '대여중') flag = 1;
 		}
-		console.log(bookArr.toString());
-		if(bookArr.length == 0) {
-			alert("대여할 책이 선택되지 않았습니다.")
+		console.log("flag = ", flag);
+		if(flag == 1) {
+			alert("대여중인 항목은 재대여가 불가능합니다. \n도서를 다시 검색하여 대여해주세요.");
 		} else {
-			$.ajax({
-				type : "POST",
-				contentType : "application/json;charset=UTF-8",
-				dataType : "json",
-				data : JSON.stringify(bookArr),
-				url : "./rent/rent.do",
-				success : function(data){
-					console.log(data.result);
-					memBookAjax();
-					$('#book_num').val("");
-				},
-				error : function(e) {
-					alert('Error : ' + e);
-				}
-			});
+			var mem_id = memGrid.getData()[0].mem_id;
+			var bookArr = new Array();
+			for (var i = 0; i < book.length; i++) {
+				var object = new Object();
+				object.mem_id = mem_id;
+				object.book_num = book[i].book_num;
+				bookArr.push(object);
+			}
+			console.log(bookArr.toString());
+			if(bookArr.length == 0) {
+				alert("대여할 책이 선택되지 않았습니다.")
+			} else {
+				$.ajax({
+					type : "POST",
+					contentType : "application/json;charset=UTF-8",
+					dataType : "json",
+					data : JSON.stringify(bookArr),
+					url : "./rent/rent.do",
+					success : function(data){
+						console.log(data.result);
+						memBookAjax();
+						$('#book_num').val("");
+					},
+					error : function(e) {
+						alert('Error : ' + e);
+					}
+				});
+			}
 		}
 	} else {
 		alert("이미 대여중인 도서입니다.");

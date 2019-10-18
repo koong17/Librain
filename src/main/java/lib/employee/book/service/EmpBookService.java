@@ -29,6 +29,7 @@ public interface EmpBookService {
 	public void returnBook(List<RentalDTO> dto); //책 반납
 	public JSONObject disSearch(String book_num); //폐기 책 검색
 	public JSONArray disSelect(); //폐기 승인 요청 목록 보기
+	public JSONArray disSelectBook(); //폐기 승인 요청 목록 보기
 	public void disInsert(List<BookRentDisDTO> dto); //폐기 요청 추가
 	public void disDelete(List<BookRentDisDTO> dto); //폐기 요청 삭제
 }

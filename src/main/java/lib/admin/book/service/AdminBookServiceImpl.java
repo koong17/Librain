@@ -30,11 +30,9 @@ public class AdminBookServiceImpl implements AdminBookService {
 			jObj = new JSONObject();
 			
 			jObj.put("new_book_num", dto.getNew_book_num());
-			jObj.put("book_name", dto.getBook_name());
-			jObj.put("book_author", dto.getBook_author());
-			jObj.put("book_pub_house", dto.getBook_pub_house());
 			jObj.put("book_price", dto.getBook_price());
 			jObj.put("new_status", dto.getNew_status());
+			jObj.put("bookCnt", dto.getBookCnt());
 			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
 			jArr.add(jObj);
 		}

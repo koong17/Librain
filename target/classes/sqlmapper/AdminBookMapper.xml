@@ -6,7 +6,9 @@
 <mapper namespace="lib.admin.book.model.AdminBookDAO">
 	
 	<select id="newSelect" resultType="lib.admin.book.model.New_BookDTO">
-		select * from new_book where new_status='요청 완료'
+		select new_book_num, sum(book_price) book_price, count(*) bookCnt, max(new_input_date) new_input_date, new_status from new_book 
+			where new_status in ('신청 완료', '반려')
+			group by new_book_num, new_status
 	</select>
 	
 	<update id="newApprove" parameterType="lib.admin.book.model.New_BookDTO">

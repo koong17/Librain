@@ -48,6 +48,26 @@ public class DiscardController {
 		
 		return  resultJO.toString();
 	}
+	@RequestMapping(value = "/book/disApply.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String disForm2(@RequestParam int perPage, @RequestParam int page) {
+		System.out.println(perPage+"rnqns"+page);
+		
+		JSONObject resultJO = new JSONObject();
+		JSONObject contentJO = new JSONObject();
+		JSONObject pageJO = new JSONObject();
+		
+		pageJO.put("page", page);  // 현재 페이지 
+		pageJO.put("totalCount", perPage); 
+		contentJO.put("pagination", pageJO);
+		contentJO.put("contents", bookService.disSelectBook()); //내용물 
+		resultJO.put("result", true);
+		resultJO.put("data",  contentJO);
+		
+		System.out.println("찍히나 확인");
+		
+		return  resultJO.toString();
+	}
 	
 	@RequestMapping(value = "/book/discardApply/search.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String search(@RequestParam("book_num") String book_num) {
