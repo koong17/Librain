@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.employee.book.model.BookRentDisDTO;
+import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.New_BookDTO;
 import lib.employee.book.service.EmpBookService;
 
 @Controller
@@ -55,6 +57,19 @@ public class DiscardController {
 	@RequestMapping(value="/book/discardApply/input.do", method = RequestMethod.POST)
 	public @ResponseBody String disInsert(@RequestBody List<BookRentDisDTO> dto) {
 		bookService.disInsert(dto);
+		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value="/book/discardApply/delete.do", method = RequestMethod.POST)
+	public @ResponseBody String disDelete(@RequestBody List<BookRentDisDTO> dto) {
+		bookService.disDelete(dto);
+		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value="/book/discardApply/deleteBook.do", method = RequestMethod.POST)
+	public @ResponseBody String deleteBook(@RequestBody List<EmpBookDTO> dto) {
+		System.out.println("deleteBook()");
+		bookService.delete(dto);
 		return "{\"result\":\"success\"}";
 	}
 }

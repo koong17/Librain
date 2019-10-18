@@ -40,6 +40,7 @@
 </head>
 <body>
 	<div class="container-fluid bg-light ">
+		<br>
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-2 pt-3">
 				<div class="form-group ">
@@ -59,7 +60,7 @@
 					<i class="fa fa-search"></i>
 				</button>
 			</div>
-			<div class="col-md-1">
+			<!-- <div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="refreshBtn"  onclick="confirm()">
 					<i class="fa fa-undo" aria-hidden="true"></i>
 				</button>
@@ -83,10 +84,9 @@
 				<button type="button" class="btn btn-primary btn-block" id="deleteBtn">
 					선택 삭제
 				</button>
-			</div>
+			</div> -->
 		</div>
 	</div>
-	<hr>
 	<div>
 		<div id="grid"></div>
 	</div>

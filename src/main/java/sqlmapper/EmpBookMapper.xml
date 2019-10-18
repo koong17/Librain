@@ -109,7 +109,11 @@
 	</update>
 	
 	<select id="newSelect" resultType="lib.employee.book.model.New_BookDTO">
-		select * from new_book
+		select * from new_book order by new_book_num desc
+	</select>
+
+	<select id="newSelectBook" resultType="lib.employee.book.model.New_BookDTO">
+		select * from new_book where new_status = '승인'
 	</select>
 	
 	<insert id="newInsertBook" parameterType="lib.employee.book.model.New_BookDTO">
@@ -151,4 +155,8 @@
 	<insert id="disInsertBook" parameterType="lib.employee.book.model.BookRentDisDTO">
 		insert into discard_book values((select nvl(max(dis_book_num)+1,1) from discard_book), #{ book_num }, sysdate, '요청 완료')
 	</insert>
+	
+	<delete id="disDeleteBook" parameterType="lib.employee.book.model.BookRentDisDTO">
+		delete from discard_book where dis_book_num = #{ dis_book_num }
+	</delete>
 </mapper>

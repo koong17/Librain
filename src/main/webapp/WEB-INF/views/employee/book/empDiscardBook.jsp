@@ -69,6 +69,19 @@
 	<div>
 		<div id="grid"></div>
 	</div>
+	<hr>
+	<div>
+		<div id="grid"></div>
+		<hr>
+		<div id="book">
+			<div class="col-md-1" style="margin-bottom: 10px;">
+				<button type="button" class="btn btn-primary btn-block" id="deleteBookBtn">
+					선택 도서 삭제
+				</button>
+			</div>
+			<div id="bookGrid"></div>
+		</div>
+	</div>
 </body>
 
 <!-- bookJS -->

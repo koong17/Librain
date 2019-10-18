@@ -21,9 +21,9 @@ $(document).ready(function() {
 });
 
 function showBookGrid() {
-	
+	console.log(grid.getRowCount());
 	setTimeout(function() {
-		if(grid.getData()[0].new_status.toString()=="승인") {
+		if(grid.getData()[grid.getRowCount()-1].new_status == "승인") {
 			$('#book').show();
 				console.log(grid.getData()[0]);
 				console.log(grid.getData()[0].new_status);
@@ -47,47 +47,56 @@ function addRowData() {
 }
 
 function inputAjax() {
-	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
-	grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
-	setTimeout(function() {
+//	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
+	if(grid.getCheckedRows().length != 0) {
+		grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
+		setTimeout(function() {
+			$.ajax({
+				type : "POST",
+				contentType : "application/json;charset=UTF-8",
+				dataType : "json",
+				data : JSON.stringify(grid.getCheckedRows()),
+				url : "./newApply/input.do",
+				success : function(data){
+					console.log(data.result);
+					grid.uncheckAll();
+					confirm();
+				},
+				error : function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}, 100); 
+	} else {
+		alert("신간 구입 신청을 요청할 도서를 선택해주세요.");
+	}
+}
+
+
+function deleteAjax() {
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getCheckedRows());
 		$.ajax({
 			type : "POST",
 			contentType : "application/json;charset=UTF-8",
 			dataType : "json",
 			data : JSON.stringify(grid.getCheckedRows()),
-			url : "./newApply/input.do",
+			url : "./newApply/delete.do",
 			success : function(data){
 				console.log(data.result);
-				grid.uncheckAll();
 				confirm();
 			},
 			error : function(e) {
 				alert('Error : ' + e);
 			}
 		});
-	}, 100); 
-}
-
-
-function deleteAjax() {
-	console.log(grid.getCheckedRows());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./newApply/delete.do",
-		success : function(data){
-			console.log(data.result);
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
+	} else {
+		alert("삭제할 도서를 선택해주세요.");
+	}
 }
 
 function updateAjax() {
+	if(grid.getCheckedRows().length != 0) {
 	console.log(grid.getCheckedRows());
 	$.ajax({
 		type : "POST",
@@ -104,28 +113,35 @@ function updateAjax() {
 			alert('Error : ' + e);
 		}
 	});
+	} else {
+		alert("수정할 도서를 선택해주세요.");
+	}
 }
 
 function inputBookAjax() {
-	console.log(bookGrid.getCheckedRows());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(bookGrid.getCheckedRows()),
-		url : "./newApply/inputBook.do",
-		success : function(data){
-			console.log(data.result);
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
-	
-	grid.checkAll();
-	deleteAjax();
-	console.log("complete");
+	if(bookGrid.getCheckedRows().length != 0) {
+		console.log(bookGrid.getCheckedRows());
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(bookGrid.getCheckedRows()),
+			url : "./newApply/inputBook.do",
+			success : function(data){
+				console.log(data.result);
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+		
+		grid.checkAll();
+		deleteAjax();
+		console.log("complete");
+	} else {
+		alert("입력할 도서를 선택해주세요.");
+	}
 }
 
 function confirm(){
@@ -140,6 +156,12 @@ var gridData =
 {
 	api: {
 			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData', method: 'GET' }
+	}
+}
+var gridData2 =
+{
+	api: {
+			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData2', method: 'GET' }
 	}
 }
 const grid = new tui.Grid({
@@ -206,7 +228,7 @@ const grid = new tui.Grid({
 
 const bookGrid = new tui.Grid({
 	el: document.getElementById('bookGrid'),
-	data: gridData,
+	data: gridData2,
 	rowHeaders: ['rowNum','checkbox'],
 	pageOptions: {
 		perPage: 10

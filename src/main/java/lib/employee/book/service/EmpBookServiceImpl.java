@@ -234,6 +234,40 @@ public class EmpBookServiceImpl implements EmpBookService {
 	}
 	
 	@Override
+	public JSONArray newSelectBook() {
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		Date date = new Date();
+		String today = format.format(date);
+		
+		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.newSelectBook();
+		
+		for (int i = 0; i < list.size(); i++) {
+			New_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("new_status", dto.getNew_status());
+			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", today);
+			jObj.put("book_ISBN", "입력");
+			jObj.put("book_apdx_status", "입력");
+			jObj.put("book_ctgr_num", "입력");
+			jObj.put("book_rsrv_status", "예약가능");
+			jObj.put("rent", "대여가능");
+			jObj.put("book_input_date", today);
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
 	public void newInsert(List<New_BookDTO> dto) {
 		for (New_BookDTO newBookDTO : dto) {
 			bookDAO.newInsertBook(newBookDTO);
@@ -323,6 +357,11 @@ public class EmpBookServiceImpl implements EmpBookService {
 		}
 	}
 	
-	
+	@Override
+	public void disDelete(List<BookRentDisDTO> dto) {
+		for (BookRentDisDTO bookRentDisDTO : dto) {
+			bookDAO.disDeleteBook(bookRentDisDTO);
+		}
+	}
 	
 }
