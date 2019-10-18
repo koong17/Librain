@@ -27,6 +27,22 @@ public class AdminBookDAOImpl implements AdminBookDAO {
 	public void newReturn(New_BookDTO dto) {
 		sqlsession.getMapper(AdminBookDAO.class).newReturn(dto);
 	}
+
+	@Override
+	public List<BookRentDisDTO> disSelect() {
+		List<BookRentDisDTO> list = sqlsession.getMapper(AdminBookDAO.class).disSelect();
+		return list;
+	}
+	
+	@Override
+	public void disApprove(BookRentDisDTO dto) {
+		sqlsession.getMapper(AdminBookDAO.class).disApprove(dto);
+	}
+	
+	@Override
+	public void disReturn(BookRentDisDTO dto) {
+		sqlsession.getMapper(AdminBookDAO.class).disReturn(dto);
+	}
 	
 	
 }

@@ -46,6 +46,7 @@ function searchAjax() {
 }
 
 function inputAjax() {
+	grid.focus(grid.getRowAt(0).rowKey, 'book_num', true);
 	$.ajax({
 		type : "POST",
 		contentType : "application/json;charset=UTF-8",
@@ -113,6 +114,7 @@ function deleteAjax() {
 }
 
 function updateAjax() {
+	grid.focus(grid.getRowAt(0).rowKey, 'book_num', true);
 	console.log(grid.getCheckedRows());
 	$.ajax({
 		type : "POST",

@@ -41,6 +41,7 @@
 </head>
 <body>
    <div class="container-fluid bg-light ">
+		<br>
       <div class="row align-items-center justify-content-center">
          <div class="col-md-2 pt-3">
             <div class="form-group ">
@@ -62,17 +63,22 @@
             </button>
          </div>
          <div class="col-md-1">
-            <button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='./member/book/search.do'">
-               <i class="fa fa-home"></i>
-            </button>
+            <button type="button" class="btn btn-primary btn-block" id="refreshBtn">
+					<i class="fa fa-undo" aria-hidden="true"></i>
+			</button>
          </div>
       </div>
-   </div>
-   <hr>
-   <div>
-      <div id="grid" class="success"></div> <hr>
-      <div id="newBookGrid"></div> <br/>
-      <div id="mostRentGrid"></div>
+      <div class="row form-group">
+     	 <div id="grid" class="success"></div> 
+      </div>
+      <div class="row form-group">
+	      <div class="col-md-6">
+	      	<div id="newBookGrid"></div>
+	      </div>
+	      <div class="col-md-6">
+		      <div id="mostRentGrid"></div>
+	      </div>
+      </div>
    </div>
 </body>
 <!-- bookJS -->

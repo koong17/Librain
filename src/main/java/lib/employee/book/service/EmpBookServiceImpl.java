@@ -234,8 +234,44 @@ public class EmpBookServiceImpl implements EmpBookService {
 	}
 	
 	@Override
+	public JSONArray newSelectBook() {
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		Date date = new Date();
+		String today = format.format(date);
+		
+		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.newSelectBook();
+		
+		for (int i = 0; i < list.size(); i++) {
+			New_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("new_status", dto.getNew_status());
+			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", today);
+			jObj.put("book_ISBN", "입력");
+			jObj.put("book_apdx_status", "입력");
+			jObj.put("book_ctgr_num", "입력");
+			jObj.put("book_rsrv_status", "예약가능");
+			jObj.put("rent", "대여가능");
+			jObj.put("book_input_date", today);
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
 	public void newInsert(List<New_BookDTO> dto) {
+		int new_book_num =  bookDAO.newMaxBookNum();
 		for (New_BookDTO newBookDTO : dto) {
+			newBookDTO.setNew_book_num(new_book_num);
 			bookDAO.newInsertBook(newBookDTO);
 		}
 	}
@@ -317,12 +353,51 @@ public class EmpBookServiceImpl implements EmpBookService {
 	}
 	
 	@Override
+	public JSONArray disSelectBook() {
+		List<BookRentDisDTO> list = new ArrayList<BookRentDisDTO>();
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		list = bookDAO.disSelectBook();
+		
+		for (int i = 0; i < list.size(); i++) {
+			BookRentDisDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj = new JSONObject();
+			jObj.put("book_num", dto.getBook_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
+			jObj.put("book_apdx_status", dto.getBook_apdx_status());
+			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
+			jObj.put("book_rsrv_status", dto.getBook_rsrv_status());
+			jObj.put("rent", dto.getRent());
+			jObj.put("book_input_date", dto.getBook_input_date().toString().substring(0, 10));
+			if(dto.getDis_book_num() != 0)
+				jObj.put("dis_book_num", dto.getDis_book_num());
+			if(dto.getDis_input_date() != null)
+				jObj.put("dis_input_date", dto.getDis_input_date().toString().substring(0, 10));
+			jObj.put("dis_status", dto.getDis_status());
+			
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
 	public void disInsert(List<BookRentDisDTO> dto) {
 		for (BookRentDisDTO bookRentDisDTO : dto) {
 			bookDAO.disInsertBook(bookRentDisDTO);
 		}
 	}
 	
-	
+	@Override
+	public void disDelete(List<BookRentDisDTO> dto) {
+		for (BookRentDisDTO bookRentDisDTO : dto) {
+			bookDAO.disDeleteBook(bookRentDisDTO);
+		}
+	}
 	
 }

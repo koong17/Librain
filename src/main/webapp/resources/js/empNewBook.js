@@ -21,15 +21,15 @@ $(document).ready(function() {
 });
 
 function showBookGrid() {
-	
+	console.log(grid.getRowCount());
 	setTimeout(function() {
-		if(grid.getData()[0].new_status.toString()=="승인") {
+		if(grid.getData()[grid.getRowCount()-1].new_status == "승인") {
 			$('#book').show();
 				console.log(grid.getData()[0]);
 				console.log(grid.getData()[0].new_status);
 				bookGrid.checkAll();
 		}
-	}, 100); 
+	}, 200); 
 }
 
 function addRowData() {
@@ -47,35 +47,80 @@ function addRowData() {
 }
 
 function inputAjax() {
-	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
-	grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
-	setTimeout(function() {
-		$.ajax({
-			type : "POST",
-			contentType : "application/json;charset=UTF-8",
-			dataType : "json",
-			data : JSON.stringify(grid.getCheckedRows()),
-			url : "./newApply/input.do",
-			success : function(data){
-				console.log(data.result);
-				grid.uncheckAll();
-				confirm();
-			},
-			error : function(e) {
-				alert('Error : ' + e);
-			}
-		});
-	}, 100); 
+//	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
+	if(grid.getCheckedRows().length != 0) {
+		var checkedGrid= grid.getCheckedRows();
+		console.log(checkedGrid);
+		var flag = 0;
+		for (var i = 0; i < checkedGrid.length; i++) {
+			if(checkedGrid[i].new_status == '신청 완료') flag = 1;
+		}
+		console.log("flag = ", flag);
+		if(flag == 1) {
+			alert("승인 신청한 항목은 재신청이 불가능합니다. \n다시 신청해주세요.");
+		} else {
+			grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
+			setTimeout(function() {
+				$.ajax({
+					type : "POST",
+					contentType : "application/json;charset=UTF-8",
+					dataType : "json",
+					data : JSON.stringify(grid.getCheckedRows()),
+					url : "./newApply/input.do",
+					success : function(data){
+						console.log(data.result);
+						grid.uncheckAll();
+						confirm();
+					},
+					error : function(e) {
+						alert('Error : ' + e);
+					}
+				});
+			}, 100); 
+		}
+	} else {
+		alert("신간 구입 신청할 도서를 선택해주세요.");
+	}
 }
 
 
 function deleteAjax() {
-	console.log(grid.getCheckedRows());
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getCheckedRows());
+		var checkedGrid= grid.getCheckedRows();
+		var flag = 0;
+		for (var i = 0; i < checkedGrid.length; i++) {
+			if(checkedGrid[i].new_status == '승인') flag = 1;
+		}
+		if(flag == 1) {
+			alert("승인한 항목은 삭제가 불가능합니다. \n다시 선택한 후 삭제해주세요.");
+		} else {
+			$.ajax({
+				type : "POST",
+				contentType : "application/json;charset=UTF-8",
+				dataType : "json",
+				data : JSON.stringify(grid.getCheckedRows()),
+				url : "./newApply/delete.do",
+				success : function(data){
+					console.log(data.result);
+					confirm();
+				},
+				error : function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}
+	} else {
+		alert("삭제할 도서를 선택해주세요.");
+	}
+}
+function deleteNewBookAjax() {
+	console.log(bookGrid.getCheckedRows());
 	$.ajax({
 		type : "POST",
 		contentType : "application/json;charset=UTF-8",
 		dataType : "json",
-		data : JSON.stringify(grid.getCheckedRows()),
+		data : JSON.stringify(bookGrid.getCheckedRows()),
 		url : "./newApply/delete.do",
 		success : function(data){
 			console.log(data.result);
@@ -85,47 +130,65 @@ function deleteAjax() {
 			alert('Error : ' + e);
 		}
 	});
+
 }
 
 function updateAjax() {
-	console.log(grid.getCheckedRows());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./newApply/update.do",
-		success : function(data){
-			console.log(data.result);
-			grid.uncheckAll();
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getCheckedRows());
+		var checkedGrid= grid.getCheckedRows();
+		var flag = 0;
+		for (var i = 0; i < checkedGrid.length; i++) {
+			if(checkedGrid[i].new_status == '승인') flag = 1;
 		}
-	});
+		if(flag == 1) {
+			alert("승인한 항목은 수정이 불가능합니다. \n다시 선택한 후 수정해주세요.");
+		} else {
+			$.ajax({
+				type : "POST",
+				contentType : "application/json;charset=UTF-8",
+				dataType : "json",
+				data : JSON.stringify(grid.getCheckedRows()),
+				url : "./newApply/update.do",
+				success : function(data){
+					console.log(data.result);
+					grid.uncheckAll();
+					confirm();
+				},
+				error : function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}
+	} else {
+		alert("수정할 도서를 선택해주세요.");
+	}
 }
 
 function inputBookAjax() {
-	console.log(bookGrid.getCheckedRows());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(bookGrid.getCheckedRows()),
-		url : "./newApply/inputBook.do",
-		success : function(data){
-			console.log(data.result);
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
-	
-	grid.checkAll();
-	deleteAjax();
-	console.log("complete");
+	if(bookGrid.getCheckedRows().length != 0) {
+		console.log(bookGrid.getCheckedRows());
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(bookGrid.getCheckedRows()),
+			url : "./newApply/inputBook.do",
+			success : function(data){
+				console.log(data.result);
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+		
+		grid.checkAll();
+		deleteNewBookAjax();
+		console.log("complete");
+	} else {
+		alert("입력할 도서를 선택해주세요.");
+	}
 }
 
 function confirm(){
@@ -140,6 +203,12 @@ var gridData =
 {
 	api: {
 			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData', method: 'GET' }
+	}
+}
+var gridData2 =
+{
+	api: {
+			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData2', method: 'GET' }
 	}
 }
 const grid = new tui.Grid({
@@ -206,7 +275,7 @@ const grid = new tui.Grid({
 
 const bookGrid = new tui.Grid({
 	el: document.getElementById('bookGrid'),
-	data: gridData,
+	data: gridData2,
 	rowHeaders: ['rowNum','checkbox'],
 	pageOptions: {
 		perPage: 10

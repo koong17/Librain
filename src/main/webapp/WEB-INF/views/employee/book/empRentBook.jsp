@@ -36,6 +36,7 @@
 </head>
 <body>
 	<div class="container-fluid bg-light ">
+		<br>
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-3">
 			    <div class="input-group">
@@ -68,11 +69,15 @@
 				</button>
 			</div>
 		</div>
-	</div>
-	<hr>
-	<div>
-		<div id="memGrid"></div> 
-		<div id="bookGrid"></div>
+		<div>
+			<br>
+			 <div class="row form-group">
+				<div id="memGrid"></div> 
+      		</div>
+			 <div class="row form-group">
+				<div id="bookGrid"></div>
+      		</div>
+		</div>
 	</div>
 </body>
 

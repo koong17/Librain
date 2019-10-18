@@ -79,7 +79,7 @@
 </body>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empNewBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empNewBook.js"></script>
 
    
    
