@@ -18,6 +18,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public int memberSearchIDCount(String mem_id) {
+		return sqlsession.getMapper(MemberDAO.class).memberSearchIDCount(mem_id);
+	}
+
+	@Override
 	public List<MemberDTO> memberSelectAll() {
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSelectAll();
 		//List<dto이름> 변수명 = sqlsession.getMapper(DAO명.class).함수();
@@ -59,5 +64,6 @@ public class MemberDAOImpl implements MemberDAO {
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).select(startRowNum, endRowNum);
 		return list;
 	}
+
 
 }

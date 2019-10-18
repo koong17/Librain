@@ -58,7 +58,12 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/memberList.do'">
+				<button type="button" class="btn btn-primary btn-block" id="refresh" onclick="location.href='/mvc/memberList.do'">
+					<i class="fa fa-refresh" aria-hidden="true"></i>
+				</button>
+			</div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/index.jsp'">
 					<i class="fa fa-home"></i>
 				</button>
 			</div>
@@ -158,6 +163,10 @@
 			{
 				header: '주소',
 				name: 'mem_address'
+			},
+			{
+				header: '우편번호',
+				name: 'mem_address_number'
 			},
 			{
 				header: '전화번호',

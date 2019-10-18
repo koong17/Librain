@@ -23,6 +23,12 @@ public class MemberServiceImpl implements MemberService {
 	public void memberjoin(MemberDTO dto) {
 		memberDAO.memberjoin(dto);
 	}
+	
+	//중복확인
+	@Override
+	public int memberSearchIDCount(String mem_id) {
+		return memberDAO.memberSearchIDCount(mem_id);
+	}
 
 	//전체검색
 	@Override
@@ -106,6 +112,7 @@ public class MemberServiceImpl implements MemberService {
 		list = memberDAO.select(startRowNum, endRowNum);
 		return list;
 	}
+
 
 
 }

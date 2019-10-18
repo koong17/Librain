@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import lib.admin.book.model.New_BookDTO;
 import lib.admin.book.model.AdminBookDAO;
+import lib.admin.book.model.BookRentDisDTO;
 
 @Service
 public class AdminBookServiceImpl implements AdminBookService {
@@ -53,6 +54,23 @@ public class AdminBookServiceImpl implements AdminBookService {
 			bookDAO.newReturn(newBookDTO);
 		}
 	}
-	
-	
+
+	@Override
+	public JSONArray disSelect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void disApprove(List<BookRentDisDTO> dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void disReturn(List<BookRentDisDTO> dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

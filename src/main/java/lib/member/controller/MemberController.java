@@ -1,6 +1,8 @@
 package lib.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,6 +31,16 @@ public class MemberController {
 	@GetMapping("/memberjoin.do")
 	public String memberjoin() {
 		return "member/memberjoin";
+	}
+	
+	@PostMapping("/memberIDCheck.do")
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String mem_id){
+		int count=0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		count = memberService.memberSearchIDCount(mem_id);
+		map.put("cnt", count);
+		return map;
 	}
 	
 	@PostMapping("/memberjoin.do")
