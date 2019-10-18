@@ -10,8 +10,14 @@
 <body>
 
 <br>
+<div class="container">
+	<br><br>
+	<h1 align="left">개인 급여</h1>
+	<hr>
 	<div class="row form-group">
 		<div class="col-md-5">
+			<div class="form-group">
+			</div>
 			<div class="form-group">
 				<div class="col-md-4">
 					<select class="form-control" id="sal_year">
@@ -81,7 +87,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>
 <%@include file="../includes/footer.jsp"%>
 </body>
 <script>
