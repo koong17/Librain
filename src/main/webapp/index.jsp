@@ -7,6 +7,12 @@
 <title>Home</title>
 </head>
 <body>
+<a href="memberjoin.do">회원가입</a>
+<a href="memberList.do">회원조회</a>
+<a href="test.do">직원목록</a>
+<a href="commute.do">근태관리</a>
+
+<br><br>
 mgmt/emplist.do <a href="mgmt/emplist.do">직원목록</a><br>
 mgmt/emplist2.do <a href="mgmt/emplist2.do">직원목록-관리자</a><br>
 mgmt/cmtlist.do <a href="mgmt/cmtlist.do">근태목록</a><br>
