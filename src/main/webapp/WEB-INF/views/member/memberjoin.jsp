@@ -40,7 +40,7 @@
 					<input class="form-control" type="text" placeholder="4~12자의 영문 대소문자와 숫자로만 입력"
 						id="mem_id" name="mem_id">
 				</div>
-				<button type="button" id="mem_idCheck" class="btn btn-default btm-sm" onclick="memberIDCheck()">중복확인</button>
+				<button type="button" id="memberIDCheck" class="btn btn-default btm-sm" >중복확인</button>
 			</div>
 			
 			<br><br>
@@ -122,7 +122,7 @@
 var idck=0;
 $(function(){
 	
-	$("#memberIDCheck").click(fucntion(){
+	$("#memberIDCheck").click(function(){
 		
 		var mem_id = $("#mem_id").val();
 		
