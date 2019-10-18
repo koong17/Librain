@@ -12,34 +12,35 @@
 <body>
 <div class="container">
 	<br><br><br><br>
-	<form action="empUpdate.do" method="post" onsubmit="javascript:return formCheck();">
+	<form action="" method="post" onsubmit="javascript:return formCheck();">
+	<div class="col-md-9">
 		<div class="form-group">
 			<input hidden="emp_no" value=${ employeeDTO.emp_no }>
 		    <div class="row form-group" id="divName">
-                <label for="inputEmpno" class="col-xs-2 control-label">사원번호</label>
-                <div class="col-xs-5">
+                <label for="inputEmpno" class="col-md-2 control-label">사원번호</label>
+                <div class="col-md-5">
                     <input type="text" name="emp_no" class="form-control" value=${ employeeDTO.emp_no } maxlength="10" readOnly>
                 </div>
             </div>
 		    <div class="row form-group" id="divName">
-                <label for="inputId" class="col-xs-2 control-label">이름</label>
-                <div class="col-xs-4">
+                <label for="inputId" class="col-md-2 control-label">이름</label>
+                <div class="col-md-4">
                     <input type="text" name="emp_name" class="form-control" value=${ employeeDTO.emp_name } id="id" maxlength="10" required>
                 </div>
-                <label for="inputPhoneNumber" class="col-xs-2 control-label">휴대폰 번호</label>
-                <div class="col-xs-4">
+                <label for="inputPhoneNumber" class="col-md-2 control-label" >휴대폰 번호</label>
+                <div class="col-md-4">
                     <input type="tel" name="emp_telephone" class="form-control" id="emp_telephone" value=${ employeeDTO.emp_telephone } maxlength="11" required>
                 </div>
             </div>
             <div class="row form-group" id="divEmail">
-                <label for="inputEmail" class="col-xs-2 control-label">이메일</label>
-                <div class="col-xs-10">
+                <label for="inputEmail" class="col-md-2 control-label">이메일</label>
+                <div class="col-md-10">
                     <input type="email" name="emp_email" class="form-control" id="emp_email" value=${ employeeDTO.emp_email } maxlength="40" required>
                 </div>
             </div>
             <div class="row form-group" id="divDept">
-                <label for="inputDept" class="col-xs-2 control-label">부서</label>
-                <div class="col-xs-4">
+                <label for="inputDept" class="col-md-2 control-label">부서</label>
+                <div class="col-md-4">
                     <select name="emp_dept_code" class="form-control" id="emp_dept_code" required>
 					  <option value="" disabled selected>선택</option>
 					  <option value="000">관장</option>
@@ -48,53 +49,53 @@
 					  <option value="003">정보부</option>
 					</select>
                 </div>
-                <label for="inputPosition" class="col-xs-2 control-label">직책</label>
-                <div class="col-xs-4">
+                <label for="inputPosition" class="col-md-2 control-label">직책</label>
+                <div class="col-md-4">
                     <input type="text" name="emp_position" class="form-control" value=${ employeeDTO.emp_position } id="emp_position" maxlength="10" required>
                 </div>
             </div>
             <div class="row form-group" id="divPos">
-                <label for="inputPosition" class="col-xs-2 control-label">기본급</label>
-                <div class="col-xs-3">
-                    <input type="number" name="emp_basic_pay" class="form-control" value=${ employeeDTO.emp_basic_pay } id="emp_basic_pay" maxlength="8" required>
+                <label for="inputPosition" class="col-md-2 control-label">기본급</label>
+                <div class="col-md-3">
+                    <div class="form-group input-group">
+	                    <input type="number" name="emp_basic_pay" class="form-control" value=${ employeeDTO.emp_basic_pay } id="emp_basic_pay" maxlength="8" required>
+	                    <span class="input-group-addon">원</span>
+                    </div>
                 </div>
-                <div class="col-xs-1">
-                    원
-                </div>
-                <label for="inputPosition" class="col-xs-2 control-label">은행명</label>
-                <div class="col-xs-4">
+                <label for="inputPosition" class="col-md-2 control-label">은행명</label>
+                <div class="col-md-4">
                     <input type="text" name="emp_bank_name" class="form-control" value=${ employeeDTO.emp_bank_name } id="emp_bank_name" maxlength="20" required>
                 </div>
             </div>
             <div class="row form-group" id="divPos">
-                <label for="inputPosition" class="col-xs-2 control-label">계좌번호</label>
-                <div class="col-xs-10">
+                <label for="inputPosition" class="col-md-2 control-label">계좌번호</label>
+                <div class="col-md-10">
                     <input type="text" name="emp_account_number" class="form-control" value=${ employeeDTO.emp_account_number } id="emp_account_number" maxlength="30" required>
                 </div>
             </div>
 		    <div class="row form-group" id="divAddrNum">
 		    	<input type="hidden" id="emp_address" name="emp_address" value="">
-                <label for="inputAddressNumber" class="col-xs-2 control-label">우편번호</label>
-                <div class="col-xs-2">
+                <label for="inputAddressNumber" class="col-md-2 control-label">우편번호</label>
+                <div class="col-md-2">
                     <input type="text" name="emp_address_number" class="form-control" value=${ employeeDTO.emp_address_number } id="emp_address_number" maxlength="30" required readOnly>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-md-2">
                 	<input type="button" class="btn" value="검색" onclick="daumPostcode()">
                 </div>
-                <div class="col-xs-6">
+                <div class="col-md-6">
                 	<input type="text" name="emp_address1" class="form-control" id="emp_address1" placeholder="기본주소" maxlength="30" required readOnly>
                 </div>
             </div>
 		    <div class="row form-group" id="divAddr">
-                <label for="inputId" class="col-xs-2 control-label">주소</label>
-                <div class="col-xs-10">
+                <label for="inputId" class="col-md-2 control-label">주소</label>
+                <div class="col-md-10">
                     <input type="text" name="emp_address" class="form-control" id="emp_address2" maxlength="30" required>
                     
                 </div>
             </div>
             <div class="row form-group">
-                <label for="inputGender" class="col-xs-2 control-label">성별</label>
-                <div class="col-xs-2">
+                <label for="inputGender" class="col-md-2 control-label">성별</label>
+                <div class="col-md-2">
                     <select class="form-control" name="emp_gender" id="emp_gender" required>
                         <option value="F">여</option>
                         <option value="M">남</option>
@@ -102,11 +103,11 @@
                 </div>
                 <input type="hidden" id="emp_join_date" name="emp_join_date" value="">
                 <input type="hidden" id="emp_join_day" name="emp_join_day" value="">
-                <label for="inputJoindate" class="col-xs-2 control-label">입사일</label>
-               	<div class="col-xs-2">
+                <label for="inputJoindate" class="col-md-2 control-label">입사일</label>
+               	<div class="col-md-2">
                		<input class="form-control" type="number" name="emp_join_year" id="emp_join_year" value=${ employeeDTO.emp_join_date } required>
                	</div>
-               	<div class="col-xs-2">
+               	<div class="col-md-2">
                    <select class="form-control" name="emp_join_month" id="emp_join_month" required>
                  	   <option value="" disabled selected>월</option>
                        <option value="01">01</option>
@@ -123,30 +124,31 @@
                        <option value="12">12</option>
                    </select>
                	</div>
-               	<div class="col-xs-2">
+               	<div class="col-md-2">
                		<input class="form-control" type="number" name="emp_join_dayInt" id="emp_join_dayInt" placeholder="일" required>
                	</div>
             </div>
             <div class="row form-group" id="divPos">
             	<input type="hidden" id="emp_password" name="emp_password" value="">
             	<input type="hidden" id="emp_jumin" name="emp_jumin" value="">
-                <label for="inputPosition" class="col-xs-2 control-label">주민번호</label>
-                <div class="col-xs-5">
+                <label for="inputPosition" class="col-md-2 control-label">주민번호</label>
+                <div class="col-md-5">
                     <input type="text" name="emp_jumin1" class="form-control" placeholder="920101" id="emp_jumin1" maxlength="6" required>
                 </div>
-                <div class="col-xs-5">
+                <div class="col-md-5">
                     <input type="text" name="emp_jumin2" class="form-control" placeholder="2222222" id="emp_jumin2" maxlength="7" required>
                 </div>
             </div>
 			<div class="row form-group">
-				<div class="col-xs-6">
+				<div class="col-md-6">
 					<input type="submit" value="수정" class="btn btn-success btn-block btn-lg" tabindex="7">
                	</div>
-				<div class="col-xs-6">
-					<input type="button" value="취소" onclick="window.close()" class="btn btn-primary btn-block btn-lg" tabindex="7">
+				<div class="col-md-6">
+					<input type="button" value="리셋" onclick="location.reload()" class="btn btn-primary btn-block btn-lg" tabindex="7">
                	</div>
 			</div>
 		</div>
+	</div>
 	</form>
 </div>
 </body>

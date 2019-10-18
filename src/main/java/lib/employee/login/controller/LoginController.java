@@ -23,6 +23,10 @@ public class LoginController {
 	public String login() {
 		return "employee/board/login";
 	}
+	@RequestMapping("/main.do")
+	public String loginAns() {
+		return "employee/board/loginResult";
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/loginCheck.do")
@@ -30,11 +34,10 @@ public class LoginController {
 		boolean result = service.loginCheck(dto, session);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("/employee/board/loginResult");
 		if(result) {
-			mav.addObject("msg", "성공");
+			mav.setViewName("redirect:main.do");
 		}else {
-			mav.addObject("msg", "실패");
+			mav.setViewName("redirect:login.do");
 		}
 		
 		return mav;

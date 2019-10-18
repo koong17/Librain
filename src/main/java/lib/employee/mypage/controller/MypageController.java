@@ -38,7 +38,6 @@ public class MypageController {
 	
 	@PostMapping("/pay.do")
 	public @ResponseBody String payPro(HttpSession session, @RequestBody SalaryDTO salaryDTO) {
-		session.setAttribute("emp_no", "1000001");
 		salaryDTO.setEmp_no(Integer.parseInt((String)session.getAttribute("emp_no")));
 		JSONObject jo = mypageService.salSelectOne(salaryDTO);
 		return jo.toString();
@@ -46,7 +45,6 @@ public class MypageController {
 	
 	@GetMapping("/info.do")
 	public String info(Model model, HttpSession session) {
-		session.setAttribute("emp_no", "1000001");
 		EmployeeDTO employeeDTO = new EmployeeDTO((String)session.getAttribute("emp_no"));
 		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
 		return "employee/mypage/info";
@@ -61,7 +59,6 @@ public class MypageController {
 	
 	@GetMapping("/commute.do")
 	public String cmtList(Model model, HttpSession session) {
-		session.setAttribute("emp_no", "1000001");
 		System.out.println(session.getAttribute("emp_no"));
 		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")));
 		JSONArray ja = mypageService.cmtSelectAll(commuteDTO);
@@ -73,7 +70,6 @@ public class MypageController {
 	
 	@PostMapping(value = "/commute.do",produces = "application/text; charset=utf-8")
 	public @ResponseBody String cmtInsert(Model model, HttpSession session, @RequestParam("cmt_status")String cmt_status) {
-		session.setAttribute("emp_no", "1000001");
 		CommuteDTO commuteDTO = new CommuteDTO(Integer.parseInt((String)session.getAttribute("emp_no")), cmt_status);
 		mypageService.cmtInsert(commuteDTO);
 		JSONArray ja = new JSONArray();

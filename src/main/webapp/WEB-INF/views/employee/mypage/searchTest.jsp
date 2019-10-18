@@ -39,16 +39,14 @@
 			type: "get",
 			data: {
 				query: document.getElementById("search").value,
-				target: 'title'
+				size: 50
 			},
 			success: function(result) {
 				console.log(result);
+				for (var i = 0; i < result.documents.length; i++) {
+					result.documents[i].thumbnail = '<img alt="no thumbnail" src="'+result.documents[i].thumbnail+'">';
+				}
 				grid.resetData(result.documents);
-				document.getElementById("author").value = result.documents[0].authors[0];
-				document.getElementById("contents").value = result.documents[0].contents;
-				document.getElementById("datetime").value = result.documents[0].datetime;
-				document.getElementById("isbn").value = result.documents[0].isbn;
-				document.getElementById("price").value = result.documents[0].publisher;
 			}
 		})
 	}
@@ -56,10 +54,12 @@
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: null,
-		scrollX: false,
-		scrollY: false,
-		rowHeaders: ['checkbox'],
+		bodyHeight: 500,
 		columns: [
+			{
+				header: '이미지',
+				name: 'thumbnail'
+			},
 			{
 				header: '제목',
 				name: 'title'

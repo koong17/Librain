@@ -8,7 +8,9 @@
     select * from employee_management emp,department dept where emp.emp_dept_code = dept.dept_code and emp_no=#{emp_no}
   </select>
   <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
-    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_email=#{emp_email} where emp_no=#{emp_no}
+    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_address=#{emp_address}, emp_address_number=#{emp_address_number}
+    , emp_dept_code=#{emp_dept_code}, emp_jumin=#{emp_jumin}, emp_gender=#{emp_gender}, emp_join_date=to_date(#{emp_join_date},'YYYYMMDD'), emp_email=#{emp_email}
+    , emp_position=#{emp_position},emp_basic_pay=#{emp_basic_pay},emp_bank_name=#{emp_bank_name},emp_account_number=#{emp_account_number},emp_password=#{emp_password} where emp_no=#{emp_no}
   </update>
   <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
   	select * from commute_management where emp_no=#{emp_no} and cmt_day=#{cmt_day}
