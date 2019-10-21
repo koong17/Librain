@@ -40,7 +40,7 @@ book/discardApply.do<a href="book/discardApply.do">도서 폐기 신청</a><br>
 admin/book/approve/newBook.do<a href="admin/book/approve/newBook.do">도서 구입 승인</a><br>
 admin/book/approve/disBook.do<a href="admin/book/approve/disBook.do">도서 폐기 승인</a>
 <hr>
-<a href="login.do">직원로그인</a>
+mvc/login.do<a href="login.do">직원로그인</a>
 <!-- mypage/pay.do <a href="mypage/pay.do">개인 급여</a><br><hr> -->
  <hr>
 memberList.do<a href="memberList.do">회원조회</a><br><hr>

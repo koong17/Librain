@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lib.employee.board.model.BoardAttachDTO;
@@ -24,6 +25,7 @@ import lib.employee.board.model.Criteria;
 import lib.employee.board.model.PageDTO;
 import lib.employee.board.service.BoardService;
 import lib.employee.board.service.NoticeService;
+import lib.employee.login.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -35,7 +37,8 @@ public class BoardController {
 
 	private BoardService boardService;
 	private NoticeService noticeService;
-
+	private LoginService loginService;
+	
 	@GetMapping("/list.do")
 	public String boardSelectAll(Criteria cri, Model model) {
 		model.addAttribute("list", boardService.boardSelectAll(cri));
@@ -46,13 +49,15 @@ public class BoardController {
 		
 		//공지사항 출력
 		model.addAttribute("notice", noticeService.getNotices());
-		
 		return "employee/board/list";
 
 	}
 
 	@GetMapping("/register.do")
 	public String boardRegisterForm() {
+		//작성자 이름
+		ModelAndView mav = new ModelAndView();
+		
 		return "employee/board/register";
 	}
 

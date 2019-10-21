@@ -33,6 +33,9 @@
 </head>
 <body>
 	<c:choose>
+	<c:when test="${!empty sessionScope.emp_no }">
+	<script>window.location.href='memberList.do'</script>
+	</c:when>
 	<c:when test="${empty sessionScope.emp_no}">
 	
     <div class="container">

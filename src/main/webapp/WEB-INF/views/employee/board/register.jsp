@@ -59,7 +59,7 @@
                         </div>
                         
                         <div class="form-group">
-                           <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${sessionScope.emp_no}" readonly="readonly">
+                           <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${sessionScope.emp_name}" readonly="readonly">
                         <button type="submit" class="btn btn-default">Submit Button</button>
                         <button type="reset" class="btn btn-default">Reset Button</button>
                </form>

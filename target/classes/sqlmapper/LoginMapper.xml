@@ -12,9 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 </select>
 
-<select id="selectSessionInfo" resultType="lib.employee.management.model.EmployeeDTO">
+<select id="selectSessionInfo" resultType="String">
 	<![CDATA[
-		SELECT * FROM employee_management
+		SELECT emp_name FROM employee_management
 		WHERE emp_no = #{emp_no}
 	]]>
 	

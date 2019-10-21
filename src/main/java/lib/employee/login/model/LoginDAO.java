@@ -25,12 +25,10 @@ public class LoginDAO {
 	}
 	
 	//
-	public ArrayList<EmployeeDTO> selectSessionInfo(EmployeeDTO dto){
+	public String selectSessionInfo(EmployeeDTO dto){
 		System.out.println("유저 정보 불러오기");
-		System.out.println("LoginDAO 실행" + sqlSession.selectOne("employeeLoginMapper.selectSessionInfo", dto));
-		ArrayList<EmployeeDTO> list = new ArrayList<>();
-		list.add(dto);
-		return list;//여기까지 ok
+		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionInfo", dto);
+		return result;//여기까지 ok
 	}
 	
 	public void logout(HttpSession session) {

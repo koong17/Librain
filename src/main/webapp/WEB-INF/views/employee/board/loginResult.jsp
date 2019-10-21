@@ -10,14 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>${ msg}</h1>
 <c:choose>
 	<c:when test='${!empty sessionScope.emp_no }'>
-${sessionScope.emp_no }님 환영합니다. ${name }
-<a href="logout.do">로그아웃</a>
+<%-- ${sessionScope.emp_no }님 환영합니다. <br> --%>
+${emp_name }님 환영합니다.<br>
+<!-- <a href="logout.do">로그아웃</a> -->
 	</c:when>
-</c:choose>
-<a href="main.do">홈으로</a>
+</c:choose><br>
+<!-- <a href="main.do">홈으로</a> -->
 </body>
 </html>
 

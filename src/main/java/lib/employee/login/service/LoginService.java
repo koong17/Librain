@@ -12,5 +12,5 @@ public interface LoginService {
 	//로그아웃
 	public void logout(HttpSession session);
 	
-	public ArrayList<EmployeeDTO> selectSessionInfo(EmployeeDTO dto);
+	public String selectSessionInfo(EmployeeDTO dto);
 }
