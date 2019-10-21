@@ -142,18 +142,18 @@ create table employee_management(
     --CONSTRAINT emp_num_pk PRIMARY KEY(emp_num),
     --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
 );
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date) 
-values(1000001,'강수아','01068618619',10000000,'koongmom@librain.org','000','관장',sysdate-1000);
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
-values(1000002,'이소영','01037869424',3000000,'soyount@librain.org','001','팀장',sysdate-254);
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
-values(1000003,'남민지','01022574895',3000000,'minjeenam@librain.org','002','팀장',sysdate-720);
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
-values(1000004,'문혜수','01016852036',2500000,'mhs96@librain.org','002','사원',sysdate-300);
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
-values(1000005,'박예원','01088430059',3000000,'yeahwoni@librain.org','003','팀장',sysdate-772);
-insert into employee_management(emp_no,emp_name,emp_telephone,emp_basic_pay,emp_email,emp_dept_code,emp_position,emp_join_date)
-values(1000006,'김승수','01078963225',2500000,'iamseungsu@librain.org','003','사원',sysdate-150);
+insert into employee_management
+values(1000001,'강수아','01068618619','서울시,이문동',02451,'000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
+insert into employee_management
+values(1000002,'이소영','01011111111','서울시,동동동',02451,'001','9901012222222','F',sysdate-2000,null,'soyoung@librain.org','팀장',3000000,'하나','111111111111','990101');
+insert into employee_management
+values(1000003,'남민지','01022222222','고촌,고촌',02451,'002','9901012222222','F',sysdate-1000,null,'zzangmom@librain.org','팀장',3000000,'하나','111111111111','990101');
+insert into employee_management
+values(1000004,'문혜수','01033333333','양주,술은 양주가 최고',02451,'002','9901012222222','F',sysdate-2400,null,'hyesudaldal@librain.org','사원',2500000,'하나','111111111111','990101');
+insert into employee_management
+values(1000005,'박예원','01044444444','예원이집,집집',02451,'003','9901012222222','F',sysdate-1300,null,'nanyewoni@librain.org','팀장',3000000,'하나','111111111111','990101');
+insert into employee_management
+values(1000006,'김승수','01055555555','종로,비트캠프',02451,'003','9901011222222','M',sysdate-3700,null,'iamseungsu@librain.org','사원',2500000,'하나','111111111111','990101');
 commit;
 
 create table commute_management(

@@ -10,24 +10,45 @@
 </head>
 <body>
 <%@include file="../../includes/header.jsp"%>
-	<div class="col-md-6 col-xs-12">
-		<div class="form-group">
-			<select class="mdb-select md-form" id="sal_year">
-			  <option value="" disabled selected>년</option>
-			  <option value="2019">2019</option>
-			  <option value="2020">2020</option>
-			  <option value="2021">2021</option>
-			</select>
-			<select class="mdb-select md-form" id="sal_month">
-			  <option value="" disabled selected>월</option>
-			  <option value="9">9</option>
-			  <option value="10">10</option>
-			  <option value="11">11</option>
-			</select>
-			<input type="button" value="검색" id="search" class="btn btn-success btn-sm">
+<div class="container">
+	<br><br>
+	<h1 align="left">급여목록</h1>
+	<hr>
+	<div class="row form-group">
+		<div class="col-md-5">
+			<div class="form-group">
+			</div>
+			<div class="form-group">
+				<div class="col-md-4">
+					<select class="form-control" id="sal_year">
+					  <option value="" disabled selected>년</option>
+					  <option value="2019">2019</option>
+					  <option value="2020">2020</option>
+					  <option value="2021">2021</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-4">
+					<select class="form-control" id="sal_month">
+					  <option value="" disabled selected>월</option>
+					  <option value="9">9</option>
+					  <option value="10">10</option>
+					  <option value="11">11</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-4">
+					<input type="button" value="검색" id="search" class="btn btn-primary btn-block">
+				</div>
+			</div>
 		</div>
 	</div>
-	<div id="grid"></div>
+	<div class="form-group">
+		<div id="grid"></div>
+	</div>
+</div>
 <%@include file="../../includes/footer.jsp"%>
 </body>
 <script>
@@ -53,7 +74,6 @@
 		data: null,
 		scrollX: false,
 		scrollY: false,
-		rowHeaders: ['checkbox'],
 		columns: [
 			{
 				header: '사원번호',
