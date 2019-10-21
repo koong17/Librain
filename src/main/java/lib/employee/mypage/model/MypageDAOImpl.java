@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lib.employee.management.model.EmployeeDTO;
+import lib.employee.management.model.SalaryDTO;
 
 @Component
 public class MypageDAOImpl implements MypageDAO {
@@ -42,6 +43,12 @@ public class MypageDAOImpl implements MypageDAO {
 	public void empUpdate(EmployeeDTO employeeDTO) {
 		sqlsession.getMapper(MypageDAO.class).empUpdate(employeeDTO);
 		
+	}
+
+	@Override
+	public SalaryDTO salSelectOne(SalaryDTO salaryDTO) {
+		salaryDTO = sqlsession.getMapper(MypageDAO.class).salSelectOne(salaryDTO);
+		return salaryDTO;
 	}
 
 }

@@ -35,20 +35,6 @@ create table appendix ( --부록
     --REFERENCES book (book_num)
 );
 
-create table member( -- 회원
-    mem_id varchar2(20), --회원번호
-    mem_pw varchar2(30), --회원비밀번호
-    mem_name varchar2(20), --회원이름 
-    mem_jumin varchar2(30), --주민번호
-    mem_address varchar2(200), --회원주소
-    mem_phone varchar2(30), --회원폰번호
-    mem_email varchar2(30), --회원이메일
-    mem_rank number --회원 등급
-   --constraint member_pk primary key (m_id)
-);
-insert into member values('1', '12', '문혜수수','1111111-2222222', '서울', '010-1234-5678', 'aa@aa.com', 2);
-insert into member values('12', '123', '문혜수수','1111111-2222222', '서울', '010-1234-5678', 'aa@aa.com', 2);
-
 create table rental (
     rent_num number, --대여번호
     book_num number, --도서번호
@@ -258,3 +244,69 @@ board_updatedate date default sysdate
 
 alter table notice add constraint pk_notice
 primary key (board_no);
+
+-------------- 더미 입력
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '필독', '공지사항을 꾸준히 확인하세요', 'admin');
+commit;
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '필독!!', '공지사항을 꾸준히 확인하세요', 'admin');
+commit;
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, 'Librain 프로그램 사전 교육[파일첨부]', '꼭 읽기', 'admin');
+commit;
+-------------------승수 
+create table Facilities( --시설물
+Fac_serialnum number  ,          --일련번호 PK
+Fac_name varchar2(30),         -- 시설물 
+Fac_address varchar2(30) ,   --위치
+Fac_status varchar2(30),
+Fac_category varchar2(30)
+);
+
+create table Facilities_inspection(   --시설물 점검
+FacIn_serialnum  number ,                           --점검한것 Facilities의 fk
+FacIn_name varchar2(30),    
+FacIn_INSPECTION_DATE date default sysdate,    -- 점검일 
+FacIn_INSPECTION_DUE_DATE date
+);
+create table pay_management(
+    pay_no number,
+    pay_emp_no varchar2(10),
+    pay_division varchar2(20),
+    pay_total_pay number,
+    pay_real_pay number,
+    pay_income_tax number,
+    pay_residence_tax number,
+    pay_health_insurance number,
+    pay_unemployment_insurance number,
+    pay_nation_pension number,
+    pay_etx_pay number,
+    pay_basic_pay number,
+    pay_bonus number,
+    pay_incentive_pay number,
+    pay_food_pay number,
+    pay_transportation_pay number
+    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
+);
+
+drop table member;
+
+create table member( -- 회원
+    mem_id varchar2(50), --회원아이디
+    mem_pw varchar2(50), --회원비밀번호
+    mem_name varchar2(30), --회원이름
+    mem_jumin varchar2(30), --주민번호
+    mem_address varchar2(200), --회원주소
+    mem_address_number varchar2(20), --우편번호
+    mem_phone varchar2(50), --회원폰번호
+    mem_email varchar2(50), --회원이메일
+    mem_rank number default 2 -- 권한 변경(1. 블랙리스트/ 2. 일반회원/ 3. 국가유공자)
+   --constraint member_pk primary key (mem_id)
+);
+
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', '1234', '남민지', '930729-2111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '010-8534-0280', 'ming_0729@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '971111-2111111', '서울시 종로구 비트캠프', '010-1111-1111', '11111', 'pyw@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('captainss', '1234', '김승수', '931013-1111111', '서울시 종로구의 어느 고시원', '01111', '010-2222-2222', 'kss@naver.com');
+
+commit;

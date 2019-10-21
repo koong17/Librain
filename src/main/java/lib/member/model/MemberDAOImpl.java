@@ -9,9 +9,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberDAOImpl implements MemberDAO {
 
-	@Autowired
+	@Autowired	//bean 자동주입
 	SqlSession sqlsession;
 	
+	@Override
+	public void memberjoin(MemberDTO dto) {
+		sqlsession.getMapper(MemberDAO.class).memberjoin(dto);
+	}
+	
+	@Override
+	public int memberSearchIDCount(String mem_id) {
+		return sqlsession.getMapper(MemberDAO.class).memberSearchIDCount(mem_id);
+	}
+
 	@Override
 	public List<MemberDTO> memberSelectAll() {
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSelectAll();
@@ -54,4 +64,6 @@ public class MemberDAOImpl implements MemberDAO {
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).select(startRowNum, endRowNum);
 		return list;
 	}
+
+
 }

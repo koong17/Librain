@@ -7,6 +7,12 @@ import org.json.simple.JSONArray;
 import lib.member.model.MemberDTO;
 
 public interface MemberService {
+	
+	//회원가입
+	public void memberjoin(MemberDTO dto);
+	
+	//중복확인
+	public int memberSearchIDCount(String mem_id);
 
 	//전체목록
 	public JSONArray memberSelectAll();

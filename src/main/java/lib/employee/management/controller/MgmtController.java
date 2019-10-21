@@ -31,21 +31,34 @@ public class MgmtController {
 	@Autowired
 	MgmtService mgmtService;
 	
+	@GetMapping("/totalpaylist.do")
+	public String totalPayList() {
+		return "employee/erp/management/totalPayList";
+	}
+	
+	@PostMapping("/totalpaylist.do")
+	public @ResponseBody String totalPayListPro(@RequestBody SalaryDTO salaryDTO) {
+		JSONArray ja = mgmtService.salSelect(salaryDTO);
+		return ja.toString();
+	}
+	
 	@GetMapping("/totalpay.do")
-	public String totalPay(Model model) {
-		//model.addAttribute("gridData", mgmtService.cmtAdminSelectOne());
+	public String totalPay() {
 		return "employee/erp/management/totalPay";
 	}
+	
 	@PostMapping("/totalpay.do")
 	public String totalPayPro(SalaryDTO salaryDTO) {
 		mgmtService.salInsert(salaryDTO);
 		return "redirect:./totalpay.do";
 	}
+	
 	@PostMapping("/totalpay1.do")
 	public @ResponseBody String totalPay1(@RequestBody EmployeeDTO employeeDTO) {
 		JSONObject jo = mgmtService.empSelectPay(employeeDTO);
 		return jo.toString();
 	}
+	
 	@PostMapping(value = "/totalpay2.do", produces = "application/json;charset=UTF-8")
 	public @ResponseBody String totalPay2(@RequestBody CommuteDTO commuteDTO) {
 		JSONArray ja = mgmtService.cmtAdminSelectOne(commuteDTO);
@@ -76,11 +89,30 @@ public class MgmtController {
 		return "employee/erp/management/close";
 	}
 	
+	@GetMapping(value = "/empUpdate.do")
+	public String empUpdate(@ModelAttribute("employeeDTO") EmployeeDTO employeeDTO, Model model) {
+		model.addAttribute("employeeDTO", mgmtService.empSelectOne(employeeDTO));
+		return "employee/erp/management/empUpdateForm";
+	}
+	
+	@PostMapping(value = "/empUpdate.do")
+	public String empUpdatePro(@ModelAttribute EmployeeDTO employeeDTO) {
+		System.out.println(employeeDTO);
+		mgmtService.empUpdate(employeeDTO);
+		return "employee/erp/management/close";
+	}
+	
 	@GetMapping("/emplist.do")
 	public String empList(Model model) {
 		JSONArray ja = mgmtService.empSelectAll();
 		model.addAttribute("gridData", ja);
 		return "employee/erp/management/empList";
+	}
+	
+	@PostMapping(value = "/empSearch.do", produces = "application/text; charset=utf8")
+	public @ResponseBody String empSearch(@RequestParam("searchType") String searchType, @RequestParam("searchWord") String searchWord) {
+		JSONArray ja = mgmtService.empSearch(searchType, searchWord);
+		return ja.toString();
 	}
 	
 	@GetMapping("/cmtlist.do")
@@ -96,5 +128,10 @@ public class MgmtController {
 			mgmtService.cmtUpdate(commuteDTO);
 		}
 		return mgmtService.cmtAdminSelectAll().toString();
+	}
+	
+	@PostMapping(value = "/cmtSearch.do", produces = "application/json;charset=UTF-8")
+	public @ResponseBody String cmtSearch(@RequestBody CommuteDTO commuteDTO) {
+		return mgmtService.cmtSearch(commuteDTO).toString();
 	}
 }

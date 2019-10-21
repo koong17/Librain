@@ -8,13 +8,33 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<input type="button" id="work" value="출근" >
-	<input type="button" id="leave" value="퇴근">
-	<hr>
-	오늘의 출근현황
-	<div id="gridTop"></div>
-	<hr>
-	<div id="grid"></div>
+<%@include file="../includes/header.jsp"%>
+  <div class="container-fluid bg-light " align="center">
+	<br>
+      <div class="row align-items-center justify-content-center" align="center">
+         <div class="col-md-2 pt-3">
+            <div class="form-group">
+            	<input type="button" class="btn btn-primary btn-block" id="work" value="출근" >
+            </div>
+         </div>
+         <div class="col-md-2 pt-3">
+            <div class="form-group">
+            	<input type="button" class="btn btn-primary btn-block" id="leave" value="퇴근" >
+            </div>
+         </div>
+      </div>
+      <div class="row align-items-center justify-content-center" align="center">
+		<div class="col-md-8">
+			<div id="gridTop"></div>
+		</div>
+	  </div>
+      <div class="row align-items-center justify-content-center" align="center">
+		<div class="col-md-8">
+			<div id="grid"></div>
+		</div>
+	  </div>
+   </div>
+<%@include file="../includes/footer.jsp"%>
 </body>
 <script>
 

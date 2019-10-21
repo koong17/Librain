@@ -44,7 +44,7 @@
 								<button data-oper='list' class="btn btn-info">List</button><br><br>
 								<button data-oper='getPrev' class="btn btn-default">이전글</button>
 								<button data-oper='getNext' class="btn btn-default">다음글</button>
-								<form id='operForm' action="${pageContext.request.contextPath}/employee/board/modify" method="get">
+								<form id='operForm' action="${pageContext.request.contextPath}/board/modify.do" method="get">
 									<input type='hidden' id='board_no' name='board_no' 
 										value='<c:out value="${board.board_no }"/>'>
 									<input type='hidden' name='pageNum' 
@@ -98,24 +98,24 @@
 		var operForm = $("#operForm");
 		$("button[data-oper='modify']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/modify").submit();
+			operForm.attr("action", "${pageContext.request.contextPath}/board/modify.do").submit();
 		});
 		
 		$("button[data-oper='list']").on("click", function(e){
 			
 			operForm.find("#board_no").remove();
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/list")
+			operForm.attr("action", "${pageContext.request.contextPath}/board/list.do")
 			operForm.submit();
 		});
 		
 		$("button[data-oper='getNext']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getNext").submit();
+			operForm.attr("action", "${pageContext.request.contextPath}/board/getNext.do").submit();
 		});
 		
 		$("button[data-oper='getPrev']").on("click", function(e){
 			
-			operForm.attr("action", "${pageContext.request.contextPath}/employee/board/getPrev").submit()
+			operForm.attr("action", "${pageContext.request.contextPath}/board/getPrev.do").submit()
 		});
 	});
 	</script>
@@ -126,7 +126,7 @@
 		(function(){
 			var board_no = '<c:out value="${board.board_no}"/>';
 			//화면에 보여주기
-			$.getJSON("${pageContext.request.contextPath}/employee/board/getAttachList", {board_no:board_no}, function(arr){
+			$.getJSON("${pageContext.request.contextPath}/board/getAttachList.do", {board_no:board_no}, function(arr){
 				console.log(arr);
 				
 				var str = "";
@@ -139,13 +139,13 @@
 						
 						str += "<li data-path='"+attach.uploadPath + "' data-uuid = '" + attach.uuid + "' data-filename= '" + attach.fileName + 
 							  "' data-type='"+attach.fileType + "'><div>";
-						str += "<img src = '${pageContext.request.contextPath}/employee/board/display?fileName="+fileCallPath+"'>";
+						str += "<img src = '${pageContext.request.contextPath}/board/display?fileName="+fileCallPath+"'>";
 						str += "</div>";
 						str += "</li>";
 					} else {
 						str += "<li data-path='" + attach.uploadPath + "' data-uuid = '"+attach.uuid + "' data-filename = '"+attach.fileName +"' data-type='"+attach.fileType +"'><div>";
 						str += "<span> " + attach.fileName + "</span><br/>";
-						str += "<img src = '../../resources/img/attach.png' width=30px>";
+						str += "<img src = '../resources/img/attach.png' width=30px>";
 						str += "</div>";
 						str += "</li>";
 					}
@@ -170,7 +170,7 @@
 			      showImage(path.replace(new RegExp(/\\/g),"/"));
 			    }else {
 			      //download 
-			      self.location ="${pageContext.request.contextPath}/employee/board/download?fileName="+path
+			      self.location ="${pageContext.request.contextPath}/board/download?fileName="+path
 			    }
 			    
 			  });
@@ -181,7 +181,7 @@
 			    $(".bigPictureWrapper").css("display","flex").show();
 			    
 			    $(".bigPicture")
-			    .html("<img src='${pageContext.request.contextPath}/employee/board/display?fileName="+fileCallPath+"' >")
+			    .html("<img src='${pageContext.request.contextPath}/board/display?fileName="+fileCallPath+"' >")
 			    .animate({width:'100%', height: '100%'}, 1000);
 			    
 			  }
