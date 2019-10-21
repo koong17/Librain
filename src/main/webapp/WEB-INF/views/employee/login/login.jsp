@@ -34,7 +34,7 @@
 <body>
 	<c:choose>
 	<c:when test="${!empty sessionScope.emp_no }">
-	<script>window.location.href='memberList.do'</script>
+	<script>window.location.href='main.do'</script>
 	</c:when>
 	<c:when test="${empty sessionScope.emp_no}">
 	

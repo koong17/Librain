@@ -17,5 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE emp_no = #{emp_no} AND emp_password = #{emp_password}
 	]]>
 </select>
+<select id="bookCount" resultType="map">
+	<![CDATA[
+		select count(*) count, b.book_ctgr_num_db ctgr from book b, book_category bc where b.book_ctgr_num_db = bc.book_ctgr_num_db 
+		group by book_ctgr_name, b.book_ctgr_num_db order by b.book_ctgr_num_db
+	]]>
+</select>
 </mapper>
 	

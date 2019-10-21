@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -23,11 +24,13 @@ public class LoginController {
 	
 	@RequestMapping("/login.do")
 	public String login() {
-		return "employee/board/login";
+		return "employee/login/login";
 	}
 	@RequestMapping("/main.do")
-	public String loginAns() {
-		return "employee/board/loginResult";
+	public String loginAns(Model model) {
+		model.addAttribute("gridData", service.bookCount());
+		System.out.println(service.bookCount());
+		return "employee/login/loginResult";
 	}
 	
 	//로그인 처리
@@ -49,7 +52,7 @@ public class LoginController {
 	public ModelAndView logout(HttpSession session) {
 		service.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("employee/board/login");
+		mav.setViewName("employee/login/login");
 		mav.addObject("msg", "로그아웃 성공");
 		return mav;
 	}
