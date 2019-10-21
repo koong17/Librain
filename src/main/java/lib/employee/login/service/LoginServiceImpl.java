@@ -26,14 +26,19 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public String selectSessionInfo(EmployeeDTO dto){
-		String emp_name = dao.selectSessionInfo(dto);
-		System.out.println("loginServiceImpl"  + emp_name);
+	public void logout(HttpSession session) {
+		dao.logout(session);
+	}
+	
+	@Override
+	public String selectSessionName(String emp_no) {
+		String emp_name = dao.selectSessionName(emp_no);
 		return emp_name;
 	}
 	
 	@Override
-	public void logout(HttpSession session) {
-		dao.logout(session);
+	public String selectSessionAuth(String emp_no) {
+		String emp_auth = dao.selectSessionAuth(emp_no);
+		return emp_auth;
 	}
 }

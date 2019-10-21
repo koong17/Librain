@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lib.employee.board.model.BoardAttachDTO;
 import lib.employee.board.model.Criteria;
 import lib.employee.board.model.NoticeDTO;
 import lib.employee.board.service.NoticeService;
+import lib.employee.login.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -32,10 +36,22 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 
 	private NoticeService service;
+	private LoginService loginService;
+	public HttpSession session;
 
+//	@GetMapping("/registerNotice.do")
+//	public String boardRegisterForm() {
+//		return "employee/board/registerNotice";
+//	}
 	@GetMapping("/registerNotice.do")
-	public String boardRegisterForm() {
-		return "employee/board/registerNotice";
+	public ModelAndView boardRegisterForm() {
+		//작성자 이름
+		ModelAndView mav = new ModelAndView();
+		String emp_no= (String) session.getAttribute("emp_no");
+		mav.setViewName("employee/board/registerNotice");
+		mav.addObject("emp_name", loginService.selectSessionName(emp_no));
+		
+		return mav;
 	}
 
 	@PostMapping("/registerNotice.do")

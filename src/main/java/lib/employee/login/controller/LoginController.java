@@ -39,7 +39,8 @@ public class LoginController {
 		if(result) {
 			mav.setViewName("employee/board/loginResult");
 			///emp 이름 가져오기
-			mav.addObject("emp_name", service.selectSessionInfo(dto));
+			String emp_no= (String) session.getAttribute("emp_no");
+			mav.addObject("emp_name", service.selectSessionName(emp_no));
 		}else {
 			mav.setViewName("redirect:login.do");
 		}

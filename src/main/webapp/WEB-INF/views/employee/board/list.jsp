@@ -7,7 +7,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Tables</h1>
+		<h1 class="page-header">Tables </h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -18,10 +18,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Board List Page
+			<c:choose>
+				<c:when test="${auth == '관장'}">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right" style='margin-right:5px'>
 					Register New Board</button>
 				<button id='noticeBtn' type="button" class="btn btn-xs pull-right">
 					Register New Notice</button>
+				</c:when>
+			</c:choose>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">

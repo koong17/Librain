@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,10 +40,29 @@ public class BoardController {
 	private BoardService boardService;
 	private NoticeService noticeService;
 	private LoginService loginService;
+	public HttpSession session;
+
+//	@GetMapping("/list.do")
+//	public String boardSelectAll(Criteria cri, Model model) {
+//		model.addAttribute("list", boardService.boardSelectAll(cri));
+//		
+//		//전체 데이터 수 
+//		int total = boardService.boardGetTotal(cri);
+//		model.addAttribute("pageMaker", new PageDTO(cri, total));
+//		
+//		//공지사항 출력
+//		model.addAttribute("notice", noticeService.getNotices());
+//		return "employee/board/list";
+//
+//	}
 	
 	@GetMapping("/list.do")
 	public String boardSelectAll(Criteria cri, Model model) {
 		model.addAttribute("list", boardService.boardSelectAll(cri));
+		
+		//회원권한
+		String emp_no= (String) session.getAttribute("emp_no");
+		model.addAttribute("auth", loginService.selectSessionAuth(emp_no));
 		
 		//전체 데이터 수 
 		int total = boardService.boardGetTotal(cri);
@@ -54,13 +75,16 @@ public class BoardController {
 	}
 
 	@GetMapping("/register.do")
-	public String boardRegisterForm() {
+	public ModelAndView boardRegisterForm() {
 		//작성자 이름
 		ModelAndView mav = new ModelAndView();
+		String emp_no= (String) session.getAttribute("emp_no");
+		mav.setViewName("employee/board/register");
+		mav.addObject("emp_name", loginService.selectSessionName(emp_no));
 		
-		return "employee/board/register";
+		return mav;
 	}
-
+	
 	@PostMapping("/register.do")
 	public String boardInsert(BoardDTO board, RedirectAttributes rttr) {
 		//첨부파일 처리

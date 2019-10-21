@@ -24,11 +24,14 @@ public class LoginDAO {
 		return (Integer.parseInt(result)==0)? false:true;
 	}
 	
-	//
-	public String selectSessionInfo(EmployeeDTO dto){
-		System.out.println("유저 정보 불러오기");
-		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionInfo", dto);
-		return result;//여기까지 ok
+	public String selectSessionName(String emp_no) {
+		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionName", emp_no);
+		return result;
+	}
+	
+	public String selectSessionAuth(String emp_no) {
+		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionAuth", emp_no);
+		return result;
 	}
 	
 	public void logout(HttpSession session) {
