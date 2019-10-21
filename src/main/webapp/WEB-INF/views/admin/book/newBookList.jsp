@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,9 @@
 <title>도서 구입 승인</title>
 </head>
 <body>
+<%@include file="../../employee/includes/header.jsp"%>
 	<div class="container-fluid bg-light ">
+	<br>
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="approveBtn">
@@ -58,6 +62,7 @@
 	<div>
 		<div id="grid"></div>
 	</div>
+	<%@include file="../../employee/includes/footer.jsp"%>
 </body>
 
 <!-- bookJS -->

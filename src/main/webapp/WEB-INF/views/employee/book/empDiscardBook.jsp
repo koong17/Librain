@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- boostrap -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Toast pagination -->
    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
@@ -14,14 +20,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
-	
-<!-- boostrap -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -38,7 +36,9 @@
 <title>도서검색</title>
 </head>
 <body>
+<%@include file="../includes/header.jsp"%>
 	<div class="container-fluid bg-light ">
+	<br>
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-2">
 				<input class="form-control" type="text" placeholder="도서번호를 입력하세요." id="searchWord" name="searchWord">
@@ -48,7 +48,7 @@
 					<i class="fa fa-search"></i>
 				</button>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
 					선택 폐기 신청
 				</button>
@@ -66,15 +66,14 @@
 		</div>
 	</div>
 	<hr>
+	<!-- <div>
+		<div id="grid"></div>
+	</div> -->
 	<div>
 		<div id="grid"></div>
-	</div>
-	<hr>
-	<div>
-		<div id="grid"></div>
-		<hr>
+		<br>
 		<div id="book">
-			<div class="col-md-1" style="margin-bottom: 10px;">
+			<div class="col-md-2" style="margin-bottom: 10px;">
 				<button type="button" class="btn btn-primary btn-block" id="deleteBookBtn">
 					선택 도서 삭제
 				</button>
@@ -82,6 +81,8 @@
 			<div id="bookGrid"></div>
 		</div>
 	</div>
+	
+	<%@include file="../includes/footer.jsp"%>
 </body>
 
 <!-- bookJS -->
