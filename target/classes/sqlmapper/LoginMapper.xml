@@ -17,21 +17,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE emp_no = #{emp_no} AND emp_password = #{emp_password}
 	]]>
 </select>
-
-<select id="selectSessionName" resultType="String">
-	<![CDATA[
-		SELECT emp_name FROM employee_management
-		WHERE emp_no = #{emp_no}
-	]]>
-	
-</select>
-
-<select id="selectSessionAuth" resultType="String">
-	<![CDATA[
-		SELECT emp_position FROM employee_management
-		WHERE emp_no = #{emp_no}
-	]]>
-	
-</select>
 </mapper>
 	

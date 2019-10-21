@@ -37,7 +37,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result) {
-			mav.setViewName("employee/board/loginResult");
+			mav.setViewName("redirect:main.do");
 		}else {
 			mav.setViewName("redirect:login.do");
 		}

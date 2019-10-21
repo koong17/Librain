@@ -46,7 +46,7 @@
 						</div>
 						<c:choose>
 						<c:when test="${sessionScope.emp_name == board.board_writer || sessionScope.emp_position=='관장'}">
-								<button data-oper='modify' class="btn btn-default">Modify</button>
+								<button data-oper='modify' class="btn btn-warning">Modify</button>
 						</c:when>
 						</c:choose>
 								<button data-oper='list' class="btn btn-info">List</button><br><br>

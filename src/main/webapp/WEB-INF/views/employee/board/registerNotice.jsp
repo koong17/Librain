@@ -11,7 +11,7 @@
 </c:choose>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Notice Register</h1>
+      <h1 class="page-header">공지 등록</h1>
    </div>
    <!--  /.col-lg-12 -->
    </div>
@@ -47,7 +47,7 @@
    <div class="row">
       <div class="col-lg-12">
          <div class="panel panel-default">
-            <div class="panel-heading">Notice Register</div>
+            <div class="panel-heading">공지글</div>
             <!--  /.panel-heading -->
             <div class="panel-body">
                <form role="form" action="${pageContext.request.contextPath}/board/registerNotice.do" method="post">
@@ -61,9 +61,9 @@
                         
                         <div class="form-group">
                            <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${sessionScope.emp_name}" readonly="readonly">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit Button</button>
-                        <button type="reset" class="btn btn-default">Reset Button</button>
+                        </div><br>
+                        <button type="submit" class="btn btn-info">등록</button>
+                        <button type="reset" class="btn btn-danger">취소</button>
                </form>
             </div>
             <!-- end panel body -->

@@ -11,7 +11,7 @@
 </c:choose>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Board Register</h1>
+      <h1 class="page-header">일반글 등록</h1>
    </div>
    <!--  /.col-lg-12 -->
    </div>
@@ -49,7 +49,7 @@
    <div class="row">
       <div class="col-lg-12">
          <div class="panel panel-default">
-            <div class="panel-heading">Board Register</div>
+            <div class="panel-heading">게시글</div>
             <!--  /.panel-heading -->
             
             <div class="panel-body">
@@ -64,8 +64,9 @@
                         
                         <div class="form-group">
                            <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${sessionScope.emp_name}" readonly="readonly">
-                        <button type="submit" class="btn btn-default">Submit Button</button>
-                        <button type="reset" class="btn btn-default">Reset Button</button>
+                        <br>
+                        <button type="submit" class="btn btn-info">등록</button>
+                        <button type="reset" class="btn btn-danger">취소</button>
                </form>
             </div>
             <!-- end panel body -->
