@@ -21,15 +21,22 @@ $(document).ready(function() {
 });
 
 function showBookGrid() {
-	console.log(grid.getRowCount());
+	var flag = 0;
 	setTimeout(function() {
-		if(grid.getData()[grid.getRowCount()-1].new_status == "승인") {
+		var gridGetData = grid.getData();
+		console.log(grid.getData());
+		for(var i = 0; i < gridGetData.length; i++) {
+			console.log(i, ' = ', gridGetData[i].new_status);
+			if(gridGetData[i].new_status == "승인") flag = 1; 
+		}
+		console.log('flag = ', flag);
+		if(flag == 1) {
 			$('#book').show();
 				console.log(grid.getData()[0]);
 				console.log(grid.getData()[0].new_status);
 				bookGrid.checkAll();
 		}
-	}, 200); 
+	}, 300);  
 }
 
 function addRowData() {
