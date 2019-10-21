@@ -25,7 +25,14 @@ public interface EmpBookDAO {
 	public void deleteBook(EmpBookDTO dto); //책 삭제
 	public void updateBook(EmpBookDTO dto); //책 수정
 	public List<New_BookDTO> newSelect(); //신간출력
+	public List<New_BookDTO> newSelectBook(); //신간요청 승인 출력
 	public void newInsertBook(New_BookDTO dto); //신간 책 추가
+	public int newMaxBookNum();
 	public void newDeleteBook(New_BookDTO dto); //신간 책 삭제
 	public void newUpdateBook(New_BookDTO dto); //신간 책 수정
+	public BookRentDisDTO disSearch(int book_num);
+	public List<BookRentDisDTO> disSelect(); //폐기출력
+	public List<BookRentDisDTO> disSelectBook(); //폐기요청 승인출력
+	public void disInsertBook(BookRentDisDTO dto);//폐기 책 추가
+	public void disDeleteBook(BookRentDisDTO dto); //폐기 책 삭제
 }

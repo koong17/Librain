@@ -9,6 +9,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+<%@include file="../../includes/header.jsp"%>
 	<div id="grid"></div>
 	<hr>
 	<div id="days"></div>
@@ -86,6 +87,7 @@
 			</div>
 		</div>
 	</form>
+<%@include file="../../includes/footer.jsp"%>
 </body>
 <script>
 	$("#check").click(function(){

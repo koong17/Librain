@@ -1,6 +1,8 @@
 package lib.employee.management.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -33,7 +35,7 @@ public class MgmtServiceImpl implements MgmtService{
 			jo.put("emp_name",dto.getEmp_name());
 			jo.put("emp_telephone",dto.getEmp_telephone());
 			jo.put("emp_email",dto.getEmp_email());
-			jo.put("emp_dept_code",dto.getEmp_dept_code());
+			jo.put("emp_dept_code",dto.getDept_name());
 			jo.put("emp_position",dto.getEmp_position());
 			jo.put("emp_join_date",dto.getEmp_join_date().toString().substring(0,10));
 			ja.add(jo);
@@ -127,6 +129,83 @@ public class MgmtServiceImpl implements MgmtService{
 	@Override
 	public void salInsert(SalaryDTO salaryDTO) {
 		employeeDAO.salInsert(salaryDTO);
+	}
+
+	@Override
+	public JSONArray salSelect(SalaryDTO salaryDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		
+		List<SalaryDTO> list = employeeDAO.salSelect(salaryDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			SalaryDTO dto = list.get(i);
+			jo.put("emp_no",dto.getEmp_no());
+			jo.put("sal_basic_pay",dto.getSal_basic_pay());
+			jo.put("sal_food_pay",dto.getSal_food_pay());
+			jo.put("sal_bonus",dto.getSal_bonus());
+			jo.put("sal_total",dto.getSal_total());
+			jo.put("sal_deducted",dto.getSal_deducted());
+			jo.put("sal_real",dto.getSal_real());
+			ja.add(jo);
+		}
+		
+		return ja;
+	}
+
+	@Override
+	public JSONArray empSearch(String searchType, String searchWord) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		Map<String, String> params = new HashMap<>();
+		params.put("searchType", searchType);
+		params.put("searchWord", "%"+searchWord+"%");
+		List<EmployeeDTO> list = employeeDAO.empSearch(params);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			EmployeeDTO dto = list.get(i);
+			jo.put("emp_no",dto.getEmp_no());
+			jo.put("emp_name",dto.getEmp_name());
+			jo.put("emp_telephone",dto.getEmp_telephone());
+			jo.put("emp_email",dto.getEmp_email());
+			jo.put("emp_dept_code",dto.getDept_name());
+			jo.put("emp_position",dto.getEmp_position());
+			jo.put("emp_join_date",dto.getEmp_join_date().toString().substring(0,10));
+			ja.add(jo);
+		}
+		return ja;
+	}
+
+	@Override
+	public void empUpdate(EmployeeDTO employeeDTO) {
+		employeeDAO.empUpdate(employeeDTO);
+	}
+
+	@Override
+	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO) {
+		return employeeDAO.empSelectOne(employeeDTO);
+	}
+
+	@Override
+	public JSONArray cmtSearch(CommuteDTO commuteDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		
+		List<CommuteDTO> list = employeeDAO.cmtSearch(commuteDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			CommuteDTO dto = list.get(i);
+			jo.put("cmt_no",dto.getCmt_no());
+			jo.put("emp_no",dto.getEmp_no());
+			jo.put("cmt_status",dto.getCmt_status());
+			jo.put("cmt_year",dto.getCmt_year());
+			jo.put("cmt_month",dto.getCmt_month());
+			jo.put("cmt_day",dto.getCmt_day());
+			jo.put("cmt_hour",dto.getCmt_hour()+"");
+			jo.put("cmt_minute",dto.getCmt_minute()+"");
+			ja.add(jo);
+		}
+		return ja;
 	}
 	
 }

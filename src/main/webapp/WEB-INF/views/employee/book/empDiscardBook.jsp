@@ -40,7 +40,7 @@
 <body>
 	<div class="container-fluid bg-light ">
 		<div class="row align-items-center justify-content-center">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<input class="form-control" type="text" placeholder="도서번호를 입력하세요." id="searchWord" name="searchWord">
 			</div>
 			<div class="col-md-1">
@@ -69,10 +69,23 @@
 	<div>
 		<div id="grid"></div>
 	</div>
+	<hr>
+	<div>
+		<div id="grid"></div>
+		<hr>
+		<div id="book">
+			<div class="col-md-1" style="margin-bottom: 10px;">
+				<button type="button" class="btn btn-primary btn-block" id="deleteBookBtn">
+					선택 도서 삭제
+				</button>
+			</div>
+			<div id="bookGrid"></div>
+		</div>
+	</div>
 </body>
 
 <!-- bookJS -->
-<script src="resources/js/empDiscardBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empDiscardBook.js?after"></script>
 
    
    

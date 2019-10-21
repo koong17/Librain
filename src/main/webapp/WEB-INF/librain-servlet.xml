@@ -19,11 +19,13 @@
 <annotation-driven/>
 <context:component-scan base-package="lib.employee.facility.controller"/>
 <context:component-scan base-package="lib.employee.facility.model"/>
-<context:component-scan base-package="lib.member.*"/>
+<context:component-scan base-package="lib.employee.member.*"/>
 <context:component-scan base-package="lib.employee.management.*"/>
 <context:component-scan base-package="lib.employee.mypage.*"/>
 <context:component-scan base-package="lib.employee.facility.*" />
 <context:component-scan base-package="lib.employee.book.*" />
+<context:component-scan base-package="lib.member.*"/>
+<context:component-scan base-package="lib.admin.book.*" />
 <!-- <context:component-scan base-package="lib.member.book.*" /> -->
 
  

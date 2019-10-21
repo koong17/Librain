@@ -15,11 +15,17 @@ public class FacilitiesInspectionDAOImp implements FacilitiesInspectionDAO {
 	SqlSession sqlsession;
 
 	@Override
-	public List<FacilitiesDTO> facSelect(int startrownum, int endrownum) {
+	public List<FacilitiesInspectionDTO> facinselect(int startrownum, int endrownum) {
 		// TODO Auto-generated method stub
-		return sqlsession.getMapper(FacilitiesInspectionDAO.class).facSelect(startrownum, endrownum);
+		return sqlsession.getMapper(FacilitiesInspectionDAO.class).facinselect(startrownum, endrownum);
 	}
-	
+
+	@Override
+	public int facintotalcount() {
+		return sqlsession.getMapper(FacilitiesInspectionDAO.class).facintotalcount();
+	}
+
+
 	
 
 }

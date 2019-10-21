@@ -5,6 +5,13 @@ $(document).ready(function() {
        $('#grid').show(); 
         searchAjax();
     });
+    
+    $('#refreshBtn').click(function() {
+    	console.log("refresh");
+    	$('#searchWord').val("");
+    	$('#searchCtgr').val("전체");
+    	$('#grid').hide();
+    });
 
 });
 
@@ -18,7 +25,7 @@ function searchAjax() {
    else {
       $.ajax({
          type: "Post",
-         url: "./memSearch.do",
+         url: "./search.do",
          data: {
             searchCtgr: $("#searchCtgr").val(),
             searchWord: $("#searchWord").val()
@@ -36,25 +43,20 @@ function searchAjax() {
    }
 }
 
-function confirm(){
-   grid.readData(1,true);
-   grid.sort("book_num",false);
-}
-
 var Grid = tui.Grid;
 Grid.setLanguage('ko');
 
 var gridData =
 {
    api: {
-         readData: { url: 'http://localhost:8080/mvc/memSearch.do/readData', method: 'GET' }
+         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData', method: 'GET' }
    }
 }
 
 var gridData2 =
 {
    api: {
-         readData: { url: 'http://localhost:8080/mvc/memSearch.do/readData2', method: 'GET' }
+         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData2', method: 'GET' }
    }
 }
 
@@ -103,7 +105,7 @@ const newBookGrid = new tui.Grid({
        },
    rowHeaders: ['rowNum'],
    pageOptions: {
-      perPage: 5
+      perPage: 10
    },
    scrollX: false,
    scrollY: false,
@@ -140,7 +142,7 @@ const mostRentGrid = new tui.Grid({
    },
    rowHeaders: ['rowNum'],
    pageOptions: {
-      perPage: 5
+      perPage: 10
    },
    scrollX: false,
    scrollY: false,

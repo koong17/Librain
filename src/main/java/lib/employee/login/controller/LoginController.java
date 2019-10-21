@@ -25,6 +25,10 @@ public class LoginController {
 	public String login() {
 		return "employee/board/login";
 	}
+	@RequestMapping("/main.do")
+	public String loginAns() {
+		return "employee/board/loginResult";
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/loginCheck.do")
@@ -32,24 +36,10 @@ public class LoginController {
 		boolean result = service.loginCheck(dto, session);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("/employee/board/loginResult");
 		if(result) {
-			mav.addObject("msg", "성공");
-////			mav.addObject("name", "신짱구");
-//
-//			///////////////////////////////////////////////이름가져오기
-////			System.out.println("셀렉문 결과 : " + service.selectSessionInfo(dto));	//여기도 ok
-//			ArrayList<EmployeeDTO> list = new ArrayList<>();
-//			list.addAll(service.selectSessionInfo(dto));
-//			System.out.println("이름좀" + list.get(0).toString());//얘도 OK
-//			list.get(0).getEmp_name();
-//			System.out.println("이름좀" + list.get(0).getEmp_name());
-////			System.out.println(dto.getEmp_name());//얘는 null...
-//			mav.addObject("emp_name", dto.getEmp_name());
-////////////////////////////////////////////////
-			
+			mav.setViewName("redirect:main.do");
 		}else {
-			mav.addObject("msg", "실패");
+			mav.setViewName("redirect:login.do");
 		}
 		return mav;
 	}

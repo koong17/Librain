@@ -5,9 +5,13 @@
 
 <mapper namespace="lib.member.model.MemberDAO">
 
-	<insert id="memberInsert" parameterType="lib.member.model.MemberDTO">
-		insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_phone,mem_email) values (#{mem_id},#{mem_pw},#{mem_name},#{mem_jumin},#{mem_address},#{mem_phone},#{mem_email});
+	<insert id="memberjoin" parameterType="lib.member.model.MemberDTO">
+		insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_phone,mem_email) values (#{mem_id},#{mem_pw},#{mem_name},#{mem_jumin},#{mem_address},#{mem_phone},#{mem_email})
 	</insert>
+	
+	<select id="memberSearchIDCount" parameterType="lib.member.model.MemberDTO">
+		select count(*) form member where mem_id = #{mem_id}
+	</select>
 	
 	<!-- 권한변경 -->
 	<update id="memberRankUpdate" 

@@ -9,25 +9,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>공지게시판</title>
-
+    <title>Librain</title>
     <!-- Bootstrap Core CSS -->
-    <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="../resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="../resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../resources/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -210,9 +209,9 @@
 						<c:when test='${!empty sessionScope.emp_no }'>
                         <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-check" aria-hidden="true"></i> 근태관리</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;개인급여</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;정보수정</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 정보수정</a>
+                        <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 개인급여</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -266,15 +265,15 @@
                                 <li>
                                     <a href="${pageContext.request.contextPath}/empRentBook.do">도서 폐기 신청</a>
                                 </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/memberList.do">회원조회</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-sitemap fa-fw"></i>직원보기</a>
+                            <a href="${pageContext.request.contextPath}/memberList.do"><i class="fa fa-sitemap fa-fw"></i>회원조회</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-users fa-fw"></i>직원보기</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
@@ -303,6 +302,9 @@
                                         </li>
                                         <li>
                                             <a href="${pageContext.request.contextPath}/mgmt/totalpay.do">급여관리</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/mgmt/totalpaylist.do">급여목록</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
