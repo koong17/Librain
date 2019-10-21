@@ -6,6 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MemberDAO {
 	
+	//회원가입
+	public void memberjoin(MemberDTO dto);
+	
+	//중복확인
+	public int memberSearchIDCount(String mem_id);
+	
 	//전체출력
 	public List<MemberDTO> memberSelectAll();
 	

@@ -4,10 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="../includes/header.jsp" %>
-	
+<c:choose>
+	<c:when test="${empty sessionScope.emp_no }">
+	<script>window.location.href='${pageContext.request.contextPath}/login.do'</script>
+	</c:when>
+</c:choose>	
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Board Read</h1>
+		<h1 class="page-header">공지글</h1>
 	</div>
 	<!--  /.col-lg-12 -->
 	</div>
@@ -40,7 +44,11 @@
 						<label>Writer</label>	<input class="form-control" name="board_writer" 
 							value='<c:out value="${board.board_writer }"/>' readonly="readonly">
 						</div>
-								<button data-oper='modify' class="btn btn-default">Modify</button>
+						<c:choose>
+						<c:when test="${sessionScope.emp_name == board.board_writer || sessionScope.emp_position=='관장'}">
+								<button data-oper='modify' class="btn btn-warning">Modify</button>
+						</c:when>
+						</c:choose>
 								<button data-oper='list' class="btn btn-info">List</button><br><br>
 								<button data-oper='getPrevNotice' class="btn btn-default">이전공지</button>
 								<button data-oper='getNextNotice' class="btn btn-default">다음공지</button>

@@ -1,7 +1,5 @@
 package lib.employee.login.service;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,10 @@ public class LoginServiceImpl implements LoginService{
 	public boolean loginCheck(EmployeeDTO dto, HttpSession session) {
 		boolean result = dao.loginCheck(dto);
 		if(result == true) {
+			dto = dao.loginInfo(dto);
 			session.setAttribute("emp_no",  dto.getEmp_no());
-			
+			session.setAttribute("emp_name",  dto.getEmp_name());
+			session.setAttribute("emp_position",  dto.getEmp_position());
 		}
 		return result;
 	}
@@ -30,4 +30,5 @@ public class LoginServiceImpl implements LoginService{
 	public void logout(HttpSession session) {
 		dao.logout(session);
 	}
+	
 }

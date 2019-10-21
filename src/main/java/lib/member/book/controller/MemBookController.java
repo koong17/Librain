@@ -37,7 +37,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 5); 
+		pageJO.put("totalCount", 20); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.newBook(perPage, page)); //내용물 
 		resultJO.put("result", true);
@@ -58,7 +58,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 5); 
+		pageJO.put("totalCount", 20); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.mostRent(perPage, page)); //내용물 
 		resultJO.put("result", true);

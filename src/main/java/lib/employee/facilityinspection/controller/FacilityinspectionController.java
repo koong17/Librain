@@ -1,5 +1,6 @@
 package lib.employee.facilityinspection.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public String check(Model model) {
 	List<FacilitiesDTO> list=facilitiesDAO.facSelect(1,1);
 	model.addAttribute("list",list);
 	return "employee/erp/facility/example";
+	
+	
 }
 
 

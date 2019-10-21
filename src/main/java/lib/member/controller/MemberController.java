@@ -1,6 +1,8 @@
 package lib.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +27,34 @@ public class MemberController {
 	MemberService memberService;
 	@Autowired
 	MemberDAO memberDAO;
+	
+	@GetMapping("/memberjoin.do")
+	public String memberjoin() {
+		return "member/memberjoin";
+	}
+	
+	@PostMapping("/memberIDCheck.do")
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String mem_id){
+		int count=0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		count = memberService.memberSearchIDCount(mem_id);
+		map.put("cnt", count);
+		return map;
+	}
+	
+	@PostMapping("/memberjoin.do")
+	public String memberjoin(@ModelAttribute MemberDTO memberDTO) {
+		System.out.println("join컨트롤탐");
+		memberService.memberjoin(memberDTO);
+		return "member/memberjoin";
+	}
 
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {
 		JSONArray ja = memberService.memberSelectAll();
 		model.addAttribute("gridData", ja);
+		System.out.println("list.do탐");
 		return "employee/member/memberList";
 	}
 
@@ -67,7 +93,7 @@ public class MemberController {
 		resultJO.put("result", true);
 		resultJO.put("data", contentJO);
 		
-		System.out.println("^ㅁ^");
+		System.out.println("list/readdate탐");
 		
 		return resultJO.toString();
 	}

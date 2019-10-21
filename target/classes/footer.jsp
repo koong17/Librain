@@ -6,13 +6,13 @@
     </div>
     <!-- /#wrapper -->
 
-   <!--  jQuery -->
+    jQuery
     <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
+    Bootstrap Core JavaScript
     <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-   <!--  Metis Menu Plugin JavaScript -->
+    Metis Menu Plugin JavaScript
     <script src="${pageContext.request.contextPath}/resources/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- DataTables JavaScript -->
@@ -30,11 +30,12 @@
             responsive: true
         });
         $(".sidebar-nav")
-           .attr("class", "sidebar-nav navbar-collapse collapse")
-           .attr("aria-expanded", 'false')
-           .attr("style", "height:1px");
+        	.attr("class", "sidebar-nav navbar-collapse collapse")
+        	.attr("aria-expanded", 'false')
+        	.attr("style", "height:1px");
     });
     </script>
 </body>
 
 </html>
+

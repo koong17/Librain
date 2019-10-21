@@ -1,5 +1,7 @@
 package lib.employee.login.model;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,9 +19,14 @@ public class LoginDAO {
 	//로그인 체크
 	public boolean loginCheck(EmployeeDTO dto) {
 		System.out.println("==>loginCheck() 실행");
-		String name = sqlSession.selectOne("employeeLoginMapper.loginCheck", dto);
+		String result = sqlSession.selectOne("employeeLoginMapper.loginCheck", dto);
 		
-		return (Integer.parseInt(name)==0)? false:true;
+		return (Integer.parseInt(result)==0)? false:true;
+	}
+	public EmployeeDTO loginInfo(EmployeeDTO dto) {
+		System.out.println("==>loginInfo() 실행");
+		
+		return sqlSession.selectOne("employeeLoginMapper.loginInfo", dto);
 	}
 	
 	public void logout(HttpSession session) {

@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,27 +21,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lib.employee.facility.model.FacilitiesDAO;
 import lib.employee.facility.model.FacilitiesDTO;
+import lib.employee.facilityinspection.model.FacilitiesInspectionDAO;
 
 
 @RestController
 @RequestMapping(value="/facilityinspection")
+@CrossOrigin("*")
 public class FacilityinspectionRestController {
 	@Autowired
-	FacilitiesDAO facilitiesDAO; 
-	
+	FacilitiesInspectionDAO dao;
 @RequestMapping(value = "/readData",method = RequestMethod.GET)
 public HashMap check(@RequestParam int perPage,@RequestParam int page ) {
 	
 	
-	List list=facilitiesDAO.facSelect(perPage,page);
+	List list=dao.facinselect(perPage,page);
 	
 	
-	// ë³??ˆ˜ëª? ê³ ì¹  ?•„?š”?„± ?†’?Œ. 
+	// ï¿½??ï¿½ï¿½ï¿½? ê³ ì¹  ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½. 
 	HashMap total=new HashMap();
 	HashMap data=new HashMap();
 	HashMap pagenation=new HashMap();
 	pagenation.put("page",page);
-	pagenation.put("totalCount",facilitiesDAO.factotalcount());
+//	pagenation.put("totalCount",dao.factotalcount());
 	data.put("contents",list);
 	
 	
@@ -54,19 +56,19 @@ public HashMap check(@RequestParam int perPage,@RequestParam int page ) {
 
 @RequestMapping(value="/createData",method = RequestMethod.POST )
 public void insert(@RequestBody List<FacilitiesDTO> dto) {
-	System.out.println("?™•?¸");
+	System.out.println("?ï¿½ï¿½?ï¿½ï¿½");
 	for (FacilitiesDTO facilitiesDTO : dto) {
-	facilitiesDAO.facinsert(facilitiesDTO);
+	//facilitiesDAO.facinsert(facilitiesDTO);
 	}
 }
 	
 @RequestMapping(value="/modifyData",method = RequestMethod.PUT )
 	public void facupdate(@RequestBody List<FacilitiesDTO> dto) {
-		System.out.println("?™•?¸");
+		System.out.println("?ï¿½ï¿½?ï¿½ï¿½");
 		for (FacilitiesDTO facilitiesDTO : dto) {
 		//facilitiesDAO.facinsert(facilitiesDTO);
 		System.out.println(facilitiesDTO.toString());
-		facilitiesDAO.facupdate(facilitiesDTO);
+	//	facilitiesDAO.facupdate(facilitiesDTO);
 		}	
 	
 			
@@ -76,8 +78,8 @@ public void insert(@RequestBody List<FacilitiesDTO> dto) {
 	public void facdelete(@RequestBody List<FacilitiesDTO> dto) {	
 	for (FacilitiesDTO facilitiesDTO : dto) {
 	
-		facilitiesDAO.facdelete(facilitiesDTO);
-	// ?•´?•¼?• ê²ƒë“¤ ? •ë¦?.
+		//facilitiesDAO.facdelete(facilitiesDTO);
+	// ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê²ƒë“¤ ?ï¿½ï¿½ï¿½?.
 	
 	}
 	

@@ -46,6 +46,7 @@ function searchAjax() {
 }
 
 function inputAjax() {
+	grid.focus(grid.getRowAt(0).rowKey, 'book_num', true);
 	$.ajax({
 		type : "POST",
 		contentType : "application/json;charset=UTF-8",
@@ -113,22 +114,27 @@ function deleteAjax() {
 }
 
 function updateAjax() {
-	console.log(grid.getCheckedRows());
-	$.ajax({
-		type : "POST",
-		contentType : "application/json;charset=UTF-8",
-		dataType : "json",
-		data : JSON.stringify(grid.getCheckedRows()),
-		url : "./search/update.do",
-		success : function(data){
-			console.log(data.result);
-			grid.uncheckAll();
-			confirm();
-		},
-		error : function(e) {
-			alert('Error : ' + e);
-		}
-	});
+	if(grid.getCheckedRows().length != 0) {
+		console.log(grid.getCheckedRows());
+		grid.focus(grid.getRowAt(0).rowKey, 'book_num', true);
+		$.ajax({
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			dataType : "json",
+			data : JSON.stringify(grid.getCheckedRows()),
+			url : "./search/update.do",
+			success : function(data){
+				console.log(data.result);
+				grid.uncheckAll();
+				confirm();
+			},
+			error : function(e) {
+				alert('Error : ' + e);
+			}
+		});
+	} else {
+		alert("수정할 도서를 선택해주세요.");
+	}
 }
 
 
@@ -181,9 +187,15 @@ const grid = new tui.Grid({
 			editor: 'text'
 		},
 		{
-			header: '발행일',
+			header: '발행년도',
 			name: 'book_pub_date',
-			editor: 'datePicker'
+			editor: {
+				type: 'datePicker',
+				options: {
+					format: 'yyyy',
+					type: 'year'
+				}
+			}
 			
 		},
 		{

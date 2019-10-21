@@ -1,5 +1,7 @@
 package lib.employee.login.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,9 @@ public class LoginController {
 		}else {
 			mav.setViewName("redirect:login.do");
 		}
-		
 		return mav;
-		
-		
 	}
+	
 	//로그아웃 처리
 	@RequestMapping("logout.do")	
 	public ModelAndView logout(HttpSession session) {

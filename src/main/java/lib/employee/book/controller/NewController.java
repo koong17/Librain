@@ -53,6 +53,27 @@ public class NewController {
 		return  resultJO.toString();
 	}
 	
+	@RequestMapping(value = "/book/newApply.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String NewForm2(@RequestParam int perPage, @RequestParam int page) {
+		System.out.println(perPage+"rnqns"+page);
+		
+		JSONObject resultJO = new JSONObject();
+		JSONObject contentJO = new JSONObject();
+		JSONObject pageJO = new JSONObject();
+		
+		pageJO.put("page", page);  // 현재 페이지 
+		pageJO.put("totalCount", perPage); 
+		contentJO.put("pagination", pageJO);
+		contentJO.put("contents", bookService.newSelectBook()); //내용물 
+		resultJO.put("result", true);
+		resultJO.put("data",  contentJO);
+		
+		System.out.println("찍히나 확인");
+		
+		return  resultJO.toString();
+	}
+	
 	@RequestMapping(value="/book/newApply/input.do", method = RequestMethod.POST)
 	public @ResponseBody String newInsert(@RequestBody List<New_BookDTO> dto) {
 		bookService.newInsert(dto);

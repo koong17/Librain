@@ -33,6 +33,9 @@
 </head>
 <body>
 	<c:choose>
+	<c:when test="${!empty sessionScope.emp_no }">
+	<script>window.location.href='memberList.do'</script>
+	</c:when>
 	<c:when test="${empty sessionScope.emp_no}">
 	
     <div class="container">
@@ -100,7 +103,7 @@
 						<td>패스워드</td>
 						<td><input type="password" name="emp_password" id="emp_password" maxlength="20"></td>
 					</tr>
-					<tr><td>${msg }</td></tr>
+					<tr><td style="font-weight:bold">${msg }</td></tr>
 					<tr>
 						<td colspan=2>
 							<input type="button" id="login" value="로그인"/>
@@ -110,7 +113,7 @@
 			</form>
 		</c:when>
 		<c:otherwise>
-			<h3>${emp_name }님 환영합니다</h3>
+			<h3>${sessionScope.emp_no }님 환영합니다</h3>
 			<a href="logout.do">로그아웃</a><br>
 			<a href="index.jsp">홈으로</a>
 		</c:otherwise>
@@ -122,11 +125,11 @@
 			//입력 값 체크
 			if($.trim($('#emp_no').val()) == ''){
 				alert("아이디를 입력하세요");
-				$('#userid').focus();
+				$('#emp_no').focus();
 				return;
 			}else if($.trim($('#emp_password').val())==''){
 				alert("패스워드를 입력하세요");
-				$('#passwd').focus();
+				$('#emp_password').focus();
 				return;
 			}
 			
