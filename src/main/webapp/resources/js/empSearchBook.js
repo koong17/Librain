@@ -169,73 +169,40 @@ const grid = new tui.Grid({
 		},
 		{
 			header: '도서명',
-			name: 'book_name',
-			editor: 'text'
+			name: 'book_name'
 		},
 		{
 			header: '저자명',
-			name: 'book_author',
-			editor: 'text'
+			name: 'book_author'
 		},
 		{
 			header: '출판사명',
-			name: 'book_pub_house',
-			editor: 'text'
+			name: 'book_pub_house'
 		},
 		{
 			header: '발행일',
-			name: 'book_pub_date',
-			editor: 'datePicker'
+			name: 'book_pub_date'
 			
 		},
 		{
 			header: 'ISBN',
-			name: 'book_ISBN',
-			editor: 'text'
+			name: 'book_ISBN'
 		},
 		{
 			header: '부록여부',
-			name: 'book_apdx_status',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: 'O', value: 'O' },
-						{ text: 'X', value: 'X' },
-					]
-				}
-			}
+			name: 'book_apdx_status'
 		},
 		{
 			header: '분류기호',
-			name: 'book_ctgr_num',
-			editor: 'text'
+			name: 'book_ctgr_num'
 		},
 		{
 			header: '대여여부',
-			name: 'rent',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: '대여가능', value: '대여가능' },
-						{ text: '대여중', value: '대여중' },
-					]
-				}
-			}
+			name: 'rent'
 		},
 		{
 			header: '예약여부',
-			name: 'book_rsrv_status',
-			editor: {
-				type: 'radio',
-				options: {
-					listItems: [
-						{ text: '예약가능', value: '예약가능' },
-						{ text: '예약중', value: '예약중' },
-					]
-				}
-			}
+			name: 'book_rsrv_status'
 		},
 		{
 			header: '입력일',
