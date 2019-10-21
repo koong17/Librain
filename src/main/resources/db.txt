@@ -1,4 +1,13 @@
----- 혜수
+---- 혜수 20191021  수정 
+---- 아예 처음 디비 넣는 분들은 drop 제외하고 하면됩니다!
+drop table book_category;
+drop table book;
+drop table appendix;
+drop table rental;
+drop table new_book;
+drop table discard_book;
+drop table reservation;
+
 create table book_category ( --도서분류
     book_ctgr_num varchar2(100) , --분류기호
     book_ctgr_name varchar2(200)  --분류명
@@ -21,11 +30,13 @@ create table book ( --도서
     --constraint book_category_num_fk FOREIGN KEY (category_num)  
     --references book_category (category_num) 
 );
+
 insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), 'ㄱㄴㄷ', '가나다', '가나다 출판사', sysdate, '입력', 'X', '1', '예약가능', 0, sysdate );
 insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), 'ㄴㄴㄴ', '나나나', '나나나 출판사', sysdate, '입력', 'X', '1', '예약가능', 0, sysdate );
 insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), 'ㄷㄷㄷ', '다다다', '다다다 출판사', sysdate, '입력', 'X', '1', '예약가능', 0, sysdate );
 insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), 'ㄹㄹㄹ', '라라라', '라라라 출판사', sysdate, '입력', 'X', '1', '예약가능', 0, sysdate );
 insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), 'ㄴㄷㄹ', '나다라', '나다라 출판사', sysdate, '입력', 'X', '1', '예약가능', 0, sysdate );
+
 create table appendix ( --부록
     apdx_code varchar(30),--부록코드
     apdx_book_num varchar2(30), --도서번호
@@ -55,11 +66,17 @@ create table new_book ( --도서 구입 신청 테이블
     new_book_num number, --신간 신청 번호
     book_author varchar2(50), --저자
     book_name varchar2(200), --도서명
-    book_pub_house varchar2(50) --출판사
+    book_pub_house varchar2(50), --출판사
+    book_price number, --도서 가격
+    new_status varchar2(20), --신청 승인 상태
+    new_input_date date  --신청일
 );
+
 create table discard_book ( --도서 폐기 신청 테이블
        dis_book_num number, --폐기 신청 번호
-       book_num number --도서번호
+       book_num number, --도서번호
+       dis_input_date date, --폐기 신청일
+       dis_status varchar2(30) --신청 승인 상태
 );
 
 create table appendix ( --부록
@@ -71,21 +88,6 @@ create table appendix ( --부록
     --REFERENCES book (book_num)
 );
 
-create table rental (
-    rent_num varchar(30), --대여번호
-    book_num varchar2(30), --도서번호
-    mem_id varchar2(20), --회원번호
-    rent_startdate date, --대여일
-    rent_enddate date, --반납일
-    rent_appendix_status varchar2(10), --부록대출여부
-    rent_extension varchar2(10) --대여연장
-   -- constraint  rent_num_pk PRIMARY KEY (rent_num),
-    --constraint rent_book_num_fk foreign key (book_num) 
-    --references book (book_num),
-    --constraint rent_fk foreign key (mem_id)   
-    --references member (mem_id)
-);
-                    
 create table reservation (
     rent_num varchar2(30), -- 대여번호
     mem_id varchar2(20), --회원번호
@@ -95,6 +97,7 @@ create table reservation (
     --constraint reservation_mem_id_fk FOREIGN KEY (mem_id)
     --REFERENCES member (mem_id)
 );
+
 commit;
 
 
