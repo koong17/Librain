@@ -250,16 +250,16 @@
                             <a href="#"><i class="fa fa-book" aria-hidden="true"></i> 도서관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/empSearch.do">도서검색</a>
+                                    <a href="${pageContext.request.contextPath}/book/search.do">도서검색</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/empRentBook.do">대여</a>
+                                    <a href="${pageContext.request.contextPath}/book/rent.do">대여</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/empNewBook.do">도서 구입 신청</a>
+                                    <a href="${pageContext.request.contextPath}/book/newApply.do">도서 구입 신청</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/empRentBook.do">도서 폐기 신청</a>
+                                    <a href="${pageContext.request.contextPath}/book/discardApply.do">도서 폐기 신청</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -310,10 +310,10 @@
                                     <a href="#">도서관리 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서구입승인</a>
+                                            <a href="${pageContext.request.contextPath}/admin/book/approve/newBook.do">도서구입승인</a>
                                         </li>
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/empRentBook.do">도서폐기승인</a>
+                                            <a href="${pageContext.request.contextPath}/admin/book/approve/disBook.do">도서폐기승인</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
