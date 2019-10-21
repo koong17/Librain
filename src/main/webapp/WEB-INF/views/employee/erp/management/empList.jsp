@@ -12,6 +12,9 @@
 <body>
 <%@include file="../../includes/header.jsp"%>
 	<div class="container-fluid bg-light " align="center">
+	<br><br>
+	<h1 align="left">직원목록</h1>
+	<hr>
 	<br>
       <div class="row align-items-center justify-content-center" align="center">
          <div class="col-md-2 pt-3">
@@ -40,6 +43,9 @@
 </body>
 
 <script type="text/javascript">
+	$(function() {
+		grid.sort('emp_no',true,false);
+	});
 	$("#search").click(function(){
 	    
 	    console.log($('#searchCtgr').val());

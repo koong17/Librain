@@ -18,6 +18,9 @@
 <body>
 
 	<div class="container-fluid bg-light " align="center">
+		<br><br>
+		<h1 align="left">근태관리</h1>
+		<hr>
 		<br>
 		<div class="row align-items-center justify-content-center" align="center">
 			<div class="col-md-2 pt-3">

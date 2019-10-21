@@ -11,7 +11,9 @@
 </head>
 <body>
 <div class="container">
-	<br><br><br><br>
+	<br><br>
+	<h1 align="left">개인정보수정</h1>
+	<hr>
 	<form action="" method="post" onsubmit="javascript:return formCheck();">
 	<div class="col-md-9">
 		<div class="form-group">
