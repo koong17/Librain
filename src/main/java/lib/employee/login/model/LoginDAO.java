@@ -23,15 +23,10 @@ public class LoginDAO {
 		
 		return (Integer.parseInt(result)==0)? false:true;
 	}
-	
-	public String selectSessionName(String emp_no) {
-		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionName", emp_no);
-		return result;
-	}
-	
-	public String selectSessionAuth(String emp_no) {
-		String result = sqlSession.selectOne("employeeLoginMapper.selectSessionAuth", emp_no);
-		return result;
+	public EmployeeDTO loginInfo(EmployeeDTO dto) {
+		System.out.println("==>loginInfo() 실행");
+		
+		return sqlSession.selectOne("employeeLoginMapper.loginInfo", dto);
 	}
 	
 	public void logout(HttpSession session) {

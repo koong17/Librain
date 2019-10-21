@@ -12,8 +12,7 @@
 <body>
 <c:choose>
 	<c:when test='${!empty sessionScope.emp_no }'>
-<%-- ${sessionScope.emp_no }님 환영합니다. <br> --%>
-${emp_name }님 환영합니다.<br>
+<h3>${sessionScope.emp_name }님 환영합니다.</h3>
 <!-- <a href="logout.do">로그아웃</a> -->
 	</c:when>
 </c:choose><br>

@@ -200,6 +200,7 @@
                     
                 </li>
                 <!-- /.dropdown -->
+             		     사용자 : ${sessionScope.emp_name } [${sessionScope.emp_position }]
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -276,7 +277,7 @@
                             <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-users fa-fw"></i>직원보기</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
+                            <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 사내게시판</a>
                         </li>
     <!--                     <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>몰라요<span class="fa arrow"></span></a>
@@ -287,7 +288,8 @@
                             </ul>
                             /.nav-second-level
                         </li> -->
-                        
+                        <c:choose>
+                       <c:when test="${sessionScope.emp_position == '관장' || sessionScope.emp_position == '팀장'}">
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> 관리자<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -333,9 +335,14 @@
                                     <!-- /.nav-third-level -->
                                 </li> 
                                 
+                                <li>
+                                <a href="${pageContext.request.contextPath}/board/list.do">사내게시판</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                       </c:when>
+                       </c:choose>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

@@ -36,22 +36,11 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 
 	private NoticeService service;
-	private LoginService loginService;
 	public HttpSession session;
 
-//	@GetMapping("/registerNotice.do")
-//	public String boardRegisterForm() {
-//		return "employee/board/registerNotice";
-//	}
 	@GetMapping("/registerNotice.do")
-	public ModelAndView boardRegisterForm() {
-		//작성자 이름
-		ModelAndView mav = new ModelAndView();
-		String emp_no= (String) session.getAttribute("emp_no");
-		mav.setViewName("employee/board/registerNotice");
-		mav.addObject("emp_name", loginService.selectSessionName(emp_no));
-		
-		return mav;
+	public String boardRegisterForm() {
+		return "employee/board/registerNotice";
 	}
 
 	@PostMapping("/registerNotice.do")
@@ -69,6 +58,7 @@ public class NoticeController {
 	@GetMapping("/getNotice.do")
 	public String noticeSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectOne(board_no));
+		String emp_no= (String) session.getAttribute("emp_no");
 		return "employee/board/getNotice";
 	}
 	

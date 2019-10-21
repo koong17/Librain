@@ -37,10 +37,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result) {
-			mav.setViewName("employee/board/loginResult");
-			///emp 이름 가져오기
-			String emp_no= (String) session.getAttribute("emp_no");
-			mav.addObject("emp_name", service.selectSessionName(emp_no));
+			mav.setViewName("redirect:main.do");
 		}else {
 			mav.setViewName("redirect:login.do");
 		}
