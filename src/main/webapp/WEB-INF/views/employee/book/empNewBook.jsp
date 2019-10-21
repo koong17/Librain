@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,16 +35,18 @@
 <title>도서검색</title>
 </head>
 <body>
+<%@include file="../includes/header.jsp"%>
 	<div class="container-fluid bg-light ">
+	<br>
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="addRowBtn">
 					행 추가
 				</button>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
-					선택 승인 신청
+					선택 구입 신청
 				</button>
 			</div>
 			<div class="col-md-1">
@@ -66,16 +69,20 @@
 	<hr>
 	<div>
 		<div id="grid"></div>
-		<hr>
 		<div id="book">
 			<div class="col-md-1" style="margin-bottom: 10px;">
 				<button type="button" class="btn btn-primary btn-block" id="inputBookBtn">
 					선택 입력
 				</button>
 			</div>
-			<div id="bookGrid"></div>
+			 <div class="row align-items-center justify-content-center" align="center">
+      			<div class="col-md-12">
+					<div id="bookGrid"></div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<%@include file="../includes/footer.jsp"%>
 </body>
 
 <!-- bookJS -->
