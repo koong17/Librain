@@ -67,13 +67,13 @@
 				<button type="button" class="btn btn-primary btn-block" id="inputBtn">
 					선택 입력
 				</button>
-			</div>
+			</div>-->
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="updateBtn">
 					선택 수정
 				</button>
 			</div>
-			<div class="col-md-1">
+			<!-- <div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="deleteBtn">
 					선택 삭제
 				</button>
