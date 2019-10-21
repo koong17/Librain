@@ -4,7 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="../includes/header.jsp" %>
-
+<c:choose>
+	<c:when test="${empty sessionScope.emp_no }">
+	<script>window.location.href='${pageContext.request.contextPath}/login.do'</script>
+	</c:when>
+</c:choose>
 <div class="row">
    <div class="col-lg-12">
       <h1 class="page-header">Notice Register</h1>
@@ -56,7 +60,7 @@
                         </div>
                         
                         <div class="form-group">
-                           <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${emp_name}" readonly="readonly">
+                           <label>Writer</label><input class="form-control" id = "board_writer" name="board_writer" value="${sessionScope.emp_name}" readonly="readonly">
                         </div>
                         <button type="submit" class="btn btn-default">Submit Button</button>
                         <button type="reset" class="btn btn-default">Reset Button</button>

@@ -11,7 +11,4 @@ public interface LoginService {
 	public boolean loginCheck(EmployeeDTO dto, HttpSession session);
 	//로그아웃
 	public void logout(HttpSession session);
-	public String selectSessionName(String emp_no);
-	public String selectSessionAuth(String emp_no);
-	
 }

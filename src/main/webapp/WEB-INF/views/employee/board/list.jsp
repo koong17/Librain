@@ -5,6 +5,11 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<c:choose>
+	<c:when test="${empty sessionScope.emp_no }">
+	<script>window.location.href='${pageContext.request.contextPath}/login.do'</script>
+	</c:when>
+</c:choose>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">Tables </h1>
@@ -18,10 +23,10 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Board List Page
-			<c:choose>
-				<c:when test="${auth == '관장'}">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right" style='margin-right:5px'>
 					Register New Board</button>
+				<c:choose>
+				<c:when test="${sessionScope.emp_position == '관장' || sessionScope.emp_position == '팀장'}">
 				<button id='noticeBtn' type="button" class="btn btn-xs pull-right">
 					Register New Notice</button>
 				</c:when>

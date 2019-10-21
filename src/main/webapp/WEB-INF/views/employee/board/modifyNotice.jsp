@@ -4,7 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="../includes/header.jsp"%>
-
+<c:choose>
+	<c:when test="${empty sessionScope.emp_no }">
+	<script>window.location.href='${pageContext.request.contextPath}/login.do'</script>
+	</c:when>
+</c:choose>
 <!-- 첨부파일 시작 -->
 <div class='bigPictureWrapper'>
    <div class='bigPicture'>

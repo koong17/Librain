@@ -200,6 +200,7 @@
                     
                 </li>
                 <!-- /.dropdown -->
+             		     사용자 : ${sessionScope.emp_name } [${sessionScope.emp_position }]
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>

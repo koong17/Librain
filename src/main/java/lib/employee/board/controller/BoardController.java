@@ -39,30 +39,12 @@ public class BoardController {
 
 	private BoardService boardService;
 	private NoticeService noticeService;
-	private LoginService loginService;
 	public HttpSession session;
 
-//	@GetMapping("/list.do")
-//	public String boardSelectAll(Criteria cri, Model model) {
-//		model.addAttribute("list", boardService.boardSelectAll(cri));
-//		
-//		//전체 데이터 수 
-//		int total = boardService.boardGetTotal(cri);
-//		model.addAttribute("pageMaker", new PageDTO(cri, total));
-//		
-//		//공지사항 출력
-//		model.addAttribute("notice", noticeService.getNotices());
-//		return "employee/board/list";
-//
-//	}
 	
 	@GetMapping("/list.do")
 	public String boardSelectAll(Criteria cri, Model model) {
 		model.addAttribute("list", boardService.boardSelectAll(cri));
-		
-		//회원권한
-		String emp_no= (String) session.getAttribute("emp_no");
-		model.addAttribute("auth", loginService.selectSessionAuth(emp_no));
 		
 		//전체 데이터 수 
 		int total = boardService.boardGetTotal(cri);
@@ -75,14 +57,8 @@ public class BoardController {
 	}
 
 	@GetMapping("/register.do")
-	public ModelAndView boardRegisterForm() {
-		//작성자 이름
-		ModelAndView mav = new ModelAndView();
-		String emp_no= (String) session.getAttribute("emp_no");
-		mav.setViewName("employee/board/register");
-		mav.addObject("emp_name", loginService.selectSessionName(emp_no));
-		
-		return mav;
+	public String boardRegisterForm() {
+		return "employee/board/register";
 	}
 	
 	@PostMapping("/register.do")
