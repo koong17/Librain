@@ -96,7 +96,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 		jObj.put("book_name", dto.getBook_name());
 		jObj.put("book_author", dto.getBook_author());
 		jObj.put("book_pub_house", dto.getBook_pub_house());
-		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 4));
 		jObj.put("book_ISBN", dto.getBook_ISBN());
 		jObj.put("book_apdx_status", dto.getBook_apdx_status());
 		jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
@@ -164,7 +164,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
-			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 4));
 			jObj.put("book_ISBN", dto.getBook_ISBN());
 			jObj.put("book_apdx_status", dto.getBook_apdx_status());
 			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
@@ -202,8 +202,11 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Override
 	public JSONArray newSelect() {
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat ("yyyy");
 		Date date = new Date();
 		String today = format.format(date);
+		String pubDate = format2.format(date);
+		System.out.println("pubDate = " + pubDate);
 		
 		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
 		JSONArray jArr = new JSONArray();
@@ -221,7 +224,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_price", dto.getBook_price());
 			jObj.put("new_status", dto.getNew_status());
 			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
-			jObj.put("book_pub_date", today);
+			jObj.put("book_pub_date", pubDate);
 			jObj.put("book_ISBN", "입력");
 			jObj.put("book_apdx_status", "입력");
 			jObj.put("book_ctgr_num", "입력");
@@ -236,8 +239,10 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Override
 	public JSONArray newSelectBook() {
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat ("yyyy");
 		Date date = new Date();
 		String today = format.format(date);
+		String pubDate = format2.format(date);
 		
 		List<New_BookDTO> list = new ArrayList<New_BookDTO>();
 		JSONArray jArr = new JSONArray();
@@ -255,7 +260,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_price", dto.getBook_price());
 			jObj.put("new_status", dto.getNew_status());
 			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
-			jObj.put("book_pub_date", today);
+			jObj.put("book_pub_date", pubDate);
 			jObj.put("book_ISBN", "입력");
 			jObj.put("book_apdx_status", "입력");
 			jObj.put("book_ctgr_num", "입력");
@@ -302,7 +307,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 		jObj.put("book_name", dto.getBook_name());
 		jObj.put("book_author", dto.getBook_author());
 		jObj.put("book_pub_house", dto.getBook_pub_house());
-		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+		jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 4));
 		jObj.put("book_ISBN", dto.getBook_ISBN());
 		jObj.put("book_apdx_status", dto.getBook_apdx_status());
 		jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
@@ -334,7 +339,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
-			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 4));
 			jObj.put("book_ISBN", dto.getBook_ISBN());
 			jObj.put("book_apdx_status", dto.getBook_apdx_status());
 			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
@@ -368,7 +373,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
-			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 4));
 			jObj.put("book_ISBN", dto.getBook_ISBN());
 			jObj.put("book_apdx_status", dto.getBook_apdx_status());
 			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());

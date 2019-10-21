@@ -30,11 +30,12 @@
             responsive: true
         });
         $(".sidebar-nav")
-           .attr("class", "sidebar-nav navbar-collapse collapse")
-           .attr("aria-expanded", 'false')
-           .attr("style", "height:1px");
+        	.attr("class", "sidebar-nav navbar-collapse collapse")
+        	.attr("aria-expanded", 'false')
+        	.attr("style", "height:1px");
     });
     </script>
 </body>
 
 </html>
+

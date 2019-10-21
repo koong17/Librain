@@ -98,7 +98,7 @@ const grid = new tui.Grid({
 			name: 'book_pub_house'
 		},
 		{
-			header: '발행일',
+			header: '발행년도',
 			name: 'book_pub_date'
 			
 		},

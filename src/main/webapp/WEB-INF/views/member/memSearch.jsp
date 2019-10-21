@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- BootStrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <!-- font CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -24,13 +27,14 @@
 <!-- Toast Grid DatePicker JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
 
-<!-- Toast Grid CSS-->
+<!-- Toast Grid JS -->
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
+<!-- BootStrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>도서검색</title>
 </head>
 <body>
-<%@include file="../employee/includes/header.jsp"%>
    <div class="container-fluid bg-light ">
 		<br>
       <div class="row align-items-center justify-content-center">
@@ -71,7 +75,6 @@
 	      </div>
       </div>
    </div>
-	<%@include file="../employee/includes/footer.jsp"%>
 </body>
 <!-- bookJS -->
 <script src="${pageContext.request.contextPath}/resources/js/memBook.js"></script>

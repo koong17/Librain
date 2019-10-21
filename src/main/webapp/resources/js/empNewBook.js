@@ -151,6 +151,7 @@ function updateAjax() {
 		if(flag == 1) {
 			alert("승인한 항목은 수정이 불가능합니다. \n다시 선택한 후 수정해주세요.");
 		} else {
+			grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
 			$.ajax({
 				type : "POST",
 				contentType : "application/json;charset=UTF-8",
@@ -175,6 +176,7 @@ function updateAjax() {
 function inputBookAjax() {
 	if(bookGrid.getCheckedRows().length != 0) {
 		console.log(bookGrid.getCheckedRows());
+		bookGrid.focus(bookGrid.getRowAt(0).rowKey, 'book_num', true);
 		$.ajax({
 			type : "POST",
 			contentType : "application/json;charset=UTF-8",
@@ -312,10 +314,15 @@ const bookGrid = new tui.Grid({
 			editor: 'text'
 		},
 		{
-			header: '발행일',
+			header: '발행년도',
 			name: 'book_pub_date',
-			editor: 'datePicker'
-			
+			editor: {
+				type: 'datePicker',
+				options: {
+					format: 'yyyy',
+					type: 'year'
+				}
+			}
 		},
 		{
 			header: 'ISBN',
