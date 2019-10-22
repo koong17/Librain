@@ -1,6 +1,8 @@
 package lib.employee.login.model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,5 +34,9 @@ public class LoginDAO {
 	public void logout(HttpSession session) {
 		System.out.println("==>로그아웃 기능 실행");
 		session.invalidate();
+	}
+	
+	public List<Map> bookCount() {
+		return sqlSession.selectList("employeeLoginMapper.bookCount");
 	}
 }

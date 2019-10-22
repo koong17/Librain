@@ -34,7 +34,7 @@
 <body>
 	<c:choose>
 	<c:when test="${!empty sessionScope.emp_no }">
-	<script>window.location.href='book/search.do'</script>
+	<script>window.location.href='main.do'</script>
 	</c:when>
 	<c:when test="${empty sessionScope.emp_no}">
 	<a class="btn btn-lg btn-success pull-right" href="./memberMain.jsp" role="button"  target="_blank">고객용 메뉴</a>
