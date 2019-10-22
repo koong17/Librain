@@ -49,8 +49,7 @@ public class LoginController {
 	public ModelAndView logout(HttpSession session) {
 		service.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("employee/board/login");
-		mav.addObject("msg", "로그아웃 성공");
+		mav.setViewName("redirect:login.do");
 		return mav;
 	}
 }
