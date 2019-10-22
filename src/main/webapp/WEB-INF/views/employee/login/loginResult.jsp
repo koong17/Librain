@@ -7,47 +7,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- BootStrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- font CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Main</title>
 
 <!-- Toast Grid CSS-->
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<!-- Toast pagination JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
- 
-<!-- Toast Grid DatePicker JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
-
-<!-- Toast Grid JS -->
-<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
-
-<!-- BootStrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+	
+<!-- Toast Chart -->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.css">
 <body>
-	<div class="content">
-		<c:choose>
-			<c:when test='${!empty sessionScope.emp_no }'>
-				<h3>${sessionScope.emp_name }님환영합니다.</h3>
-				<!-- <a href="logout.do">로그아웃</a> -->
-			</c:when>
-		</c:choose>
-		<br>
+    <div id="wrapper">
+        <div class="row">
+			<c:choose>
+				<c:when test='${!empty sessionScope.emp_no }'>
+	            <div class="col-md-12">
+	                <h1 class="page-header">${sessionScope.emp_name }님 환영합니다.</h1>
+						<!-- <a href="logout.do">로그아웃</a> -->
+	            </div>
+				</c:when>
+			</c:choose>
+            <!-- /.col-lg-12 -->
+		</div>
 		<!-- <a href="main.do">홈으로</a> -->
-		<div class="form-group">
-			<div class="col-md-12">
-				<div id="grid"></div>
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<div class="form-group">
+					<div id="chart-area"></div>
+				</div>
+			</div>
+			<!-- <div class="col-md-2"></div>
+			<div class="col-md-2"></div> -->
+			<div class="col-md-8">
+				<div class="form-group"><br><br><br>
+					<div id="grid"></div>
+				</div>
 			</div>
 		</div>
 		<div class="row form-group">
@@ -60,6 +57,40 @@
 		</div>
 	</div>
 </body>
+
+
+<!-- jQuery -->
+<script
+	src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+
+<!-- BootStrap JS -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<!-- Toast pagination JS-->
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
+
+<!-- Toast Grid DatePicker JS-->
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+
+<!-- Toast Grid JS -->
+<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script
+	src="${pageContext.request.contextPath}/resources/dist/js/sb-admin-2.js"></script>
+	
+<!-- Toast Chart JS -->
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/core-js/2.5.7/core.js'></script>
+<script type='text/javascript' src='https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js'></script>
+<script type='text/javascript' src='https://uicdn.toast.com/tui.chart/latest/raphael.js'></script>
+<script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.js"></script>
+
 <script type="text/javascript">
 	
 	var Grid = tui.Grid;
@@ -82,7 +113,7 @@
 	const grid = new tui.Grid({
 	   el: document.getElementById('grid'),
 	   data: ${gridData},
-	    header: {
+	   header: {
 	         height: 70,
 	         complexColumns: [
 	           {
@@ -213,6 +244,78 @@
 	      }
 	      ]
 	});
+	
+	var container = document.getElementById('chart-area');
+	var data = {
+	    categories: ['Books'],
+	    series: [
+	        {
+	            name: '총류',
+	            data: grid.getColumnValues("000")[0]
+	        },
+	        {
+	            name: '철학',
+	            data: grid.getColumnValues("100")[0]
+	        },
+	        {
+	            name: '종교',
+	            data: grid.getColumnValues("200")[0]
+	        },
+	        {
+	            name: '사회학',
+	            data: grid.getColumnValues("300")[0]
+	        },
+	        {
+	            name: '언어',
+	            data: grid.getColumnValues("400")[0]
+	        },
+	        {
+	            name: '자연과학',
+	            data: grid.getColumnValues("500")[0]
+	        },
+	        {
+	            name: '기술과학',
+	            data: grid.getColumnValues("600")[0]
+	        },
+	        {
+	            name: '예술',
+	            data: grid.getColumnValues("700")[0]
+	        },
+	        {
+	            name: '문학',
+	            data: grid.getColumnValues("800")[0]
+	        },
+	        {
+	            name: '역사',
+	            data: grid.getColumnValues("900")[0]
+	        }
+	    ]
+	};
+	var options = {
+	    chart: {
+	        width: 400,
+	        height: 400,
+	        title: '보유 도서'
+	    },
+	    tooltip: {
+	        suffix: '권'
+	    }
+	};
+	/* var theme = {
+	    series: {
+	        colors: [
+	            '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
+	            '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
+	        ]
+	    }
+	};
+	
+	// For apply theme
+	
+	tui.chart.registerTheme('myTheme', theme);
+	options.theme = 'myTheme'; */
+	
+	tui.chart.pieChart(container, data, options);
 </script>
 </html>
 <%@include file="../includes/footer.jsp"%>
