@@ -39,7 +39,7 @@
 	body {
 		background-image: url('resources/img/background-library.jpg');
 		background-size: 100%;
-		/*    background: #d5d5d5; */
+		/* background: #d5d5d5; */
 		font-family:trebuchet MS;
 		color:#6B6B6B;
 	    border: 0 none;
@@ -127,7 +127,7 @@
 }
 .c4:hover .red{
   color: #ffffff;
-}
+} 
 
 </style>
   </head>
@@ -136,7 +136,7 @@
 
     <div class="container">
       <div class="masthead">
-        <br><h3 style="font-weight:bold; color:white" class="text-muted" >환영합니다</h3>
+        <br><h2 style="font-weight:bold; color:white" class="text-muted" >환영합니다</h2>
       </div>
 
             <div class="navbar-header">
@@ -151,10 +151,10 @@
             <hr>
 
        <!-- Jumbotron -->
-      <div class="jumbotron" text-align="center">
-       <img src="${pageContext.request.contextPath}/resources/img/logo_transparent.png" width="100%" align="middle">
+     <!--  <div class="jumbotron"> -->
+       <img id="bgImg" src="${pageContext.request.contextPath}/resources/img/logo_transparent.png" width="100%" align="middle">
         <p class="lead"></p>
-      </div> 
+      <!-- </div>  -->
 <!--       <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
  -->  
  <hr>
@@ -191,9 +191,9 @@
             <div class="col-md-3">
                   <div class="circle c4 img-circle">
                       <span class="icon red"></span>
-                      <span class="price-small red" style="font-weight:bold">로그인</span><br><br>
-                      <p>로그인 후 회원용 메뉴를 사용할 수 있습니다.</p>
-                      <a class="btn btn-lg btn-danger" href="#" role="button">로그인</a></p>
+                      <span class="price-small red" style="font-weight:bold">희망도서</span><br><br>
+                      <p>희망도서는 심사 후 구매여부가 결정됩니다.</p>
+                      <a class="btn btn-lg btn-danger" href="#" role="button">신청하기</a></p>
                   </div>
                   </div>
               </div><!-- .Col-md-3 ends here -->
