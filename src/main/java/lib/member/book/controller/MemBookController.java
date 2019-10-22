@@ -1,5 +1,8 @@
 package lib.member.book.controller;
 
+import java.awt.PageAttributes.MediaType;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lib.employee.book.model.EmpBookDAO;
+import lib.employee.book.model.New_BookDTO;
 import lib.member.book.model.MemBookDAO;
 import lib.member.book.service.MemBookService;
 
@@ -25,6 +29,20 @@ public class MemBookController {
 	@RequestMapping(value = "/member/book/search.do", method = RequestMethod.GET)
 	public String searchForm() {
 		return "member/memSearch";
+	}
+	
+	@RequestMapping(value = "/member/book/hope.do", method = RequestMethod.GET)
+	public String hopeForm() {
+		return "member/memBookHope";
+	}
+	
+	@RequestMapping(value="/member/book/hopeInput.do", method = RequestMethod.POST, produces = org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody	
+	public  String newInsert() {
+
+			System.out.println("ddd");
+		//	bookService.newInsert(dto);
+		return "{\"result\":\"success\"}";
 	}
 	
 	@RequestMapping(value = "/member/book/search.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")

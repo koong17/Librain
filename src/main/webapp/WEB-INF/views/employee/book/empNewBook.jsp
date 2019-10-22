@@ -32,9 +32,34 @@
 </head>
 <body>
 <%@include file="../includes/header.jsp"%>
-	<div class="container-fluid bg-light ">
+	<div id="searchGridDiv">
 	<br>
-		<div class="row align-items-center justify-content-center">
+		<h4>구입할 도서 검색</h4><hr>
+      <!-- <div class="row align-items-center justify-content-center" align="center"> -->
+      	<div>
+			<div class="col-lg-4">
+				<input type="text" placeholder="책 제목을 입력하세요" class="form-control" id="search">
+			</div>
+			<div class="col-lg-1">
+				<input type="button" class="btn btn-primary btn-block" value="책 검색" id="searchBtn"><br>
+			</div>
+			<div class="col-lg-1">
+				<input type="button" class="btn btn-primary btn-block" value="선택 추가" id="searchInputBtn"><br>
+			</div>
+      	</div>
+	  <!-- </div> -->
+      <!-- <div class="row align-items-center justify-content-center" align="center"> -->
+      	<div class="form-group">
+			<div class="col-md-12">
+				<div id="searchGrid"></div><br><br>
+			</div>
+      	</div>
+	  <!-- </div> -->
+	</div>
+	<br><br><hr><br>
+	<div id="gridDiv">
+		<h4>도서 구입 신청</h4><hr>
+		<div>
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-block" id="addRowBtn">
 					행 추가
@@ -60,11 +85,12 @@
 					<i class="fa fa-undo" aria-hidden="true"></i>
 				</button>
 			</div>
-		</div>
-	</div>
-	<hr>
-	<div>
+		</div><br>
+		<br>
 		<div id="grid"></div>
+	</div>
+	<div id="bookGridDiv">
+		<h4>도서 구입 완료 후 입력</h4><hr>
 		<div id="book">
 			<div class="col-md-1" style="margin-bottom: 10px;">
 				<button type="button" class="btn btn-primary btn-block" id="inputBookBtn">
@@ -82,8 +108,6 @@
 </body>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empNewBook.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empNewBook.js?after"></script>
 
-   
-   
 </html>

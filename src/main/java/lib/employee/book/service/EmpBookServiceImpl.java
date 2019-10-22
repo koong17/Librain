@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lib.employee.book.model.BookRentDisDTO;
+import lib.employee.book.model.Book_categoryDTO;
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
 import lib.employee.book.model.New_BookDTO;
@@ -181,6 +182,9 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Override
 	public void insert(List<EmpBookDTO> dto) {
 		for (EmpBookDTO empBookDTO : dto) {
+			empBookDTO.setBook_ctgr_num_db((Integer.parseInt(empBookDTO.getBook_ctgr_num())/100)+"00");
+			System.out.println("empBookDTO.getBook_ctgr_num()" + empBookDTO.getBook_ctgr_num());
+			System.out.println("empBookDTO.getBook_ctgr_num_db()" + empBookDTO.getBook_ctgr_num_db());
 			bookDAO.insertBook(empBookDTO);
 		}
 	}
@@ -218,14 +222,15 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj = new JSONObject();
 			
 			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("new_book_num_sub", dto.getNew_book_num_sub());
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
 			jObj.put("book_price", dto.getBook_price());
 			jObj.put("new_status", dto.getNew_status());
 			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
-			jObj.put("book_pub_date", pubDate);
-			jObj.put("book_ISBN", "입력");
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
 			jObj.put("book_apdx_status", "입력");
 			jObj.put("book_ctgr_num", "입력");
 			jObj.put("book_rsrv_status", "예약가능");
@@ -254,14 +259,15 @@ public class EmpBookServiceImpl implements EmpBookService {
 			jObj = new JSONObject();
 			
 			jObj.put("new_book_num", dto.getNew_book_num());
+			jObj.put("new_book_num_sub", dto.getNew_book_num_sub());
 			jObj.put("book_name", dto.getBook_name());
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
 			jObj.put("book_price", dto.getBook_price());
 			jObj.put("new_status", dto.getNew_status());
 			jObj.put("new_input_date", dto.getNew_input_date().toString().substring(0, 10));
-			jObj.put("book_pub_date", pubDate);
-			jObj.put("book_ISBN", "입력");
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
 			jObj.put("book_apdx_status", "입력");
 			jObj.put("book_ctgr_num", "입력");
 			jObj.put("book_rsrv_status", "예약가능");
@@ -284,6 +290,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Override
 	public void newDelete(List<New_BookDTO> dto) {
 		for (New_BookDTO newBookDTO : dto) {
+			System.out.println("Service) newBookDTO.getNew_book_num_sub() >> " + newBookDTO.getNew_book_num_sub());
 			bookDAO.newDeleteBook(newBookDTO);
 		}
 	}

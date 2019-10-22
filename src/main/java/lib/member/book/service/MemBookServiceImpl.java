@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lib.employee.book.model.New_BookDTO;
 import lib.member.book.model.MemBookDAO;
 import lib.member.book.model.MemBookDTO;
 
@@ -16,6 +17,15 @@ public class MemBookServiceImpl implements MemBookService {
 	
 	@Autowired
 	MemBookDAO bookDAO;
+	
+	@Override
+	public void newInsert(List<New_BookDTO> dto) {
+		int new_book_num =  bookDAO.newMaxBookNum();
+		for (New_BookDTO newBookDTO : dto) {
+			newBookDTO.setNew_book_num(new_book_num);
+			bookDAO.newInsertBook(newBookDTO);
+		}
+	}
 	
 	@Override
 	public List searchCtgr(String searchCtgr, String searchWord) {

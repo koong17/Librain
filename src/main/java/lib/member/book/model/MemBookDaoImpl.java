@@ -6,11 +6,23 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import lib.employee.book.model.EmpBookDAO;
+import lib.employee.book.model.New_BookDTO;
+
 @Repository
 public class MemBookDaoImpl implements MemBookDAO {
 	
 	@Autowired
 	SqlSession sqlsession;
+	
+	@Override
+	public void newInsertBook(New_BookDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).newInsertBook(dto);
+	}
+	@Override
+	public int newMaxBookNum() {
+		return sqlsession.getMapper(EmpBookDAO.class).newMaxBookNum();
+	}
 	
 	@Override
 	public List<MemBookDTO> searchAll(String searchWord) {

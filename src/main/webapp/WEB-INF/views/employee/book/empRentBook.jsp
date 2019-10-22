@@ -67,17 +67,23 @@
 		</div>
 		<div>
 			<br>
-			 <div class="row align-items-center justify-content-center" align="center">
-      			<div class="col-md-12">
-					<div id="memGrid"></div> 
-				</div>
+			<div id="memGridDiv">
+				<h4>회원 조회</h4>
+				<div class="row align-items-center justify-content-center" align="center">
+	      			<div class="col-md-12">
+						<div id="memGrid"></div> 
+					</div>
+	      		</div>
       		</div>
       		<br>
-      		<div class="row align-items-center justify-content-center" align="center">
-      			<div class="col-md-12">
-			 		<!-- <div class="row form-group"> -->
-					<div id="bookGrid"></div>
-				</div>
+      		<div id="bookGridDiv">
+   				<h4>도서 조회</h4>
+	      		<div class="row align-items-center justify-content-center" align="center">
+	      			<div class="col-md-12">
+				 		<!-- <div class="row form-group"> -->
+						<div id="bookGrid"></div>
+					</div>
+	      		</div>
       		</div>
 		</div>
 	</div>
@@ -85,6 +91,6 @@
 </body>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empRentBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empRentBook.js"></script>
 
 </html>

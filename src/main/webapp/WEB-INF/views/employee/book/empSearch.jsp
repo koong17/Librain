@@ -89,7 +89,7 @@
 </body>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empSearchBook.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empSearchBook.js?after"></script>
 
    
 </html>

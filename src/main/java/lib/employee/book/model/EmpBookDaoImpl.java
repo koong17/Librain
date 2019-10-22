@@ -89,7 +89,7 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	public void insertBook(EmpBookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).insertBook(dto);
 	}
-
+	
 	@Override
 	public void deleteBook(EmpBookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).deleteBook(dto);
@@ -123,6 +123,7 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	
 	@Override
 	public void newDeleteBook(New_BookDTO dto) {
+		System.out.println("Controller) dto.getNew_book_num_sub() >> " + dto.getNew_book_num_sub());
 		sqlsession.getMapper(EmpBookDAO.class).newDeleteBook(dto);
 	}
 	
