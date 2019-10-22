@@ -189,9 +189,11 @@ create table salary_management(
     --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
 
-----소영
--- 게시판 테이블 생성
-create table board(
+-----------------------소영
+select * from table board;
+drop table board;
+
+create table board( -- 게시판 테이블
 board_no number not null,      --게시물 번호
 board_title varchar2(200) not null,   --제목
 board_content varchar2(4000),      --내용
@@ -204,6 +206,7 @@ board_updatedate date default sysdate
 alter table board add constraint pk_board
 primary key (board_no);
 
+drop sequence seq_board;
 create sequence seq_board;
 --------------------------------------------------------
 --더미 입력
@@ -223,6 +226,10 @@ commit;
 
 -----------------------------------
 --파일첨부 테이블 생성
+
+select * from tbl_attach;
+drop tbl_attach;
+
 create table tbl_attach (
 	uuid varchar2(100) not null,
 	uploadPath varchar2(200) not null,
@@ -234,6 +241,9 @@ create table tbl_attach (
 alter table tbl_attach add constraint pk_attach primary key(uuid);
 
 --------------------------------------------------------
+
+select * from table notice;
+drop table notice;
 
 create table notice( --공지게시판
 board_no number not null,      --게시물 번호
@@ -251,12 +261,6 @@ primary key (board_no);
 -------------- 더미 입력
 insert into notice (board_no, board_title, board_content, board_writer) 
 values(seq_board.nextval, '필독', '공지사항을 꾸준히 확인하세요', 'admin');
-commit;
-insert into notice (board_no, board_title, board_content, board_writer) 
-values(seq_board.nextval, '필독!!', '공지사항을 꾸준히 확인하세요', 'admin');
-commit;
-insert into notice (board_no, board_title, board_content, board_writer) 
-values(seq_board.nextval, 'Librain 프로그램 사전 교육[파일첨부]', '꼭 읽기', 'admin');
 commit;
 -------------------승수 
 create table Facilities( --시설물
