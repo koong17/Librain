@@ -6,16 +6,25 @@
 <mapper namespace="lib.member.model.MemberDAO">
 
 	<insert id="memberjoin" parameterType="lib.member.model.MemberDTO">
-		insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_phone,mem_email) values (#{mem_id},#{mem_pw},#{mem_name},#{mem_jumin},#{mem_address},#{mem_phone},#{mem_email})
+		insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_phone,mem_email,mem_address_number) values (#{mem_id},#{mem_pw},#{mem_name},#{mem_jumin},#{mem_address},#{mem_phone},#{mem_email},#{mem_address_number})
 	</insert>
 	
-	<select id="memberSearchIDCount" parameterType="lib.member.model.MemberDTO">
-		select count(*) form member where mem_id = #{mem_id}
+	<select id="memberSearchIDCount" parameterType="lib.member.model.MemberDTO" resultType="Integer">
+		select count(*) from member where mem_id = #{mem_id}
 	</select>
 	
+	<!-- 회원로그인 -->
+	<select id="memberLogin" parameterType="lib.member.model.MemberDTO" resultType="String">
+		select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
+	
+	<!-- 회원정보변경 -->
+	<update id="memberMyPage" parameterType="lib.member.model.MemberDTO">
+		update member set mem_pw, mem_address, mem_phone, mem_email, mem_address_number where mem_id = #{mem_id}
+	</update>
+	
 	<!-- 권한변경 -->
-	<update id="memberRankUpdate" 
-		parameterType="lib.member.model.MemberDTO">
+	<update id="memberRankUpdate" parameterType="lib.member.model.MemberDTO">
 		update member set mem_rank = #{mem_rank} where mem_id = #{mem_id}
 	</update>
 
@@ -44,7 +53,7 @@
 	<!-- 페이징 -->
 	<select id="select" resultType="lib.member.model.MemberDTO" parameterType="int">
 	<![CDATA[
-		select * from (select rownum r, mem_id, mem_pw, mem_name, mem_jumin, mem_address, mem_phone, mem_email, mem_rank from member) where r > #{ startRowNum } and r < #{ endRowNum }
+		select * from (select rownum r, mem_id, mem_pw, mem_name, mem_jumin, mem_address, mem_phone, mem_email, mem_rank, mem_address_number from member) where r > #{ startRowNum } and r < #{ endRowNum }
 	]]>
 	</select>
 	

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,28 +30,47 @@ public class MemberController {
 	@Autowired
 	MemberDAO memberDAO;
 	
+	//회원가입
 	@GetMapping("/memberjoin.do")
 	public String memberjoin() {
 		return "member/memberjoin";
 	}
-	
-	@PostMapping("/memberIDCheck.do")
-	@ResponseBody
-	public Map<Object, Object> idcheck(@RequestBody String mem_id){
-		int count=0;
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		count = memberService.memberSearchIDCount(mem_id);
-		map.put("cnt", count);
-		return map;
-	}
-	
+
 	@PostMapping("/memberjoin.do")
 	public String memberjoin(@ModelAttribute MemberDTO memberDTO) {
 		System.out.println("join컨트롤탐");
 		memberService.memberjoin(memberDTO);
 		return "member/memberjoin";
 	}
-
+	
+	@RequestMapping(value="/memberIDCheck.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String mem_id){
+		int count=0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		count = memberService.memberSearchIDCount(mem_id);
+		map.put("cnt", count);
+		System.out.println("ID체크합니다");
+		return map;
+	}
+	
+	//회원로그인
+	@GetMapping("/memberLogin.do")
+	public String memberLogin() {
+		return "member/memberLogin";
+	}
+	
+	@PostMapping("/memberLogin.do")
+	public String memberLogin(String mem_id, String mem_pw) {
+		return memberService.memberLogin(mem_id, mem_pw);
+	}
+	
+	@PostMapping(value="/memberMyPage.do", produces = "application/text; charset=utf8")
+	public @ResponseBody String memberMyPage(@RequestBody List<MemberDTO> dtos) {
+		memberService.memberMyPage();
+		return "{\"result\":\"success\"}";
+	}
+	
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {
 		JSONArray ja = memberService.memberSelectAll();

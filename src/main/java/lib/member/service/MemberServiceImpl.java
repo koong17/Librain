@@ -23,10 +23,25 @@ public class MemberServiceImpl implements MemberService {
 	public void memberjoin(MemberDTO dto) {
 		memberDAO.memberjoin(dto);
 	}
+
+	//회원로그인
+	@Override
+	public String memberLogin(String mem_id, String mem_pw) {
+		return memberDAO.memberLogin(mem_id, mem_pw);
+	}
+	
+	@Override
+	public String memberMyPage(List<MemberDTO> dtos) {
+		for (MemberDTO memberDTO : dtos) {
+			memberDAO.memberRankUpdate(memberDTO);
+		}
+		return memberDAO.memberMyPage();
+	}
 	
 	//중복확인
 	@Override
-	public int memberSearchIDCount(String mem_id) {
+	public Integer memberSearchIDCount(String mem_id) {
+		System.out.println("서비스임플");
 		return memberDAO.memberSearchIDCount(mem_id);
 	}
 
@@ -48,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 			jo.put("mem_phone", dto.getMem_phone());
 			jo.put("mem_email", dto.getMem_email());
 			jo.put("mem_rank", dto.getMem_rank());
+			jo.put("mem_address_number", dto.getMem_address_number());
 			ja.add(jo);
 		}
 		
@@ -70,6 +86,7 @@ public class MemberServiceImpl implements MemberService {
 			jo.put("mem_phone", dto.getMem_phone());
 			jo.put("mem_email", dto.getMem_email());
 			jo.put("mem_rank", dto.getMem_rank());
+			jo.put("mem_address_number", dto.getMem_address_number());
 			ja.add(jo);
 		}
 		
@@ -112,7 +129,5 @@ public class MemberServiceImpl implements MemberService {
 		list = memberDAO.select(startRowNum, endRowNum);
 		return list;
 	}
-
-
 
 }

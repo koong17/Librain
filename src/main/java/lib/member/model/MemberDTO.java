@@ -9,6 +9,7 @@ public class MemberDTO {
 	private String mem_address;
 	private String mem_phone;
 	private String mem_email;
+	private String mem_address_number;
 	private int mem_rank;
 	
 	///////////constructor///////////
@@ -18,7 +19,7 @@ public class MemberDTO {
 	}
 	
 	public MemberDTO(String mem_id, String mem_pw, String mem_name, String mem_jumin, String mem_address,
-			String mem_phone, String mem_email, int mem_rank) {
+			String mem_phone, String mem_email, String mem_address_number, int mem_rank) {
 		this.mem_id = mem_id;
 		this.mem_pw = mem_pw;
 		this.mem_name = mem_name;
@@ -26,6 +27,7 @@ public class MemberDTO {
 		this.mem_address = mem_address;
 		this.mem_phone = mem_phone;
 		this.mem_email = mem_email;
+		this.mem_address_number = mem_address_number;
 		this.mem_rank = mem_rank;
 	}
 	
@@ -71,6 +73,12 @@ public class MemberDTO {
 	}
 	public void setMem_email(String mem_email) {
 		this.mem_email = mem_email;
+	}
+	public String getMem_address_number() {
+		return mem_address_number;
+	}
+	public void setMem_address_number(String mem_address_number) {
+		this.mem_address_number = mem_address_number;
 	}
 	public int getMem_rank() {
 		return mem_rank;

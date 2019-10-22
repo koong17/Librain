@@ -38,7 +38,7 @@
 				<label for="inputID" class="col-xs-2 control-label">아이디</label>
 				<div class="col-xs-5">
 					<input class="form-control" type="text" placeholder="4~12자의 영문 대소문자와 숫자로만 입력"
-						id="mem_id" name="mem_id" required>
+						id="mem_id" name="mem_id" required readonly="readonly">
 				</div>
 				<div class="col-xs-2">
 					<button type="button" id="mem_idCheck" class="btn btn-default btm-sm" onclick="memberIDCheck()">중복확인</button>
@@ -62,17 +62,17 @@
 				<label for="inputName" class="col-xs-2 control-label">이름</label>
 				<div class="col-xs-6">
 					<input class="form-control" type="text" placeholder="이름을 입력하세요."
-						id="mem_name" name="mem_name" required>
+						id="mem_name" name="mem_name" required readonly="readonly">
 				</div>
 			</div>
 			<div class="row form-group" id="divPos">
 		    	<input type="hidden" id="mem_jumin" name="mem_jumin" value="">
                 <label for="inputJumin" class="col-xs-2 control-label">주민번호</label>
                 <div class="col-xs-3">
-                    <input type="text" name="mem_jumin1" class="form-control" placeholder="920101" id="mem_jumin1" maxlength="6" required>
+                    <input type="text" name="mem_jumin1" class="form-control" placeholder="920101" id="mem_jumin1" maxlength="6" required readonly="readonly">
                 </div>
                 <div class="col-xs-3">
-                    <input type="text" name="mem_jumin2" class="form-control" placeholder="2222222" id="mem_jumin2" maxlength="7" required>
+                    <input type="text" name="mem_jumin2" class="form-control" placeholder="2222222" id="mem_jumin2" maxlength="7" required readonly="readonly">
                 </div>
             </div>
 			<div class="row form-group">
@@ -113,7 +113,7 @@
 			</div>
 				<div class="form-group">
 					<div class="col-xs-4">
-						<input type="submit" class="btn btn-primary btn-block" id="joinBtn" value="회원가입">
+						<input type="submit" class="btn btn-primary btn-block" id="ModifyBtn" value="정보수정">
 					</div>
 				</div>
 				<div class="form-group">
@@ -131,40 +131,6 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-
-var idck;
-	$(function(){
-		idck=0;
-	});
-	function memberIDCheck(){
-		
-		var mem_id = $("#mem_id").val();
-		
-		$.ajax({
-			async : true,
-			type : 'POST',
-			data : mem_id,
-			url : "memberIDCheck.do",
-			dataType : "json",
-			contentType : "application/json; charset=UTF-8",
-			success : function(data){
-				if(data.cnt > 0){
-					alert("이미 존재하는 아이디입니다.");
-					$("#inputID").addClass("has-error")
-					$("#inputID").removeClass("has-success")
-					$("#mem_id").focus();
-				} else {
-					alert("사용이 가능한 아이디입니다.");
-					$("#inputID").addClass("has-error")
-					$("#inputID").removeClass("has-success")
-					$("#mem_id").focus();
-					idck=1;
-				}
-			}, error : function(error){
-				alert("error : "+error);
-			}
-		});
-	}
 	
 	function formCheck(){
 		var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
@@ -178,11 +144,7 @@ var idck;
 		document.getElementById("mem_address").value = document.getElementById("mem_address1").value + ", " + document.getElementById("mem_address2").value;
 		document.getElementById("mem_jumin").value = document.getElementById("mem_jumin1").value+document.getElementById("mem_jumin2").value;
 		
-		if(!regTel.test(document.getElementById("mem_phone").value)) {
-			alert("전화번호를 확인하세요"); return false;
-		} else if(!regID.test(document.getElementById("mem_id").value)) {
-			alert("ID를 확인하세요"); return false;
-		} else if(!regPW.test(document.getElementById("mem_pw").value)) {
+		if(!regPW.test(document.getElementById("mem_pw").value)) {
 			alert("패스워드를 다시 입력하세요"); return false;
 		} else if(document.getElementById("mem_pw").value != document.getElementById("mem_pwCheck").value){
 			alert("패스워드와 확인한 패스워드가 다릅니다"); return false;
@@ -190,14 +152,8 @@ var idck;
 			alert("우편번호를 입력하세요"); return false;
 		} else if(document.getElementById("mem_address1").value.length < 2) {
 			alert("기본주소를 입력하세요"); return false;
-		} else if(!regJumin1.test(document.getElementById("mem_jumin1").value) || !regJumin2.test(document.getElementById("mem_jumin2").value)) {
-			alert("주민번호를 확인하세요"); return false;
-		} else if(idck==0) {
-			alert("아이디 중복체크를 해주세요"); return false;
-		} else if(!confirm("회원가입을 하시겠습니까?")){
-			return false;
 		} else {
-			alert("회원가입을 축하합니다!");
+			alert("정보가 수정되었습니다.");
 			return true;
 		}
 	}
@@ -232,7 +188,6 @@ var idck;
 	        }
 	    }).open();
 	}
-
 	
 </script>
 
