@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lib.employee.board.model.BoardAttachDTO;
 import lib.employee.board.model.Criteria;
 import lib.employee.board.model.NoticeDTO;
 import lib.employee.board.service.NoticeService;
+import lib.employee.login.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -32,6 +36,7 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 
 	private NoticeService service;
+	public HttpSession session;
 
 	@GetMapping("/registerNotice.do")
 	public String boardRegisterForm() {
@@ -53,6 +58,7 @@ public class NoticeController {
 	@GetMapping("/getNotice.do")
 	public String noticeSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectOne(board_no));
+		String emp_no= (String) session.getAttribute("emp_no");
 		return "employee/board/getNotice";
 	}
 	

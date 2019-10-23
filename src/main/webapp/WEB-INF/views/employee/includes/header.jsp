@@ -50,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Librain</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/main.do"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Librain</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -200,23 +200,28 @@
                     
                 </li>
                 <!-- /.dropdown -->
+             		     사용자 : ${sessionScope.emp_name } [${sessionScope.emp_position }]
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                   	    <c:choose>	 
+						<c:when test='${!empty sessionScope.emp_no }'>
                         <li><a href="${pageContext.request.contextPath}/mypage/commute.do"><i class="fa fa-check" aria-hidden="true"></i> 근태관리</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/info.do"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;&nbsp;정보수정</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/mypage/pay.do"><i class="fa fa-gear fa-fw"></i> 개인급여</a>
                         </li>
-                        <c:choose>
-						<c:when test='${!empty sessionScope.emp_no }'>
                         <li class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                         </c:when>
+                        <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/login.do"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                        </li>
+                        </c:otherwise>
                         </c:choose>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -275,7 +280,7 @@
                             <a href="${pageContext.request.contextPath}/mgmt/emplist.do"><i class="fa fa-users fa-fw"></i>직원보기</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 공지게시판</a>
+                            <a href="${pageContext.request.contextPath}/board/list.do"><i class="fa fa-edit fa-fw"></i> 사내게시판</a>
                         </li>
     <!--                     <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>몰라요<span class="fa arrow"></span></a>
@@ -286,7 +291,8 @@
                             </ul>
                             /.nav-second-level
                         </li> -->
-                        
+                        <c:choose>
+                       <c:when test="${sessionScope.emp_position == '관장' || sessionScope.emp_position == '팀장'}">
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> 관리자<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -332,9 +338,14 @@
                                     <!-- /.nav-third-level -->
                                 </li> 
                                 
+                                <li>
+                                <a href="${pageContext.request.contextPath}/board/list.do">사내게시판</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                       </c:when>
+                       </c:choose>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

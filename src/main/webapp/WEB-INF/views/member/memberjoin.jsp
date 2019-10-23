@@ -122,7 +122,7 @@
 var idck=0;
 $(function(){
 	
-	$("#memberIDCheck").click(fucntion(){
+	$("#memberIDCheck").click(function(){
 		
 		var mem_id = $("#mem_id").val();
 		

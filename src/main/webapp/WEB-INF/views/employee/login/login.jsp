@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>librain</title>
 <style type="text/css">
 	body{
 		background-image: url('resources/img/background-library.jpg');
@@ -33,8 +33,11 @@
 </head>
 <body>
 	<c:choose>
+	<c:when test="${!empty sessionScope.emp_no }">
+	<script>window.location.href='main.do'</script>
+	</c:when>
 	<c:when test="${empty sessionScope.emp_no}">
-	
+	<a class="btn btn-lg btn-success pull-right" href="./memberMain.jsp" role="button"  target="_blank">고객용 메뉴</a>
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -66,6 +69,8 @@
             </div>
         </div>
     </div>
+    <!-- ./container -->
+    
 	</c:when>
 	<c:otherwise>
 		<h3>${emp_name }님 환영합니다</h3>
@@ -84,37 +89,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="resources/dist/js/sb-admin-2.js"></script>
-<%--     
-    
-<h1>로그인 페이지</h1>	<a href="index.jsp">홈으로</a>
-	<c:choose>
-	<c:when test="${empty sessionScope.emp_no}">
-			<form id="loginForm" name="loginForm" action="loginCheck.do">
-				<table>
-					<tr>
-						<td>아이디</td>
-						<td><input type="text" name="emp_no" id="emp_no" placeholder="10글자" maxlength="10"></td>
-					</tr>
-					
-					<tr>
-						<td>패스워드</td>
-						<td><input type="password" name="emp_password" id="emp_password" maxlength="20"></td>
-					</tr>
-					<tr><td>${msg }</td></tr>
-					<tr>
-						<td colspan=2>
-							<input type="button" id="login" value="로그인"/>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</c:when>
-		<c:otherwise>
-			<h3>${emp_name }님 환영합니다</h3>
-			<a href="logout.do">로그아웃</a><br>
-			<a href="index.jsp">홈으로</a>
-		</c:otherwise>
-	</c:choose> --%>
 </body>
 <script type="text/javascript">
 	$(document).ready(function(e){
@@ -122,11 +96,11 @@
 			//입력 값 체크
 			if($.trim($('#emp_no').val()) == ''){
 				alert("아이디를 입력하세요");
-				$('#userid').focus();
+				$('#emp_no').focus();
 				return;
 			}else if($.trim($('#emp_password').val())==''){
 				alert("패스워드를 입력하세요");
-				$('#passwd').focus();
+				$('#emp_password').focus();
 				return;
 			}
 			

@@ -12,6 +12,9 @@
 <body>
 <%@include file="../../includes/header.jsp"%>
 	<div class="container-fluid bg-light " align="center">
+	<br><br>
+	<h1 align="left">직원목록</h1>
+	<hr>
 	<br>
       <div class="row align-items-center justify-content-center" align="center">
          <div class="col-md-2 pt-3">
@@ -30,13 +33,13 @@
             <input type="button" class="btn btn-primary btn-block" id="search" value="검색">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="insert" value="직원 추가">
+            <input class="btn btn-primary btn-block" type="button" id="insert" value="직원추가">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="update" value="직원 수정">
+            <input class="btn btn-primary btn-block" type="button" id="update" value="직원수정">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="delete" value="직원 삭제">
+            <input class="btn btn-primary btn-block" type="button" id="delete" value="직원삭제">
          </div>
       </div>
 	<div id="grid"></div>
@@ -45,6 +48,11 @@
 </body>
 
 <script type="text/javascript">
+
+	$(function() {
+		grid.sort('emp_no',true,false);
+	});
+	
 	$("#search").click(function(){
 	    
 	    console.log($('#searchCtgr').val());
