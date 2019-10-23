@@ -57,6 +57,7 @@
                                 <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="비밀번호 변경">
                             </fieldset>
                         </form>
+                        <a href="main.do">다음에 변경하기</a>
                     </div>
                 </div>
             </div>

@@ -56,6 +56,11 @@
 	</div>
 </body>
 
+
+<!-- jQuery -->
+<script
+	src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+
 <!-- Toast pagination JS-->
 <script type="text/javascript"
 	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
