@@ -87,40 +87,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="resources/dist/js/sb-admin-2.js"></script>
-<%--     
-    
-<h1>로그인 페이지</h1>	<a href="index.jsp">홈으로</a>
-	<c:choose>
-	<c:when test="${empty sessionScope.emp_no}">
-			<form id="loginForm" name="loginForm" action="loginCheck.do">
-				<table>
-					<tr>
-						<td>아이디</td>
-						<td><input type="text" name="emp_no" id="emp_no" placeholder="10글자" maxlength="10"></td>
-					</tr>
-					
-					<tr>
-						<td>패스워드</td>
-						<td><input type="password" name="emp_password" id="emp_password" maxlength="20"></td>
-					</tr>
-					<tr><td style="font-weight:bold">${msg }</td></tr>
-					<tr>
-						<td colspan=2>
-							<input type="button" id="login" value="로그인"/>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</c:when>
-		<c:otherwise>
-			<h3>${sessionScope.emp_no }님 환영합니다</h3>
-			<a href="logout.do">로그아웃</a><br>
-			<a href="index.jsp">홈으로</a>
-		</c:otherwise>
-	</c:choose> --%>
 </body>
 <script type="text/javascript">
 	$(document).ready(function(e){
+		if("${param.check}"=="f") alert('사원번호와 비밀번호를 확인해주세요');
+		
 		$('#login').click(function(){
 			//입력 값 체크
 			if($.trim($('#emp_no').val()) == ''){
