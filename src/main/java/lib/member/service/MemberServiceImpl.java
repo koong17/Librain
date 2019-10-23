@@ -26,16 +26,30 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원로그인
 	@Override
-	public String memberLogin(String mem_id, String mem_pw) {
-		return memberDAO.memberLogin(mem_id, mem_pw);
+	public MemberDTO memberLogin(String mem_id, String mem_pw) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setMem_id(mem_id);
+		dto.setMem_pw(mem_pw);
+		
+		return memberDAO.memberLogin(dto);
 	}
 	
+	//회원로그인
 	@Override
-	public String memberMyPage(List<MemberDTO> dtos) {
-		for (MemberDTO memberDTO : dtos) {
-			memberDAO.memberRankUpdate(memberDTO);
-		}
-		return memberDAO.memberMyPage();
+	public int memberCount(String mem_id, String mem_pw) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setMem_id(mem_id);
+		dto.setMem_pw(mem_pw);
+		
+		return memberDAO.memberCount(dto);
+	}
+	
+	//회원수정
+	@Override
+	public void memberUpdate(MemberDTO dto) {
+		memberDAO.memberUpdate(dto);
 	}
 	
 	//중복확인

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import lib.member.model.MemberDAO;
 import lib.member.model.MemberDTO;
@@ -31,12 +32,12 @@ public class MemberController {
 	MemberDAO memberDAO;
 	
 	//회원가입
-	@GetMapping("/memberjoin.do")
+	@GetMapping("/member/join.do")
 	public String memberjoin() {
 		return "member/memberjoin";
 	}
 
-	@PostMapping("/memberjoin.do")
+	@PostMapping("/member/join.do")
 	public String memberjoin(@ModelAttribute MemberDTO memberDTO) {
 		System.out.println("join컨트롤탐");
 		memberService.memberjoin(memberDTO);
@@ -55,21 +56,37 @@ public class MemberController {
 	}
 	
 	//회원로그인
-	@GetMapping("/memberLogin.do")
+	@GetMapping("/member/login.do")
 	public String memberLogin() {
 		return "member/memberLogin";
 	}
 	
-	@PostMapping("/memberLogin.do")
-	public String memberLogin(String mem_id, String mem_pw) {
-		return memberService.memberLogin(mem_id, mem_pw);
+	@PostMapping("/member/mypage.do")
+	public ModelAndView memberLogin(String mem_id, String mem_pw) {
+		ModelAndView mav = new ModelAndView();
+		if(memberService.memberCount(mem_id, mem_pw) != 0) {
+			mav.addObject("memberDTO", memberService.memberLogin(mem_id, mem_pw));
+			//mav.setViewName("redirect:mypage.do?mem_id="+mem_id);
+			mav.setViewName("member/memberMyPage");
+		} else {
+			mav.setViewName("redirect:login.do?check=f");
+		}
+		return mav;
 	}
 	
-	@PostMapping(value="/memberMyPage.do", produces = "application/text; charset=utf8")
-	public @ResponseBody String memberMyPage(@RequestBody List<MemberDTO> dtos) {
-		memberService.memberMyPage(dtos);
-		return "{\"result\":\"success\"}";
+	@PostMapping("/member/update.do")
+	public String memberMyPagePro(@ModelAttribute MemberDTO dto) {
+		memberService.memberUpdate(dto);
+		// return "/mvc/memberMain.jsp"; 나중에 이걸로 바꿀 것
+		return "member/memberMyPage";
 	}
+//	
+//	@GetMapping(value="/member/mypage.do")
+//	public @ResponseBody String memberMyPage(String mem_id) {
+//		
+//		//memberService.memberMyPage(dtos);
+//		return "{\"result\":\"success\"}";
+//	}
 	
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {
@@ -114,7 +131,7 @@ public class MemberController {
 		resultJO.put("result", true);
 		resultJO.put("data", contentJO);
 		
-		System.out.println("list/readdate탐");
+		System.out.println("list/readdata탐");
 		
 		return resultJO.toString();
 	}

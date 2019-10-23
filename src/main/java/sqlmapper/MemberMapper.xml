@@ -14,13 +14,18 @@
 	</select>
 	
 	<!-- 회원로그인 -->
-	<select id="memberLogin" parameterType="lib.member.model.MemberDTO" resultType="String">
+	<select id="memberCount" parameterType="lib.member.model.MemberDTO" resultType="Integer">
+		select count(*) from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
+	
+	<!-- 회원로그인 -->
+	<select id="memberLogin" parameterType="lib.member.model.MemberDTO" resultType="lib.member.model.MemberDTO">
 		select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
 	</select>
 	
 	<!-- 회원정보변경 -->
-	<update id="memberMyPage" parameterType="lib.member.model.MemberDTO">
-		update member set mem_pw, mem_address, mem_phone, mem_email, mem_address_number where mem_id = #{mem_id}
+	<update id="memberUpdate" parameterType="lib.member.model.MemberDTO" >
+		update member set mem_pw=#{mem_pw}, mem_address=#{mem_address}, mem_phone=#{mem_phone}, mem_email=#{mem_email}, mem_address_number=#{mem_address_number} where mem_id = #{mem_id}
 	</update>
 	
 	<!-- 권한변경 -->

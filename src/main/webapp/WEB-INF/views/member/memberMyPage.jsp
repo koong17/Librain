@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원정보수정</title>
 
 <!-- grid -->
 <link rel="stylesheet"
@@ -31,14 +31,14 @@
 </head>
 <body>
 <div class="container">
-	<form action="memberjoin.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
+	<form action="update.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
 		<div class="form-group">
 		
 			<div class="row form-group">
 				<label for="inputID" class="col-xs-2 control-label">아이디</label>
 				<div class="col-xs-5">
 					<input class="form-control" type="text" placeholder="4~12자의 영문 대소문자와 숫자로만 입력"
-						id="mem_id" name="mem_id" required readonly="readonly">
+						id="mem_id" name="mem_id" value=${ memberDTO.mem_id } required readonly="readonly">
 				</div>
 				<div class="col-xs-2">
 					<button type="button" id="mem_idCheck" class="btn btn-default btm-sm" onclick="memberIDCheck()">중복확인</button>
@@ -48,21 +48,21 @@
 				<label for="inputPW" class="col-xs-2 control-label">비밀번호</label>
 				<div class="col-xs-6">
 					<input class="form-control" type="password" placeholder="4~12자의 영문 대소문자와 숫자로만 입력."
-						id="mem_pw" name="mem_pw" required>
+						id="mem_pw" name="mem_pw" value=${ memberDTO.mem_pw } required>
 				</div>
 			</div>
 			<div class="row form-group">
 				<label for="inputPWCheck" class="col-xs-2 control-label">비밀번호 확인</label>
 				<div class="col-xs-6">
 					<input type="password" class="form-control" placeholder="비밀번호 확인"
-						id="mem_pwCheck" name="mem_pwCheck" required>
+						id="mem_pwCheck" name="mem_pwCheck" value=${ memberDTO.mem_pw } required>
 				</div>
 			</div>
 			<div class="row form-group">
 				<label for="inputName" class="col-xs-2 control-label">이름</label>
 				<div class="col-xs-6">
 					<input class="form-control" type="text" placeholder="이름을 입력하세요."
-						id="mem_name" name="mem_name" required readonly="readonly">
+						id="mem_name" name="mem_name" value=${ memberDTO.mem_name } required readonly="readonly">
 				</div>
 			</div>
 			<div class="row form-group" id="divPos">
@@ -79,7 +79,7 @@
 		    	<input type="hidden" id="mem_address" name="mem_address" value="">
                 <label for="inputAddressNumber" class="col-xs-2 control-label">우편번호</label>
                 <div class="col-xs-2">
-                    <input type="text" name="mem_address_number" class="form-control" placeholder="00000" id="mem_address_number" maxlength="30" required readOnly>
+                    <input type="text" name="mem_address_number" class="form-control" placeholder="00000" id="mem_address_number" maxlength="30" value=${ memberDTO.mem_address_number } required readOnly>
                 </div>
                 <div class="col-xs-2">
                 	<input type="button" class="btn" value="검색" onclick="daumPostcode()">
@@ -102,13 +102,13 @@
 				<label for="inputPhone" class="col-xs-2 control-label">전화번호</label>
 				<div class="col-xs-6">			
 					<input class="form-control" type="tel" placeholder="공백이나 -없이 입력하세요."
-						id="mem_phone" name="mem_phone" required>
+						id="mem_phone" name="mem_phone"value=${ memberDTO.mem_phone }  required>
 				</div>
 			</div>
 			<div class="row form-group">
                 <label for="inputEmail" class="col-xs-2 control-label">이메일</label>
                 <div class="col-xs-6">
-                    <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex) librain@librain.org" maxlength="40" required>
+                    <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex) librain@librain.org" maxlength="40" value=${ memberDTO.mem_email } required>
                 </div>
 			</div>
 				<div class="form-group">
@@ -119,7 +119,7 @@
 				<div class="form-group">
 					<div class="col-xs-4">
 						<button type="button" class="btn btn-primary btn-block" id="homeBtn"
-							onclick="location.href='index.jsp'">
+							onclick="location.href='login.do'">
 							<i class="fa fa-home">돌아가기</i>
 						</button>
 					</div>
@@ -131,31 +131,43 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+	$(function() {
+		var addrSplit = ("${memberDTO.mem_address}").split(", ",2);
+		document.getElementById("mem_address1").value =addrSplit[0];
+		document.getElementById("mem_address2").value =addrSplit[1];
+		document.getElementById("mem_jumin1").value =("${memberDTO.mem_jumin}").substring(0,6);
+		document.getElementById("mem_jumin2").value =("${memberDTO.mem_jumin}").substring(6);
+	});
 	
 	function formCheck(){
-		var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
-		var regID = /^[a-zA-Z0-9]{4,12}$/;
-		var regPW = /^[a-zA-Z0-9]{4,12}$/;
-		var regJumin1 = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/;
-		var regJumin2 = /[1-4][0-9]{6}$/;
-		
-		console.log("폼체크탐");
-		
-		document.getElementById("mem_address").value = document.getElementById("mem_address1").value + ", " + document.getElementById("mem_address2").value;
-		document.getElementById("mem_jumin").value = document.getElementById("mem_jumin1").value+document.getElementById("mem_jumin2").value;
-		
-		if(!regPW.test(document.getElementById("mem_pw").value)) {
-			alert("패스워드를 다시 입력하세요"); return false;
-		} else if(document.getElementById("mem_pw").value != document.getElementById("mem_pwCheck").value){
-			alert("패스워드와 확인한 패스워드가 다릅니다"); return false;
-		} else if(document.getElementById("mem_address_number").value.length < 2) {
-			alert("우편번호를 입력하세요"); return false;
-		} else if(document.getElementById("mem_address1").value.length < 2) {
-			alert("기본주소를 입력하세요"); return false;
-		} else {
-			alert("정보가 수정되었습니다.");
-			return true;
+		try {
+			var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+			var regID = /^[a-zA-Z0-9]{4,12}$/;
+			var regPW = /^[a-zA-Z0-9]{4,12}$/;
+			var regJumin1 = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/;
+			var regJumin2 = /[1-4][0-9]{6}$/;
+			
+			console.log("폼체크탐");
+			
+			document.getElementById("mem_address").value = document.getElementById("mem_address1").value + ", " + document.getElementById("mem_address2").value;
+			document.getElementById("mem_jumin").value = document.getElementById("mem_jumin1").value+document.getElementById("mem_jumin2").value;
+			
+			if(!regPW.test(document.getElementById("mem_pw").value)) {
+				alert("패스워드를 다시 입력하세요"); return false;
+			} else if(document.getElementById("mem_pw").value != document.getElementById("mem_pwCheck").value){
+				alert("패스워드와 확인한 패스워드가 다릅니다"); return false;
+			} else if(document.getElementById("mem_address_number").value.length < 2) {
+				alert("우편번호를 입력하세요"); return false;
+			} else if(document.getElementById("mem_address1").value.length < 2) {
+				alert("기본주소를 입력하세요"); return false;
+			} else {
+				alert("정보가 수정되었습니다.");
+				return true;
+			}
+		} catch (e) {
+			alert(e.message);
 		}
+
 	}
 	
 	function daumPostcode() {
