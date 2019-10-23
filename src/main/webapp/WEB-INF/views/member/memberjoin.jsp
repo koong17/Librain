@@ -132,11 +132,10 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 
-var idck;
-	$(function(){
-		idck=0;
-	});
-	function memberIDCheck(){
+var idck=0;
+$(function(){
+	
+	$("#memberIDCheck").click(function(){
 		
 		var mem_id = $("#mem_id").val();
 		
