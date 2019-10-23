@@ -7,9 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
+
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -17,12 +15,13 @@
 </head>
 <body>
 
-	<div class="container-fluid bg-light " align="center">
-		<br><br>
-		<h1 align="left">근태관리</h1>
-		<hr>
-		<br>
-		<div class="row align-items-center justify-content-center" align="center">
+	<div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">근태 목록</h1>
+            </div>
+		</div>
+		<div class="row">
 			<div class="col-md-2 pt-3">
 				<div class="form-group">
 					<select id="cmt_year" name="cmt_year" class="form-control">
@@ -51,22 +50,19 @@
 					</select>
 				</div>
 			</div>
-				<div class="col-md-1">
-					<input type="button" class="btn btn-primary btn-block" id="search" value="검색">
-				</div>
-				<div class="col-md-2">
-					<input type="button" class="btn btn-primary btn-block" id="update" value="선택 수정">
-				</div>
-			<div class="form-group">
+			<div class="col-md-1">
+				<input type="button" class="btn btn-primary btn-block" id="search" value="검색">
 			</div>
-			<div class="form-group">
+			<div class="col-md-2">
+				<input type="button" class="btn btn-primary btn-block" id="update" value="선택 수정">
 			</div>
 		</div>
-		<div class="form-group">
-			<div id="grid"></div>
+		<div class="row">
+			<div class="form-group">
+				<div id="grid"></div>
+			</div>
 		</div>
 	</div>
-
 </body>
 
 <script type="text/javascript">	

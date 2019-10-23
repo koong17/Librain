@@ -1,43 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../includes/header.jsp"%>
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8">
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<html>
+<head>
+<meta charset="UTF-8">
+<title>근태관리</title>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-<%@include file="../includes/header.jsp"%>
-  <div class="container-fluid bg-light " align="center">
-	<br><br>
-	<h1 align="left">근태관리</h1>
-	<hr>
-	<br>
-      <div class="row align-items-center justify-content-center" align="center">
-         <div class="col-md-2 pt-3">
-            <div class="form-group">
-            	<input type="button" class="btn btn-primary btn-block" id="work" value="출근" >
-            </div>
-         </div>
-         <div class="col-md-2 pt-3">
-            <div class="form-group">
-            	<input type="button" class="btn btn-primary btn-block" id="leave" value="퇴근" >
-            </div>
-         </div>
-      </div>
-      <div class="row align-items-center justify-content-center" align="center">
-		<div class="col-md-8">
-			<div id="gridTop"></div>
+	<div class="wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">근태 관리</h1>
+			</div>
 		</div>
-	  </div>
-      <div class="row align-items-center justify-content-center" align="center">
-		<div class="col-md-8">
-			<div id="grid"></div>
+		<div class="row">
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<input type="button" class="btn btn-primary btn-block" id="work"
+						value="출근">
+				</div>
+			</div>
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<input type="button" class="btn btn-primary btn-block" id="leave"
+						value="퇴근">
+				</div>
+			</div>
 		</div>
-	  </div>
-   </div>
-<%@include file="../includes/footer.jsp"%>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<div id="gridTop"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<div id="grid"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script>
 
@@ -148,3 +158,4 @@
 	});
 </script>
 </html>
+<%@include file="../includes/footer.jsp"%>
