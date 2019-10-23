@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Main</title>
 
 <!-- Toast Grid CSS-->
 <link rel="stylesheet"
@@ -26,7 +25,6 @@
 				<c:when test='${!empty sessionScope.emp_no }'>
 	            <div class="col-md-12">
 	                <h1 class="page-header">${sessionScope.emp_name }님 환영합니다.</h1>
-						<!-- <a href="logout.do">로그아웃</a> -->
 	            </div>
 				</c:when>
 			</c:choose>
@@ -57,16 +55,6 @@
 		</div>
 	</div>
 </body>
-
-
-<!-- jQuery -->
-<script
-	src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-
-<!-- BootStrap JS -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript"
