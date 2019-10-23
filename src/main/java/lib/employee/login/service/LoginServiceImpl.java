@@ -21,10 +21,13 @@ public class LoginServiceImpl implements LoginService{
 	LoginDAO dao;
 	
 	@Override
-	public boolean loginCheck(EmployeeDTO dto, HttpSession session) {
-		boolean result = dao.loginCheck(dto);
-		if(result == true) {
+	public int loginCheck(EmployeeDTO dto, HttpSession session) {
+		int result = dao.loginCheck(dto);
+		if(result != 0) {
 			dto = dao.loginInfo(dto);
+			if(dto.getEmp_password().equals(dto.getEmp_jumin().substring(0,6))) {
+				result++;
+			}
 			session.setAttribute("emp_no",  dto.getEmp_no());
 			session.setAttribute("emp_name",  dto.getEmp_name());
 			session.setAttribute("emp_position",  dto.getEmp_position());
@@ -50,6 +53,12 @@ public class LoginServiceImpl implements LoginService{
 		jo.put("total", total);
 		ja.add(jo);
 		return ja;
+	}
+
+	@Override
+	public int changePwd(EmployeeDTO dto) {
+		int result = dao.changePwd(dto);
+		return result;
 	}
 	
 }
