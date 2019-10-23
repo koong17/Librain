@@ -24,13 +24,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public String memberLogin(String mem_id, String mem_pw) {
-		return sqlsession.getMapper(MemberDAO.class).memberLogin(mem_id, mem_pw);
+	public MemberDTO memberLogin(MemberDTO dto) {
+		return sqlsession.getMapper(MemberDAO.class).memberLogin(dto);
 	}
 	
 	@Override
-	public String memberMyPage() {
-		return sqlsession.getMapper(MemberDAO.class).memberMyPage();
+	public void memberUpdate(MemberDTO dto) {
+		sqlsession.getMapper(MemberDAO.class).memberUpdate(dto);
 	}
 
 	@Override
@@ -73,5 +73,10 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("DAO select 탔다");
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).select(startRowNum, endRowNum);
 		return list;
+	}
+
+	@Override
+	public int memberCount(MemberDTO dto) {
+		return sqlsession.getMapper(MemberDAO.class).memberCount(dto);
 	}
 }

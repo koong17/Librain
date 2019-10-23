@@ -11,8 +11,6 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- boostrap -->
-<!-- boostrap -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -33,7 +31,7 @@
 <body>
 
 <div class="container">
-	<form action="memberLogin.do" method="post" id="memberLogin.do">
+	<form action="mypage.do" method="post">
 		<div class="row form-group">
 			<div class="form-group">
 				<label for="inputID" class="col-xs-5 control-label">아이디</label>
@@ -44,19 +42,24 @@
 			<div class="form-group">
 				<label for="inputPW" class="col-xs-5 control-label">비밀번호</label>
 				<div class="col-xs-5">
-					<input class="form-control" type="text" placeholder="ID입력" id="mem_pw" name="mem_pw" required>
+					<input class="form-control" type="text" placeholder="ID입력" id="mem_pw" name="mem_pw" maxlength="12" required>
 				</div>
 			</div>
 		</div>
 		<div class="row form-group">
 			<div class="form-group">
 				<div class="col-xs-10">
-					<input type="submit" class="btn btn-primary btn-block" id="LoginBtn" value="Login" onclick="location.href='/mvc/memberMyPage.do'">
+					<input type="submit" class="btn btn-primary btn-block" id="LoginBtn" value="Login">
 				</div>
 			</div>
 		</div>
 	</form>		
 </div>
 </body>
-
+<script type="text/javascript">
+$(function() {
+	if("${param.check}"=="f") alert("아이디 및 비밀번호를 확인해주세요.");
+	
+});
+</script>
 </html>
