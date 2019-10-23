@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>도서검색</title>
 
 <!-- Toast Grid CSS-->
 <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
-<title>도서검색</title>
 <%@include file="../includes/header.jsp"%>
 </head>
 <body>

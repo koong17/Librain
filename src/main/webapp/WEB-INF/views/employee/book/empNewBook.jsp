@@ -6,32 +6,15 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- font CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <!-- Toast Grid CSS-->
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
 <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<!-- Toast pagination JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
- 
-<!-- Toast Grid DatePicker JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
-
-<!-- Toast Grid CSS-->
-<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
-
-
 <title>도서검색</title>
+<%@include file="../includes/header.jsp"%>
 </head>
 <body>
-<%@include file="../includes/header.jsp"%>
 	<div id="searchGridDiv">
 	<br>
 		<h4>구입할 도서 검색</h4><hr>
@@ -104,10 +87,20 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="../includes/footer.jsp"%>
 </body>
+<%@include file="../includes/footer.jsp"%>
 
 <!-- bookJS -->
 <script src="${pageContext.request.contextPath}/resources/js/empNewBook.js?after"></script>
+
+<!-- Toast pagination JS-->
+<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
+ 
+<!-- Toast Grid DatePicker JS-->
+<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+
+<!-- Toast Grid CSS-->
+<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 </html>
