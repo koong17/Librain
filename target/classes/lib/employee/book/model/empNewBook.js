@@ -103,7 +103,7 @@ function searchData(array) {
 			book_pub_date: array.datetime.substring(0, 10), book_ISBN: array.isbn, book_price: array.price 
 	}
 	
-	console.log(data);
+	console.log("data = ", data);
 	grid.appendRow(data,option);
 	grid.check(grid.getRowAt(0).rowKey);
 }
@@ -124,7 +124,7 @@ function addRowData() {
 
 function inputAjax() {
 //	console.log('focus success >> ' + grid.focus(grid.getRowAt(0).rowKey, 'book_name', true));
-	console.log("input() > ", grid.getCheckedRows());
+	console.log("input() > ", JSON.stringify(grid.getCheckedRows()));
 	
 	if(grid.getCheckedRows().length != 0) {
 		var checkedGrid= grid.getCheckedRows();

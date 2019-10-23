@@ -8,9 +8,10 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lib.employee.book.model.New_BookDTO;
+import lib.employee.book.model.Hope_BookDTO;
 import lib.member.book.model.MemBookDAO;
 import lib.member.book.model.MemBookDTO;
+import lib.member.model.MemberDTO;
 
 @Service
 public class MemBookServiceImpl implements MemBookService {
@@ -19,14 +20,25 @@ public class MemBookServiceImpl implements MemBookService {
 	MemBookDAO bookDAO;
 	
 	@Override
-	public void newInsert(List<New_BookDTO> dto) {
-		int new_book_num =  bookDAO.newMaxBookNum();
-		for (New_BookDTO newBookDTO : dto) {
-			newBookDTO.setNew_book_num(new_book_num);
-			bookDAO.newInsertBook(newBookDTO);
+	public void hopeInsert(List<Hope_BookDTO> dto) {
+		for (Hope_BookDTO hopeBookDTO : dto) {
+			bookDAO.hopeInsertBook(hopeBookDTO);
 		}
 	}
 	
+	@Override
+	public JSONObject hopeMemCheck(String mem_id) {
+		String result = "";
+		JSONObject jObj = new JSONObject();
+		
+		if(bookDAO.hopeMemCheck(mem_id) == 1) result = "success";
+		else result = "fail";
+		
+		jObj.put("result", result);
+		
+		return jObj;
+	}
+
 	@Override
 	public List searchCtgr(String searchCtgr, String searchWord) {
 		List<MemBookDTO> list = new ArrayList<MemBookDTO>();

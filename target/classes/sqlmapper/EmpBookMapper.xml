@@ -109,6 +109,33 @@
 			where book_num = #{ book_num }
 	</update>
 	
+	<select id="hopeSelectRowNum" resultType="int">
+		select count(*) from hope_book
+	</select>	
+	
+	<update id="hopeApprove" parameterType="lib.employee.book.model.Hope_BookDTO">
+		update hope_book set hope_status='승인' where hope_book_num = #{ hope_book_num }
+	</update>
+	
+	<update id="hopeReturn" parameterType="lib.employee.book.model.Hope_BookDTO">
+		update hope_book set hope_status='반려' where hope_book_num = #{ hope_book_num }
+	</update>
+
+	<delete id="hopeDelete" parameterType="lib.employee.book.model.Hope_BookDTO">
+		<![CDATA[
+			delete from hope_book where hope_input_date < sysdate - 7
+		]]>
+	</delete>
+	
+	<select id="hopeSelect" parameterType="int" resultType="lib.employee.book.model.Hope_BookDTO">
+		<![CDATA[
+			select * from 
+			    (select  rownum r, hope_book_num, book_author, book_name, book_pub_house, book_pub_date, book_isbn, book_price, hope_status, hope_input_date
+			        from (select * from hope_book order by hope_book_num desc))
+			    where r > #{ startRowNum } and r <= #{ endRowNum }
+		]]>
+	</select>
+	
 	<select id="newSelect" resultType="lib.employee.book.model.New_BookDTO">
 		select * from new_book order by new_book_num_sub desc
 	</select>

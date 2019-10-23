@@ -54,6 +54,10 @@
 				<div class="col-md-12">
 					<div id="searchGrid"></div><br><br>
 				</div>
+				<br><br>
+				<div class="col-md-12">
+					<div id="grid"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -61,6 +65,6 @@
 
 <!-- bookJS -->
 <script
-	src="${pageContext.request.contextPath}/resources/js/memBook.js?after"></script>
+	src="${pageContext.request.contextPath}/resources/js/memHopeBook.js?after"></script>
 
 </html>

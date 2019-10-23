@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lib.employee.book.model.BookRentDisDTO;
-import lib.employee.book.model.Book_categoryDTO;
 import lib.employee.book.model.EmpBookDAO;
 import lib.employee.book.model.EmpBookDTO;
+import lib.employee.book.model.Hope_BookDTO;
 import lib.employee.book.model.New_BookDTO;
 import lib.employee.book.model.RentalDTO;
 import lib.member.model.MemberDTO;
@@ -201,6 +201,55 @@ public class EmpBookServiceImpl implements EmpBookService {
 		for (EmpBookDTO empBookDTO : dto) {
 			bookDAO.updateBook(empBookDTO);
 		}
+	}
+	
+	@Override
+	public void hopeApprove(List<Hope_BookDTO> dto) {
+		for (Hope_BookDTO hopeBookDTO : dto) {
+			bookDAO.hopeApprove(hopeBookDTO);
+		}
+	}
+	
+	@Override
+	public void hopeReturn(List<Hope_BookDTO> dto) {
+		for (Hope_BookDTO hopeBookDTO : dto) {
+			bookDAO.hopeReturn(hopeBookDTO);
+		}
+	}
+	
+	@Override
+	public void hopeDelete(List<Hope_BookDTO> dto) {
+		for (Hope_BookDTO hopeBookDTO : dto) {
+			bookDAO.hopeDelete(hopeBookDTO);
+		}
+	}
+	
+	@Override
+	public JSONArray hopeSelect(int Perpage, int page) {
+		int startRowNum = Perpage * page - Perpage;
+		int endRowNum = Perpage * page;
+		List<Hope_BookDTO> list = new ArrayList<Hope_BookDTO>();
+		list = bookDAO.hopeSelect(startRowNum, endRowNum);
+
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		for (int i = 0; i < list.size(); i++) {
+			Hope_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("hope_book_num", dto.getHope_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("hope_status", dto.getHope_status());
+			jObj.put("hope_input_date", dto.getHope_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
+			jArr.add(jObj);
+		}
+		return jArr;
 	}
 	
 	@Override

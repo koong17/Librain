@@ -5,6 +5,16 @@
 
 <mapper namespace="lib.member.book.model.MemBookDAO">
 	
+	<insert id="hopeInsertBook" parameterType="lib.employee.book.model.Hope_BookDTO">
+		insert into hope_book VALUES ((select nvl(max(hope_book_num)+1,1) from hope_book), 
+			#{ book_author }, #{ book_name }, #{ book_pub_house }, #{ book_pub_date }, 
+			#{ book_ISBN }, #{ book_price }, '신청 완료', sysdate)
+	</insert>
+	
+	<select id="hopeMemCheck" parameterType="java.lang.String" resultType="int">
+		select count(*) from member where mem_id = #{ mem_id }
+	</select>
+	
 	<select id="searchAll" parameterType="java.lang.String" resultType="lib.member.book.model.MemBookDTO">
 		select b.book_num, book_author, book_pub_house, book_name,  decode(rent_enddate,'o','대여중','대여가능') rent
 			from  (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }) b 
