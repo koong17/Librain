@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<label for="inputPW" class="col-xs-5 control-label">비밀번호</label>
 				<div class="col-xs-5">
-					<input class="form-control" type="text" placeholder="ID입력" id="mem_pw" name="mem_pw" maxlength="12" required>
+					<input class="form-control" type="password" placeholder="비밀번호입력" id="mem_pw" name="mem_pw" maxlength="12" required>
 				</div>
 			</div>
 		</div>

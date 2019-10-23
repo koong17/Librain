@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원정보수정</title>
 
 <!-- grid -->
 <link rel="stylesheet"
