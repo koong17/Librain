@@ -18,7 +18,7 @@ public interface MemberService {
 	public String memberLogin(String mem_id, String mem_pw);
 	
 	//회원마이페이지
-	public String memberMyPage();
+	public String memberMyPage(List<MemberDTO> dtos);
 
 	//전체목록
 	public JSONArray memberSelectAll();

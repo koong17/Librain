@@ -67,7 +67,7 @@ public class MemberController {
 	
 	@PostMapping(value="/memberMyPage.do", produces = "application/text; charset=utf8")
 	public @ResponseBody String memberMyPage(@RequestBody List<MemberDTO> dtos) {
-		memberService.memberMyPage();
+		memberService.memberMyPage(dtos);
 		return "{\"result\":\"success\"}";
 	}
 	

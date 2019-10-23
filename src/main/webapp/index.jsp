@@ -41,6 +41,10 @@ admin/book/approve/disBook.do<a href="admin/book/approve/disBook.do">도서 폐�
  <hr>
 memberList.do<a href="memberList.do">회원조회</a><br><hr>
 
+member/join.do<a href="member/join.do">회원가입</a><br><hr>
+member/login.do<a href="member/login.do">회원로그인</a><br><hr>
+member/mypage.do<a href="member/mypage.do">회원정보수정</a><br><hr>
+
 
 
 
