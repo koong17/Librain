@@ -1,5 +1,7 @@
 package lib.employee.mypage.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -55,6 +57,16 @@ public class MypageController {
 		mypageService.empUpdate(employeeDTO);
 		model.addAttribute("employeeDTO", mypageService.empSelectOne(employeeDTO));
 		return "employee/mypage/info";
+	}
+	
+	@PostMapping("/updatePwd.do")
+	public @ResponseBody String updatePwd(HttpSession session, HttpServletRequest req) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		employeeDTO.setEmp_password(req.getParameter("oldPwd"));
+		employeeDTO.setEmp_no((String)session.getAttribute("emp_no"));
+		
+		return String.valueOf(mypageService.empUpdatePwd(employeeDTO, req.getParameter("pwd")));
 	}
 	
 	@GetMapping("/commute.do")

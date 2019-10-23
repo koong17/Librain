@@ -12,4 +12,6 @@ public interface MypageDAO {
 	public List<CommuteDTO> cmtSelectAll(CommuteDTO commuteDTO);
 	public List<CommuteDTO> cmtSelectOnOff(CommuteDTO commuteDTO);
 	public SalaryDTO salSelectOne(SalaryDTO salaryDTO);
+	public int empCheckPwd(EmployeeDTO employeeDTO);
+	public void empUpdatePwd(EmployeeDTO employeeDTO);
 }
