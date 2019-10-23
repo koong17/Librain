@@ -23,64 +23,73 @@
    </div>
    <div class="row">
 		<div class="container-fluid bg-light ">
-		<br>
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-3">
 				    <div class="input-group">
-				      <input type="text" class="form-control" placeholder="회원번호" id="mem_id" name="mem_id">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button" id="memBtn">
-				        	<i class="fa fa-search"></i>
-				        </button>
-				      </span>
+					    <input type="text" class="form-control" placeholder="회원번호" id="mem_id" name="mem_id">
+					    <span class="input-group-btn">
+						    <button class="btn btn-default" type="button" id="memBtn">
+						   		<i class="fa fa-search"></i>
+						    </button>
+					    </span>
 				    </div>
 				</div>
 				<div class="col-md-3">
 				    <div class="input-group">
-				      <input type="text" class="form-control" placeholder="도서번호" id="book_num" name="book_num">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button" id="bookBtn">
-				        	<i class="fa fa-search"></i>
-				        </button>
-				      </span>
+					    <input type="text" class="form-control" placeholder="도서번호" id="book_num" name="book_num">
+					    <span class="input-group-btn">
+						    <button class="btn btn-default" type="button" id="bookBtn">
+						    	<i class="fa fa-search"></i>
+						    </button>
+					    </span>
 				    </div>
 				</div>
 				<div class="col-md-1">
-					<button type="button" class="btn btn-primary btn-block" id="rentBtn"> 
-						대여
-					</button>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary btn-block" id="rentBtn"> 
+							대여
+						</button>
+					</div>
 				</div>
 				<div class="col-md-1">
-					<button type="button" class="btn btn-primary btn-block" id="returnBtn">
-						반납
-					</button>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary btn-block" id="returnBtn">
+							반납
+						</button>
+					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
     <div class="row">
-		<br>
 		<div id="memGridDiv">
-			<h4>회원 조회</h4>
-			<div class="row align-items-center justify-content-center" align="center">
-      			<div class="col-md-12">
-					<div id="memGrid"></div> 
-				</div>
-      		</div>
-     	</div>
-   		<br>
-   		<div id="bookGridDiv">
-  			<h4>도서 조회</h4>
-   		<div class="row align-items-center justify-content-center" align="center">
-   			<div class="col-md-12">
- 		<!-- <div class="row form-group"> -->
-				<div id="bookGrid"></div>
+			<div class="col-md-12">
+				<h4>회원 조회</h4>
+				<div class="row align-items-center justify-content-center">
+	      			<div class="col-md-12">
+						<div id="memGrid"></div> 
+					</div>
+	      		</div>
 			</div>
-   		</div>
+     	</div>
+     </div>
+     <br>
+     <div class="row">
+   		<div id="bookGridDiv">
+   			<div class="col-md-12">
+  				<h4>도서 조회</h4>
+	   			<div class="row align-items-center justify-content-center">
+	   				<div class="col-md-12">
+	 				<!-- <div class="row form-group"> -->
+						<div id="bookGrid"></div>
+					</div>
+	   			</div>
+  			</div>
+		</div>
 	</div>
 </div>
-	<%@include file="../includes/footer.jsp"%>
 </body>
+<%@include file="../includes/footer.jsp"%>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>

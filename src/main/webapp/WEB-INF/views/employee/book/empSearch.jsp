@@ -22,7 +22,6 @@
    </div>
    <div class="row">
 		<div class="container-fluid bg-light ">
-		<br>
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-2 pt-3">
 					<div class="form-group ">
@@ -52,9 +51,11 @@
 		</div>
    </div>
    <div class="row">
-	 	<div class="row align-items-center justify-content-center" align="center">
-	      	<div class="col-md-12">
-				<div id="grid"></div>
+   		<div class="col-md-12">
+		 	<div class="row align-items-center justify-content-center">
+		      	<div class="col-md-12">
+					<div id="grid"></div>
+		      	</div>
 	      	</div>
       	</div>
    </div>

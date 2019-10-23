@@ -72,6 +72,7 @@ public class MemBookServiceImpl implements MemBookService {
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
 			jObj.put("book_num", dto.getBook_num());
+			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
 			jObj.put("rent", dto.getRent());
 			jArr.add(jObj);
 		}

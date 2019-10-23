@@ -85,6 +85,10 @@ const grid = new tui.Grid({
          name: 'book_pub_house'
       },
       {
+    	  header: '분류기호',
+    	  name: 'book_ctgr_num'
+      },
+      {
          header: '대출여부',
          name: 'rent'
       }
