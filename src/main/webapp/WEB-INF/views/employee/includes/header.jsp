@@ -88,7 +88,6 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-
                         <c:choose>
                        <c:when test="${sessionScope.emp_position == '관장' || sessionScope.emp_position == '팀장'}">
                         <li>
@@ -116,11 +115,26 @@
                                <li>
                                     <a href="#">도서관리 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+                                    	<li>
+		                                    <a href="${pageContext.request.contextPath}/book/search.do">도서검색</a>
+		                                </li>
+		                                <li>
+		                                    <a href="${pageContext.request.contextPath}/book/rent.do">대여</a>
+		                                </li>
+		                                <li>
+		                                    <a href="${pageContext.request.contextPath}/book/hope.do">희망 도서 승인</a>
+		                                </li>
+		                                <li>
+		                                    <a href="${pageContext.request.contextPath}/book/newApply.do">도서 구입 신청</a>
+		                                </li>
+		                                <li>
+		                                    <a href="${pageContext.request.contextPath}/book/discardApply.do">도서 폐기 신청</a>
+		                                </li>
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/admin/book/approve/newBook.do">도서구입승인</a>
+                                            <a href="${pageContext.request.contextPath}/admin/book/approve/newBook.do">도서 구입 승인</a>
                                         </li>
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/admin/book/approve/disBook.do">도서폐기승인</a>
+                                            <a href="${pageContext.request.contextPath}/admin/book/approve/disBook.do">도서 폐기 승인</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -152,6 +166,9 @@
                                 </li>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/book/rent.do">대여</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/book/hope.do">희망 도서 승인</a>
                                 </li>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/book/newApply.do">도서 구입 신청</a>

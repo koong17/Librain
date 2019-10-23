@@ -117,21 +117,23 @@ function updateAjax() {
 	if(grid.getCheckedRows().length != 0) {
 		console.log(grid.getCheckedRows());
 		grid.focus(grid.getRowAt(0).rowKey, 'book_num', true);
-		$.ajax({
-			type : "POST",
-			contentType : "application/json;charset=UTF-8",
-			dataType : "json",
-			data : JSON.stringify(grid.getCheckedRows()),
-			url : "./search/update.do",
-			success : function(data){
-				console.log(data.result);
-				grid.uncheckAll();
-				confirm();
-			},
-			error : function(e) {
-				alert('Error : ' + e);
-			}
-		});
+		setTimeout(function() {
+			$.ajax({
+				type : "POST",
+				contentType : "application/json;charset=UTF-8",
+				dataType : "json",
+				data : JSON.stringify(grid.getCheckedRows()),
+				url : "./search/update.do",
+				success : function(data){
+					console.log(data.result);
+					grid.uncheckAll();
+					confirm();
+				},
+				error : function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}, 200); 
 	} else {
 		alert("수정할 도서를 선택해주세요.");
 	}
@@ -189,13 +191,7 @@ const grid = new tui.Grid({
 		{
 			header: '발행년도',
 			name: 'book_pub_date',
-			editor: {
-				type: 'datePicker',
-				options: {
-					format: 'yyyy',
-					type: 'year'
-				}
-			}
+			editor: 'datePicker'
 			
 		},
 		{
@@ -223,7 +219,7 @@ const grid = new tui.Grid({
 		},
 		{
 			header: '대여여부',
-			name: 'rent',
+			name: 'rent'/*,
 			editor: {
 				type: 'radio',
 				options: {
@@ -232,11 +228,11 @@ const grid = new tui.Grid({
 						{ text: '대여중', value: '대여중' },
 					]
 				}
-			}
+			}*/
 		},
 		{
 			header: '예약여부',
-			name: 'book_rsrv_status',
+			name: 'book_rsrv_status'/*,
 			editor: {
 				type: 'radio',
 				options: {
@@ -245,12 +241,14 @@ const grid = new tui.Grid({
 						{ text: '예약중', value: '예약중' },
 					]
 				}
-			}
+			}*/
 		},
 		{
 			header: '입력일',
 			name: 'book_input_date',
-			
 		}
-	]
+	],
+	columnOptions: {
+	      resizable: true
+	}
 });
