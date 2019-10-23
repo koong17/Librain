@@ -223,6 +223,9 @@
 	});
 	
 	function formCheck() {
+		document.getElementById("emp_dept_code").disabled = false;
+		document.getElementById("emp_gender").disabled = false;
+		document.getElementById("emp_join_month").disabled = false;
 		var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 		var regJumin1 = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/;
 		var regJumin2 = /[1-4][0-9]{6}$/;
