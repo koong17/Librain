@@ -409,17 +409,18 @@ create table employee_management(
     --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
 );
 insert into employee_management
-values(1000001,'강수아','01068618619','서울시,이문동',02451,'000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
+values(1000001,'강수아','01068618619','서울시,이문동','02451','000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
 insert into employee_management
-values(1000002,'이소영','01011111111','서울시,비밀',02451,'001','9901012222222','F',sysdate-2000,null,'soyoung@librain.org','팀장',3000000,'하나','111111111111','990101');
+values(1000002,'이소영','01011111111','서울시,동동동','02451','001','9901012222222','F',sysdate-2000,null,'soyoung@librain.org','팀장',3000000,'하나','111111111111','990101');
 insert into employee_management
-values(1000003,'남민지','01022222222','고촌,고촌',02451,'002','9901012222222','F',sysdate-1000,null,'zzangmom@librain.org','팀장',3000000,'하나','111111111111','990101');
+values(1000003,'남민지','01022222222','고촌,고촌','02451','002','9901012222222','F',sysdate-1000,null,'zzangmom@librain.org','팀장',3000000,'하나','111111111111','990101');
 insert into employee_management
-values(1000004,'문혜수','01033333333','양주,술은 양주가 최고',02451,'002','9901012222222','F',sysdate-2400,null,'hyesudaldal@librain.org','사원',2500000,'하나','111111111111','990101');
+values(1000004,'문혜수','01033333333','양주,술은 양주가 최고','02451','002','9901012222222','F',sysdate-2400,null,'hyesudaldal@librain.org','사원',2500000,'하나','111111111111','990101');
 insert into employee_management
-values(1000005,'박예원','01044444444','예원이집,집집',02451,'003','9901012222222','F',sysdate-1300,null,'nanyewoni@librain.org','팀장',3000000,'하나','111111111111','990101');
+values(1000005,'박예원','01044444444','예원이집,집집','02451','003','9901012222222','F',sysdate-1300,null,'nanyewoni@librain.org','팀장',3000000,'하나','111111111111','990101');
 insert into employee_management
-values(1000006,'김승수','01055555555','종로,비트캠프',02451,'003','9901011222222','M',sysdate-3700,null,'iamseungsu@librain.org','사원',2500000,'하나','111111111111','990101');
+values(1000006,'김승수','01055555555','종로,비트캠프','02451','003','9901011222222','M',sysdate-3700,null,'iamseungsu@librain.org','사원',2500000,'하나','111111111111','990101');
+commit;
 
 drop table commute_management;
 create table commute_management(

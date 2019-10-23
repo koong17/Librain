@@ -19,16 +19,21 @@ public class LoginDAO {
 	SqlSession sqlSession;
 	
 	//로그인 체크
-	public boolean loginCheck(EmployeeDTO dto) {
+	public int loginCheck(EmployeeDTO dto) {
 		System.out.println("==>loginCheck() 실행");
 		String result = sqlSession.selectOne("employeeLoginMapper.loginCheck", dto);
 		
-		return (Integer.parseInt(result)==0)? false:true;
+		return Integer.parseInt(result);
 	}
+	
 	public EmployeeDTO loginInfo(EmployeeDTO dto) {
 		System.out.println("==>loginInfo() 실행");
-		
 		return sqlSession.selectOne("employeeLoginMapper.loginInfo", dto);
+	}
+	
+	public int changePwd(EmployeeDTO dto) {
+		System.out.println("==>changePwd() 실행");
+		return sqlSession.update("employeeLoginMapper.changePwd", dto);
 	}
 	
 	public void logout(HttpSession session) {
