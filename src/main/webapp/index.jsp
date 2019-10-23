@@ -71,12 +71,54 @@
     </div>
     <!-- ./container -->
     
+    <!-- /.row -->
+   <div class="row">
+ 	<div class="col-lg-4">
+ 	 <div class="well">
+  		<h4 style="font-weight:bold; color:red">기존 인덱스 파일에 있던 링크들</h4>
+  		<hr>
+  		memberjoin.do<a href="memberjoin.do">회원가입</a><br>
+  		memberList.do<a href="memberList.do">회원조회</a><br>
+  		<hr>
+  		mgmt/emplist.do <a href="mgmt/emplist.do">직원목록</a><br>
+		mgmt/emplist2.do <a href="mgmt/emplist2.do">직원목록-관리자</a><br>
+		mgmt/cmtlist.do <a href="mgmt/cmtlist.do">근태목록</a><br>
+		mgmt/totalpaylist.do <a href="mgmt/totalpaylist.do">급여목록-관리자</a><br>
+		mgmt/totalpay.do <a href="mgmt/totalpay.do">급여관리-관리자</a><br>
+	  </div>
+ 	 </div>
+ 	
+ 	<div class="col-lg-4">
+ 	 <div class="well">
+  		mypage/commute.do <a href="mypage/commute.do">근태관리</a><br>
+		mypage/info.do <a href="mypage/info.do">개인정보 수정</a><br>
+		mypage/pay.do <a href="mypage/pay.do">개인 급여</a><br>
+		mypage/test.do <a href="mypage/test.do">도서 검색</a><br>
+		<hr>
+		member/book/search.do<a href="member/book/search.do">고객 도서 검색</a> <br>
+		book/search.do<a href="book/search.do">직원 도서 검색</a><br>
+		book/rent.do<a href="book/rent.do">도서 대여</a><br>
+		book/newApply.do<a href="book/newApply.do">도서 구입 신청</a><br>
+		book/discardApply.do<a href="book/discardApply.do">도서 폐기 신청</a><br>
+   	 </div>
+ 	 </div>
+ 	
+ 	<div class="col-lg-4">
+ 	 <div class="well">
+  		./facility<a href="./facility">시설 </a><br>
+		./facilityapproval<a href="./facilityapproval">시설승인</a>
+		<hr>
+		admin/book/approve/newBook.do<a href="admin/book/approve/newBook.do">도서 구입 승인</a><br>
+		admin/book/approve/disBook.do<a href="admin/book/approve/disBook.do">도서 폐기 승인</a>
+		<hr>
+		board/list.do<a href="board/list.do">게시판</a>
+		<hr>
+		mvc/login.do<a href="login.do">직원로그인</a>
+   	 </div>
+ 	 </div>
+ 	</div>
+    
 	</c:when>
-	<c:otherwise>
-		<h3>${emp_name }님 환영합니다</h3>
-		<a href="logout.do">로그아웃</a><br>
-		<a href="index.jsp">홈으로</a>
-	</c:otherwise>
 	</c:choose>
     <!-- jQuery -->
     <script src="resources/vendor/jquery/jquery.min.js"></script>
