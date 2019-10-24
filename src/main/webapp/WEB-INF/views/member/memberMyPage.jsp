@@ -7,41 +7,63 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보수정</title>
-
+<style type="text/css">
+	html, body{
+		background-image: url('${pageContext.request.contextPath}/resources/img/background-member.jpg');
+		background-size: 100%;
+	}
+	#contents{
+		padding: 10%;
+		margin-right:15%;
+		color: white;
+		font-family:'Malgun Gothic';
+		font-size:12pt;
+	}
+	#mem_name{
+		background-color: #aadeed; color: black;
+	}
+	#mem_id{
+		background-color: #aadeed; color: black;
+	}
+	#mem_jumin1{
+		background-color: #aadeed; color: black;
+	}
+	#mem_jumin2{
+		background-color: #aadeed; color: black;
+	}
+</style>
+<!-- boostrap -->
+<!-- index에서 가져온 부트스트랩 -->
+	<!-- Bootstrap Core CSS -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- MetisMenu CSS -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="${pageContext.request.contextPath}/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+	<!-- Custom Fonts -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- grid -->
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- boostrap -->
-<!-- boostrap -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div class="container">
+
+<div class="container" id="contents">
 	<form action="update.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
 		<div class="form-group">
 		
 			<div class="row form-group">
 				<label for="inputID" class="col-xs-2 control-label">아이디</label>
-				<div class="col-xs-5">
+				<div class="col-xs-6">
 					<input class="form-control" type="text" placeholder="4~12자의 영문 대소문자와 숫자로만 입력"
 						id="mem_id" name="mem_id" value=${ memberDTO.mem_id } required readonly="readonly">
-				</div>
-				<div class="col-xs-2">
-					<button type="button" id="mem_idCheck" class="btn btn-default btm-sm" onclick="memberIDCheck()">중복확인</button>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -81,8 +103,8 @@
                 <div class="col-xs-2">
                     <input type="text" name="mem_address_number" class="form-control" placeholder="00000" id="mem_address_number" maxlength="30" value=${ memberDTO.mem_address_number } required readOnly>
                 </div>
-                <div class="col-xs-2">
-                	<input type="button" class="btn" value="검색" onclick="daumPostcode()">
+                <div class="col-xs-1">
+                	<input type="button" class="btn btn-info" value="검색" onclick="daumPostcode()">
                 </div>
                 <br>
             </div>
@@ -113,20 +135,21 @@
 			</div>
 				<div class="form-group">
 					<div class="col-xs-4">
-						<input type="submit" class="btn btn-primary btn-block" id="ModifyBtn" value="정보수정">
+						<input type="submit" class="btn btn-info btn-block" id="ModifyBtn" value="정보수정">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4">
-						<button type="button" class="btn btn-primary btn-block" id="homeBtn"
+						<button type="button" class="btn btn-info btn-block" id="homeBtn"
 							onclick="location.href='login.do'">
-							<i class="fa fa-home">돌아가기</i>
+							<i class="fa fa-home"></i>
 						</button>
 					</div>
 				</div>
 		</div><p>
 	</form>
 </div>
+
 </body>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

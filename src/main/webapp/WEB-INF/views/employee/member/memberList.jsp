@@ -136,7 +136,7 @@
 	var gridData =
 	{
 		api: {
-			readData: { url: 'http://localhost:8080/mvc/memberList.do/readData', method: 'GET' }
+			readData: { url:location.href+'/readData', method: 'GET' }
 		}
 	}
 		

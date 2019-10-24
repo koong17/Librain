@@ -7,41 +7,52 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-
+<style type="text/css">
+	html, body{
+		background-image: url('${pageContext.request.contextPath}/resources/img/background-member.jpg');
+		background-size: 100%;
+	}
+	#contents{
+		padding: 10%;
+		margin-right:15%;
+		color: white;
+		font-family:'Malgun Gothic';
+		font-size:12pt;
+	}
+</style>
+<!-- boostrap -->
+<!-- index에서 가져온 부트스트랩 -->
+	<!-- Bootstrap Core CSS -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- MetisMenu CSS -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="${pageContext.request.contextPath}/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+	<!-- Custom Fonts -->
+	<link href="${pageContext.request.contextPath}/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- grid -->
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- boostrap -->
-<!-- boostrap -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div class="container">
-	<form action="memberjoin.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
+<div class="container" id="contents">
+	<form action="member/join.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
 		<div class="form-group">
-		
 			<div class="row form-group">
 				<label for="inputID" class="col-xs-2 control-label">아이디</label>
-				<div class="col-xs-5">
+				<div class="col-xs-6">
 					<input class="form-control" type="text" placeholder="4~12자의 영문 대소문자와 숫자로만 입력"
 						id="mem_id" name="mem_id" required>
 				</div>
-				<div class="col-xs-2">
-					<button type="button" id="mem_idCheck" class="btn btn-default btm-sm" onclick="memberIDCheck()">중복확인</button>
+				<div>
+					<button type="button" id="mem_idCheck" class="btn btn-info btm-sm" >중복확인</button>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -82,7 +93,7 @@
                     <input type="text" name="mem_address_number" class="form-control" placeholder="00000" id="mem_address_number" maxlength="30" required readOnly>
                 </div>
                 <div class="col-xs-2">
-                	<input type="button" class="btn" value="검색" onclick="daumPostcode()">
+                	<input type="button" class="btn btn-info" value="검색" onclick="daumPostcode()">
                 </div>
                 <br>
             </div>
@@ -112,15 +123,16 @@
                 </div>
 			</div>
 				<div class="form-group">
+					<label for="zero" class="col-xs-1 control-label"></label>
 					<div class="col-xs-4">
-						<input type="submit" class="btn btn-primary btn-block" id="joinBtn" value="회원가입">
+						<input type="submit" class="btn btn-info btn-block" id="joinBtn" value="회원가입">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4">
-						<button type="button" class="btn btn-primary btn-block" id="homeBtn"
+						<button type="button" class="btn btn-info btn-block" id="homeBtn"
 							onclick="location.href='index.jsp'">
-							<i class="fa fa-home">돌아가기</i>
+							<i class="fa fa-home"></i>
 						</button>
 					</div>
 				</div>
@@ -148,7 +160,7 @@ $(function(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(data){
 				if(data.cnt > 0){
-					alert("이미 존재하는 아이디입니다.");
+					alert("존재하는 아이디입니다.");
 					$("#inputID").addClass("has-error")
 					$("#inputID").removeClass("has-success")
 					$("#mem_id").focus();
@@ -163,7 +175,8 @@ $(function(){
 				alert("error : "+error);
 			}
 		});
-	}
+	});
+});
 	
 	function formCheck(){
 		var regTel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
@@ -231,7 +244,6 @@ $(function(){
 	        }
 	    }).open();
 	}
-
 	
 </script>
 
