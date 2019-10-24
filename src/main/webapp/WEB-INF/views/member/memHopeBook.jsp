@@ -5,6 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style type="text/css">
+body {
+	background-image: url('${pageContext.request.contextPath}/resources/img/background-library.jpg');
+	background-size: 100%;
+}
+
+.logo {
+	width: 50%;
+}
+</style>
 <!-- BootStrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -33,6 +44,12 @@
 <title>도서검색</title>
 </head>
 <body>
+<a class="btn btn-lg btn-success pull-right" href="${pageContext.request.contextPath}/memberMain.jsp"
+		role="button" ><i class="fa fa-home"></i></a><br>
+<div class="panel panel-default" id="panel" style="margin:2.5%; padding:0.5%">
+			<div class="panel-heading" align="left">
+				<h3 class="panel-title" style="font-weight:bold">도서검색</h3>
+			</div>
 	<div class="container-fluid bg-light ">
 		<br>
 		<h4>희망 도서 신청</h4>
@@ -61,6 +78,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 
 <!-- bookJS -->
