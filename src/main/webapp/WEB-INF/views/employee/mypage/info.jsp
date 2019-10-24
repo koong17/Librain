@@ -63,9 +63,10 @@
 				<h1 class="page-header">개인 정보 수정</h1>
 			</div>
 		</div>
+		<div class="row"><br><br></div>
 		<div class="row">
 			<form action="" method="post" onsubmit="javascript:return formCheck();">
-				<div class="col-md-9">
+				<div class="col-md-7 col-md-offset-2">
 					<input hidden="emp_no" value=${ employeeDTO.emp_no }>
 					<div class="row form-group">
 						<label for="inputEmpno" class="col-md-2 control-label">사원번호</label>

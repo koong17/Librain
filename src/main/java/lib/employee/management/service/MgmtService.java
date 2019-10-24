@@ -15,6 +15,7 @@ public interface MgmtService {
 	public void empInsert(EmployeeDTO employeeDTO);
 	public void empUpdate(EmployeeDTO employeeDTO);
 	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO);
+	public JSONArray empSelectDept(EmployeeDTO employeeDTO);
 	public JSONArray cmtAdminSelectAll();
 	public JSONArray cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
