@@ -10,7 +10,7 @@
 	</update>
 	
 	<insert id="rentBook" parameterType="lib.employee.book.model.RentalDTO">
-		insert into rental values((select nvl(max(rent_num)+1,1) from rental), #{ book_num }, #{ mem_id }, sysdate, null, 'X', 'X', '대여중')
+		insert into rental values((select nvl(max(rent_num)+1,1) from rental), #{ book_num }, #{ mem_id }, sysdate, sysdate+7, 'X', 'X', '대여중')
 	</insert>
 	
 	<select id="rentMemCheck" resultType="lib.member.model.MemberDTO" parameterType="java.lang.String">

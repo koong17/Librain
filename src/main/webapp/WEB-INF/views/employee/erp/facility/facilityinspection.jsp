@@ -1,283 +1,388 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
 <body>
+  
+  <%@include file="../../includes/header.jsp"%>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
-<br>
-<input type="button" value="추가" onclick='gridaddgrid()'/>
-<input type="button" value="삭제" onclick='griddelete()'/>
-<input type="button" value="카테고리형식으로  몇개씩보기지원" onclick='aa()'/>
-<input type="button" value="수정" onclick='gridmodify()'/>
+  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" />
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+  <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.css" />
 
-    <div id="grid"></div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     
-    <br>
-    <br>
-    입력폼 모달로 만들지 생각해볼것sss
-    <div id="grid2"></div>
-    <input type="button" value="그리드2체크확인" onclick='grdi2checked()'/>
-    
-    
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-var a=10;
-function gridmodify(){
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-	grid.blur()
-	console.log(grid.getModifiedRows().updatedRows +"마지막전")
-	
-	setTimeout(()=>
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script>
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+    <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+ 
+    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+        <style>
+          #form-wrapper{
+            display: flex;
+            margin-left:9px ;
+          }
+          .tui-grid-cell-has-input.glyphicon{
+            display: flex;
 
-	$.ajax({
-		url:"/mvc/facility/modifyData",
-		data: JSON.stringify(grid.getModifiedRows().updatedRows),
-		type:"PUT",
+          }
+          .btn.btn-info{
+              margin-left: 10px;
+              display: inline;
+          }
+        </style>
+      
+            <div id="grid"></div>
+          <br>
+          <button type="button" class="btn btn-info" onclick="addfacin()">추가하기</button>
+            <button type="button" class="btn btn-info " onclick="BATCH_ENTRY()">일괄입력</button>
+            
+          <div id="grid2"></div>
+<script type="text/javascript">
+
+
+    $(window).on('load', function () {
+      $('#grid2').hide()
+
+      $.ajax({
+		url:"http://localhost:8080/librain/facilityinspection/readData",
+		type:"get",
 		contentType: 'application/json',
 		success:function(date){
-			alert("수정완료");
-			grid.reloadData();
-		}
-	}) 
-			,100)
-	
- 	
-}
-const dataSource = {
-		  initialRequest: true,
-		  api: {
-		    readData: { url: 'http://localhost:8080/mvc/facility/readData', method: 'GET' },
-		    createData: { url: 'http://localhost:8080/mvc/facility/createData', method: 'POST' },
-		    updateData: { url: '/api/updateData', method: 'PUT' },
-		    modifyData: { url: '/api/modifyData', method: 'PUT' },
-		    deleteData: { url: '/api/deleteData', method: 'DELETE' }
-		  }
-		};
+   
 
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
-	data:dataSource,
+	data:date.data.contents,
 	scrollX: false,
 	scrollY: false,
 	minBodyHeight: 30,
 	rowHeaders: ['checkbox'],
 	editingEvent:"click",
 	pageOptions: {
-	    perPage: a
+    useClient: true,
+  perPage: 30
 	  },
 	columns: [
 		{
 			header: '일련번호',
-			name: 'fac_serialnum',
+			name: 'FacIn_serialnum',
 			sortingType: 'desc',
 	        sortable: true,
-	        width:90
+	        width:100,
+      filter: {
+        type: 'select',
+        showApplyBtn: true,
+        showClearBtn: true
+      }
 	     
 		},
 		{
 			header: '시설물이름',
-			name: 'fac_name'
+			name: 'FacIn_name',
+      width:100,
+      filter: {
+        type: 'select',
+        showApplyBtn: true,
+        showClearBtn: true
+      }
 		},
 		{
 			header: '장소',
-			name: 'fac_address',
+			name: 'facin_address',
 			editor:{
 				type:"text"
-			}
+			} ,
+      validation: {
+        dataType: 'string'},
+      filter: {
+        type: 'text',
+        showApplyBtn: true,
+        showClearBtn: true
+      }
 		},
-		{
-			header: '시설물 상태',
-			name: 'fac_status',
-			editor:{
-				type:"select",
-				options:{
-					listItems: [
-				          { text: '고장', value: '고장' },
-				          { text: '정상', value: '정상' },
-				          { text: '수리신청', value: '수리신청' },
-				          { text: '비가동', value: '비가동' }
-				        ]
-				}
+    {
+			header: '이전검사날',
+				name: 'FacIn_Inspection_Date',
+      filter: {
+        type: 'date',
+        showApplyBtn: true,
+        showClearBtn: true,
+        operator: 'OR'
+      }
 			},
-			 onAfterChange: function(ev) {
-		             console.log(ev.rowKey);
-		            grid.check(ev.rowKey);
-		          }
-		
-		},
 		{
-			header: '카테고리',
-			name: 'fac_category',
-		}
+			header: '검사예정일',
+				name: 'FacIn_Inspection_Due_Date',
+      filter: {
+        type: 'date',
+        showApplyBtn: true,
+        showClearBtn: true,
+        operator: 'OR'
+      }
+			}
+			
+		
+		,
+		{
+			header: '점검까지남은날',
+			name: 'RemainingTime',
+      width:20,
+      filter: {
+        type: 'text',
+        showApplyBtn: true,
+        showClearBtn: true
+      }
+		},
+      {
+          header: '입력',
+          name: 'checkbutton',
+          defaultValue:'<i class="btn btn-primary" style="display:inline;">점검완료 <i>',
+          width:110  ,
+          heigt:50
+        }
 	],
 	 columnOptions: {
 	      resizable: true
 	    }
 });
+var alerttextvalues='';
+grid.findRows((row) => {
+    return (row.RemainingTime < 7)
+      }  ).forEach((row2)=>{
+          console.log(row2.rowKey)
+          grid.addCellClassName(row2.rowKey, 'RemainingTime', 'glyphicon glyphicon-exclamation-sign bg-danger')
+
+          alerttextvalues+=row2.FacIn_serialnum +'번\n'
+      })
+      alerttextvalues+='점검예정일까지 7일미만의 일련번호' 
+      if(alerttextvalues.length>18) alert(alerttextvalues)
+      alerttextvalues="";
+
+     
+      grid.on('click',(ev)=>{
+	console.log(grid.getModifiedRows())
+  if(ev.columnName=="checkbutton"){
+      var checktrueorfalse=confirm("점검을 완료하시겠습니까?");
+        if(checktrueorfalse==true){
+          console.log(grid.getRow(ev.rowKey))
+          var object=new Object()
+          object=[
+          {
+          FacIn_serialnum:grid.getRow(ev.rowKey).FacIn_serialnum
+          ,FacIn_name:grid.getRow(ev.rowKey).FacIn_name,
+          facin_address:grid.getRow(ev.rowKey).facin_address
+          }
+          ]
+
+          $.ajax({
+         type: "PUT",
+         url: "http://localhost:8080/librain/facilityinspection/modifyData",
+         data: JSON.stringify(object),
+       	contentType: 'application/json',
+		success:function(date){
+          console.log(date.data.contents)
+          grid.resetData(date.data.contents)
+
+
+          grid.findRows((row) => {
+    return (row.RemainingTime < 7)
+      }  ).forEach((row2)=>{
+          console.log(row2.rowKey)
+          grid.addCellClassName(row2.rowKey, 'RemainingTime', 'bg-danger glyphicon glyphicon-exclamation-sign')
+
+          alerttextvalues+=row2.FacIn_serialnum +'번\n'
+      })
+      alerttextvalues+='점검예정일까지 7일미만의 일련번호' 
+      if(alerttextvalues.length>18) alert(alerttextvalues)
+      alerttextvalues="";
+
+         }
+       });
+
+
+        }
+  
+
+  }
+	
+})
+
+}})//ajax end
+    
+    
+
+    }
+    )
+
+   
 
 
 
 
-const dataSource2 = [];
+
+
+
+
+
+
+
+
 const grid2 = new tui.Grid({
 	el: document.getElementById('grid2'),
-	data:dataSource2,
+	data:[],
 	scrollX: false,
 	scrollY: false,
 	minBodyHeight: 30,
 	rowHeaders: ['checkbox'],
-	editingEvent:"click",
-	pageOptions: {
-	    perPage: 7
-	  },
+	editingEvent:"click"
+  ,
 	columns: [
 	
 		{
 			header: '시설물이름',
-			name: 'fac_name',
-		 	editor:{
-				type:'text'
-			}, 
+			name: 'facfacin_name'
+      , editor:{
+				type:"text"
+			},
 			validation:{
-				required:true
+				required:true,
+        dataType: 'string'
 			}
 		},
 		{
 			header: '장소',
-			name: 'fac_address',
+			name: 'facin_address',
 			editor:{
-				type:'text'
-			},
+				type:"text"
+			} ,
 			validation:{
-				required:true
+				required:true,
+        dataType: 'string'
 			}
-			
 		},
-		{
-			header: '시설물 상태',
-			name: 'fac_status',
-			validation:{
-				required:true
+    {
+			header: '안전점검주기',
+				name: 'f_cycle'
+        , editor:{
+				type:"text"
 			},
-			
-			editor:{
-				type:"select",
-				options:{
-					listItems: [
-				          { text: '고장', value: '고장' },
-				          { text: '정상', value: '정상' },
-				          { text: '수리신청', value: '수리신청' },
-				          { text: '비가동', value: '비가동' }
-				        ]
-				}
+			validation:{
+				required:true,
+        dataType: 'number'
 			},
 			 onAfterChange: function(ev) {
 		             console.log(ev.rowKey);
-		            grid.check(ev.rowKey);
+		            grid2.check(ev.rowKey);
 		          }
-		
-		},
-		{
-			header: '카테고리',
-			name: 'fac_category',
-			editor:{
-				type:'text'
 			},
-			validation:{
-				required:true
-			}
-		}
-		
+      {
+          header: '입력',
+          name: 'checkbutton',
+          defaultValue:'<i class="btn btn-primary " >점검완료 <i>',
+          width:90  ,
+          heigt:20
+        }
 	],
+  
 	 columnOptions: {
 	      resizable: true
 	    }
 });
+ function addfacin() {
 
-grid.on('click',(ev)=>{
-	console.log(grid.getModifiedRows())
-	
-})
+   $('#grid2').show()
+grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutton":'<i class="btn btn-primary ">입력 <i>'  })
 
-grid2.on('click',(ev)=>{
-	
-	console.log(grid2.getModifiedRows())
-	
-})
+   }
+   grid2.on('click',function (ev) {
+      console.log(ev.columnName)
+      if(ev.columnName=="checkbutton"){
 
-function gridaddgrid(){
-	console.log('dd')
-		grid.blur()
-	setTimeout(()=>console.log(grid.getCheckedRows()),100)
-	
-	console.log(grid.getCheckedRows())
-	 grid2.appendRow({"fac_name":"","fac_address":"","fac_status":"","fac_category":""},{extendPrevRowSpan:true})
-	/* dataSou	rce2.push({"fac_name":"","fac_address":"","fac_status":"","fac_category":""})
-	grid2.resetData(dataSource2) */
+     var trueorfalsevailidate=   grid2.validate().some((check)=>{
+          return check.rowKey==ev.rowKey
+        })
+        console.log(trueorfalsevailidate)
+        if(!trueorfalsevailidate) {
 
-}
-function griddelete(){
-	grid2.blur()
-	setTimeout(()=>
-	$.ajax({
-		url:'http://localhost:8080/mvc/facility/deleteData',
-		data:JSON.stringify(grid.getCheckedRows()),
-		contentType: 'application/json',
-		type:"DELETE",
-		success : function(data) {
-	        alert("success!");
-	    }
-		});
+          var object=new Object()
+          object=[
+          {
+          FacIn_serialnum:grid2.getRow(ev.rowKey).FacIn_serialnum
+          ,FacIn_name:grid2.getRow(ev.rowKey).FacIn_name,
+          facin_address:grid2.getRow(ev.rowKey).facin_address
+          ,f_cycle:grid2.getRow(ev.rowKey).f_cycle
+          }
+          ]
 
-	,100)
-	
-	console.log(grid.getCheckedRows())
-	grid.removeCheckedRows();
-	
-
-}
+          $.ajax({
+         type: "post",
+         url: "http://localhost:8080/librain/facilityinspection/createData",
+         data: JSON.stringify(object),
+       	contentType: 'application/json',
+		success:function(date){
+          grid2.clear()
 
 
-function grdi2checked(){//데이터 보내기용
-	grid2.blur()
-	console.log(grid2.getCheckedRowKeys().length)
-	console.log(grid2.getModifiedRows().createdRows)
-	console.log(JSON.stringify(grid2.getModifiedRows().createdRows))
-	console.log(grid2.validate().length);
-	confirm()
-	setTimeout(()=>	
-	$.ajax({
-		url:'http://localhost:8080/mvc/facility/createData',
-		data:JSON.stringify(grid2.getModifiedRows().createdRows),
-		contentType: 'application/json',
-		type:"POST",
-		success : function(data) {
-	        alert("success!");
-	    }
-		});
-	
-		,100)
-	
-
-	
-}
-
- tui.Grid.applyTheme('clean',{})
-</script>
+         }
+       });
 
 
-<br><br><Br>
+        }
+        
+        // confirm('입력하시겠습니까?');
+      }
+     })
 
 
+     function BATCH_ENTRY() {
+      grid2.blur()
+      setTimeout(() => {
+        
 
-</body>
+        if(grid2.validate().length){
+          alert('빈칸없이 모두 입력해주세요')
+          return
+        }
+        console.log(JSON.stringify(grid2.getCheckedRows()))
+
+          $.ajax({
+         type: "POST",
+         url: "http://localhost:8080/librain/facilityinspection/createData",
+         data: JSON.stringify(grid2.getCheckedRows()),
+       	contentType: 'application/json',
+		success:function(date){
+            grid2.removeCheckedRows()
+            $('#grid2').hide()
+         }
+       });
+        
+      }, 0);
+
+
+       
+
+      
+     
+
+       
+     }
+            </script>
+            <br><br><br>
 </html>

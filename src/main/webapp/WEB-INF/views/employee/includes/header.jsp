@@ -148,6 +148,13 @@
                                         <li>
                                             <a href="${pageContext.request.contextPath}/facility">시설</a>
                                         </li>
+                                        <li>
+                                        	<a href="${pageContext.request.contextPath}/facilityapproval">시설승인</a>
+                                        </li>
+                                         <li>
+                                        	<a href="${pageContext.request.contextPath}/facilityinspection">시설검사</a>
+                                        </li>
+                                        
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li> 

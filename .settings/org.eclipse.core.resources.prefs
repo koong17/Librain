@@ -1,4 +1,14 @@
 eclipse.preferences.version=1
+encoding//src/main/java/lib/employee/board/controller/BoardController.java=UTF-8
+encoding//src/main/java/lib/employee/board/controller/NoticeController.java=UTF-8
+encoding//src/main/java/lib/employee/board/controller/UploadController.java=UTF-8
+encoding//src/main/java/lib/employee/board/model/Criteria.java=UTF-8
+encoding//src/main/java/lib/employee/board/model/PageDTO.java=UTF-8
+encoding//src/main/java/lib/employee/board/service/BoardServiceImpl.java=UTF-8
+encoding//src/main/java/lib/employee/board/service/NoticeServiceImpl.java=UTF-8
+encoding//src/main/java/lib/employee/facility/controller/FacilityRestController.java=UTF-8
+encoding//src/main/java/lib/employee/facilityinspection/controller/FacilityinspectionRestController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/employee/erp/facility/facility.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/memberMain.jsp=UTF-8
 encoding//src/main/webapp/resources/img/logo.png=UTF-8

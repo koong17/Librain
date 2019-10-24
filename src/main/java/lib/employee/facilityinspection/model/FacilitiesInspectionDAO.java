@@ -1,10 +1,12 @@
 package lib.employee.facilityinspection.model;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 public interface FacilitiesInspectionDAO {
-	public List<FacilitiesInspectionDTO> facinselect(@Param(value = "startrownum") int startrownum,@Param(value = "endrownum") int endrownum);
+	public List<FacilitiesInspectionDTO> facinselect();
 	public int facintotalcount();
+	public void facininsertprocedure(FacinVO vo);
+	public void facinupdateprocedure(FacilitiesInspectionDTO dto);
+	public void facindelete(FacilitiesInspectionDTO dto);
 }
