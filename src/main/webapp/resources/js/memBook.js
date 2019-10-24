@@ -12,7 +12,6 @@ $(document).ready(function() {
     	$('#searchCtgr').val("전체");
     	$('#grid').hide();
     });
-
 });
 
 function searchAjax() {
@@ -60,6 +59,8 @@ var gridData2 =
    }
 }
 
+
+
 const grid = new tui.Grid({
    el: document.getElementById('grid'),
    data: null,
@@ -82,6 +83,10 @@ const grid = new tui.Grid({
       {
          header: '출판사명',
          name: 'book_pub_house'
+      },
+      {
+    	  header: '분류기호',
+    	  name: 'book_ctgr_num'
       },
       {
          header: '대출여부',
@@ -161,9 +166,6 @@ const mostRentGrid = new tui.Grid({
       }
       ]
 });
-
-
-
 
 
 

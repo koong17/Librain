@@ -17,6 +17,7 @@ public class EmpBookDTO {
 	private String rent; //대출여부
     private int book_rent_cnt; //대출 횟수
     private Timestamp book_input_date;
+    private String book_ctgr_num_db; //도서 분류 DB에 넣을 기호
 	
 	public int getBook_num() {
 		return book_num;
@@ -89,6 +90,12 @@ public class EmpBookDTO {
 	}
 	public void setBook_input_date(Timestamp book_input_date) {
 		this.book_input_date = book_input_date;
+	}
+	public String getBook_ctgr_num_db() {
+		return book_ctgr_num_db;
+	}
+	public void setBook_ctgr_num_db(String book_ctgr_num_db) {
+		this.book_ctgr_num_db = book_ctgr_num_db;
 	}
 	
 	@Override
