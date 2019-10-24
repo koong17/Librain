@@ -1,7 +1,9 @@
 package lib.member.book.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -40,27 +42,19 @@ public class MemBookServiceImpl implements MemBookService {
 	}
 
 	@Override
-	public List searchCtgr(String searchCtgr, String searchWord) {
+	public JSONArray search(String searchCtgr, String searchWord) {
 		List<MemBookDTO> list = new ArrayList<MemBookDTO>();
 		
 		if(searchCtgr.equals("전체")) {
 			System.out.println("전체들어옴 "+searchWord);
-			list = bookDAO.searchAll(searchWord);
-			for (MemBookDTO bookDTO : list) {
-				System.out.println(bookDTO.getBook_name()+" / ");
-			}
-		} else if(searchCtgr.equals("도서명")) {
-			list = bookDAO.searchBookName(searchWord);
-		} else if(searchCtgr.equals("저자명")) {
-			list = bookDAO.searchAuthor(searchWord);
-		} else if(searchCtgr.equals("출판사명")) {
-			list = bookDAO.searchPub(searchWord);
-		}
-		return list;
-	}
-	
-	@Override
-	public JSONArray search(List<MemBookDTO> list) {
+			list = bookDAO.searchAll("%" + searchWord + "%");
+		} else {
+			Map<String, String> parameters = new HashMap<>();
+			parameters.put("searchCtgr", searchCtgr);
+			parameters.put("searchWord", "%"+searchWord+"%");
+			list = bookDAO.searchCtgr(parameters);
+		} 
+		
 		JSONArray jArr = new JSONArray();
 		JSONObject jObj;
 		
@@ -78,6 +72,7 @@ public class MemBookServiceImpl implements MemBookService {
 		}
 		return jArr;
 	}
+	
 
 	@Override
 	public JSONArray newBook(int Perpage, int page) {

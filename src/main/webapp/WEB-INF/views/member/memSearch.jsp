@@ -42,9 +42,9 @@
             <div class="form-group ">
                <select id="searchCtgr" name="searchCtgr" class="form-control">
                   <option selected>전체</option>
-                  <option>도서명</option>
-                  <option>저자명</option>
-                  <option>출판사명</option>
+                  <option value="book_name">도서명</option>
+                  <option value="book_author">저자명</option>
+                  <option value="book_pub_house">출판사명</option>
                </select>
             </div>
          </div>

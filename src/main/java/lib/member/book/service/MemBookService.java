@@ -11,8 +11,7 @@ import lib.member.book.model.MemBookDTO;
 public interface MemBookService {
 	public void hopeInsert(List<Hope_BookDTO> dto); //희망도서 추가
 	public JSONObject hopeMemCheck(String mem_id); //hope 회원 검색
-	public List searchCtgr(String searchCtgr, String searchWord);
-	public JSONArray search(List<MemBookDTO> list);
+	public JSONArray search(String searchCtgr, String searchWord);
 	public JSONArray newBook(int Perpage, int page);
 	public JSONArray mostRent(int Perpage, int page);
 }
