@@ -83,11 +83,11 @@ function inputAjax() {
 		console.log(checkedGrid);
 		var flag = 0;
 		for (var i = 0; i < checkedGrid.length; i++) {
-			if(checkedGrid[i].dis_status == '신청 완료') flag = 1;
+			if(checkedGrid[i].dis_status == '신청 완료' || checkedGrid[i].dis_status == '승인') flag = 1;
 		}
 		console.log("flag = ", flag);
 		if(flag == 1) {
-			alert("신청한 항목은 재신청이 불가능합니다. \n다시 신청해주세요.");
+			alert("신청 완료한 항목과 승인한 항목은 재신청이 불가능합니다. \n다시 신청해주세요.");
 		} else {
 			$.ajax({
 				type : "POST",
@@ -276,7 +276,10 @@ const grid = new tui.Grid({
 			name: 'dis_status',
 			
 		}
-	]
+	],
+	columnOptions: {
+	      resizable: true
+	}
 });
 const bookGrid = new tui.Grid({
 	el: document.getElementById('bookGrid'),
@@ -334,5 +337,8 @@ const bookGrid = new tui.Grid({
 			name: 'book_input_date',
 			
 		}
-		]
+	],
+	columnOptions: {
+	      resizable: true
+	}
 });

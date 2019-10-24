@@ -74,5 +74,5 @@
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empSearchBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empSearchBook.js"></script>
 </html>

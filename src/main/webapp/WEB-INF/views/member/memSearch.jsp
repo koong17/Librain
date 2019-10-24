@@ -76,5 +76,5 @@
    </div>
 </body>
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/memBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/memBook.js"></script>
 </html>

@@ -52,13 +52,6 @@
 				<h4>도서 구입 신청 목록</h4><hr>
 			</div>
 			<div>
-				<div class="col-md-1">
-					<div class="form-group">
-						<button type="button" class="btn btn-primary btn-block" id="addRowBtn">
-							행 추가
-						</button>
-					</div>
-				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-block" id="inputBtn">

@@ -219,7 +219,8 @@ const grid = new tui.Grid({
 		},
 		{
 			header: '대여여부',
-			name: 'rent'/*,
+			name: 'rent',
+			filter: 'select'/*,
 			editor: {
 				type: 'radio',
 				options: {

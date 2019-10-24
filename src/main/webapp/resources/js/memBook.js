@@ -92,7 +92,10 @@ const grid = new tui.Grid({
          header: '대출여부',
          name: 'rent'
       }
-   ]
+   ],
+	columnOptions: {
+	      resizable: true
+	}
 });
 
 const newBookGrid = new tui.Grid({
@@ -129,7 +132,10 @@ const newBookGrid = new tui.Grid({
          header: '저자명',
          name: 'book_author'
       }
-   ]
+   ],
+	columnOptions: {
+	      resizable: true
+	}
 });
 
 const mostRentGrid = new tui.Grid({
@@ -164,7 +170,10 @@ const mostRentGrid = new tui.Grid({
          header: '저자명',
          name: 'book_author'
       }
-      ]
+    ],
+  	columnOptions: {
+	      resizable: true
+	}
 });
 
 

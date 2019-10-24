@@ -137,5 +137,8 @@ const grid = new tui.Grid({
 			name: 'dis_status',
 			
 		}
-	]
+	],
+	columnOptions: {
+	      resizable: true
+	}
 });
