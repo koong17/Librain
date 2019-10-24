@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MemberDAO {
 	
+	//회원가입
+	public void memberJoin(MemberDTO dto);
+	
 	//전체출력
 	public List<MemberDTO> memberSelectAll();
 	

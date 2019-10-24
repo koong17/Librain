@@ -24,6 +24,18 @@ public class MemberController {
 	MemberService memberService;
 	@Autowired
 	MemberDAO memberDAO;
+	
+	@GetMapping("/memberJoin.do")
+	public String memberJoin(Model model) {
+		System.out.println("멤버조인탔슈");
+		return "/member/memberJoin";
+	}
+	
+	@PostMapping("/memberJoin.do")
+	public String memberJoinpro(MemberDTO dto) {
+		//행동하는 부분 코드 작성
+		return "member/memberJoin";
+	}
 
 	@GetMapping("/memberList.do")
 	public String memList(Model model) {

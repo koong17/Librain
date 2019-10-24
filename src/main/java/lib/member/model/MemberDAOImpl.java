@@ -12,6 +12,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Autowired	//bean 자동주입
 	SqlSession sqlsession;
 	
+	//회원가입
+	@Override
+	public void memberJoin(MemberDTO dto) {
+		sqlsession.getMapper(MemberDAO.class).memberJoin(dto);
+	}
+	
 	@Override
 	public List<MemberDTO> memberSelectAll() {
 		List<MemberDTO> list = sqlsession.getMapper(MemberDAO.class).memberSelectAll();

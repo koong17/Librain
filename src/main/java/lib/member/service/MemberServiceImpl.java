@@ -18,6 +18,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO memberDAO;
 	
+	//회원가입
+	
 	//전체검색
 	@Override
 	public JSONArray memberSelectAll() {
