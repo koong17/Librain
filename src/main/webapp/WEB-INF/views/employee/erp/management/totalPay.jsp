@@ -12,6 +12,38 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+	<!-- Modal -->
+
+	<div class="modal fade" id="selectEmp" role="dialog"  tabindex="-1" aria-labelledby="modal-login-label" aria-hidden="true">
+		<div class="modal-dialog">
+		
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 30px 30px;">
+					<button type="button" class="close" data-dismiss="modal" style="margin-top: 7px;">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4><span class="glyphicon glyphicon-user"></span>회원 선택</h4>
+				</div>
+
+				<form class="form-horizontal" method="POST" id="Frm" name="Frm">
+					<div class="modal-body" style="padding: 40px 50px; height: 200px;">
+						<div id="names">
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" id="search" name="search" class="btn btn-success btn-default pull-left"  value="Send" style="margin: 10px; margin-left: 35px">
+						<span class="glyphicon glyphicon-plus"></span>완 료
+					</button>
+					<button type="button" class="btn btn-danger btn-default pull-left"
+						data-dismiss="modal" value="Input Button" style="margin: 10px">
+						<span class="glyphicon glyphicon-remove"></span>취 소
+					</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div class="wrapper">
 		<div class="row">
 			<div class="col-md-12">
@@ -56,39 +88,30 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<input type="text" id="emp_name" class="form-control"
-						placeholder="이름">
-				</div>
-			</div>
 			<div class="col-md-1">
 				<div class="form-group">
-					<input type="button" value="확인" id="check"
+					<input type="button" value="회원검색" id="check"
 						class="btn btn-primary btn-block">
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-2">
 				<div class="form-group">
-					<div id="grid"></div>
+					<input type="text" id="emp_name" class="form-control"
+						placeholder="이름" readOnly>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-10">
+			<!-- <div class="col-md-1">
 				<div class="form-group">
-					<input type="text" id="days" class="form-control" value="근무일" readOnly>
-					<!-- <div id="days"></div> -->
+					<input type="button" value="확인" id="search"
+						class="btn btn-primary btn-block">
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<form action="totalpay.do" method="post">
 			<div class="row">
 				<input type="hidden" name="sal_year" value=""> <input
 					type="hidden" name="sal_month" value="">
-				<div class="col-md-5">
+				<div class="col-md-3">
 					<div class="form-group">
 						기본급<input type="number" name="sal_basic_pay" class="form-control"
 							value="" readOnly>
@@ -113,8 +136,12 @@
 						차감수령액<input type="number" name="sal_real" class="form-control"
 							value="" readOnly>
 					</div>
+					<div class="form-group">
+						<input type="submit" value="확정" id="insertSal"
+								class="btn btn-success btn-block">
+					</div>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-3">
 					<div class="form-group">
 						국민연금<input type="number" name="sal_national_pension"
 							class="form-control" value="" readOnly>
@@ -140,14 +167,24 @@
 							class="form-control" value="" readOnly>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-2">
-						<input type="submit" value="확정" id="insertSal"
-							class="btn btn-success btn-block btn-lg">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+								근무일<input type="text" id="days" class="form-control" readOnly>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+								<div id="grid"></div>
+							</div>
+						</div>
 					</div>
 				</div>
+			</div>
+			<div class="row">
 			</div>
 		</form>
 	</div>
@@ -167,15 +204,55 @@
 		var year = document.getElementById("cmt_year");
 		var month = document.getElementById("cmt_month");
 		var dept = document.getElementById("emp_dept_code");
+		// var name = document.getElementById("emp_name").value;
+		var empDept = new Object();
+		empDept.emp_dept_code = dept.options[dept.selectedIndex].value;
+		var cmtObject = new Object();
+		cmtObject.cmt_year = year.options[year.selectedIndex].value;
+		cmtObject.cmt_month = month.options[month.selectedIndex].value;
+		cmtObject.dept = dept.options[dept.selectedIndex].value;
+		if (cmtObject.cmt_year == ""
+				|| cmtObject.cmt_month == ""
+				|| cmtObject.dept == "" ) {
+			alert('항목을 모두 입력하세요.');
+		} else {
+			$.ajax({
+				type : 'POST',
+				url : 'empDept.do',
+				contentType : 'application/json;charset=UTF-8',
+				dataType : 'json',
+				data : JSON.stringify(empDept),
+				success : function(data) {
+					if (data.length == 0) {
+						alert("사원이 존재하지 않습니다.");
+					} else {
+						$("#names").html('');
+						$("#selectEmp").modal();
+						$("#names").append('<label>');
+						for (var i = 0; i < data.length; i++) {
+							if(i==0)
+								$("#names").append('<div class="radio"><input type="radio" name="radio" value="'+data[i].emp_name+'" checked>'+data[i].emp_name+'</label></div>');							
+							else 
+								$("#names").append('<div class="radio"><input type="radio" name="radio" value="'+data[i].emp_name+'">'+data[i].emp_name+'</label></div>');
+						}
+						$("#names").append('</label>');
+					}
+				}
+			});
+		}
+	});
+	
+ 	$("#search").click(function() {
+ 		$("#emp_name").val( $('input[name="radio"]:checked').val());
+		$("#selectEmp").modal('hide');
+		var year = document.getElementById("cmt_year");
+		var month = document.getElementById("cmt_month");
+		var dept = document.getElementById("emp_dept_code");
 		var name = document.getElementById("emp_name").value;
 		var cmtObject = new Object();
 		cmtObject.cmt_year = year.options[year.selectedIndex].value;
 		cmtObject.cmt_month = month.options[month.selectedIndex].value;
 		cmtObject.dept = month.options[dept.selectedIndex].value;
-		console.log(cmtObject.cmt_year);
-		console.log(cmtObject.cmt_month);
-		console.log(cmtObject.dept);
-		console.log(name);
 		if (cmtObject.cmt_year == ""
 				|| cmtObject.cmt_month == ""
 				|| cmtObject.dept == "" || name == null) {
@@ -199,7 +276,7 @@
 				success : function(result) {
 					emp_no = result.emp_no;
 					date.emp_no = emp_no;
-
+	
 					$.ajax({
 						type : "POST",
 						contentType : 'application/json;charset=UTF-8',
@@ -207,6 +284,7 @@
 						url : "totalpay2.do",
 						data : JSON.stringify(date),
 						success : function(gridData) {
+							console.log(gridData);
 							grid.resetData(gridData);
 							var onCount = grid.findRows({
 										cmt_status_kr : '정상출근'
@@ -277,11 +355,12 @@
 	const grid = new tui.Grid({
 		el : document.getElementById('grid'),
 		data : null,
-		scrollX : false,
-		scrollY : false,
+		bodyHeight: 500,
 		columns : [ {
 			header : '일',
-			name : 'cmt_day'
+			name : 'cmt_day',
+	        sortingType: 'asc',
+	        sortable: true
 		}, {
 			header : '시',
 			name : 'cmt_hour'

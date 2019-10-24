@@ -20,7 +20,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-5" id="searchRow">
+			<div class="col-md-4" id="searchRow">
 				<div class="col-md-4">
 					<div class="form-group">
 						<select class="form-control" id="sal_year">
@@ -60,57 +60,59 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="col-md-5">
-				<div class="form-group">
-					기본급<input type="number" name="sal_basic_pay" class="form-control"
-						value="" readOnly>
+		<div class="col-md-8">
+			<div class="form-group">
+				<div class="col-md-6">
+					<div class="form-group">
+						기본급<input type="number" name="sal_basic_pay" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						식대<input type="number" name="sal_food_pay" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						보너스<input type="number" name="sal_bonus" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						급여계<input type="number" name="sal_total" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						공제합계<input type="number" name="sal_deducted" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						차감수령액<input type="number" name="sal_real" class="form-control"
+							value="" readOnly>
+					</div>
 				</div>
-				<div class="form-group">
-					식대<input type="number" name="sal_food_pay" class="form-control"
-						value="" readOnly>
-				</div>
-				<div class="form-group">
-					보너스<input type="number" name="sal_bonus" class="form-control"
-						value="" readOnly>
-				</div>
-				<div class="form-group">
-					급여계<input type="number" name="sal_total" class="form-control"
-						value="" readOnly>
-				</div>
-				<div class="form-group">
-					공제합계<input type="number" name="sal_deducted" class="form-control"
-						value="" readOnly>
-				</div>
-				<div class="form-group">
-					차감수령액<input type="number" name="sal_real" class="form-control"
-						value="" readOnly>
-				</div>
-			</div>
-			<div class="col-md-5">
-				<div class="form-group">
-					국민연금<input type="number" name="sal_national_pension"
-						class="form-control" value="" readOnly>
-				</div>
-				<div class="form-group">
-					건강보험<input type="number" name="sal_health_insurance"
-						class="form-control" value="" readOnly>
-				</div>
-				<div class="form-group">
-					장기요양<input type="number" name="sal_longterm_care_insurance"
-						class="form-control" value="" readOnly>
-				</div>
-				<div class="form-group">
-					고용보험<input type="number" name="sal_employment_insurance"
-						class="form-control" value="" readOnly>
-				</div>
-				<div class="form-group">
-					소득세<input type="number" name="sal_income_tax" class="form-control"
-						value="" readOnly>
-				</div>
-				<div class="form-group">
-					지방소득세<input type="number" name="sal_local_income_tax"
-						class="form-control" value="" readOnly>
+				<div class="col-md-6">
+					<div class="form-group">
+						국민연금<input type="number" name="sal_national_pension"
+							class="form-control" value="" readOnly>
+					</div>
+					<div class="form-group">
+						건강보험<input type="number" name="sal_health_insurance"
+							class="form-control" value="" readOnly>
+					</div>
+					<div class="form-group">
+						장기요양<input type="number" name="sal_longterm_care_insurance"
+							class="form-control" value="" readOnly>
+					</div>
+					<div class="form-group">
+						고용보험<input type="number" name="sal_employment_insurance"
+							class="form-control" value="" readOnly>
+					</div>
+					<div class="form-group">
+						소득세<input type="number" name="sal_income_tax" class="form-control"
+							value="" readOnly>
+					</div>
+					<div class="form-group">
+						지방소득세<input type="number" name="sal_local_income_tax"
+							class="form-control" value="" readOnly>
+					</div>
 				</div>
 			</div>
 		</div>

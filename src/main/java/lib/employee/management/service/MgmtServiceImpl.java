@@ -91,8 +91,10 @@ public class MgmtServiceImpl implements MgmtService{
 		SalaryDTO salaryDTO = new SalaryDTO();
 		JSONObject jo = new JSONObject();
 		employeeDTO = employeeDAO.empSelectPay(employeeDTO);
-		jo.put("sal_basic_pay", employeeDTO.getEmp_basic_pay());
-		jo.put("emp_no", employeeDTO.getEmp_no());
+		if(employeeDTO != null) {
+			jo.put("sal_basic_pay", employeeDTO.getEmp_basic_pay());
+			jo.put("emp_no", employeeDTO.getEmp_no());
+		}
 		return jo;
 	}
 
@@ -203,6 +205,20 @@ public class MgmtServiceImpl implements MgmtService{
 			jo.put("cmt_day",dto.getCmt_day());
 			jo.put("cmt_hour",dto.getCmt_hour()+"");
 			jo.put("cmt_minute",dto.getCmt_minute()+"");
+			ja.add(jo);
+		}
+		return ja;
+	}
+
+	@Override
+	public JSONArray empSelectDept(EmployeeDTO employeeDTO) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo;
+		List<EmployeeDTO> list = employeeDAO.empSelectDept(employeeDTO);
+		for (int i = 0; i < list.size(); i++) {
+			jo = new JSONObject();
+			EmployeeDTO dto = list.get(i);
+			jo.put("emp_name",dto.getEmp_name());
 			ja.add(jo);
 		}
 		return ja;

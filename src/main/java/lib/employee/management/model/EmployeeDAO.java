@@ -14,6 +14,7 @@ public interface EmployeeDAO {
 	public void empUpdate(EmployeeDTO dto);
 	public EmployeeDTO empSelectOne(EmployeeDTO dto);
 	public EmployeeDTO empSelectPay(EmployeeDTO dto);
+	public List<EmployeeDTO> empSelectDept(EmployeeDTO dto);
 	public List<CommuteDTO> cmtAdminSelectAll();
 	public List<CommuteDTO> cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
