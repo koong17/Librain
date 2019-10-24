@@ -1,7 +1,9 @@
 package lib.member.book.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,6 +20,34 @@ public class MemBookServiceImpl implements MemBookService {
 	
 	@Autowired
 	MemBookDAO bookDAO;
+	
+	@Override
+	public JSONArray hopeSelect(int Perpage, int page) {
+		int startRowNum = Perpage * page - Perpage;
+		int endRowNum = Perpage * page;
+		List<Hope_BookDTO> list = new ArrayList<Hope_BookDTO>();
+		list = bookDAO.hopeSelect(startRowNum, endRowNum);
+
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		for (int i = 0; i < list.size(); i++) {
+			Hope_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("hope_book_num", dto.getHope_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("hope_status", dto.getHope_status());
+			jObj.put("hope_input_date", dto.getHope_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
 	
 	@Override
 	public void hopeInsert(List<Hope_BookDTO> dto) {
@@ -40,27 +70,19 @@ public class MemBookServiceImpl implements MemBookService {
 	}
 
 	@Override
-	public List searchCtgr(String searchCtgr, String searchWord) {
+	public JSONArray search(String searchCtgr, String searchWord) {
 		List<MemBookDTO> list = new ArrayList<MemBookDTO>();
 		
 		if(searchCtgr.equals("전체")) {
 			System.out.println("전체들어옴 "+searchWord);
-			list = bookDAO.searchAll(searchWord);
-			for (MemBookDTO bookDTO : list) {
-				System.out.println(bookDTO.getBook_name()+" / ");
-			}
-		} else if(searchCtgr.equals("도서명")) {
-			list = bookDAO.searchBookName(searchWord);
-		} else if(searchCtgr.equals("저자명")) {
-			list = bookDAO.searchAuthor(searchWord);
-		} else if(searchCtgr.equals("출판사명")) {
-			list = bookDAO.searchPub(searchWord);
-		}
-		return list;
-	}
-	
-	@Override
-	public JSONArray search(List<MemBookDTO> list) {
+			list = bookDAO.searchAll("%" + searchWord + "%");
+		} else {
+			Map<String, String> parameters = new HashMap<>();
+			parameters.put("searchCtgr", searchCtgr);
+			parameters.put("searchWord", "%"+searchWord+"%");
+			list = bookDAO.searchCtgr(parameters);
+		} 
+		
 		JSONArray jArr = new JSONArray();
 		JSONObject jObj;
 		
@@ -78,6 +100,7 @@ public class MemBookServiceImpl implements MemBookService {
 		}
 		return jArr;
 	}
+	
 
 	@Override
 	public JSONArray newBook(int Perpage, int page) {

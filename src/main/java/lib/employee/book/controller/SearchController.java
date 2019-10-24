@@ -29,7 +29,7 @@ public class SearchController {
 	
 	@RequestMapping(value = "/book/search.do", method = RequestMethod.GET)
 	public String searchForm(Model model) {
-		return "employee/book/empSearch";
+		return "employee/erp/book/empSearch";
 	}
 	
 	@RequestMapping(value = "/book/search.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")

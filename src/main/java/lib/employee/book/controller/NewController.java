@@ -28,12 +28,12 @@ public class NewController {
 	
 	@RequestMapping(value="book/newApply.do", method = RequestMethod.GET) 
 	public String newBookForm(Model model) {
-		return "employee/book/empNewBook";
+		return "employee/erp/book/empNewBook";
 	}
 	
 	@RequestMapping(value="book/hope.do", method = RequestMethod.GET) 
 	public String hopeBookForm(Model model) {
-		return "employee/book/empHopeBook";
+		return "employee/erp/book/empHopeBook";
 	}
 	
 	@RequestMapping(value="/book/hope/approve.do", method = RequestMethod.POST)
