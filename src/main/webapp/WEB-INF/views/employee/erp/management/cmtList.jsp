@@ -24,6 +24,7 @@
 		<div class="row">
 			<div class="col-md-2 pt-3">
 				<div class="form-group">
+					<div class="years"></div>
 					<select id="cmt_year" name="cmt_year" class="form-control">
 						<option value="" disabled selected>년</option>
 						<option value="2018">2018</option>
@@ -66,6 +67,11 @@
 </body>
 
 <script type="text/javascript">	
+
+	$(function(){
+		
+	});
+	
 	$("#search").click(function(){
 		var year = document.getElementById("cmt_year");
 		var month = document.getElementById("cmt_month");
@@ -127,8 +133,6 @@
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridData},
-		scrollX: false,
-		scrollY: false,
 		rowHeaders: ['checkbox'],
 		columns: [
 			{
