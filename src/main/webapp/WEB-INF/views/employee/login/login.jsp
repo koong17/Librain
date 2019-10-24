@@ -92,6 +92,8 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(e){
+		if("${param.check}"=="f") alert('사원번호와 비밀번호를 확인해주세요');
+		
 		$('#login').click(function(){
 			//입력 값 체크
 			if($.trim($('#emp_no').val()) == ''){
