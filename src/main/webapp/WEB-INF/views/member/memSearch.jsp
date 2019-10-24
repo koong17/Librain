@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+body {
+	background-image: url('${pageContext.request.contextPath}/resources/img/background-library.jpg');
+	background-size: 100%;
+}
 
+.logo {
+	width: 50%;
+}
+</style>
 <!-- BootStrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -35,7 +45,13 @@
 <title>도서검색</title>
 </head>
 <body>
-   <div class="container-fluid bg-light ">
+<a class="btn btn-lg btn-success pull-right" href="${pageContext.request.contextPath}/memberMain.jsp"
+		role="button" ><i class="fa fa-home"></i></a><br>
+<div class="panel panel-default" id="panel" style="margin:2.5%; padding:0.5%">
+			<div class="panel-heading" align="left">
+				<h3 class="panel-title" style="font-weight:bold">도서검색</h3>
+			</div>
+   <div class="container-fluid bg-light">
 		<br>
       <div class="row align-items-center justify-content-center">
          <div class="col-md-2 pt-3">
@@ -63,9 +79,12 @@
 			</button>
          </div>
       </div>
-      <div class="row form-group">
+     </div>
+     
+      <div class="row form-group" style="padding:0.5%">
      	 <div id="grid" class="success"></div> 
       </div>
+      
       <div class="row form-group">
 	      <div class="col-md-6">
 	      	<div id="newBookGrid"></div>
@@ -74,7 +93,7 @@
 		      <div id="mostRentGrid"></div>
 	      </div>
       </div>
-   </div>
+</div>
 </body>
 <!-- bookJS -->
 <script src="${pageContext.request.contextPath}/resources/js/memBook.js?after"></script>
