@@ -92,6 +92,6 @@ public class MemBookController {
 	public @ResponseBody String search(@RequestBody
 			@RequestParam("searchCtgr") String searchCtgr, @RequestParam("searchWord") String searchWord) {
 		System.out.println(searchCtgr + " / " + searchWord);
-		return bookService.search(bookService.searchCtgr(searchCtgr, searchWord)).toString();
+		return bookService.search(searchCtgr, searchWord).toString();
 	}
 }

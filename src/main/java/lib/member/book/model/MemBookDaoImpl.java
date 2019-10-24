@@ -1,6 +1,7 @@
 package lib.member.book.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,27 +30,16 @@ public class MemBookDaoImpl implements MemBookDAO {
 
 	@Override
 	public List<MemBookDTO> searchAll(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAll("%" + searchWord + "%");
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAll(searchWord);
 		return list;
 	}
 
 	@Override
-	public List<MemBookDTO> searchBookName(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchBookName("%" + searchWord + "%");
+	public List<MemBookDTO> searchCtgr(Map<String, String> parameters) {
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchCtgr(parameters);
 		return list;
 	}
 
-	@Override
-	public List<MemBookDTO> searchAuthor(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAuthor("%" + searchWord + "%");
-		return list;
-	}
-
-	@Override
-	public List<MemBookDTO> searchPub(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchPub("%" + searchWord + "%");
-		return list;
-	}
 
 	@Override
 	public List<MemBookDTO> newBook(int startRowNum, int endRowNum) {
