@@ -1,5 +1,9 @@
 $(document).ready(function() {
+	$('#searchGrid').hide();
+	
 	$('#searchBtn').click(function() {
+		$('#grid').hide();
+		$('#searchGrid').show();
 		searchAjax();
 	});
 	$('#addRowBtn').click(function() {
@@ -36,7 +40,7 @@ function searchAjax() {
 			contentType : "application/x-www-form-urlencoded;charset=UTF-8", // 클라이언트 -> 서버
 			success : function(response) {
 				console.log(response);
-				grid.resetData(response);
+				searchGrid.resetData(response);
 			},
 			error : function(e) {
 				alert('일치하는 데이터가 없습니다.');
@@ -145,6 +149,8 @@ function confirm(){
 	grid.sort("book_num",false);
 	$('#searchWord').val("");
 	$('#searchCtgr').val("전체");
+	$('#grid').show();
+	$('#searhGrid').hide();
 }
 
 
@@ -157,6 +163,100 @@ var gridData =
 			readData: { url: location.href+'/readData', method: 'GET' }
 	}
 }
+const searchGrid = new tui.Grid({
+	el: document.getElementById('searchGrid'),
+	data: gridData,
+	rowHeaders: ['rowNum','checkbox'],
+	scrollX: false,
+	scrollY: false,
+	columns: [
+		{
+			header: '도서번호',
+			name: 'book_num',
+			sortingType: 'desc',
+			sortable: true
+		},
+		{
+			header: '도서명',
+			name: 'book_name',
+			editor: 'text'
+		},
+		{
+			header: '저자명',
+			name: 'book_author',
+			editor: 'text'
+		},
+		{
+			header: '출판사명',
+			name: 'book_pub_house',
+			editor: 'text'
+		},
+		{
+			header: '발행년도',
+			name: 'book_pub_date',
+			editor: 'datePicker'
+			
+		},
+		{
+			header: 'ISBN',
+			name: 'book_ISBN',
+			editor: 'text'
+		},
+		{
+			header: '부록여부',
+			name: 'book_apdx_status',
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: 'O', value: 'O' },
+						{ text: 'X', value: 'X' },
+					]
+				}
+			}
+		},
+		{
+			header: '분류기호',
+			name: 'book_ctgr_num',
+			editor: 'text'
+		},
+		{
+			header: '대여여부',
+			name: 'rent',
+			filter: 'select'/*,
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '대여가능', value: '대여가능' },
+						{ text: '대여중', value: '대여중' },
+					]
+				}
+			}*/
+		},
+		{
+			header: '예약여부',
+			name: 'book_rsrv_status'/*,
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: [
+						{ text: '예약가능', value: '예약가능' },
+						{ text: '예약중', value: '예약중' },
+					]
+				}
+			}*/
+		},
+		{
+			header: '입력일',
+			name: 'book_input_date',
+		}
+	],
+	columnOptions: {
+	      resizable: true
+	}
+});
+
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
 	data: gridData,

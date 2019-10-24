@@ -59,8 +59,6 @@ var gridData2 =
    }
 }
 
-
-
 const grid = new tui.Grid({
    el: document.getElementById('grid'),
    data: null,

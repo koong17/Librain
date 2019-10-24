@@ -6,7 +6,7 @@
 <mapper namespace="lib.employee.book.model.EmpBookDAO">
 	
 	<update id="returnBook" parameterType="lib.employee.book.model.RentalDTO">
-		update rental set rent_enddate = sysdate where book_num = #{ book_num }
+		update rental set rent_enddate = sysdate, rent_status = '대여가능' where book_num = #{ book_num }
 	</update>
 	
 	<insert id="rentBook" parameterType="lib.employee.book.model.RentalDTO">
@@ -46,8 +46,9 @@
 	<![CDATA[
 		select * from
 		   (select rownum rnum, b.*, nvl(rent_status,'대여가능') rent
-	           from  (select * from book order by book_num desc) b
-	           left outer join rental  r   on (b.book_num = r.book_num))
+		           from  (select * from book order by book_num desc) b
+		           left outer join  (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
+                   on (b.book_num = r.book_num))
 	    	where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
 	]]>
 	</select>
@@ -55,16 +56,15 @@
 	<select id="searchAll" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
 		select b.*,  nvl(rent_status, '대여가능') rent
 			from  (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }
-                   order by book_num desc) b 
-			left outer join rental  r  
+                        order by book_num desc) b 
+			left outer join  (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
 			on b.book_num = r.book_num
 	</select>
 	
 	<select id="searchCtgr" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
 		select b.*, nvl(rent_status, '대여가능') rent
-		    from (select * from book where ${searchCtgr} like #{ searchWord }
-		    	  order by book_num desc) b
-		    left outer join rental r
+		    from (select * from book where ${searchCtgr} like #{searchWord} order by book_num desc) b
+		    left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
 		    on b.book_num = r.book_num
 	</select>
 	

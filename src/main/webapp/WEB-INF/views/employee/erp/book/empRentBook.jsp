@@ -102,6 +102,6 @@
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empRentBook.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empRentBook.js?after"></script>
 
 </html>
