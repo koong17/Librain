@@ -15,7 +15,7 @@ body {
 	width: 50%;
 }
 </style>
-'<br>'<br>'<br>'<br>
+'<br>'<br>'<br>
 <!-- BootStrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -54,6 +54,9 @@ body {
 <title>도서검색</title>
 </head>
 <body>
+
+<a class="btn btn-lg btn-success pull-right" href="./memberMain.jsp"
+		role="button"><i class="fa fa-home"></i></a>
 
 	<div class="panel panel-default" id="panel">
 		<div class="panel-heading" align="left">
