@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    $('#memGrid').hide(); 
-    $('#bookGrid').hide(); 
+    $('#memGridDiv').hide(); 
+    $('#bookGridDiv').hide(); 
     
     $('#memBtn').click(function() {
-    	$('#memGrid').show();
-    	$('#bookGrid').show(); 
+    	$('#memGridDiv').show();
+    	$('#bookGridDiv').show(); 
         memAjax();
         memBookAjax();
     });

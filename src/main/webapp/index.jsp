@@ -21,6 +21,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+ <br />
     <!-- MetisMenu CSS -->
     <link href="resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
@@ -96,6 +97,8 @@
 		mypage/test.do <a href="mypage/test.do">도서 검색</a><br>
 		<hr>
 		member/book/search.do<a href="member/book/search.do">고객 도서 검색</a> <br>
+		member/book/hope.do<a href="member/book/hope.do">고객 희망 도서</a> <br>
+		book/hope.do<a href="book/hope.do">희망 도서 승인</a> <br>
 		book/search.do<a href="book/search.do">직원 도서 검색</a><br>
 		book/rent.do<a href="book/rent.do">도서 대여</a><br>
 		book/newApply.do<a href="book/newApply.do">도서 구입 신청</a><br>

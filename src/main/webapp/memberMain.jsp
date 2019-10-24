@@ -193,7 +193,7 @@
                       <span class="icon red"></span>
                       <span class="price-small red" style="font-weight:bold">희망도서</span><br><br>
                       <p>희망도서는 심사 후 구매여부가 결정됩니다.</p>
-                      <a class="btn btn-lg btn-danger" href="#" role="button">신청하기</a></p>
+                      <a class="btn btn-lg btn-danger" href="${pageContext.request.contextPath}/member/book/hope.do" role="button">신청하기</a></p>
                   </div>
                   </div>
               </div><!-- .Col-md-3 ends here -->
