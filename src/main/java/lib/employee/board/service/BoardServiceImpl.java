@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService{
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
 	
+	//글 쓰기
 	@Transactional
 	@Override
 	public void boardInsert(BoardDTO board) {
@@ -44,11 +45,13 @@ public class BoardServiceImpl implements BoardService{
 		});
 	}
 
+	//글 읽기
 	@Override
 	public BoardDTO boardSelectOne(Long board_no) {
 		return mapper.read(board_no);
 	}
 	
+	//이전 글
 	@Override
 	public BoardDTO boardSelectPrev(Long board_no) {
 		
@@ -60,6 +63,7 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 	
+	//다음 글
 	@Override
 	public BoardDTO boardSelectNext(Long board_no) {
 		BoardDTO dto =  mapper.readNext(board_no);
@@ -70,7 +74,7 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 
-	
+	//글 수정
 	@Transactional
 	@Override
 	public boolean boardUpdate(BoardDTO board) {
@@ -83,25 +87,29 @@ public class BoardServiceImpl implements BoardService{
 				attachMapper.insert(attach);
 			});
 		}
-		return modifyResult;
+		return modifyResult;	//여기서 리턴한 결과를 토대로 정상종료/비정상종료 판단하여 실제 글 수정처리 여부가 결정 됨
 	}
 
+	//글 삭제
 	@Override
 	public boolean boardDelete(Long board_no) {
 		attachMapper.deleteAll(board_no);
 		return mapper.delete(board_no)==1;
 	}
 
+	//전체보기
 	@Override
 	public List<BoardDTO> boardSelectAll(Criteria cri) {
 		return mapper.getListWithPaging(cri);
 	}
 
+	//페이징처리
 	@Override
 	public int boardGetTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
 
+	//첨부파일
 	@Override
 	public List<BoardAttachDTO> getAttachList(Long board_no) {
 		log.info("get Attach List by board_no" + board_no);

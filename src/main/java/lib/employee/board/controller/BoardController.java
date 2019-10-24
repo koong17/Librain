@@ -42,25 +42,28 @@ public class BoardController {
 	public HttpSession session;
 
 	
+	//게시글 전체 목록
 	@GetMapping("/list.do")
-	public String boardSelectAll(Criteria cri, Model model) {
+	public String boardSelectAll(Criteria cri, Model model) {	
 		model.addAttribute("list", boardService.boardSelectAll(cri));
 		
-		//전체 데이터 수 
+		//일반글 전체 데이터 수 구해 페이징 하기
 		int total = boardService.boardGetTotal(cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
-		//공지사항 출력
+		//공지글
 		model.addAttribute("notice", noticeService.getNotices());
 		return "employee/board/list";
 
 	}
 
+	//글쓰기 폼
 	@GetMapping("/register.do")
 	public String boardRegisterForm() {
 		return "employee/board/register";
 	}
 	
+	//실제 글 동록 처리
 	@PostMapping("/register.do")
 	public String boardInsert(BoardDTO board, RedirectAttributes rttr) {
 		//첨부파일 처리
@@ -74,30 +77,38 @@ public class BoardController {
 		return "redirect:./list.do";
 	}
 
-	@GetMapping("/get.do")	//읽기폼
-	public String boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+	// 글 읽기
+	@GetMapping("/get.do")
+	public String boardSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri,
+			Model model) {
 		model.addAttribute("board", boardService.boardSelectOne(board_no));
 		return "employee/board/get";
 	}
+
+	// 다음 글
+	@GetMapping({ "/getNext.do" })
+	public String boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri,
+			Model model) {
+		model.addAttribute("board", boardService.boardSelectNext(board_no));
+		return "employee/board/getNext";
+	}
+
+	// 이전 글
+	@GetMapping({ "/getPrev.do" })
+	public String boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri,
+			Model model) {
+		model.addAttribute("board", boardService.boardSelectPrev(board_no));
+		return "employee/board/getPrev";
+	}
 	
-	@GetMapping("/modify.do" )	//수정폼
+	//글 수정 폼
+	@GetMapping("/modify.do" )
 	public String boardModifyForm(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", boardService.boardSelectOne(board_no));
 		return "employee/board/modify";
 	}
 	
-	@GetMapping({"/getNext.do"})
-	public String boardSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", boardService.boardSelectNext(board_no));
-		return "employee/board/getNext";
-	}
-	
-	@GetMapping({"/getPrev.do"})
-	public String boardSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", boardService.boardSelectPrev(board_no));
-		return "employee/board/getPrev";
-	}
-
+	//실제 수정 처리
 	@PostMapping("/modify.do")
 	public String boardUpdate(BoardDTO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
@@ -105,7 +116,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		//페이징, 검색조건
+		//페이징, 검색조건 그대로 유지해야 함
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
@@ -113,6 +124,7 @@ public class BoardController {
 		return "redirect:./list.do";
 	}
 
+	//글 삭제 처리
 	@PostMapping("/remove.do")
 	public String boardDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
@@ -140,22 +152,31 @@ public class BoardController {
 	
 	//파일 삭제 
 	private void deleteFiles(List<BoardAttachDTO> attachList) {
-		if(attachList == null || attachList.size() == 0) {return;}
-		
+		if (attachList == null || attachList.size() == 0) {
+			return;
+		}
+
 		attachList.forEach(attach -> {
 			try {
-				Path file = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+attach.getFileName());
+				Path file = Paths.get(
+								"C:\\upload\\" + 
+								 attach.getUploadPath() + 
+								 "\\" + attach.getUuid() + 
+								 "_" + attach.getFileName());
 				Files.deleteIfExists(file);
-				
-				if(Files.probeContentType(file).startsWith("image")) {
-					Path thumNail = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid() + "_"
-							+ attach.getFileName());
+
+				if (Files.probeContentType(file).startsWith("image")) {
+					Path thumNail = Paths.get(
+										"C:\\upload\\" + 
+										 attach.getUploadPath() + "\\s_" + 
+										 attach.getUuid() + "_" + 
+										 attach.getFileName());
 					Files.delete(thumNail);
 				}
-				
-			} catch(Exception e) {
+
+			} catch (Exception e) {
 				log.error("delete file error" + e.getMessage());
-			}//end catch
-		});//end forEach
+			} // end catch
+		});// end forEach
 	}
 }

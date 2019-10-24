@@ -38,7 +38,8 @@ import net.coobird.thumbnailator.Thumbnailator;
 @RequestMapping("board/*")
 @Log4j
 public class UploadController {
-
+	
+	//파일 업로드 양식
 	@PostMapping("/uploadFormAction.do")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 
@@ -60,18 +61,19 @@ public class UploadController {
 
 	}
 
+	//파일 업로드 처리
 	@GetMapping("/uploadAjax.do")
 	public void uploadAjax() {
 	}
 
-	private String getFolder() { // 날짜별로 파일 관리
+	private String getFolder() { // 날짜별로 폴더 생성하여 파일 관리
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
 		return str.replace("-", File.separator);
 	}
 
-	// 썸네일
+	// 이미지 파일과 일반 파일 구분
 	private boolean checkImageType(File file) {
 		try {
 			String contentType = Files.probeContentType(file.toPath());
@@ -97,7 +99,7 @@ public class UploadController {
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 
-		if (uploadPath.exists() == false) {
+		if (uploadPath.exists() == false) {	//오늘 날짜 폴더가 없으면 디렉토리를 만들어줌
 			uploadPath.mkdirs();
 		}
 
@@ -108,13 +110,12 @@ public class UploadController {
 
 			// IE
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-
-			log.info("only file name : " + uploadFileName);
+			log.info("original file name : " + uploadFileName);
 
 			attachDTO.setFileName(uploadFileName);
-
+			
+			//파일 이름 중복 방지하기 위한 UUID 생성
 			UUID uuid = UUID.randomUUID();
-
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 
 			try {
@@ -124,7 +125,7 @@ public class UploadController {
 				attachDTO.setUuid(uuid.toString());
 				attachDTO.setUploadPath(uploadFolderPath);
 
-				// 이미지 파일 체크
+				// 이미지 파일이면 썸네일을 만들어줌
 				if (checkImageType(saveFile)) {
 					attachDTO.setImage(true);
 
@@ -141,7 +142,7 @@ public class UploadController {
 
 	}
 
-	// 썸네일처리- 파일ㄹ 이름을 받아서 이미지 데이터 전송
+	// 썸네일처리- 파일 이름을 받아서 이미지 데이터 전송
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
@@ -164,13 +165,14 @@ public class UploadController {
 		return result;
 	}
 
+	//첨부파일 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
 
-//		log.info("download file:" + fileName);
+		log.info("download file:" + fileName);
 		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-//		log.info("resource : " + resource);
+		log.info("resource : " + resource);
 
 		if (resource.exists() == false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -178,7 +180,7 @@ public class UploadController {
 
 		String resourceName = resource.getFilename();
 
-		// remove UUID - 원래 이름으로 다운 받을 수 있게 함
+		// UUID제거 - 원래 파일 이름으로 다운 받을 수 있게 함
 		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
 
 		HttpHeaders headers = new HttpHeaders();
