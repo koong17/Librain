@@ -42,15 +42,14 @@
             <div class="form-group ">
                <select id="searchCtgr" name="searchCtgr" class="form-control">
                   <option selected>전체</option>
-                  <option>도서명</option>
-                  <option>저자명</option>
-                  <option>출판사명</option>
+                  <option value="book_name">도서명</option>
+                  <option value="book_author">저자명</option>
+                  <option value="book_pub_house">출판사명</option>
                </select>
             </div>
          </div>
          <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="검색어를 입력하세요."
-               id="searchWord" name="searchWord">
+            <input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord" name="searchWord">
          </div>
          <div class="col-md-1">
             <button type="button" class="btn btn-primary btn-block" id="searchBtn">
@@ -77,5 +76,5 @@
    </div>
 </body>
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/memBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/memBook.js"></script>
 </html>

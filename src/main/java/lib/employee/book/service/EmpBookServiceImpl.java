@@ -3,7 +3,9 @@ package lib.employee.book.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -136,18 +138,14 @@ public class EmpBookServiceImpl implements EmpBookService {
 		List<EmpBookDTO> list = new ArrayList<EmpBookDTO>();
 		
 		if(searchCtgr.equals("전체")) {
-			list = bookDAO.searchAll(searchWord);
-//			System.out.println("전체들어옴 "+searchWord);
-//			for (EmpBookDTO bookDTO : list) {
-//				System.out.println(bookDTO.getBook_name()+" / ");
-//			}
-		} else if(searchCtgr.equals("도서명")) {
-			list = bookDAO.searchBookName(searchWord);
-		} else if(searchCtgr.equals("저자명")) {
-			list = bookDAO.searchAuthor(searchWord);
-		} else if(searchCtgr.equals("출판사명")) {
-			list = bookDAO.searchPub(searchWord);
-		}
+			System.out.println("전체들어옴 "+searchWord);
+			list = bookDAO.searchAll("%" + searchWord + "%");
+		} else {
+			Map<String, String> parameters = new HashMap<>();
+			parameters.put("searchCtgr", searchCtgr);
+			parameters.put("searchWord", "%"+searchWord+"%");
+			list = bookDAO.searchCtgr(parameters);
+		} 
 		return list;
 	}
 	

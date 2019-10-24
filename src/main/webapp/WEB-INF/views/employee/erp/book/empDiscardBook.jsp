@@ -14,7 +14,7 @@
 <title>도서검색</title>
 </head>
 <body>
-<%@include file="../includes/header.jsp"%>
+<%@include file="../../includes/header.jsp"%>
 <div class="wrapper">
 	<div class="row">
 		<div class="col-md-12">
@@ -91,7 +91,7 @@
    </div>
 </div>
 </body>
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
@@ -104,6 +104,6 @@
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/empDiscardBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empDiscardBook.js"></script>
 
 </html>

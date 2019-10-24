@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
 <title>희망 도서 승인</title>
-<%@include file="../../employee/includes/header.jsp"%>
+<%@include file="../../includes/header.jsp"%>
 </head>
 <body>
 <div class="wrapper">
@@ -65,7 +65,7 @@
     </div>
 </div>
 </body>
-<%@include file="../../employee/includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
