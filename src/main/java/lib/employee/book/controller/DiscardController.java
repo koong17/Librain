@@ -25,10 +25,10 @@ public class DiscardController {
 	
 	@RequestMapping(value="/book/discardApply.do", method = RequestMethod.GET) 
 	public String discardBookForm(Model model) {
-		return "employee/book/empDiscardBook";
+		return "employee/erp/book/empDiscardBook";
 	}
 
-	@RequestMapping(value = "/book/disApply.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/book/discardApply.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String disForm(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);
@@ -48,7 +48,7 @@ public class DiscardController {
 		
 		return  resultJO.toString();
 	}
-	@RequestMapping(value = "/book/disApply.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/book/discardApply.do/readData2", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String disForm2(@RequestParam int perPage, @RequestParam int page) {
 		System.out.println(perPage+"rnqns"+page);

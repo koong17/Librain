@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
 <title>도서 구입 신청</title>
-<%@include file="../includes/header.jsp"%>
+<%@include file="../../includes/header.jsp"%>
 </head>
 <body>
 <div class="wrapper">
@@ -52,13 +52,6 @@
 				<h4>도서 구입 신청 목록</h4><hr>
 			</div>
 			<div>
-				<div class="col-md-1">
-					<div class="form-group">
-						<button type="button" class="btn btn-primary btn-block" id="addRowBtn">
-							행 추가
-						</button>
-					</div>
-				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-block" id="inputBtn">
@@ -122,7 +115,7 @@
 	</div>
 </div>
 </body>
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>

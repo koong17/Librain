@@ -22,6 +22,34 @@ public class MemBookServiceImpl implements MemBookService {
 	MemBookDAO bookDAO;
 	
 	@Override
+	public JSONArray hopeSelect(int Perpage, int page) {
+		int startRowNum = Perpage * page - Perpage;
+		int endRowNum = Perpage * page;
+		List<Hope_BookDTO> list = new ArrayList<Hope_BookDTO>();
+		list = bookDAO.hopeSelect(startRowNum, endRowNum);
+
+		JSONArray jArr = new JSONArray();
+		JSONObject jObj = null;
+		
+		for (int i = 0; i < list.size(); i++) {
+			Hope_BookDTO dto = list.get(i);
+			jObj = new JSONObject();
+			
+			jObj.put("hope_book_num", dto.getHope_book_num());
+			jObj.put("book_name", dto.getBook_name());
+			jObj.put("book_author", dto.getBook_author());
+			jObj.put("book_pub_house", dto.getBook_pub_house());
+			jObj.put("book_price", dto.getBook_price());
+			jObj.put("hope_status", dto.getHope_status());
+			jObj.put("hope_input_date", dto.getHope_input_date().toString().substring(0, 10));
+			jObj.put("book_pub_date", dto.getBook_pub_date().toString().substring(0, 10));
+			jObj.put("book_ISBN", dto.getBook_ISBN());
+			jArr.add(jObj);
+		}
+		return jArr;
+	}
+	
+	@Override
 	public void hopeInsert(List<Hope_BookDTO> dto) {
 		for (Hope_BookDTO hopeBookDTO : dto) {
 			bookDAO.hopeInsertBook(hopeBookDTO);

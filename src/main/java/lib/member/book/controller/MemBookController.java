@@ -33,6 +33,27 @@ public class MemBookController {
 		return "member/memHopeBook";
 	}
 	
+	@RequestMapping(value = "/member/book/hope.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String hopeForm(@RequestParam int perPage, @RequestParam int page) {
+		System.out.println(perPage+"rnqns"+page);
+		
+		JSONObject resultJO = new JSONObject();
+		JSONObject contentJO = new JSONObject();
+		JSONObject pageJO = new JSONObject();
+		
+		pageJO.put("page", page);  // 현재 페이지 
+		pageJO.put("totalCount", bookDAO.hopeSelectRowNum()); 
+		contentJO.put("pagination", pageJO);
+		contentJO.put("contents", bookService.hopeSelect(perPage, page)); //내용물 
+		resultJO.put("result", true);
+		resultJO.put("data",  contentJO);
+		
+		System.out.println("찍히나 확인");
+		
+		return  resultJO.toString();
+	}
+	
 	@RequestMapping(value="/member/book/hope/input.do", method = RequestMethod.POST)	
 	public @ResponseBody String hopeInsert(@RequestBody List<Hope_BookDTO> dto) {
 		bookService.hopeInsert(dto);

@@ -131,11 +131,11 @@ function inputAjax() {
 		console.log(checkedGrid);
 		var flag = 0;
 		for (var i = 0; i < checkedGrid.length; i++) {
-			if(checkedGrid[i].new_status == '신청 완료') flag = 1;
+			if(checkedGrid[i].new_status == '신청 완료' || checkedGrid[i].new_status == '승인') flag = 1;
 		}
 		console.log("flag = ", flag);
 		if(flag == 1) {
-			alert("승인 신청한 항목은 재신청이 불가능합니다. \n다시 신청해주세요.");
+			alert("신청 완료한 항목과 승인한 항목은 재신청이 불가능합니다. \n다시 신청해주세요.");
 		} else {
 			grid.focus(grid.getRowAt(0).rowKey, 'new_book_num', true);
 			setTimeout(function() {
@@ -297,13 +297,13 @@ Grid.setLanguage('ko');
 var gridData =
 {
 	api: {
-			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData', method: 'GET' }
+			readData: { url: location.href+'/readData', method: 'GET' }
 	}
 }
 var gridData2 =
 {
 	api: {
-			readData: { url: 'http://localhost:8080/mvc/book/newApply.do/readData2', method: 'GET' }
+			readData: { url: location.href+'/readData2', method: 'GET' }
 	}
 }
 

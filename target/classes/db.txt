@@ -1,4 +1,4 @@
----- 혜수 20191021  수정 
+---- 혜수 20191024  수정 
 ---- 아예 처음 디비 넣는 분들은 drop 제외하고 하면됩니다!
 drop table book_category;
 drop table book;
@@ -41,7 +41,7 @@ create table book ( --도서
     --constraint book_category_num_fk FOREIGN KEY (category_num)  
     --references book_category (category_num) 
 );
-delete from book;
+
 insert into book values((select nvl(max(book_num)+1,100001) from book),'이반 일리치 지음 ; 정영목 옮김','텍스트의 포도밭','라이브레인',to_date('2016','YYYY'),'9788932318042 ','X',1,'예약가능',0,sysdate,'000');
 insert into book values((select nvl(max(book_num)+1,100001) from book),'강윤팔 저','UFO의 구동원리','라이브레인',to_date('2017','YYYY'),'9788968560323 ','X',1.442,'예약가능',0,sysdate,'000');
 insert into book values((select nvl(max(book_num)+1,100001) from book),'이문근 저','정형기법','라이브레인',to_date('2017','YYYY'),'9791187892502 ','X',3.3,'예약가능',0,sysdate,'000');
@@ -311,7 +311,6 @@ insert into book values((select nvl(max(book_num)+1,100001) from book),'핫토�
 insert into book values((select nvl(max(book_num)+1,100001) from book),'에이미 노브스키 글 ; 이자벨 아르스노 그림 ; 길상효 옮김','거미 엄마, 마망 : 루이스 부르주아','라이브레인',to_date('2017','YYYY'),'9791160510676 ','X',992.6,'예약가능',0,sysdate,900);
 insert into book values((select nvl(max(book_num)+1,100001) from book),'조용현 지음','(5백년 내력의) 명문가 이야기','라이브레인',to_date('2002','YYYY'),'9788987787404 ','X',999.9,'예약가능',0,sysdate,900);
 
-commit;
 create table appendix ( --부록
     apdx_code varchar(30),--부록코드
     apdx_book_num varchar2(30), --도서번호
@@ -339,12 +338,27 @@ create table rental (
 
 create table new_book ( --도서 구입 신청 테이블
     new_book_num number, --신간 신청 번호
+    new_book_num_sub number, --신간 하위 번호
     book_author varchar2(150), --저자
     book_name varchar2(200), --도서명
     book_pub_house varchar2(50), --출판사
+    book_pub_date date, --발행일
+    book_isbn varchar2(50), --isbn
     book_price number, --도서 가격
     new_status varchar2(20), --신청 승인 상태
     new_input_date date  --신청일
+);
+
+create table hope_book ( -- 희망 도서 테이블
+    hope_book_num number, --희망 도서 번호
+    book_author varchar2(150), --저자
+    book_name varchar2(200), --도서명
+    book_pub_house varchar2(50), --출판사
+    book_pub_date date, --발행일
+    book_isbn varchar2(50), --isbn
+    book_price number, --도서 가격
+    hope_status varchar2(20), --승인 상태
+    hope_input_date date  --신청일
 );
 
 create table discard_book ( --도서 폐기 신청 테이블
