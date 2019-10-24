@@ -34,4 +34,10 @@
   <select id="salSelectOne" resultType="lib.employee.management.model.SalaryDTO" parameterType="lib.employee.management.model.SalaryDTO">
   	select * from salary_management where sal_year=#{sal_year} and sal_month=#{sal_month} and emp_no=#{emp_no}
   </select>
+  <select id="empCheckPwd" resultType="Integer" parameterType="lib.employee.management.model.EmployeeDTO">
+  	select count(*) from employee_management where emp_no=#{emp_no} and emp_password=#{emp_password}
+  </select>
+  <update id="empUpdatePwd" parameterType="lib.employee.management.model.EmployeeDTO">
+  	update employee_management set emp_password=#{emp_password} where emp_no=#{emp_no}
+  </update>
 </mapper>

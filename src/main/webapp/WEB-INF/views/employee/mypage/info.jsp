@@ -12,6 +12,51 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+	<!-- Modal -->
+
+	<div class="modal fade" id="changePwd" role="dialog"  tabindex="-1" aria-labelledby="modal-login-label" aria-hidden="true">
+		<div class="modal-dialog">
+		
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 30px 30px;">
+					<button type="button" class="close" data-dismiss="modal" style="margin-top: 7px;">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4><span class="glyphicon glyphicon-user"></span>비밀번호 수정</h4>
+				</div>
+
+				<form class="form-horizontal" method="POST" id="Frm" name="Frm">
+					<div class="modal-body" style="padding: 40px 50px; height: 200px;">
+						<div id="wrongPwd">
+						</div>
+						<div class="form-group" id="divPwd">
+							<input type="password" class="pwd form-control" id="oldPwd" name="oldPwd"
+								placeholder="기존 비밀번호 입력" maxlength="12" required>
+						</div>
+						<div class="form-group" id="divPwd">
+							<input type="password" class="pwd form-control" id="pwd" name="pwd"
+								placeholder="새 비밀번호 입력(영문 및 숫자 6~12자)" maxlength="12" required>
+						</div>
+						<div class="form-group" id="divPwd2">
+							<input type="password" class="form-control" id="pwd2" name="pwd2"
+								placeholder="새 비밀번호 확인" maxlength="12" required>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" id="updatePwd" name="updatePwd" class="btn btn-success btn-default pull-left"  value="Send" style="margin: 10px; margin-left: 35px">
+						<span class="glyphicon glyphicon-plus"></span>완 료
+					</button>
+					<button type="button" class="btn btn-danger btn-default pull-left"
+						data-dismiss="modal" value="Input Button" style="margin: 10px">
+						<span class="glyphicon glyphicon-remove"></span>취 소
+					</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  
 	<div class="wrapper">
 		<div class="row">
 			<div class="col-md-12">
@@ -60,7 +105,7 @@
 						</div>
 						<div class="col-md-2">
 							<input type="button" class="btn" value="비밀번호 수정"
-								onclick="daumPostcode()">
+								data-toggle="modal" data-target="#changePwd">
 						</div>
 					</div>
 					<div class="row form-group">
@@ -260,6 +305,38 @@
 			return true;
 		}
 	}
+	
+	$('#updatePwd').click(function() {
+		var regPwd = /^[a-zA-Z0-9]{6,12}$/;
+		
+		if(!regPwd.test(Frm.oldPwd.value) || !regPwd.test(Frm.pwd.value) || !regPwd.test(Frm.pwd2.value)) {
+			alert("비밀번호 형식을 확인하세요"); return false;
+		} else if(Frm.pwd.value != Frm.pwd2.value){
+			alert("비밀번호와 재입력한 비밀번호가 일치하지 않습니다."); return false;
+		} else{
+			$.ajax({
+				url : 'updatePwd.do',
+				type : 'post',
+				data : $('#Frm').serialize(),
+				success : function(data) {
+					if (data == "0") {
+						console.log(data);
+						alert("비밀번호가 틀렸습니다.");
+						$("#oldPwd").val("");
+						$("#pwd").val("");
+						$("#pwd2").val("");
+					} else {
+						alert("비밀번호가 수정되었습니다.");
+						$("#oldPwd").val("");
+						$("#pwd").val("");
+						$("#pwd2").val("");
+						$("#changePwd").modal('hide');
+					}
+				}
+			});
+		}
+	});
+	
 	function daumPostcode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
