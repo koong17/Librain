@@ -36,7 +36,9 @@
     <![endif]-->
 
 </head>
-
+<c:if test='${empty sessionScope.emp_no }'>
+<c:redirect url="/login.do" />
+</c:if>
 <body>
 
     <div id="wrapper">

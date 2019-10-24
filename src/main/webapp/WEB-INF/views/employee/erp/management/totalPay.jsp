@@ -23,9 +23,6 @@
 				<div class="form-group">
 					<select class="form-control" id="cmt_year">
 						<option value="" disabled selected>년</option>
-						<option value="2019">2019</option>
-						<option value="2020">2020</option>
-						<option value="2021">2021</option>
 					</select>
 				</div>
 			</div>
@@ -33,9 +30,18 @@
 				<div class="form-group">
 					<select class="form-control" id="cmt_month">
 						<option value="" disabled selected>월</option>
-						<option value="9">9</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
 						<option value="10">10</option>
 						<option value="11">11</option>
+						<option value="12">12</option>
 					</select>
 				</div>
 			</div>
@@ -147,6 +153,16 @@
 	</div>
 </body>
 <script>
+
+	$(function(){
+		var date = new Date();
+		var year = date.getFullYear();
+		//var month = new String(date.getMonth()+1);
+		for (var i = year-2; i <= year; i++) {
+			$("#cmt_year").append('<option value="'+i+'">'+i+'</option>');
+		}
+	});
+
 	$("#check").click(function() {
 		var year = document.getElementById("cmt_year");
 		var month = document.getElementById("cmt_month");

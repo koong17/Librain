@@ -27,8 +27,6 @@
 					<div class="years"></div>
 					<select id="cmt_year" name="cmt_year" class="form-control">
 						<option value="" disabled selected>년</option>
-						<option value="2018">2018</option>
-						<option value="2019">2019</option>
 					</select>
 				</div>
 			</div>
@@ -69,7 +67,12 @@
 <script type="text/javascript">	
 
 	$(function(){
-		
+		var date = new Date();
+		var year = date.getFullYear();
+		//var month = new String(date.getMonth()+1);
+		for (var i = year-2; i <= year; i++) {
+			$("#cmt_year").append('<option value="'+i+'">'+i+'</option>');
+		}
 	});
 	
 	$("#search").click(function(){
