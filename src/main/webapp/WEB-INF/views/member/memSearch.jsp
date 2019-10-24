@@ -17,31 +17,40 @@ body {
 }
 </style>
 <!-- BootStrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- font CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Toast Grid CSS-->
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.date-picker/v3.3.0/tui-date-picker.css">
+<link rel="stylesheet" type="text/css"
+	href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!-- Toast pagination JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
- 
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
+
 <!-- Toast Grid DatePicker JS-->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
 
 <!-- Toast Grid JS -->
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 <!-- BootStrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>도서검색</title>
 </head>
 <body>
@@ -58,15 +67,14 @@ body {
             <div class="form-group ">
                <select id="searchCtgr" name="searchCtgr" class="form-control">
                   <option selected>전체</option>
-                  <option>도서명</option>
-                  <option>저자명</option>
-                  <option>출판사명</option>
+                  <option value="book_name">도서명</option>
+                  <option value="book_author">저자명</option>
+                  <option value="book_pub_house">출판사명</option>
                </select>
             </div>
          </div>
          <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="검색어를 입력하세요."
-               id="searchWord" name="searchWord">
+            <input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord" name="searchWord">
          </div>
          <div class="col-md-1">
             <button type="button" class="btn btn-primary btn-block" id="searchBtn">
@@ -96,5 +104,5 @@ body {
 </div>
 </body>
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/memBook.js?after"></script>
+<script src="${pageContext.request.contextPath}/resources/js/memBook.js"></script>
 </html>

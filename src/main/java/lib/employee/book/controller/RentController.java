@@ -30,7 +30,7 @@ public class RentController {
 		
 	@RequestMapping(value = "/book/rent.do", method = RequestMethod.GET)
 	public String rentBookForm(Model model) {
-		return "employee/book/empRentBook";
+		return "employee/erp/book/empRentBook";
 	}
 	
 	@RequestMapping(value = "/book/rent/return.do", method = RequestMethod.POST)

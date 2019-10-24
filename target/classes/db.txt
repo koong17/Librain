@@ -1,4 +1,4 @@
----- 혜수 20191021  수정 
+---- 혜수 20191024  수정 
 ---- 아예 처음 디비 넣는 분들은 drop 제외하고 하면됩니다!
 drop table book_category;
 drop table book;
@@ -41,7 +41,7 @@ create table book ( --도서
     --constraint book_category_num_fk FOREIGN KEY (category_num)  
     --references book_category (category_num) 
 );
-delete from book;
+
 insert into book values((select nvl(max(book_num)+1,100001) from book),'이반 일리치 지음 ; 정영목 옮김','텍스트의 포도밭','라이브레인',to_date('2016','YYYY'),'9788932318042 ','X',1,'예약가능',0,sysdate,'000');
 insert into book values((select nvl(max(book_num)+1,100001) from book),'강윤팔 저','UFO의 구동원리','라이브레인',to_date('2017','YYYY'),'9788968560323 ','X',1.442,'예약가능',0,sysdate,'000');
 insert into book values((select nvl(max(book_num)+1,100001) from book),'이문근 저','정형기법','라이브레인',to_date('2017','YYYY'),'9791187892502 ','X',3.3,'예약가능',0,sysdate,'000');
@@ -311,7 +311,6 @@ insert into book values((select nvl(max(book_num)+1,100001) from book),'핫토�
 insert into book values((select nvl(max(book_num)+1,100001) from book),'에이미 노브스키 글 ; 이자벨 아르스노 그림 ; 길상효 옮김','거미 엄마, 마망 : 루이스 부르주아','라이브레인',to_date('2017','YYYY'),'9791160510676 ','X',992.6,'예약가능',0,sysdate,900);
 insert into book values((select nvl(max(book_num)+1,100001) from book),'조용현 지음','(5백년 내력의) 명문가 이야기','라이브레인',to_date('2002','YYYY'),'9788987787404 ','X',999.9,'예약가능',0,sysdate,900);
 
-commit;
 create table appendix ( --부록
     apdx_code varchar(30),--부록코드
     apdx_book_num varchar2(30), --도서번호
@@ -339,12 +338,27 @@ create table rental (
 
 create table new_book ( --도서 구입 신청 테이블
     new_book_num number, --신간 신청 번호
+    new_book_num_sub number, --신간 하위 번호
     book_author varchar2(150), --저자
     book_name varchar2(200), --도서명
     book_pub_house varchar2(50), --출판사
+    book_pub_date date, --발행일
+    book_isbn varchar2(50), --isbn
     book_price number, --도서 가격
     new_status varchar2(20), --신청 승인 상태
     new_input_date date  --신청일
+);
+
+create table hope_book ( -- 희망 도서 테이블
+    hope_book_num number, --희망 도서 번호
+    book_author varchar2(150), --저자
+    book_name varchar2(200), --도서명
+    book_pub_house varchar2(50), --출판사
+    book_pub_date date, --발행일
+    book_isbn varchar2(50), --isbn
+    book_price number, --도서 가격
+    hope_status varchar2(20), --승인 상태
+    hope_input_date date  --신청일
 );
 
 create table discard_book ( --도서 폐기 신청 테이블
@@ -583,8 +597,56 @@ create table member( -- 회원
    --constraint member_pk primary key (mem_id)
 );
 
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', '1234', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '010-8534-0280', 'ming_0729@naver.com');
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '010-1111-1111', '11111', 'pyw@naver.com');
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('captainss', '1234', '김승수', '9310131111111', '서울시 종로구의 어느 고시원', '01111', '010-2222-2222', 'kss@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', '1234', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '01085340280', 'ming_0729@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '01011111111', '11111', 'pyw@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('captainss', '1234', '김승수', '9310131111111', '서울시 종로구의 어느 고시원', '01111', '01022222222', 'kss@naver.com');
+
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lsy', '2345', '이소영', '9707111111111', '서울시 영등포구 오피스텔', '58642','01012342345', 'soso@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('ksa', '5432', '강수아', '9511111111111', '서울시 양천구 ', '52325', '01012673421', 'sooa@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('mhs', '3456', '문혜수', '9611111111111', '서울시 강남구', '35473', '01011112222', 'hyesoo@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kdw', '6543', '강동원', '8111111111111', '서울시 강북구', '34578', '01011113333', 'dongwon@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jws', '4567', '정우성', '7311111111111', '서울시 송파구', '95463', '01011114444', 'sung@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jdg', '7654', '장동건', '7211111111111', '서울시 성북구', '34865', '01011115555', 'shotgun@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kth', '5678', '김태형', '8211111111111', '경기도 광명시', '89658', '01011116666', 'hyunbin@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('cew', '8765', '차은우', '9711111111111', '서울시 중구', '53257', '01011117777', 'dongmin@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('dks', '6789', '도경수', '9311111111111', '서울시 강동구', '35278', '01011118888', 'kyungsoo@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jjh', '9876', '주지훈', '8211111111111', '서울시 도봉구', '94214', '01011119999', 'jihoon@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('sjk', '1122', '송중기', '8511111111111', '서울시 중랑구', '73241', '01011111122', 'joongki@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('hjw', '1133', '하정우', '7811111111111', '서울시 강서구', '86552', '01011111133', 'letswalk@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('ljj', '1144', '이정재', '7311111111111', '서울시 구로구', '56345', '01011111144', 'kingjae@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jjs', '1155', '조정석', '8011111111111', '서울시 관악구', '31278', '01011111155', 'yongnam@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jcw', '1166', '지창욱', '8711111111111', '서울시 금천구', '75648', '01011111166', 'changwook@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kjh', '1177', '김지훈', '8111111111111', '서울시 성동구', '64245', '01011111177', 'kjihoon@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('sjs', '1188', '소지섭', '7711111111111', '서울시 용산구', '56378', '01011111188', 'cowjis@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('skj', '1199', '서강준', '9311111111111', '서울시 서대문구', '35424', '01011111199', 'westliver@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('yjk', '1233', '여진구', '9711111111111', '서울시 동대문구', '86543', '01011112211', 'jinggu@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kms', '2546', '김민석', '9011111111111', '서울시 노원구', '64785', '01011112233', 'minseok@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('jyh', '7543', '정윤호', '8611111111111', '서울시 강북구', '12576', '01011112244', 'passionjyh@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('hmh', '7553', '황민현', '9511111111111', '서울시 은평구', '52158', '01011112255', 'hwngje@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pjh', '4676', '박지훈', '9911111111111', '서울시 동작구', '76355', '01011112266', 'winkjh@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pcy', '4673', '박찬열', '9211111111111', '서울시 성북구', '35468', '01011112277', 'real_pcy@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('hsw', '3464', '하성운', '9411111111111', '서울시 송파구', '21348', '01011112288', 'hacloud@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kmj', '9774', '김민주', '0111111111111', '서울시 강남구', '18576', '01011112299', 'miguri@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kjh', '6845', '김지호', '9711111111111', '서울시 송파구', '34185', '01011113311', 'kingjiho@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('ayj', '6545', '안유진', '0311111111111', '서울시 노원구', '67523', '01011113322', 'anujin@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kty', '5415', '김태연', '8911111111111', '서울시 도봉구', '37586', '01011113355', 'tangtang@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kyr', '5638', '권유리', '8911111111111', '서울시 강북구', '16854', '01011113366', 'yulyuri@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lya', '5241', '임윤아', '9011111111111', '서울시 중랑구', '81385', '01011113377', 'yoona@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('csy', '5447', '최수영', '8911111111111', '서울시 광진구', '33153', '01011113388', 'choiswim@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('khy', '2148', '김효연', '8911111111111', '서울시 동작구', '53158', '01011113399', 'hyoyeon@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('sjh', '3541', '서주현', '9111111111111', '서울시 구로구', '56905', '01011115511', 'westjh@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lsg', '3267', '이순규', '8911111111111', '서울시 강서구', '31058', '01011115522', 'leesgu@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('hmy', '1206', '황미영', '8911111111111', '서울시 양천구', '63410', '01011115533', 'stafanih@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('khn', '1024', '강하늘', '8911111111111', '서울시 동대문구', '35740', '01011115544', 'kangsky@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('khj', '5855', '공효진', '8011111111111', '서울시 중구', '50576', '01011115566', 'ballhj@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lmh', '3212', '이민호', '8711111111111', '서울시 서대문구', '07645', '01011115577', 'leemh@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('psh', '7832', '박신혜', '9011111111111', '서울시 성북구', '63205', '01011115588', 'parksh@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('ljs', '8723', '이종석', '8911111111111', '서울시 은평구', '86405', '01011115599', 'leebells@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kwb', '5436', '김우빈', '8911111111111', '서울시 강동구', '94520', '01011116611', 'cowbean@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('sma', '8652', '신민아', '8411111111111', '서울시 관악구', '34210', '01011116622', 'godma@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('bsj', '7514', '배수지', '9411111111111', '서울시 금천구', '67520', '01011116633', 'boatsj@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('kms', '8527', '김명수', '9211111111111', '서울시 은평구', '50864', '01011116655', 'myungs@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('shs', '3748',  '신혜선', '8911111111111', '서울시 용산구', '64105', '01011117788', 'godhs@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('ppg', '4162', '박보검', '9311111111111', '서울시 송파구', '46876', '01011118956', 'bogummy@naver.com');
 
 commit;
