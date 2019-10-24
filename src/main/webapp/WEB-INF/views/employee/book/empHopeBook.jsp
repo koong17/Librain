@@ -10,14 +10,14 @@
 <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
-<title>도서 구입 승인</title>
+<title>희망 도서 승인</title>
 <%@include file="../../employee/includes/header.jsp"%>
 </head>
 <body>
 <div class="wrapper">
    <div class="row">
       <div class="col-md-12">
-         <h1 class="page-header">도서 구입 승인</h1>
+         <h1 class="page-header">희망 도서 승인</h1>
       </div>
    </div>
    <div class="row">
@@ -37,6 +37,13 @@
 					</button>
 				</div>
 			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<button type="button" class="btn btn-primary btn-block" id="deleteBtn">
+						삭제
+					</button>
+				</div>
+			</div>
 			<div class="col-md-1">
 				<div class="form-group">
 					<button type="button" class="btn btn-primary btn-block" id="refreshBtn"  onclick="confirm()">
@@ -46,8 +53,8 @@
 			</div>
 		</div>
 	</div>
-   </div>
-   <div class="row">
+    </div>
+    <div class="row">
 		<div class="col-md-12">
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-12">
@@ -55,7 +62,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
 </div>
 </body>
 <%@include file="../../employee/includes/footer.jsp"%>
@@ -71,7 +78,7 @@
 <script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
 
 <!-- bookJS -->
-<script src="${pageContext.request.contextPath}/resources/js/adminNewBook.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/empHopeBook.js?after"></script>
 
    
    
