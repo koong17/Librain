@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
 <title>도서 구입 신청</title>
-<%@include file="../includes/header.jsp"%>
+<%@include file="../../includes/header.jsp"%>
 </head>
 <body>
 <div class="wrapper">
@@ -122,7 +122,7 @@
 	</div>
 </div>
 </body>
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>
 
 <!-- Toast pagination JS-->
 <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>

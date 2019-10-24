@@ -49,8 +49,7 @@
             </div>
          </div>
          <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="검색어를 입력하세요."
-               id="searchWord" name="searchWord">
+            <input class="form-control" type="text" placeholder="검색어를 입력하세요." id="searchWord" name="searchWord">
          </div>
          <div class="col-md-1">
             <button type="button" class="btn btn-primary btn-block" id="searchBtn">

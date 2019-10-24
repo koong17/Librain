@@ -39,62 +39,41 @@
 	</select>	
 	
 	<select id="selectRowNum" resultType="int">
-		select nvl(max(rnum),0) from
-		    (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, 
-		            decode(rent_enddate,'o','대여중','대여가능') rent
-		            from  book b 
-		            left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-		            on (b.book_num = r.book_num))
+		select nvl(count(*),0) from book
 	</select>	
 	
 	<select id="select" resultType="lib.employee.book.model.EmpBookDTO" parameterType="int">
 	<![CDATA[
 		select * from
-		   (select rownum rnum, b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
-		           decode(rent_enddate,'o','대여중','대여가능') rent
-		           from  (select * from book order by book_num desc) b
-		           left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-		           on (b.book_num = r.book_num))
-		     where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
-		     order by book_num desc
+		   (select rownum rnum, b.*, nvl(rent_status,'대여가능') rent
+	           from  (select * from book order by book_num desc) b
+	           left outer join rental  r   on (b.book_num = r.book_num))
+	    	where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
 	]]>
 	</select>
 	
 	<select id="searchAll" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
-		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
-            decode(rent_enddate,'o','대여중','대여가능') rent
-			from (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }) b 
-			left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
+		select b.*,  nvl(rent_status, '대여가능') rent
+			from  (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }
+                   order by book_num desc) b 
+			left outer join rental  r  
 			on b.book_num = r.book_num
 	</select>
 	
-	<select id="searchBookName" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
-		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
-            decode(rent_enddate,'o','대여중','대여가능') rent
-			from (select * from book where book_name like #{ searchWord }) b 
-			left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-			on b.book_num = r.book_num
+	<select id="searchCtgr" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
+		select b.*, nvl(rent_status, '대여가능') rent
+		    from (select * from book where ${searchCtgr} like #{ searchWord }
+		    	  order by book_num desc) b
+		    left outer join rental r
+		    on b.book_num = r.book_num
 	</select>
 	
-	<select id="searchAuthor" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
-		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
-            decode(rent_enddate,'o','대여중','대여가능') rent
-			from (select * from book where book_author like #{ searchWord }) b 
-			left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-			on b.book_num = r.book_num
-	</select>
-	
-	<select id="searchPub" parameterType="java.lang.String" resultType="lib.employee.book.model.EmpBookDTO">
-		select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date,
-            decode(rent_enddate,'o','대여중','대여가능') rent
-			from (select * from book where book_pub_house like #{ searchWord }) b 
-			left outer join (select book_num, nvl(to_char(rent_enddate),'o') rent_enddate from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num))  r  
-			on b.book_num = r.book_num
-	</select>
 	
 	<insert id="insertBook" parameterType="lib.employee.book.model.EmpBookDTO">
-		insert into book VALUES ((select nvl(max(book_num)+1,100001) from book), #{ book_author }, #{ book_name }, #{ book_pub_house }, 
-		#{ book_pub_date }, #{ book_ISBN }, #{ book_apdx_status }, #{ book_ctgr_num }, #{ book_rsrv_status }, 0, sysdate, #{ book_ctgr_num_db } )
+		insert into book (book_num, book_author, book_name,  book_pub_house,
+			book_pub_date, book_ISBN, book_apdx_status, book_ctgr_num, book_rsrv_status, book_rent_cnt, book_input_date, book_ctgr_num_db) 
+        VALUES ((select nvl(max(book_num)+1,100001) from book), #{ book_author }, #{ book_name }, #{ book_pub_house }, 
+			#{ book_pub_date }, #{ book_ISBN }, #{ book_apdx_status }, #{ book_ctgr_num }, #{ book_rsrv_status }, 0, sysdate, #{ book_ctgr_num_db })
 	</insert>
 	
 	<delete id="deleteBook" parameterType="lib.employee.book.model.EmpBookDTO">
@@ -170,7 +149,7 @@
 	
 	<select id="disSearch" parameterType="int" resultType="lib.employee.book.model.BookRentDisDTO">
 		select t.*,  dis_book_num, dis_input_date, dis_status 
-		    from (select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date, nvl(r.rent_status, '대여가능') rent
+		    from (select b.*, nvl(r.rent_status, '대여가능') rent
 	                from  (select * from book where book_num = #{ book_num }) b
 	                left outer join rental r
 	                on (b.book_num = r.book_num)) t
@@ -179,8 +158,8 @@
 	
 	<select id="disSelect"  resultType="lib.employee.book.model.BookRentDisDTO">
 		select t.*,  dis_book_num, dis_input_date, dis_status 
-		    from (select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date, nvl(r.rent_status, '대여가능') rent
-	                from  (select * from book) b
+		    from (select b.*, nvl(r.rent_status, '대여가능') rent
+	                from book b
 	                left outer join rental r
 	                on (b.book_num = r.book_num)) t
 	                join discard_book d on d.book_num = t.book_num
@@ -189,8 +168,8 @@
 	
 	<select id="disSelectBook"  resultType="lib.employee.book.model.BookRentDisDTO">
 		select t.*,  dis_book_num, dis_input_date, dis_status 
-		    from (select b.book_num, book_author, book_pub_house, book_name, book_pub_date, book_ISBN, book_apdx_status, book_rsrv_status, book_ctgr_num, book_input_date, nvl(r.rent_status, '대여가능') rent
-	                from  (select * from book) b
+		    from (select b.*, nvl(r.rent_status, '대여가능') rent
+	                from book b
 	                left outer join rental r
 	                on (b.book_num = r.book_num)) t
 	                join discard_book d on d.book_num = t.book_num

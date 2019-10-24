@@ -17,6 +17,17 @@ public class MemBookDaoImpl implements MemBookDAO {
 	SqlSession sqlsession;
 	
 	@Override
+	public int hopeSelectRowNum() {
+		return sqlsession.getMapper(MemBookDAO.class).hopeSelectRowNum();
+	}
+	
+	@Override
+	public List<Hope_BookDTO> hopeSelect(int startRowNum, int endRowNum) {
+		List<Hope_BookDTO> list = sqlsession.getMapper(MemBookDAO.class).hopeSelect(startRowNum, endRowNum);
+		return list;
+	}
+	
+	@Override
 	public void hopeInsertBook(Hope_BookDTO dto) {
 		sqlsession.getMapper(MemBookDAO.class).hopeInsertBook(dto);
 	}

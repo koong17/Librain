@@ -25,7 +25,7 @@ public class DiscardController {
 	
 	@RequestMapping(value="/book/discardApply.do", method = RequestMethod.GET) 
 	public String discardBookForm(Model model) {
-		return "employee/book/empDiscardBook";
+		return "employee/erp/book/empDiscardBook";
 	}
 
 	@RequestMapping(value = "/book/disApply.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
