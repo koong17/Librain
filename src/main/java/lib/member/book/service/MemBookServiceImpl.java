@@ -8,8 +8,10 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lib.employee.book.model.Hope_BookDTO;
 import lib.member.book.model.MemBookDAO;
 import lib.member.book.model.MemBookDTO;
+import lib.member.model.MemberDTO;
 
 @Service
 public class MemBookServiceImpl implements MemBookService {
@@ -17,6 +19,26 @@ public class MemBookServiceImpl implements MemBookService {
 	@Autowired
 	MemBookDAO bookDAO;
 	
+	@Override
+	public void hopeInsert(List<Hope_BookDTO> dto) {
+		for (Hope_BookDTO hopeBookDTO : dto) {
+			bookDAO.hopeInsertBook(hopeBookDTO);
+		}
+	}
+	
+	@Override
+	public JSONObject hopeMemCheck(String mem_id) {
+		String result = "";
+		JSONObject jObj = new JSONObject();
+		
+		if(bookDAO.hopeMemCheck(mem_id) == 1) result = "success";
+		else result = "fail";
+		
+		jObj.put("result", result);
+		
+		return jObj;
+	}
+
 	@Override
 	public List searchCtgr(String searchCtgr, String searchWord) {
 		List<MemBookDTO> list = new ArrayList<MemBookDTO>();
@@ -50,6 +72,7 @@ public class MemBookServiceImpl implements MemBookService {
 			jObj.put("book_author", dto.getBook_author());
 			jObj.put("book_pub_house", dto.getBook_pub_house());
 			jObj.put("book_num", dto.getBook_num());
+			jObj.put("book_ctgr_num", dto.getBook_ctgr_num());
 			jObj.put("rent", dto.getRent());
 			jArr.add(jObj);
 		}

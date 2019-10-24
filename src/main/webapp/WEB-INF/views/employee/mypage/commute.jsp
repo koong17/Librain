@@ -1,20 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../includes/header.jsp"%>
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8">
+<html>
+<head>
+<meta charset="UTF-8">
 <title>근태관리</title>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<input type="button" id="work" value="출근" >
-	<input type="button" id="leave" value="퇴근">
-	<hr>
-	오늘의 출근현황
-	<div id="gridTop"></div>
-	<hr>
-	<div id="grid"></div>
+	<div class="wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">근태 관리</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<input type="button" class="btn btn-primary btn-block" id="work"
+						value="출근">
+				</div>
+			</div>
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<input type="button" class="btn btn-primary btn-block" id="leave"
+						value="퇴근">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<div id="gridTop"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<div id="grid"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script>
 
@@ -125,3 +158,4 @@
 	});
 </script>
 </html>
+<%@include file="../includes/footer.jsp"%>

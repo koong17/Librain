@@ -5,7 +5,13 @@ $(document).ready(function() {
        $('#grid').show(); 
         searchAjax();
     });
-
+    
+    $('#refreshBtn').click(function() {
+    	console.log("refresh");
+    	$('#searchWord').val("");
+    	$('#searchCtgr').val("전체");
+    	$('#grid').hide();
+    });
 });
 
 function searchAjax() {
@@ -36,11 +42,6 @@ function searchAjax() {
    }
 }
 
-function confirm(){
-   grid.readData(1,true);
-   grid.sort("book_num",false);
-}
-
 var Grid = tui.Grid;
 Grid.setLanguage('ko');
 
@@ -57,6 +58,8 @@ var gridData2 =
          readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData2', method: 'GET' }
    }
 }
+
+
 
 const grid = new tui.Grid({
    el: document.getElementById('grid'),
@@ -82,6 +85,10 @@ const grid = new tui.Grid({
          name: 'book_pub_house'
       },
       {
+    	  header: '분류기호',
+    	  name: 'book_ctgr_num'
+      },
+      {
          header: '대출여부',
          name: 'rent'
       }
@@ -103,7 +110,7 @@ const newBookGrid = new tui.Grid({
        },
    rowHeaders: ['rowNum'],
    pageOptions: {
-      perPage: 5
+      perPage: 10
    },
    scrollX: false,
    scrollY: false,
@@ -140,7 +147,7 @@ const mostRentGrid = new tui.Grid({
    },
    rowHeaders: ['rowNum'],
    pageOptions: {
-      perPage: 5
+      perPage: 10
    },
    scrollX: false,
    scrollY: false,
@@ -159,9 +166,6 @@ const mostRentGrid = new tui.Grid({
       }
       ]
 });
-
-
-
 
 
 

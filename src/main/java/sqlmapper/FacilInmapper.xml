@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.facilityinspection.model.FacilitiesInspectionDAO">
+
+ 
+  
+  <!-- Facilities_Inspection List -->
+  <select id="facinselect" parameterType="int" resultType="lib.employee.facilityinspection.model.FacilitiesInspectionDTO">
+  <![CDATA[
+  select * from (select (rank() over(order by FacIn_serialnum))r , FacIn_serialnum, FacIn_name,FacIn_address, FacIn_status, FacIn_Inspection_Date,FacIn_Inspection_Due_Date,
+(FacIn_Inspection_Due_Date-FacIn_Inspection_Date) RemainingTime
+from Facilities_inspection ) where r>#{startrownum} and r<=#{endrownum}
+  
+  ]]>
+  
+  </select>
+  
+  <select id="facintotalcount"  resultType="int">
+	  select FacIn_serialnum from Facilities_inspection
+  </select>
+  
+</mapper>

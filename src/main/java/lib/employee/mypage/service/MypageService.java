@@ -10,6 +10,7 @@ import lib.employee.mypage.model.CommuteDTO;
 public interface MypageService {
 	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO);
 	public void empUpdate(EmployeeDTO employeeDTO);
+	public int empUpdatePwd(EmployeeDTO employeeDTO, String pwd);
 	public void cmtInsert(CommuteDTO commuteDTO);
 	public JSONArray cmtSelectAll(CommuteDTO commuteDTO);
 	public JSONArray cmtSelectOnOff(CommuteDTO commuteDTO);

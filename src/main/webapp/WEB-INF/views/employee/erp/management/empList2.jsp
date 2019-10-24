@@ -1,18 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../../includes/header.jsp"%>
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <title>사원 목록 조회</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<div class="container-fluid bg-light " align="center">
-	<br>
-      <div class="row align-items-center justify-content-center" align="center">
+	<div class="wrapper">
+	  <div class="row">
+		<div class="col-md-12">
+			<h1 class="page-header">직원 목록</h1>
+		</div>
+	  </div>
+      <div class="row">
          <div class="col-md-2 pt-3">
             <div class="form-group">
                <select id="searchType" name="searchCtgr" class="form-control">
@@ -29,21 +33,26 @@
             <input type="button" class="btn btn-primary btn-block" id="search" value="검색">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="insert" value="직원 추가">
+            <input class="btn btn-primary btn-block" type="button" id="insert" value="직원추가">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="update" value="직원 수정">
+            <input class="btn btn-primary btn-block" type="button" id="update" value="직원수정">
          </div>
          <div class="col-md-1">
-            <input class="btn btn-primary btn-block" type="button" id="delete" value="직원 삭제">
+            <input class="btn btn-primary btn-block" type="button" id="delete" value="직원삭제">
          </div>
       </div>
 	<div id="grid"></div>
    </div>
-	
+<%@include file="../../includes/footer.jsp"%>
 </body>
 
 <script type="text/javascript">
+
+	$(function() {
+		grid.sort('emp_no',true,false);
+	});
+	
 	$("#search").click(function(){
 	    
 	    console.log($('#searchCtgr').val());

@@ -10,6 +10,7 @@ public class New_BookDTO {
 	private int book_price; //도서가격
 	private String new_status; //승인상태 
 	private Timestamp new_input_date; //신청일
+	private int bookCnt;
 	
 	public int getNew_book_num() {
 		return new_book_num;
@@ -52,6 +53,12 @@ public class New_BookDTO {
 	}
 	public void setNew_input_date(Timestamp new_input_date) {
 		this.new_input_date = new_input_date;
+	}
+	public int getBookCnt() {
+		return bookCnt;
+	}
+	public void setBookCnt(int bookCnt) {
+		this.bookCnt = bookCnt;
 	}
 	
 	

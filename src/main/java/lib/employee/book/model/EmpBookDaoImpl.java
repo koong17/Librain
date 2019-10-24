@@ -89,7 +89,7 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	public void insertBook(EmpBookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).insertBook(dto);
 	}
-
+	
 	@Override
 	public void deleteBook(EmpBookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).deleteBook(dto);
@@ -101,8 +101,40 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	}
 	
 	@Override
+	public int hopeSelectRowNum() {
+		return sqlsession.getMapper(EmpBookDAO.class).hopeSelectRowNum();
+	}
+	
+	@Override
+	public void hopeApprove(Hope_BookDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).hopeApprove(dto);
+	}
+	
+	@Override
+	public void hopeReturn(Hope_BookDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).hopeReturn(dto);
+	}
+	
+	@Override
+	public void hopeDelete(Hope_BookDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).hopeDelete(dto);
+	}
+	
+	@Override
+	public List<Hope_BookDTO> hopeSelect(int startRowNum, int endRowNum) {
+		List<Hope_BookDTO> list = sqlsession.getMapper(EmpBookDAO.class).hopeSelect(startRowNum, endRowNum);
+		return list;
+	}
+	
+	@Override
 	public List<New_BookDTO> newSelect() {
 		List<New_BookDTO> list = sqlsession.getMapper(EmpBookDAO.class).newSelect();
+		return list;
+	}
+
+	@Override
+	public List<New_BookDTO> newSelectBook() {
+		List<New_BookDTO> list = sqlsession.getMapper(EmpBookDAO.class).newSelectBook();
 		return list;
 	}
 	
@@ -110,9 +142,14 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	public void newInsertBook(New_BookDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).newInsertBook(dto);
 	}
+	@Override
+	public int newMaxBookNum() {
+		return sqlsession.getMapper(EmpBookDAO.class).newMaxBookNum();
+	}
 	
 	@Override
 	public void newDeleteBook(New_BookDTO dto) {
+		System.out.println("Controller) dto.getNew_book_num_sub() >> " + dto.getNew_book_num_sub());
 		sqlsession.getMapper(EmpBookDAO.class).newDeleteBook(dto);
 	}
 	
@@ -134,8 +171,18 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	}
 	
 	@Override
+	public List<BookRentDisDTO> disSelectBook() {
+		List<BookRentDisDTO> list = sqlsession.getMapper(EmpBookDAO.class).disSelectBook();
+		return list;
+	}
+	
+	@Override
 	public void disInsertBook(BookRentDisDTO dto) {
 		sqlsession.getMapper(EmpBookDAO.class).disInsertBook(dto);
 	}
 	
+	@Override
+	public void disDeleteBook(BookRentDisDTO dto) {
+		sqlsession.getMapper(EmpBookDAO.class).disDeleteBook(dto);
+	}
 }

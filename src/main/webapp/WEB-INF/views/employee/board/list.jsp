@@ -5,11 +5,15 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<c:choose>
+	<c:when test="${empty sessionScope.emp_no }">
+	<script>window.location.href='${pageContext.request.contextPath}/login.do'</script>
+	</c:when>
+</c:choose>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Tables</h1>
+		<h1 class="page-header">사내게시판</h1>
 	</div>
-	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 
@@ -17,11 +21,13 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Board List Page
-				<button id='regBtn' type="button" class="btn btn-xs pull-right" style='margin-right:5px'>
-					Register New Board</button>
-				<button id='noticeBtn' type="button" class="btn btn-xs pull-right">
-					Register New Notice</button>
+				<button id='regBtn' type="button" class="btn btn-primary btn-xs" style='margin-right:5px'>일반글 등록</button>
+				<c:choose>
+				<c:when test="${sessionScope.emp_position == '관장' || sessionScope.emp_position == '팀장'}">
+				<button id='noticeBtn' type="button" class="btn btn-primary btn-xs">공지글 등록</button>
+				</c:when>
+				</c:choose>
+				<span class="pull-right" style="font-weight:bold; color:red">*게시판 이용 전 규칙을 숙지해주시기 바랍니다.</span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -73,7 +79,8 @@
 			<div class="col-lg-12">
 			
 			<form id="searchForm" action="${pageContext.request.contextPath}/board/list.do" method="get">
-				<select name="type">
+				<div class="col-lg-2">
+				<select class="form-control" name="type">
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
 					<option value="T"
@@ -88,16 +95,17 @@
 						<c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
 					<option value="TWC"
 						<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
-				</select>
+				</select></div>
 				
-					<input type='text' name='keyword'
+				<div class="col-lg-4">
+					<input class="form-control" type='text'  name='keyword'
 						value='<c:out value="${pageMaker.cri.keyword}"/>'/>
 					<input type='hidden' name='pageNum'
 						value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
 					<input type='hidden' name='amount'
 						value='<c:out value="${pageMaker.cri.amount}"/>'/>
-				
-				<button class="btn btn-default">Search</button>
+				</div>
+				<button class="btn btn-info btn-sm">검색</button>
 			</form>
 		</div>
 	</div>

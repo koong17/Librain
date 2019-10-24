@@ -1,40 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@include file="../../includes/header.jsp"%>
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<html>
+<head>
+<meta charset="UTF-8">
+<title>직원 목록</title>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
-	<div class="container-fluid bg-light " align="center">
-	<br>
-      <div class="row align-items-center justify-content-center" align="center">
-         <div class="col-md-2 pt-3">
-            <div class="form-group">
-               <select id="searchType" name="searchCtgr" class="form-control">
-                  <option value="emp_name" selected>사원명</option>
-                  <option value="dept_name">부서명</option>
-               </select>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="검색어를 입력하세요."
-               id="searchWord" name="searchWord">
-         </div>
-         <div class="col-md-1">
-            <input type="button" class="btn btn-primary btn-block" id="search" value="검색">
-         </div>
-      </div>
-	<div id="grid"></div>
-   </div>
-	
+	<div class="wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">직원 목록</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<select id="searchType" name="searchCtgr" class="form-control">
+						<option value="emp_name" selected>사원명</option>
+						<option value="dept_name">부서명</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="검색어를 입력하세요."
+					id="searchWord" name="searchWord">
+			</div>
+			<div class="col-md-1">
+				<input type="button" class="btn btn-primary btn-block" id="search"
+					value="검색">
+			</div>
+		</div>
+		<div class="row align-items-center justify-content-center"
+			align="center">
+			<div class="col-md-12">
+				<div id="grid"></div>
+			</div>
+		</div>
+	</div>
+	<%@include file="../../includes/footer.jsp"%>
 </body>
 
 <script type="text/javascript">
+	$(function() {
+		grid.sort('emp_no',true,false);
+	});
 	$("#search").click(function(){
 	    
 	    console.log($('#searchCtgr').val());

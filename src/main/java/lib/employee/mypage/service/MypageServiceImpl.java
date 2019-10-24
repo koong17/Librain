@@ -103,5 +103,16 @@ public class MypageServiceImpl implements MypageService{
 		jo.put("sal_real",dto.getSal_real());
 		return jo;
 	}
+
+	@Override
+	public int empUpdatePwd(EmployeeDTO employeeDTO, String pwd) {
+		int result = mypageDAO.empCheckPwd(employeeDTO);
+		System.out.println("result : "+result);
+		if(result > 0) {
+			employeeDTO.setEmp_password(pwd);
+			mypageDAO.empUpdatePwd(employeeDTO);
+		} 
+		return result;
+	}
 	
 }

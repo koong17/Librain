@@ -1,6 +1,7 @@
 package lib.member.book.controller;
 
-import org.json.simple.JSONArray;
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lib.employee.book.model.EmpBookDAO;
+import lib.employee.book.model.Hope_BookDTO;
 import lib.member.book.model.MemBookDAO;
 import lib.member.book.service.MemBookService;
 
@@ -27,6 +28,23 @@ public class MemBookController {
 		return "member/memSearch";
 	}
 	
+	@RequestMapping(value = "/member/book/hope.do", method = RequestMethod.GET)
+	public String hopeForm() {
+		return "member/memHopeBook";
+	}
+	
+	@RequestMapping(value="/member/book/hope/input.do", method = RequestMethod.POST)	
+	public @ResponseBody String hopeInsert(@RequestBody List<Hope_BookDTO> dto) {
+		bookService.hopeInsert(dto);
+		return "{\"result\":\"success\"}";
+	}
+	
+	@RequestMapping(value = "/member/book/hope/memCheck.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public @ResponseBody String rentMemCheck(@RequestParam("mem_id") String mem_id) {
+		System.out.println(bookService.hopeMemCheck(mem_id).toString());
+		return bookService.hopeMemCheck(mem_id).toString();
+	}
+	
 	@RequestMapping(value = "/member/book/search.do/readData", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String searchForm(@RequestParam int perPage, @RequestParam int page) {
@@ -37,7 +55,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 5); 
+		pageJO.put("totalCount", 20); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.newBook(perPage, page)); //내용물 
 		resultJO.put("result", true);
@@ -58,7 +76,7 @@ public class MemBookController {
 		JSONObject pageJO = new JSONObject();
 		
 		pageJO.put("page", page);  // 현재 페이지 
-		pageJO.put("totalCount", 5); 
+		pageJO.put("totalCount", 20); 
 		contentJO.put("pagination", pageJO);
 		contentJO.put("contents", bookService.mostRent(perPage, page)); //내용물 
 		resultJO.put("result", true);

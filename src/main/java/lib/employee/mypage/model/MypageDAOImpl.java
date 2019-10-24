@@ -51,4 +51,15 @@ public class MypageDAOImpl implements MypageDAO {
 		return salaryDTO;
 	}
 
+	@Override
+	public int empCheckPwd(EmployeeDTO employeeDTO) {
+		return sqlsession.getMapper(MypageDAO.class).empCheckPwd(employeeDTO);
+	}
+
+	@Override
+	public void empUpdatePwd(EmployeeDTO employeeDTO) {
+		sqlsession.getMapper(MypageDAO.class).empUpdatePwd(employeeDTO);
+		
+	}
+
 }
