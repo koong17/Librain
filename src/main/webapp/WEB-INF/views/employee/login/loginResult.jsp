@@ -92,14 +92,14 @@
 	var gridData1 =
 	{
 	   api: {
-	         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData', method: 'GET' }
+	         readData: { url: location.href+'/readData', method: 'GET' }
 	   }
 	}
-	
+
 	var gridData2 =
 	{
 	   api: {
-	         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData2', method: 'GET' }
+	         readData: { url: location.href+'/readData2', method: 'GET' }
 	   }
 	}
 	
