@@ -17,26 +17,24 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- boostrap -->
-<!-- boostrap -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
+
+<!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
+부가적인 테마
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-   crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+  -->
+ 
+<%@ include file="../../employee/includes/header.jsp"%>
 </head>
 <body>
+
+<div class="wrapper">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="page-header">회원 목록 관리</h1>
+      </div>
+   </div>
+   <div class="row">
 	<div class="container-fluid bg-light " align="center">
 		<div class="row align-items-center justify-content-center" align="center">
 			<div class="col-md-2 pt-3">
@@ -62,29 +60,33 @@
 					<i class="fa fa-refresh" aria-hidden="true"></i>
 				</button>
 			</div>
-			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="homeBtn" onclick="location.href='/mvc/index.jsp'">
-					<i class="fa fa-home"></i>
-				</button>
-			</div>
 		</div>
 	</div>
 	<hr>
-	<div id="grid"></div>
+	<div id="gridDIV">
+		<div id="grid"></div>
+	</div>
+	<div id="searchGridDIV">
+		<div id="searchGrid"></div>
+	</div>
 	<input type="button" class="btn btn-primary btn-block" value="선택 수정" onclick="rankUpdate()">
-	
+	</div>
+</div>
 </body>
 
-<script type="text/javascript">
+<%@ include file="../../employee/includes/footer.jsp"%>
 
+<script type="text/javascript">
    $(document).ready(function() {
-       
+	   $('#searchGridDIV').hide();
        $('#searchBtn').click(function() {
-           searchAjax();
+           searchAjax(); $('#gridDIV').hide(); $('#searchGridDIV').show(); $('#searchGridDIV').show();
+       });
+       $('#refresh').click(function() {
+           //$('#gridDIV').show(); $('#searchGridDIV').hide();
        });
    
    });
-
 	function searchAjax(){
 		
 		console.log($('#searchCtgr').val());
@@ -106,6 +108,7 @@
 				success: function(response) {
 					console.log(response);
 					grid.resetData(response);
+					searchGrid.resetData(response);
 				},
 				error: function(e) {
 					alert('Error : ' + e);
@@ -129,14 +132,13 @@
 			}
 		});
 	}
-
 	var Grid = tui.Grid;
 	Grid.setLanguage('ko');
 	
 	var gridData =
 	{
 		api: {
-			readData: { url: 'http://localhost:8080/mvc/memberList.do/readData', method: 'GET' }
+			readData: { url: location.href+'/readData', method: 'GET' }
 		}
 	}
 		
@@ -149,6 +151,57 @@
 		pageOptions: {
 			perPage: 10
 		},
+		columns: [
+			{
+				header: '회원 ID',
+				name: 'mem_id',
+		        sortingType: 'desc',
+		        sortable: true
+			},
+			{
+				header: '회원명',
+				name: 'mem_name'
+			},
+			{
+				header: '주소',
+				name: 'mem_address'
+			},
+			{
+				header: '우편번호',
+				name: 'mem_address_number'
+			},
+			{
+				header: '전화번호',
+				name: 'mem_phone'
+			},
+			{
+				header: '이메일',
+				name: 'mem_email'
+			},
+			{
+				header: '회원 등급',
+				sortingType: 'desc',
+		        sortable: true,
+				name: 'mem_rank',
+				editor: {
+					type: 'select',
+					options: {
+						listItems: [
+							{ text: '플러스 회원', value: '1' },
+							{ text: '일반 회원', value: '2' },
+							{ text: '마이너스 회원', value: '3' }
+						]
+					}
+				}
+			}
+		]
+	});
+	
+	const searchGrid = new tui.Grid({
+		el: document.getElementById('searchGrid'),
+		data: null,
+		bodyHeight: 500,
+		rowHeaders: ['rowNum','checkbox'],
 		columns: [
 			{
 				header: '회원 ID',

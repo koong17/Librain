@@ -665,8 +665,8 @@ create table member( -- 회원
    --constraint member_pk primary key (mem_id)
 );
 
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', '1234', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '01085340280', 'ming_0729@naver.com');
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '01011111111', '11111', 'pyw@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', 'ming0729!123', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '01085340280', 'ming_0729@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '11111', '01011111111', 'pyw@naver.com');
 insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('captainss', '1234', '김승수', '9310131111111', '서울시 종로구의 어느 고시원', '01111', '01022222222', 'kss@naver.com');
 
 insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lsy', '2345', '이소영', '9707111111111', '서울시 영등포구 오피스텔', '58642','01012342345', 'soso@naver.com');

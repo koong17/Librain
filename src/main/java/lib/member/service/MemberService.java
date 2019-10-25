@@ -12,7 +12,16 @@ public interface MemberService {
 	public void memberjoin(MemberDTO dto);
 	
 	//중복확인
-	public int memberSearchIDCount(String mem_id);
+	public Integer memberSearchIDCount(String mem_id);
+	
+	//회원로그인
+	public MemberDTO memberLogin(String mem_id, String mem_pw);
+	
+	//회원확인
+	public int memberCount(String mem_id, String mem_pw);
+	
+	//회원수정
+	public void memberUpdate(MemberDTO dto);
 
 	//전체목록
 	public JSONArray memberSelectAll();
