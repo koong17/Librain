@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
 </head>
 <%@include file="../../includes/header.jsp"%>
 <body>
+
 
      
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -25,6 +28,15 @@
      <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
      <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>  
+   
+   <div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">시설</h1>
+            </div>
+		</div>
+   </div>
+   
 <br>
 <style>
 .btn.btn-primary{

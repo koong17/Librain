@@ -17,6 +17,7 @@ import lib.employee.facility.model.FacilitiesDTO;
 
 @Controller
 @CrossOrigin("*")
+@EnableScheduling
 public class FacilityController {
 	@Autowired
 	FacilitiesDAO facilitiesDAO; 
@@ -33,7 +34,12 @@ public String facilityapproval(Model model) {
 }
 
 
-
+	@Scheduled(fixedDelay = 1000)
+	public void sche() {
+		
+		
+		System.out.println("d");
+	}
 
 	
 }

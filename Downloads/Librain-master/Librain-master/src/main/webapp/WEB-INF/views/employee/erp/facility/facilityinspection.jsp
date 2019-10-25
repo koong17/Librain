@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,6 @@
   
   <%@include file="../../includes/header.jsp"%>
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
   <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" />
@@ -23,10 +21,8 @@
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
     <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script>
@@ -48,6 +44,15 @@
               display: inline;
           }
         </style>
+      	<div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">시설검사</h1>
+            </div>
+		</div>
+   </div>
+      
+      
       
             <div id="grid"></div>
           <br>
@@ -164,6 +169,7 @@ const grid = new tui.Grid({
 	    }
 });
 var alerttextvalues='';
+
 grid.findRows((row) => {
     return (row.RemainingTime < 7)
       }  ).forEach((row2)=>{
@@ -386,5 +392,7 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
        
      }
             </script>
-            <br><br><br>
+           wdqwjdwop
+            </body>
+           
 </html>
