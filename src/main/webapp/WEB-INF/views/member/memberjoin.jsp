@@ -130,7 +130,7 @@
 				<div class="form-group">
 					<div class="col-xs-4">
 						<button type="button" class="btn btn-info btn-block" id="homeBtn"
-							onclick="location.href='index.jsp'">
+							onclick="location.href='${pageContext.request.contextPath}/memberMain.jsp'">
 							<i class="fa fa-home"></i>
 						</button>
 					</div>

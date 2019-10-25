@@ -73,7 +73,7 @@
     <!-- ./container -->
     
     <!-- /.row -->
-   <div class="row">
+<!--    <div class="row">
  	<div class="col-lg-4">
  	 <div class="well">
   		<h4 style="font-weight:bold; color:red">기존 인덱스 파일에 있던 링크들</h4>
@@ -119,7 +119,7 @@
 		mvc/login.do<a href="login.do">직원로그인</a>
    	 </div>
  	 </div>
- 	</div>
+ 	</div> -->
     
 	</c:when>
 	</c:choose>
