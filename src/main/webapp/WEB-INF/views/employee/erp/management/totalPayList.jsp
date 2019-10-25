@@ -72,7 +72,7 @@
 			$("#sal_year").append('<option value="'+i+'">'+i+'</option>');
 		}
 	});
-	
+ 	
 	$("#search").click(function() {
 		var date = new Object();
 		date.sal_year = $("#sal_year").val();
@@ -95,6 +95,7 @@
 		data : null,
 		scrollX : false,
 		scrollY : false,
+		rowHeaders: ['checkbox'],
 		columns : [ {
 			header : '사원번호',
 			name : 'emp_no'

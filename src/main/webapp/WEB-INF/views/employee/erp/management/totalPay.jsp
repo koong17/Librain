@@ -31,15 +31,15 @@
 						<div id="names">
 						</div>
 					</div>
-				<div class="modal-footer">
-					<button type="button" id="search" name="search" class="btn btn-success btn-default pull-left"  value="Send" style="margin: 10px; margin-left: 35px">
-						<span class="glyphicon glyphicon-plus"></span>완 료
-					</button>
-					<button type="button" class="btn btn-danger btn-default pull-left"
-						data-dismiss="modal" value="Input Button" style="margin: 10px">
-						<span class="glyphicon glyphicon-remove"></span>취 소
-					</button>
-				</div>
+					<div class="modal-footer">
+						<button type="button" id="search" name="search" class="btn btn-success btn-default pull-left"  value="Send" style="margin: 10px; margin-left: 35px">
+							<span class="glyphicon glyphicon-plus"></span>완 료
+						</button>
+						<button type="button" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal" value="Input Button" style="margin: 10px">
+							<span class="glyphicon glyphicon-remove"></span>취 소
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 				</div>
 			</div> -->
 		</div>
-		<form action="totalpay.do" method="post">
+		<form action="totalpay.do" method="post" onsubmit='return checkAgain();'>
 			<div class="row">
 				<input type="hidden" name="sal_year" value=""> <input
 					type="hidden" name="sal_month" value="">
@@ -192,6 +192,7 @@
 <script>
 
 	$(function(){
+		//confirm("입력하면 수정 할 수 없습니다. 급여를 확정하시겠습니까?");
 		var date = new Date();
 		var year = date.getFullYear();
 		//var month = new String(date.getMonth()+1);
@@ -332,6 +333,16 @@
 			});
 		}
 	});
+ 	
+ 	function checkAgain(){
+ 		try {
+	 		if(confirm("확정하면 수정 할 수 없습니다. 급여를 확정하시겠습니까?")) return true;
+	 		else return false;
+			
+		} catch (e) {
+			alert(e.message);
+		}
+ 	}
 
 	function getDate(year, month) {
 		var date1 = new Date(year, month - 1, 1);

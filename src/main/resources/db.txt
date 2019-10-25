@@ -417,8 +417,8 @@ commit;
 drop table department;
 create table department (
     dept_code varchar2(20),
-    dept_name varchar2(30)
-    --CONSTRAINT dept_code_pk PRIMARY KEY(department_code)
+    dept_name varchar2(30),
+    CONSTRAINT dept_code_pk PRIMARY KEY(dept_code)
 );
 insert into department values('000', '관장');
 insert into department values('001', '총무부');
@@ -432,8 +432,8 @@ create table sal_check (
     emp_no number,
     sal_ck_year varchar2(20),
     sal_ck_month varchar2(20),
-    sal_ck_check varchar2(20)
-    --constraint sal_ck_no primary key(sal_ck_no)
+    sal_ck_check varchar2(20),
+    constraint sal_ck_no primary key(sal_ck_no)
 );
 
 drop table employee_management;
@@ -453,9 +453,9 @@ create table employee_management(
     emp_basic_pay number,
     emp_bank_name varchar2(50),
     emp_account_number varchar2(30),
-    emp_password varchar2(100)
-    --CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
-    --constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department_table(dept_code)
+    emp_password varchar2(100),
+    CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
+    constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department(dept_code)
 );
 insert into employee_management
 values(1000001,'강수아','01068618619','서울시,이문동','02451','000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
@@ -489,9 +489,9 @@ create table commute_management(
     cmt_DAY number,
     cmt_hour number,
     cmt_minute number,
-    cmt_second number
-    --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
-    --constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
+    cmt_second number,
+    CONSTRAINT cmt_no_pk PRIMARY KEY(cmt_no),
+    constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (0,1000001,'on',2019,10,7,8,57,16);
@@ -543,8 +543,8 @@ create table salary_management(
     sal_bonus number,
     sal_food_pay number, -- 식대 15만원
     sal_year number,
-    sal_month number
-    --constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
+    sal_month number,
+    constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (0,1000001,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (1,1000002,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
@@ -634,6 +634,7 @@ insert into notice (board_no, board_title, board_content, board_writer)
 values(seq_board.nextval, '게시판 이용 규칙', '공지사항과 사내소식만을 업데이트 합니다. 업무와 관련 없는 이야기는 삼가해주세요.', 'admin');
 commit;
 -------------------승수 
+drop table Facilities;
 create table Facilities( --시설물
 Fac_serialnum number  ,          --일련번호 PK
 Fac_name varchar2(30),         -- 시설물 
@@ -642,30 +643,12 @@ Fac_status varchar2(30),
 Fac_category varchar2(30)
 );
 
+drop table Facilities_inspedtion;
 create table Facilities_inspection(   --시설물 점검
 FacIn_serialnum  number ,                           --점검한것 Facilities의 fk
 FacIn_name varchar2(30),    
 FacIn_INSPECTION_DATE date default sysdate,    -- 점검일 
 FacIn_INSPECTION_DUE_DATE date
-);
-create table pay_management(
-    pay_no number,
-    pay_emp_no varchar2(10),
-    pay_division varchar2(20),
-    pay_total_pay number,
-    pay_real_pay number,
-    pay_income_tax number,
-    pay_residence_tax number,
-    pay_health_insurance number,
-    pay_unemployment_insurance number,
-    pay_nation_pension number,
-    pay_etx_pay number,
-    pay_basic_pay number,
-    pay_bonus number,
-    pay_incentive_pay number,
-    pay_food_pay number,
-    pay_transportation_pay number
-    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
 
 drop table member;
