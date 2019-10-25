@@ -23,10 +23,39 @@ public class MemberServiceImpl implements MemberService {
 	public void memberjoin(MemberDTO dto) {
 		memberDAO.memberjoin(dto);
 	}
+
+	//회원로그인
+	@Override
+	public MemberDTO memberLogin(String mem_id, String mem_pw) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setMem_id(mem_id);
+		dto.setMem_pw(mem_pw);
+		
+		return memberDAO.memberLogin(dto);
+	}
+	
+	//회원로그인
+	@Override
+	public int memberCount(String mem_id, String mem_pw) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setMem_id(mem_id);
+		dto.setMem_pw(mem_pw);
+		
+		return memberDAO.memberCount(dto);
+	}
+	
+	//회원수정
+	@Override
+	public void memberUpdate(MemberDTO dto) {
+		memberDAO.memberUpdate(dto);
+	}
 	
 	//중복확인
 	@Override
-	public int memberSearchIDCount(String mem_id) {
+	public Integer memberSearchIDCount(String mem_id) {
+		System.out.println("서비스임플");
 		return memberDAO.memberSearchIDCount(mem_id);
 	}
 
@@ -48,6 +77,7 @@ public class MemberServiceImpl implements MemberService {
 			jo.put("mem_phone", dto.getMem_phone());
 			jo.put("mem_email", dto.getMem_email());
 			jo.put("mem_rank", dto.getMem_rank());
+			jo.put("mem_address_number", dto.getMem_address_number());
 			ja.add(jo);
 		}
 		
@@ -70,6 +100,7 @@ public class MemberServiceImpl implements MemberService {
 			jo.put("mem_phone", dto.getMem_phone());
 			jo.put("mem_email", dto.getMem_email());
 			jo.put("mem_rank", dto.getMem_rank());
+			jo.put("mem_address_number", dto.getMem_address_number());
 			ja.add(jo);
 		}
 		
@@ -112,7 +143,5 @@ public class MemberServiceImpl implements MemberService {
 		list = memberDAO.select(startRowNum, endRowNum);
 		return list;
 	}
-
-
 
 }
