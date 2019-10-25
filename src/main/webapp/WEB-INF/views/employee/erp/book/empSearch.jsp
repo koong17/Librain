@@ -27,6 +27,7 @@
 					<div class="form-group ">
 						<select id="searchCtgr" name="searchCtgr" class="form-control">
 							<option selected>전체</option>
+							<option value="book_num">도서번호</option>
 							<option value="book_name">도서명</option>
 							<option value="book_author">저자명</option>
 							<option value="book_pub_house">출판사명</option>
@@ -49,7 +50,7 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group">
-						<button type="button" class="btn btn-primary btn-block" id="refreshBtn"  onclick="confirm()">
+						<button type="button" class="btn btn-primary btn-block" id="refreshBtn">
 							<i class="fa fa-undo" aria-hidden="true"></i>
 						</button>
 					</div>
@@ -64,7 +65,7 @@
 					<div id="grid"></div>
 		      	</div>
 	      	</div>
-	      	<div class="row align-items-center justify-content-center">
+	      	<div class="row align-items-center justify-content-center" id="searchGridDiv">
 		      	<div class="col-md-12">
 					<div id="searchGrid"></div>
 		      	</div>
