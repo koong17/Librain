@@ -435,7 +435,7 @@ create table sal_check (
     sal_ck_year varchar2(20),
     sal_ck_month varchar2(20),
     sal_ck_check varchar2(20)
-    --constraint pay_no_pk primary key(pay_check_no)
+    --constraint sal_ck_no primary key(sal_ck_no)
 );
 
 drop table employee_management;
@@ -456,8 +456,8 @@ create table employee_management(
     emp_bank_name varchar2(50),
     emp_account_number varchar2(30),
     emp_password varchar2(100)
-    --CONSTRAINT emp_num_pk PRIMARY KEY(emp_num),
-    --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
+    --CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
+    --constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department_table(dept_code)
 );
 insert into employee_management
 values(1000001,'강수아','01068618619','서울시,이문동','02451','000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
@@ -493,11 +493,12 @@ create table commute_management(
     cmt_minute number,
     cmt_second number
     --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
+    --constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (0,1000001,'on',2019,10,7,8,57,16);
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (1,1000001,'off',2019,10,7,18,57,19);
-Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (2,1000002,'on',2019,10,7,8,0,19);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (2,1000002,'on',2019,10,7,8,5,19);
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (3,1000002,'off',2019,10,7,18,2,55);
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (4,1000001,'off',2019,10,7,18,4,47);
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (5,1000001,'on',2019,10,10,8,28,19);
@@ -545,7 +546,7 @@ create table salary_management(
     sal_food_pay number, -- 식대 15만원
     sal_year number,
     sal_month number
-    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
+    --constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (0,1000001,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (1,1000002,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);

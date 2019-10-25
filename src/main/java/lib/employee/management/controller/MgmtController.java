@@ -140,4 +140,9 @@ public class MgmtController {
 	public @ResponseBody String cmtSearch(@RequestBody CommuteDTO commuteDTO) {
 		return mgmtService.cmtSearch(commuteDTO).toString();
 	}
+	
+	@PostMapping(value = "/cmtSearchOne.do", produces = "application/json;charset=UTF-8")
+	public @ResponseBody String cmtSearchOne(@RequestBody CommuteDTO commuteDTO) {
+		return mgmtService.cmtSearchOne(commuteDTO).toString();
+	}
 }

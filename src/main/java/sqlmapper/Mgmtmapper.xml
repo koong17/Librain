@@ -86,4 +86,17 @@
 	      	having cmt_status='off'
 	  )) and cmt_year=#{cmt_year} and cmt_month=#{cmt_month} order by cmt_no
   </select>
+  <select id="cmtSearchOne" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+    select * 
+	  from commute_management 
+	  where (cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  )) and cmt_year=#{cmt_year} and cmt_month=#{cmt_month} and emp_no=#{emp_no} order by cmt_no
+  </select>
 </mapper>

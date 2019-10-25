@@ -19,6 +19,7 @@ public interface EmployeeDAO {
 	public List<CommuteDTO> cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
 	public List<CommuteDTO> cmtSearch(CommuteDTO commuteDTO);
+	public List<CommuteDTO> cmtSearchOne(CommuteDTO commuteDTO);
 	public void salInsert(SalaryDTO salaryDTO);
 	public List<SalaryDTO> salSelect(SalaryDTO salaryDTO);
 	public List<EmployeeDTO> empSearch(Map<String, String> parameters);

@@ -109,7 +109,7 @@
 				type: "POST",
 				contentType : 'application/json;charset=UTF-8',
 				dataType : 'json',
-				url: "cmtSearch.do",
+				url: "cmtSearchOne.do",
 				data: JSON.stringify(cmtObject),
 				success :function(result) {
 					console.log(result);
@@ -129,6 +129,7 @@
 			url: "cmtlist.do",
 			data: JSON.stringify(grid.getCheckedRows()),
 			success :function(result) {
+				alert('수정되었습니다.');
 				console.log(result);
 				grid.resetData(result);
 		    }
@@ -153,10 +154,10 @@
 	}
 	minutes += " ]";
 
-	console.log(hours);
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridData},
+		bodyHeight: 500,
 		rowHeaders: ['checkbox'],
 		columns: [
 			{
