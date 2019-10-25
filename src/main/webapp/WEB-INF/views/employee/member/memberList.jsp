@@ -147,7 +147,7 @@
 		data: gridData,
 		scrollX: false,
 		scrollY: false,
-		rowHeaders: ['rowNum','checkbox'],
+		rowHeaders: ['checkbox'],
 		pageOptions: {
 			perPage: 10
 		},
@@ -201,7 +201,7 @@
 		el: document.getElementById('searchGrid'),
 		data: null,
 		bodyHeight: 500,
-		rowHeaders: ['rowNum','checkbox'],
+		rowHeaders: ['checkbox'],
 		columns: [
 			{
 				header: '회원 ID',
