@@ -348,9 +348,6 @@ create table new_book ( --도서 구입 신청 테이블
     new_status varchar2(20), --신청 승인 상태
     new_input_date date  --신청일
 );
-insert into new_book values(2, 3,	'임홍택',	'90년생이 온다','웨일북(whalebooks)',	TO_DATE('2018/11/16','YYYY-MM-DD'),	'1188248677 9791188248674',	14000,	'반려',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into new_book values(1, 1,	'조남주',	'82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',	'민음사',	TO_DATE('2016/10/14','YYYY-MM-DD'),	'8937473135 9788937473135',	13000,	'승인',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into new_book values(1, 2,  '글배우',	'지쳤거나 좋아하는 게 없거나',	'강한별',	TO_DATE('2019/09/04','YYYY-MM-DD'),	'1196797706 9791196797706', 13500,	'승인',	TO_DATE('2019/10/01','YYYY-MM-DD'));
 
 create table hope_book ( -- 희망 도서 테이블
     hope_book_num number, --희망 도서 번호
@@ -363,10 +360,10 @@ create table hope_book ( -- 희망 도서 테이블
     hope_status varchar2(20), --승인 상태
     hope_input_date date  --신청일
 );
-commit;
-insert into hope_book values(1,	'글배우',	'지쳤거나 좋아하는 게 없거나',	'강한별',	TO_DATE('2019/09/04','YYYY-MM-DD'),	'1196797706 9791196797706', 13500,	'승인',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(2,	'조남주',	'82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',	'민음사',	TO_DATE('2016/10/14','YYYY-MM-DD'),	'8937473135 9788937473135',	13000,	'승인',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(3,	'임홍택',	'90년생이 온다','웨일북(whalebooks)',	TO_DATE('2018/11/16','YYYY-MM-DD'),	'1188248677 9791188248674',	14000,	'승인',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+
+insert into hope_book values(1,	'글배우',	'지쳤거나 좋아하는 게 없거나',	'강한별',	TO_DATE('2019/09/04','YYYY-MM-DD'),	'1196797706 9791196797706', 13500,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(2,	'조남주',	'82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',	'민음사',	TO_DATE('2016/10/14','YYYY-MM-DD'),	'8937473135 9788937473135',	13000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(3,	'임홍택',	'90년생이 온다','웨일북(whalebooks)',	TO_DATE('2018/11/16','YYYY-MM-DD'),	'1188248677 9791188248674',	14000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
 insert into hope_book values(4,	'유발 하라리',	'사피엔스',	'김영사',	TO_DATE('2015/11/24','YYYY-MM-DD'),	'8934972467 9788934972464',	22000,'	신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
 insert into hope_book values(5,	'김영하',	'여행의 이유',	'문학동네',	TO_DATE('2019/04/17','YYYY-MM-DD'),	'8954655971 9788954655972',	13500,'	신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
 insert into hope_book values(6,	'이병률',	'혼자가 혼자에게',	'달'	, TO_DATE('2019/09/19','YYYY-MM-DD'),	'1158161026 9791158161026',	15500,	'신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
@@ -378,10 +375,11 @@ create table discard_book ( --도서 폐기 신청 테이블
        dis_input_date date, --폐기 신청일
        dis_status varchar2(30) --신청 승인 상태
 );
-insert into discard_book values(3, '100266', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
-insert into discard_book values(2, '100268', TO_DATE('2019/10/24','YYYY-MM-DD'), '반려');
-insert into discard_book values(1, '100267', TO_DATE('2019/10/24','YYYY-MM-DD'), '승인');
 
+insert into discard_book values(3, '100268', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+insert into discard_book values(2, '100267', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+insert into discard_book values(1, '100266', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+commit;
 create table reservation (
     rent_num varchar2(30), -- 대여번호
     mem_id varchar2(20), --회원번호

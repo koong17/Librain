@@ -22,7 +22,8 @@
 	<select id="disSelect" resultType="lib.admin.book.model.BookRentDisDTO">
 		 select t.*,  dis_book_num, dis_input_date, dis_status 
 		    from (select b.*, nvl(r.rent_status, '대여가능') rent from book b
-	                left outer join rental r  on (b.book_num = r.book_num)) t
+	                left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
+	                on (b.book_num = r.book_num)) t
 	                join discard_book d on d.book_num = t.book_num
 	        order by dis_book_num desc
 	</select>
