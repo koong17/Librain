@@ -140,6 +140,16 @@
                                     <!-- /.nav-third-level -->
                                 </li>
                                 
+                                <li>
+                                    <a href="#">회원관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/memberList.do">회원목록</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                
                             	<li>
                                     <a href="#">시설관리 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
