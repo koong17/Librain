@@ -166,7 +166,7 @@
                       <span class="icon blue"></span>
                       <span class="price-small blue" style="font-weight:bold">회원가입</span><br><br>
                       <p>회원가입 후 도서를 대출하실 수 있습니다.</p>
-                  <a class="btn btn-lg btn-info" href="${pageContext.request.contextPath}/member/join.do" role="button" target="_blank">가입하기</a></p>
+                  <a class="btn btn-lg btn-info" href="${pageContext.request.contextPath}/member/join.do" role="button">가입하기</a>
                   </div>
               </div><!-- .Col-md-3 ends here -->
           
