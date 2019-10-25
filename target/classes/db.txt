@@ -612,6 +612,9 @@ primary key (board_no);
 insert into notice (board_no, board_title, board_content, board_writer) 
 values(seq_board.nextval, '필독', '공지사항을 꾸준히 확인하세요', 'admin');
 commit;
+insert into notice (board_no, board_title, board_content, board_writer) 
+values(seq_board.nextval, '게시판 이용 규칙', '공지사항과 사내소식만을 업데이트 합니다. 업무와 관련 없는 이야기는 삼가해주세요.', 'admin');
+commit;
 -------------------승수 
 create table Facilities( --시설물
 Fac_serialnum number  ,          --일련번호 PK
