@@ -1,6 +1,7 @@
 package lib.employee.book.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
@@ -68,20 +69,8 @@ public class EmpBookDaoImpl implements EmpBookDAO {
 	}
 
 	@Override
-	public List<EmpBookDTO> searchBookName(String searchWord) {
-		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).searchBookName("%" + searchWord + "%");
-		return list;
-	}
-
-	@Override
-	public List<EmpBookDTO> searchAuthor(String searchWord) {
-		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).searchAuthor("%" + searchWord + "%");
-		return list;
-	}
-
-	@Override
-	public List<EmpBookDTO> searchPub(String searchWord) {
-		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).searchPub("%" + searchWord + "%");
+	public List<EmpBookDTO> searchCtgr(Map<String, String> parameters) {
+		List<EmpBookDTO> list = sqlsession.getMapper(EmpBookDAO.class).searchCtgr(parameters);
 		return list;
 	}
 

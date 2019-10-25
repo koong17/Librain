@@ -8,18 +8,42 @@
  
   
   <!-- Facilities_Inspection List -->
-  <select id="facinselect" parameterType="int" resultType="lib.employee.facilityinspection.model.FacilitiesInspectionDTO">
+  <select id="facinselect" resultType="lib.employee.facilityinspection.model.FacilitiesInspectionDTO">
   <![CDATA[
-  select * from (select (rank() over(order by FacIn_serialnum))r , FacIn_serialnum, FacIn_name,FacIn_address, FacIn_status, FacIn_Inspection_Date,FacIn_Inspection_Due_Date,
-(FacIn_Inspection_Due_Date-FacIn_Inspection_Date) RemainingTime
-from Facilities_inspection ) where r>#{startrownum} and r<=#{endrownum}
-  
+select FacIn_serialnum ,                         
+FacIn_name ,    
+to_char(FacIn_INSPECTION_DATE,'yyyy"/"mm"/"DD""') FacIn_INSPECTION_DATE,   
+facin_address,
+to_char(FacIn_INSPECTION_DUE_DATE,'yyyy"/"MM"/"DD""') FacIn_INSPECTION_DUE_DATE , trunc((FacIn_INSPECTION_DUE_DATE-FacIn_INSPECTION_DATE),0) RemainingTime from Facilities_inspection
+
   ]]>
   
   </select>
   
   <select id="facintotalcount"  resultType="int">
-	  select FacIn_serialnum from Facilities_inspection
+	  select count(*) from Facilities_inspection
   </select>
+  
+  
+  <insert id="facininsertprocedure" statementType="CALLABLE" parameterType="lib.employee.facilityinspection.model.FacinVO">
+    {
+ CALL facin_insert(#{facfacin_name} , #{facin_address}
+ 	<if test="f_cycle != null">
+ 	,#{f_cycle}
+ 	</if>
+ )
+ }
+  
+  </insert>
+  
+  <update id="facinupdateprocedure" statementType="CALLABLE" parameterType="map">
+  {
+  CALL facin_update(
+  	#{FacIn_serialnum},
+  	#{FacIn_name},
+  	#{facin_address}
+  )
+  }
+  </update>
   
 </mapper>

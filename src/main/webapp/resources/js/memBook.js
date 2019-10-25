@@ -48,18 +48,16 @@ Grid.setLanguage('ko');
 var gridData =
 {
    api: {
-         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData', method: 'GET' }
+         readData: { url: location.href+'/readData', method: 'GET' }
    }
 }
 
 var gridData2 =
 {
    api: {
-         readData: { url: 'http://localhost:8080/mvc/member/book/search.do/readData2', method: 'GET' }
+         readData: { url: location.href+'/readData2', method: 'GET' }
    }
 }
-
-
 
 const grid = new tui.Grid({
    el: document.getElementById('grid'),
@@ -92,7 +90,10 @@ const grid = new tui.Grid({
          header: '대출여부',
          name: 'rent'
       }
-   ]
+   ],
+	columnOptions: {
+	      resizable: true
+	}
 });
 
 const newBookGrid = new tui.Grid({
@@ -129,7 +130,10 @@ const newBookGrid = new tui.Grid({
          header: '저자명',
          name: 'book_author'
       }
-   ]
+   ],
+	columnOptions: {
+	      resizable: true
+	}
 });
 
 const mostRentGrid = new tui.Grid({
@@ -164,7 +168,10 @@ const mostRentGrid = new tui.Grid({
          header: '저자명',
          name: 'book_author'
       }
-      ]
+    ],
+  	columnOptions: {
+	      resizable: true
+	}
 });
 
 

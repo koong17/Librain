@@ -1,6 +1,7 @@
 package lib.member.book.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,17 @@ public class MemBookDaoImpl implements MemBookDAO {
 	SqlSession sqlsession;
 	
 	@Override
+	public int hopeSelectRowNum() {
+		return sqlsession.getMapper(MemBookDAO.class).hopeSelectRowNum();
+	}
+	
+	@Override
+	public List<Hope_BookDTO> hopeSelect(int startRowNum, int endRowNum) {
+		List<Hope_BookDTO> list = sqlsession.getMapper(MemBookDAO.class).hopeSelect(startRowNum, endRowNum);
+		return list;
+	}
+	
+	@Override
 	public void hopeInsertBook(Hope_BookDTO dto) {
 		sqlsession.getMapper(MemBookDAO.class).hopeInsertBook(dto);
 	}
@@ -29,27 +41,16 @@ public class MemBookDaoImpl implements MemBookDAO {
 
 	@Override
 	public List<MemBookDTO> searchAll(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAll("%" + searchWord + "%");
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAll(searchWord);
 		return list;
 	}
 
 	@Override
-	public List<MemBookDTO> searchBookName(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchBookName("%" + searchWord + "%");
+	public List<MemBookDTO> searchCtgr(Map<String, String> parameters) {
+		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchCtgr(parameters);
 		return list;
 	}
 
-	@Override
-	public List<MemBookDTO> searchAuthor(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchAuthor("%" + searchWord + "%");
-		return list;
-	}
-
-	@Override
-	public List<MemBookDTO> searchPub(String searchWord) {
-		List<MemBookDTO> list = sqlsession.getMapper(MemBookDAO.class).searchPub("%" + searchWord + "%");
-		return list;
-	}
 
 	@Override
 	public List<MemBookDTO> newBook(int startRowNum, int endRowNum) {

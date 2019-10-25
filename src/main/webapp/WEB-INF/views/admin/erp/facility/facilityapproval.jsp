@@ -1,45 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-ddㅇㄴㅁㅇ
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Document</title>
+        </head>
+        <%@include file="../../../employee/includes/header.jsp"%>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
+        <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+        <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <body>
 <br>
-<input type="button" value="추가" onclick='gridaddgrid()'/>
-<input type="button" value="삭제" onclick='griddelete()'/>
-<input type="button" value="카테고리형식으로  몇개씩보기지원" onclick='aa()'/>
-<input type="button" value="수정" onclick='gridmodify()'/>
+<style>
+.glyphicon.glyphicon-plus.btn.btn-primary{
+    width:5%;
+    margin: 20px;
+}
 
+</style>
 
-ㅇㅇ
     <div id="grid"></div>
+   
+
+ <script>
+$(window).on('load', function () {
+    console.log(1)
+        grid.findRows((row) => {
+    return (row.fac_status == '접수완료')
+      }  ).forEach((row2)=>{
+          console.log(row2.rowKey)
+          grid.addCellClassName(row2.rowKey, 'fac_status', 'glyphicon glyphicon-exclamation-sign')
+
+      })
     
-    <br>
-    <br>
-    <input type="button" value="그리드2체크확인" onclick='grdi2checked()'/>
-    
-    
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-var a=10;
+      grid.reloadData()
+
+
+  })
 function gridmodify(row){
-	/* a=3;
-	grid.setPerPage(a); */
 	grid.blur()
-	setTimeout(()=>console.log(grid.getCheckedRows()),100)
-	console.log(	grid.getRow(row))
-	console.log(grid.getModifiedRows().updatedRows)
+	setTimeout(()=>{
+
 	$.ajax({
-		url:"/mvc/facility/modifyDataRepair",
+		url:"httP://localhost:8080/librain/facility/modifyDataRepair",
 		data: JSON.stringify(grid.getRow(row)),
 		type:"PUT",
 		contentType: 'application/json',
@@ -47,13 +58,13 @@ function gridmodify(row){
 			alert("수정완료");
 			grid.reloadData()
 		}
-	})
+	})},100)
 }
 const dataSource = {
 		  initialRequest: true,
 		  api: {
-		    readData: { url: 'http://localhost:8080/mvc/facility/readDataRepair', method: 'GET' },
-		    createData: { url: 'http://localhost:8080/mvc/facility/createData', method: 'POST' },
+		    readData: { url: 'http://localhost:8080/librain/facility/readDataRepair', method: 'get' },
+		    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
 		    updateData: { url: '/api/updateData', method: 'PUT' },
 		    modifyData: { url: '/api/modifyData', method: 'PUT' },
 		    deleteData: { url: '/api/deleteData', method: 'DELETE' }
@@ -69,7 +80,7 @@ const grid = new tui.Grid({
 	rowHeaders: ['checkbox'],
 	editingEvent:"click",
 	pageOptions: {
-	    perPage: a
+	    perPage: 100
 	  },
 	columns: [
 		{
@@ -115,7 +126,7 @@ grid.on('click',(ev)=>{
 			if(grid.getValue(ev.rowKey,ev.columnName)=="접수완료") 	{var preconfirm=confirm("수리완료하시겠습니까?")}
 			else{ var preconfirm=confirm("접수하시겠습니까?")} 
 	if(preconfirm==true){
-		gridmodify(ev.rowKey)
+		gridmodify(ev)
 		preconfirm=false
 		}
 		
@@ -126,16 +137,22 @@ grid.on('click',(ev)=>{
 
 
 
+	grid.on('response',()=>{
+        grid.findRows((row) => {
+    return (row.fac_status == '접수완료')
+      }  ).forEach((row2)=>{
+          console.log(row2.rowKey)
+          grid.addCellClassName(row2.rowKey, 'fac_status', 'glyphicon glyphicon-exclamation-sign')
 
-	
+      })
+    })
 	
 
  tui.Grid.applyTheme('clean',{})
 </script>
 
+    <%@include file="../../../employee/includes/footer.jsp"%>
 
-<br><br><Br>
 
-ㅁㄴㅇㅁㄴㅇ
 </body>
 </html>

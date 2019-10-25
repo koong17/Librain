@@ -109,7 +109,7 @@ Grid.setLanguage('ko');
 var gridData =
 {
 	api: {
-			readData: { url: 'http://localhost:8080/mvc/book/hope.do/readData', method: 'GET' }
+			readData: { url: location.href+'/readData', method: 'GET' }
 	}
 }
 
