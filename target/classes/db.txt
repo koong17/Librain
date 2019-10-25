@@ -361,6 +361,14 @@ create table hope_book ( -- 희망 도서 테이블
     hope_input_date date  --신청일
 );
 
+insert into hope_book values(1,	'글배우',	'지쳤거나 좋아하는 게 없거나',	'강한별',	TO_DATE('2019/09/04','YYYY-MM-DD'),	'1196797706 9791196797706', 13500,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(2,	'조남주',	'82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',	'민음사',	TO_DATE('2016/10/14','YYYY-MM-DD'),	'8937473135 9788937473135',	13000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(3,	'임홍택',	'90년생이 온다','웨일북(whalebooks)',	TO_DATE('2018/11/16','YYYY-MM-DD'),	'1188248677 9791188248674',	14000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(4,	'유발 하라리',	'사피엔스',	'김영사',	TO_DATE('2015/11/24','YYYY-MM-DD'),	'8934972467 9788934972464',	22000,'	신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(5,	'김영하',	'여행의 이유',	'문학동네',	TO_DATE('2019/04/17','YYYY-MM-DD'),	'8954655971 9788954655972',	13500,'	신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
+insert into hope_book values(6,	'이병률',	'혼자가 혼자에게',	'달'	, TO_DATE('2019/09/19','YYYY-MM-DD'),	'1158161026 9791158161026',	15500,	'신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
+insert into hope_book values(7,	'박종훈',	'2020 부의 지각변동',	'21세기북스',	TO_DATE('2019/07/05','YYYY-MM-DD'),'	895098198X 9788950981983',	17000,	'신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
+
 create table discard_book ( --도서 폐기 신청 테이블
        dis_book_num number, --폐기 신청 번호
        book_num number, --도서번호
@@ -368,6 +376,10 @@ create table discard_book ( --도서 폐기 신청 테이블
        dis_status varchar2(30) --신청 승인 상태
 );
 
+insert into discard_book values(3, '100268', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+insert into discard_book values(2, '100267', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+insert into discard_book values(1, '100266', TO_DATE('2019/10/24','YYYY-MM-DD'), '신청 완료');
+commit;
 create table reservation (
     rent_num varchar2(30), -- 대여번호
     mem_id varchar2(20), --회원번호
@@ -379,26 +391,49 @@ create table reservation (
     --REFERENCES member (mem_id)
 );
 
+--정보입력 날짜 랜덤 커리
+update book set book_input_date = to_date(round(dbms_random.value(20170101, 20170131),0),'yyyymmdd')
+where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
+
+update book set book_input_date = to_date(round(dbms_random.value(20190801, 20190831),0),'yyyymmdd')
+where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
+
+update book set book_input_date = to_date(round(dbms_random.value(20180601, 20180630),0),'yyyymmdd')
+where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
+
+update book set book_input_date = to_date(round(dbms_random.value(20190501, 20180630),0),'yyyymmdd')
+where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
+
+update book set book_input_date = to_date(round(dbms_random.value(20191001, 20191031),0),'yyyymmdd')
+where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
+
+--렌털횟수 랜덤 커리
+update book set book_rent_cnt = round(dbms_random.value(12, 50),0);
+
+select book_rent_cnt from book;
+
+commit;
 ----수아
 drop table department;
 create table department (
     dept_code varchar2(20),
-    dept_name varchar2(30)
-    --CONSTRAINT dept_code_pk PRIMARY KEY(department_code)
+    dept_name varchar2(30),
+    CONSTRAINT dept_code_pk PRIMARY KEY(dept_code)
 );
 insert into department values('000', '관장');
 insert into department values('001', '총무부');
 insert into department values('002', '교육부');
 insert into department values('003', '정보부');
 
+-- 삭제예정
 drop table sal_check;
 create table sal_check (
     sal_ck_no number,
     emp_no number,
     sal_ck_year varchar2(20),
     sal_ck_month varchar2(20),
-    sal_ck_check varchar2(20)
-    --constraint pay_no_pk primary key(pay_check_no)
+    sal_ck_check varchar2(20),
+    constraint sal_ck_no primary key(sal_ck_no)
 );
 
 drop table employee_management;
@@ -418,9 +453,9 @@ create table employee_management(
     emp_basic_pay number,
     emp_bank_name varchar2(50),
     emp_account_number varchar2(30),
-    emp_password varchar2(100)
-    --CONSTRAINT emp_num_pk PRIMARY KEY(emp_num),
-    --constraint emp_dept_fk FOREIGN KEY(department_code) REFERENCES department_table(department_code)
+    emp_password varchar2(100),
+    CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
+    constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department(dept_code)
 );
 insert into employee_management
 values(1000001,'강수아','01068618619','서울시,이문동','02451','000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
@@ -434,6 +469,14 @@ insert into employee_management
 values(1000005,'박예원','01044444444','예원이집,집집','02451','003','9901012222222','F',sysdate-1300,null,'nanyewoni@librain.org','팀장',3000000,'하나','111111111111','990101');
 insert into employee_management
 values(1000006,'김승수','01055555555','종로,비트캠프','02451','003','9901011222222','M',sysdate-3700,null,'iamseungsu@librain.org','사원',2500000,'하나','111111111111','990101');
+insert into employee_management
+values(1000007,'한예슬','01012341234','종로,비트캠프','02451','001','9901012222222','F',sysdate-3700,null,'asdf@librain.org','사원',2500000,'하나','111111111111','990101');
+insert into employee_management
+values(1000008,'제니','01034563456','종로,비트캠프','02451','001','9901012222222','F',sysdate-3700,null,'qwer@librain.org','사원',2500000,'하나','111111111111','990101');
+insert into employee_management
+values(1000009,'손나은','01045674567','종로,비트캠프','02451','002','9901012222222','F',sysdate-3700,null,'zxcv@librain.org','사원',2500000,'하나','111111111111','990101');
+insert into employee_management
+values(1000010,'정우성','01056785678','종로,비트캠프','02451','003','9901012222222','M',sysdate-3700,null,'abab@librain.org','사원',2500000,'하나','111111111111','990101');
 commit;
 
 drop table commute_management;
@@ -446,9 +489,42 @@ create table commute_management(
     cmt_DAY number,
     cmt_hour number,
     cmt_minute number,
-    cmt_second number
-    --CONSTRAINT cmt_no_pk PRIMARY KEY(commute_no)
+    cmt_second number,
+    CONSTRAINT cmt_no_pk PRIMARY KEY(cmt_no),
+    constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
+
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (0,1000001,'on',2019,10,7,8,57,16);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (1,1000001,'off',2019,10,7,18,57,19);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (2,1000002,'on',2019,10,7,8,5,19);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (3,1000002,'off',2019,10,7,18,2,55);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (4,1000001,'off',2019,10,7,18,4,47);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (5,1000001,'on',2019,10,10,8,28,19);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (6,1000001,'off',2019,10,10,11,28,20);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (7,1000001,'on',2019,10,11,8,36,11);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (8,1000001,'off',2019,10,11,18,19,10);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (9,1000001,'on',2019,10,14,8,19,11);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (10,1000001,'off',2019,10,14,18,1,6);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (11,1000001,'on',2019,10,15,8,18,12);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (12,1000001,'off',2019,10,15,18,18,15);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (13,1000001,'on',2019,10,16,8,55,5);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (14,1000001,'off',2019,10,16,20,55,6);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (15,1000001,'on',2019,10,17,8,38,3);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (16,1000001,'off',2019,10,17,20,38,4);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (17,1000001,'on',2019,10,18,8,53,5);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (18,1000001,'off',2019,10,18,20,53,9);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (19,1000001,'on',2019,10,22,17,53,7);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (20,1000001,'off',2019,10,22,17,53,9);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (21,1000001,'on',2019,10,23,12,51,26);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (22,1000001,'off',2019,10,23,12,51,27);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (23,1000001,'on',2019,10,24,8,25,46);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (24,1000001,'off',2019,10,24,18,25,47);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (25,1000002,'on',2019,10,24,8,53,30);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (26,1000002,'off',2019,10,24,15,27,43);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (27,1000003,'on',2019,10,24,8,37,30);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (28,1000003,'off',2019,10,24,19,38,41);
+Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (29,1000001,'off',2019,10,24,19,38,43);
+commit;
 
 drop table salary_management;
 create table salary_management(
@@ -467,10 +543,20 @@ create table salary_management(
     sal_bonus number,
     sal_food_pay number, -- 식대 15만원
     sal_year number,
-    sal_month number
-    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
+    sal_month number,
+    constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
-
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (0,1000001,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (1,1000002,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (2,1000003,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (3,1000004,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (4,1000005,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (5,1000006,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (6,1000007,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (7,1000008,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (8,1000009,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (9,1000010,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
+commit;
 -----------------------소영
 select * from table board;
 drop table board;
@@ -548,6 +634,7 @@ insert into notice (board_no, board_title, board_content, board_writer)
 values(seq_board.nextval, '게시판 이용 규칙', '공지사항과 사내소식만을 업데이트 합니다. 업무와 관련 없는 이야기는 삼가해주세요.', 'admin');
 commit;
 -------------------승수 
+drop table Facilities;
 create table Facilities( --시설물
 Fac_serialnum number  ,          --일련번호 PK
 Fac_name varchar2(30),         -- 시설물 
@@ -556,30 +643,12 @@ Fac_status varchar2(30),
 Fac_category varchar2(30)
 );
 
+drop table Facilities_inspedtion;
 create table Facilities_inspection(   --시설물 점검
 FacIn_serialnum  number ,                           --점검한것 Facilities의 fk
 FacIn_name varchar2(30),    
 FacIn_INSPECTION_DATE date default sysdate,    -- 점검일 
 FacIn_INSPECTION_DUE_DATE date
-);
-create table pay_management(
-    pay_no number,
-    pay_emp_no varchar2(10),
-    pay_division varchar2(20),
-    pay_total_pay number,
-    pay_real_pay number,
-    pay_income_tax number,
-    pay_residence_tax number,
-    pay_health_insurance number,
-    pay_unemployment_insurance number,
-    pay_nation_pension number,
-    pay_etx_pay number,
-    pay_basic_pay number,
-    pay_bonus number,
-    pay_incentive_pay number,
-    pay_food_pay number,
-    pay_transportation_pay number
-    --constraint pay_emp_fk FOREIGN KEY(emp_num) REFERENCES human_resource_management(emp_num)
 );
 
 drop table member;
@@ -597,8 +666,8 @@ create table member( -- 회원
    --constraint member_pk primary key (mem_id)
 );
 
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', '1234', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '01085340280', 'ming_0729@naver.com');
-insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '01011111111', '11111', 'pyw@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('nmj', 'ming0729!123', '남민지', '9307292111111', '경기도 김포시 고촌읍 수기로 67-50, 119동 802호', '10130', '01085340280', 'ming_0729@naver.com');
+insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('pyw', '4321', '박예원', '9711112111111', '서울시 종로구 비트캠프', '11111', '01011111111', 'pyw@naver.com');
 insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('captainss', '1234', '김승수', '9310131111111', '서울시 종로구의 어느 고시원', '01111', '01022222222', 'kss@naver.com');
 
 insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_address_number,mem_phone,mem_email) values('lsy', '2345', '이소영', '9707111111111', '서울시 영등포구 오피스텔', '58642','01012342345', 'soso@naver.com');

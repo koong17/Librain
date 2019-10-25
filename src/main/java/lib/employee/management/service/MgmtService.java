@@ -15,10 +15,12 @@ public interface MgmtService {
 	public void empInsert(EmployeeDTO employeeDTO);
 	public void empUpdate(EmployeeDTO employeeDTO);
 	public EmployeeDTO empSelectOne(EmployeeDTO employeeDTO);
+	public JSONArray empSelectDept(EmployeeDTO employeeDTO);
 	public JSONArray cmtAdminSelectAll();
 	public JSONArray cmtAdminSelectOne(CommuteDTO commuteDTO);
 	public void cmtUpdate(CommuteDTO commuteDTO);
 	public JSONArray cmtSearch(CommuteDTO commuteDTO);
+	public JSONArray cmtSearchOne(CommuteDTO commuteDTO);
 	public JSONObject empSelectPay(EmployeeDTO employeeDTO);
 	public void salInsert(SalaryDTO salaryDTO);
 	public JSONArray salSelect(SalaryDTO salaryDTO);
