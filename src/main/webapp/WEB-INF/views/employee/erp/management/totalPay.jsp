@@ -109,6 +109,7 @@
 		</div>
 		<form action="totalpay.do" method="post" onsubmit='return checkAgain();'>
 			<div class="row">
+				<input type="hidden" name="emp_no" value="">
 				<input type="hidden" name="sal_year" value=""> <input
 					type="hidden" name="sal_month" value="">
 				<div class="col-md-3">
@@ -276,6 +277,7 @@
 				data : JSON.stringify(info),
 				success : function(result) {
 					emp_no = result.emp_no;
+					console.log(emp_no);
 					date.emp_no = emp_no;
 	
 					$.ajax({

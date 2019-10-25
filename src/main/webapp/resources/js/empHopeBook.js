@@ -13,22 +13,33 @@ $(document).ready(function() {
 
 function approveAjax() {
 	if(grid.getCheckedRows().length != 0) {
-		console.log(grid.getData());
-		$.ajax({
-			type : "POST",
-			contentType : "application/json;charset=UTF-8",
-			dataType : "json",
-			data : JSON.stringify(grid.getCheckedRows()),
-			url : "./hope/approve.do",
-			success : function(data){
-				console.log(data.result);
-				confirm();
-				inputAjax();
-			},
-			error : function(e) {
-				alert('Error : ' + e);
-			}
-		});
+		var checkedGrid= grid.getCheckedRows();
+		console.log(checkedGrid);
+		var flag = 0;
+		for (var i = 0; i < checkedGrid.length; i++) {
+			if(checkedGrid[i].hope_status == '승인') flag = 1;
+		}
+		console.log("flag = ", flag);
+		if(flag == 1) {
+			alert("승인한 항목은 재승인이 불가능합니다.");
+		} else {
+			console.log(grid.getData());
+			$.ajax({
+				type : "POST",
+				contentType : "application/json;charset=UTF-8",
+				dataType : "json",
+				data : JSON.stringify(grid.getCheckedRows()),
+				url : "./hope/approve.do",
+				success : function(data){
+					console.log(data.result);
+					confirm();
+					inputAjax();
+				},
+				error : function(e) {
+					alert('Error : ' + e);
+				}
+			});
+		}
 	} else {
 		alert("신간 구입을 승인할 신청번호를 선택해주세요.");
 	}
