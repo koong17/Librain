@@ -349,6 +349,7 @@ create table new_book ( --도서 구입 신청 테이블
     new_input_date date  --신청일
 );
 
+drop table hope_book;
 create table hope_book ( -- 희망 도서 테이블
     hope_book_num number, --희망 도서 번호
     book_author varchar2(150), --저자
@@ -361,13 +362,14 @@ create table hope_book ( -- 희망 도서 테이블
     hope_input_date date  --신청일
 );
 
-insert into hope_book values(1,	'글배우',	'지쳤거나 좋아하는 게 없거나',	'강한별',	TO_DATE('2019/09/04','YYYY-MM-DD'),	'1196797706 9791196797706', 13500,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(2,	'조남주',	'82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',	'민음사',	TO_DATE('2016/10/14','YYYY-MM-DD'),	'8937473135 9788937473135',	13000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(3,	'임홍택',	'90년생이 온다','웨일북(whalebooks)',	TO_DATE('2018/11/16','YYYY-MM-DD'),	'1188248677 9791188248674',	14000,	'신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(4,	'유발 하라리',	'사피엔스',	'김영사',	TO_DATE('2015/11/24','YYYY-MM-DD'),	'8934972467 9788934972464',	22000,'	신청 완료',	TO_DATE('2019/10/01','YYYY-MM-DD'));
-insert into hope_book values(5,	'김영하',	'여행의 이유',	'문학동네',	TO_DATE('2019/04/17','YYYY-MM-DD'),	'8954655971 9788954655972',	13500,'	신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
-insert into hope_book values(6,	'이병률',	'혼자가 혼자에게',	'달'	, TO_DATE('2019/09/19','YYYY-MM-DD'),	'1158161026 9791158161026',	15500,	'신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
-insert into hope_book values(7,	'박종훈',	'2020 부의 지각변동',	'21세기북스',	TO_DATE('2019/07/05','YYYY-MM-DD'),'	895098198X 9788950981983',	17000,	'신청 완료',	TO_DATE('2019/10/24','YYYY-MM-DD'));
+insert into hope_book values(1,   '글배우',   '지쳤거나 좋아하는 게 없거나',   '강한별',   TO_DATE('2019/09/04','YYYY-MM-DD'),   '1196797706 9791196797706', 13500,   '신청 완료',   TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(2,   '조남주',   '82년생 김지영(오늘의 젊은 작가 13)(양장본 HardCover)',   '민음사',   TO_DATE('2016/10/14','YYYY-MM-DD'),   '8937473135 9788937473135',   13000,   '신청 완료',   TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(3,   '임홍택',   '90년생이 온다','웨일북(whalebooks)',   TO_DATE('2018/11/16','YYYY-MM-DD'),   '1188248677 9791188248674',   14000,   '신청 완료',   TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(4,   '유발 하라리',   '사피엔스',   '김영사',   TO_DATE('2015/11/24','YYYY-MM-DD'),   '8934972467 9788934972464',   22000,'   신청 완료',   TO_DATE('2019/10/01','YYYY-MM-DD'));
+insert into hope_book values(5,   '김영하',   '여행의 이유',   '문학동네',   TO_DATE('2019/04/17','YYYY-MM-DD'),   '8954655971 9788954655972',   13500,'   신청 완료',   TO_DATE('2019/10/24','YYYY-MM-DD'));
+insert into hope_book values(6,   '이병률',   '혼자가 혼자에게',   '달'   , TO_DATE('2019/09/19','YYYY-MM-DD'),   '1158161026 9791158161026',   15500,   '신청 완료',   TO_DATE('2019/10/24','YYYY-MM-DD'));
+insert into hope_book values(7,   '박종훈',   '2020 부의 지각변동',   '21세기북스',   TO_DATE('2019/07/05','YYYY-MM-DD'),'   895098198X 9788950981983',   17000,   '신청 완료',   TO_DATE('2019/10/24','YYYY-MM-DD'));
+commit;
 
 create table discard_book ( --도서 폐기 신청 테이블
        dis_book_num number, --폐기 신청 번호
@@ -401,7 +403,7 @@ where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbm
 update book set book_input_date = to_date(round(dbms_random.value(20180601, 20180630),0),'yyyymmdd')
 where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
 
-update book set book_input_date = to_date(round(dbms_random.value(20190501, 20180630),0),'yyyymmdd')
+update book set book_input_date = to_date(round(dbms_random.value(20190501, 20190531),0),'yyyymmdd')
 where (book_num between round(dbms_random.value(100001, 100268),0) and round(dbms_random.value(100001, 100268),0));
 
 update book set book_input_date = to_date(round(dbms_random.value(20191001, 20191031),0),'yyyymmdd')
@@ -417,8 +419,8 @@ commit;
 drop table department;
 create table department (
     dept_code varchar2(20),
-    dept_name varchar2(30),
-    CONSTRAINT dept_code_pk PRIMARY KEY(dept_code)
+    dept_name varchar2(30)
+    --CONSTRAINT dept_code_pk PRIMARY KEY(dept_code)
 );
 insert into department values('000', '관장');
 insert into department values('001', '총무부');
@@ -432,8 +434,8 @@ create table sal_check (
     emp_no number,
     sal_ck_year varchar2(20),
     sal_ck_month varchar2(20),
-    sal_ck_check varchar2(20),
-    constraint sal_ck_no primary key(sal_ck_no)
+    sal_ck_check varchar2(20)
+    --constraint sal_ck_no primary key(sal_ck_no)
 );
 
 drop table employee_management;
@@ -453,9 +455,9 @@ create table employee_management(
     emp_basic_pay number,
     emp_bank_name varchar2(50),
     emp_account_number varchar2(30),
-    emp_password varchar2(100),
-    CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
-    constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department(dept_code)
+    emp_password varchar2(100)
+    --CONSTRAINT emp_no_pk PRIMARY KEY(emp_no),
+   -- constraint emp_dept_fk FOREIGN KEY(emp_dept_code) REFERENCES department(dept_code)
 );
 insert into employee_management
 values(1000001,'강수아','01068618619','서울시,이문동','02451','000','9501072222222','F',sysdate-3000,null,'koongmom@librain.org','관장',10000000,'하나','111111111111','950107');
@@ -489,9 +491,9 @@ create table commute_management(
     cmt_DAY number,
     cmt_hour number,
     cmt_minute number,
-    cmt_second number,
-    CONSTRAINT cmt_no_pk PRIMARY KEY(cmt_no),
-    constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
+    cmt_second number
+    --CONSTRAINT cmt_no_pk PRIMARY KEY(cmt_no),
+    --constraint cmt_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 
 Insert into COMMUTE_MANAGEMENT (CMT_NO,EMP_NO,CMT_STATUS,CMT_YEAR,CMT_MONTH,CMT_DAY,CMT_HOUR,CMT_MINUTE,CMT_SECOND) values (0,1000001,'on',2019,10,7,8,57,16);
@@ -543,8 +545,8 @@ create table salary_management(
     sal_bonus number,
     sal_food_pay number, -- 식대 15만원
     sal_year number,
-    sal_month number,
-    constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
+    sal_month number
+   -- constraint pay_emp_fk FOREIGN KEY(emp_no) REFERENCES employee_management(emp_no)
 );
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (0,1000001,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
 Insert into SALARY_MANAGEMENT (SAL_NO,EMP_NO,SAL_TOTAL,SAL_REAL,SAL_NATIONAL_PENSION,SAL_HEALTH_INSURANCE,SAL_LONGTERM_CARE_INSURANCE,SAL_EMPLOYMENT_INSURANCE,SAL_INCOME_TAX,SAL_LOCAL_INCOME_TAX,SAL_DEDUCTED,SAL_BASIC_PAY,SAL_BONUS,SAL_FOOD_PAY,SAL_YEAR,SAL_MONTH) values (1,1000002,924091,828750,40909,29364,2499,5909,15145,1515,95341,909091,0,15000,2019,10);
@@ -596,7 +598,7 @@ commit;
 --파일첨부 테이블 생성
 
 select * from tbl_attach;
-drop tbl_attach;
+drop table tbl_attach;
 
 create table tbl_attach (
 	uuid varchar2(100) not null,
@@ -622,10 +624,13 @@ board_regdate date default sysdate,   --작성일자
 board_updatedate date default sysdate
 );
 
-
+select * from rental;
+delete from rental;
+commit;
 alter table notice add constraint pk_notice
 primary key (board_no);
 
+select * from facilities;
 -------------- 더미 입력
 insert into notice (board_no, board_title, board_content, board_writer) 
 values(seq_board.nextval, '필독', '공지사항을 꾸준히 확인하세요', 'admin');
@@ -652,9 +657,6 @@ FacIn_Inspection_Due_Date date                 --점검예정일
 );
 
 
-commit;
-
-
 insert into  Facilities values(1,'책상','1층열람실','고장','목재');
 insert into  Facilities values(2 ,'책상','1층열람실','정상 ','목재');
 insert into  Facilities values(3,'책상','1층열람실','정상 ','목재');
@@ -664,7 +666,8 @@ insert into  Facilities values(6,'컴퓨터','2관시설팀','고장 ','가전�
 insert into  Facilities values(7,'컴퓨터','3관2층','정상 ','가전제품');
 insert into  Facilities values(8,'컴퓨터','1층열람실','정상 ','가전제품');
 insert into  Facilities values(9,'의자','1층열람실','정상 ','목재');
-insert into  Facilities values(9,'','1층열람실','정상 ','목재');
+insert into  Facilities values(10,'의자','1층열람실','정상 ','목재');
+commit;
 
 
 
@@ -684,7 +687,7 @@ insert into Facilities_inspection(FacIn_serialnum,FacIn_name,FacIn_address,FacIn
 
 commit;
 
-
+select * from employee_management;
 create or replace procedure facin_update( f_number IN Facilities_inspection.Facin_serialnum%TYPE,
                                           f_name   in facilities_inspection.facin_name%type,
                                           f_address in facilities_inspection.facin_address%type) 
