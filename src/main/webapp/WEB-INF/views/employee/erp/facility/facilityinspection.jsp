@@ -168,7 +168,7 @@ const grid = new tui.Grid({
 	      resizable: true
 	    }
 });
-var alerttextvalues='';
+var alerttextvalues='점검예정일까지 7일미만의 일련번호\n';
 
 grid.findRows((row) => {
     return (row.RemainingTime < 7)
@@ -178,7 +178,7 @@ grid.findRows((row) => {
 
           alerttextvalues+=row2.FacIn_serialnum +'번\n'
       })
-      alerttextvalues+='점검예정일까지 7일미만의 일련번호' 
+      alerttextvalues+='' 
       if(alerttextvalues.length>18) alert(alerttextvalues)
       alerttextvalues="";
 
@@ -392,7 +392,6 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
        
      }
             </script>
-           wdqwjdwop
             </body>
            
 </html>

@@ -92,14 +92,14 @@
 	var gridData1 =
 	{
 	   api: {
-	         readData: { url: location.href+'/readData', method: 'GET' }
+	         readData: { url: 'http://10.10.10.178:8080/librain/member/book/search.do/readData', method: 'GET' }
 	   }
 	}
 
 	var gridData2 =
 	{
 	   api: {
-	         readData: { url: location.href+'/readData2', method: 'GET' }
+	         readData: { url: 'http://10.10.10.178:8080/librain/member/book/search.do/readData2', method: 'GET' }
 	   }
 	}
 	
