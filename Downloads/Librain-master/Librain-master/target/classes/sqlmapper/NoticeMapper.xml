@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lib.employee.board.mapper.NoticeMapper">
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="board_no" order="BEFORE"
+			resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into notice (board_no, board_title, board_content, board_writer)
+		values (#{board_no},	#{board_title}, #{board_content}, #{board_writer})
+	</insert>
+	
+	<select id="read" resultType="lib.employee.board.model.NoticeDTO">
+		select * from notice where board_no = #{board_no}
+	</select>
+	
+	<select id="readNext" resultType="lib.employee.board.model.NoticeDTO">
+			select * from notice
+			where board_no in (
+				(
+					select max(board_no)
+					from notice
+					where #{board_no} > board_no
+				)
+			)
+	</select>
+	
+	
+	<select id="readPrev" resultType="lib.employee.board.model.NoticeDTO">
+			select * from notice
+			where board_no in (
+				(
+					select min(board_no)
+					from notice
+					where board_no > #{board_no}
+				)
+			)
+	</select>
+	
+	
+	<delete id="delete">
+		delete from notice where board_no = #{notice_no}
+	</delete>
+	
+	<update id="update" >
+		update notice
+			set board_title =#{board_title},
+			board_content = #{board_content},
+			board_writer = #{board_writer},
+			board_updateDate = sysdate
+			where board_no = #{board_no}
+	</update>
+
+	<sql id="criteria">
+	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						board_title like '%' || #{keyword} ||'%'
+					</when>
+					<when test="type == 'C'.toString()">
+						board_content like '%'|| #{keyword} ||'%'
+					</when>
+					<when test="type == 'W'.toString()">
+						board_writer like '%' || #{keyword} ||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
+<select id="getNotices" resultType="lib.employee.board.model.NoticeDTO">
+	select * 
+		from notice 
+			order by board_no desc
+</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from notice
+		where 
+		<include refid="criteria"></include>
+		board_no > 0
+	</select>
+</mapper>
+	

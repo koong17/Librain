@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 인터페이스의 경로를 적어줌 -->
+<mapper namespace="employeeLoginMapper">
+
+<select id="loginCheck" resultType="String">
+	<![CDATA[
+		SELECT count(*) FROM employee_management
+		WHERE emp_no = #{emp_no} AND emp_password = #{emp_password}
+	]]>
+</select>
+<select id="loginInfo" resultType="lib.employee.management.model.EmployeeDTO">
+	<![CDATA[
+		SELECT emp_no, emp_name, emp_position, emp_password, emp_jumin FROM employee_management
+		WHERE emp_no = #{emp_no} AND emp_password = #{emp_password}
+	]]>
+</select>
+<select id="bookCount" resultType="map">
+	<![CDATA[
+		select count(*) count, b.book_ctgr_num_db ctgr from book b, book_category bc where b.book_ctgr_num_db = bc.book_ctgr_num_db 
+		group by book_ctgr_name, b.book_ctgr_num_db order by b.book_ctgr_num_db
+	]]>
+</select>
+<update id="changePwd" parameterType="lib.employee.management.model.EmployeeDTO">
+	<![CDATA[
+		update employee_management set emp_password=#{emp_password} where emp_no=#{emp_no}
+	]]>
+</update>
+</mapper>
+	

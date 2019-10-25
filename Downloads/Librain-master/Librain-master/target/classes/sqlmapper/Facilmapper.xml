@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.facility.model.FacilitiesDAO">
+
+  <select id="facSelect" resultType="lib.employee.facility.model.FacilitiesDTO" parameterType="int">
+  
+  <![CDATA[
+select * from 
+(select (rank() over(order by Fac_serialnum))r ,
+				FAC_serialnum,
+				FAC_NAME,FAC_ADDRESS,
+				FAC_STATUS,
+				FAC_CATEGORY from Facilities ) 
+				where r>#{startrownum} and r<=#{endrownum}
+				  
+  ]]>
+   </select>
+   
+   <select id="factotalcount" resultType="int">
+   	select count(*) from Facilities
+   </select>
+   
+   <select id="facRepareSelect" resultType="lib.employee.facility.model.FacilitiesDTO" parameterType="int">
+  
+  <![CDATA[
+select * from 
+(select (rank() over(order by Fac_serialnum))r ,
+				FAC_serialnum,
+				FAC_NAME,FAC_ADDRESS,
+				FAC_STATUS,
+				FAC_CATEGORY from Facilities ) 
+				where r>#{startrownum} and r<=#{endrownum} and fac_status='수리신청' or fac_status='접수완료'
+				  
+  ]]>
+   </select>
+   
+  
+  <insert id="facinsert" parameterType="lib.employee.facility.model.FacilitiesDTO">
+   insert into Facilities values((select count(Fac_serialnum)+1 from Facilities),#{fac_name},#{fac_address },#{fac_status},#{fac_category})
+  </insert>
+  
+  <update id="facupdate" parameterType="lib.employee.facility.model.FacilitiesDTO" >
+  update Facilities set FAC_NAME=#{fac_name},FAC_ADDRESS=#{fac_address},FAC_STATUS=#{fac_status},FAC_CATEGORY=#{fac_category} where Fac_serialnum=#{fac_serialnum}
+  </update>
+    <update id="facupdaterepair" parameterType="lib.employee.facility.model.FacilitiesDTO" >
+  update Facilities set FAC_STATUS='접수완료' where Fac_serialnum=#{fac_serialnum}
+  </update>
+  <update id="facupdaterepaircomplete" parameterType="lib.employee.facility.model.FacilitiesDTO" >
+  update Facilities set FAC_STATUS='정상' where Fac_serialnum=#{fac_serialnum}
+  </update>
+  
+  
+  <delete id="facdelete" parameterType="int">
+  delete from Facilities where Fac_serialnum=#{Fac_serialnum}
+  </delete>
+  
+  
+  
+  
+  
+  <!-- <select id="" statementType="CALLABLE" parameterType="">  </select> -->
+  
+</mapper>

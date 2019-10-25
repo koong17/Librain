@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.management.model.EmployeeDAO">
+  <select id="empSelectAll" resultType="lib.employee.management.model.EmployeeDTO">
+    select emp_no,emp_name,emp_telephone,emp_email,dept_name,emp_position,emp_join_date
+     from employee_management, department where emp_dept_code = dept_code
+  </select>
+  <delete id="empDelete" parameterType="lib.employee.management.model.EmployeeDTO">
+  	delete employee_management where emp_no=#{emp_no}
+  </delete>
+  <insert id="empInsert" parameterType="lib.employee.management.model.EmployeeDTO">
+    insert into employee_management values((select nvl(max(emp_no)+1,0) from employee_management),#{emp_name},#{emp_telephone},#{emp_address}
+    ,#{emp_address_number},#{emp_dept_code},#{emp_jumin},#{emp_gender},to_date(#{emp_join_date},'YYYYMMDD'),null,#{emp_email},#{emp_position}
+    ,#{emp_basic_pay},#{emp_bank_name},#{emp_account_number},#{emp_password})
+  </insert>
+  <select id="empSelectPay" resultType="lib.employee.management.model.EmployeeDTO" parameterType="lib.employee.management.model.EmployeeDTO">
+    select emp_basic_pay,emp_no from employee_management where emp_dept_code=#{emp_dept_code} and emp_name=#{emp_name}
+  </select>
+  <select id="cmtAdminSelectAll" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  ) order by cmt_no
+  </select>
+  <select id="cmtAdminSelectOne" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+	select * 
+	  from commute_management 
+	  where (cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  )) and cmt_month=#{cmt_month} and cmt_year=#{cmt_year} and emp_no=#{emp_no}
+      order by cmt_no
+  </select>
+  <update id="cmtUpdate" parameterType="lib.employee.mypage.model.CommuteDTO">
+  	update commute_management set cmt_status=#{cmt_status},cmt_hour=#{cmt_hour},cmt_minute=#{cmt_minute} where cmt_no=#{cmt_no}
+  </update>
+  <insert id="salInsert" parameterType="lib.employee.management.model.SalaryDTO">
+    insert into salary_management(sal_no, emp_no, sal_total, sal_real, sal_national_pension, sal_health_insurance, sal_longterm_care_insurance
+    	,sal_employment_insurance, sal_income_tax, sal_local_income_tax, sal_deducted, sal_basic_pay, sal_bonus, sal_food_pay, sal_year, sal_month)
+     values((select nvl(max(sal_no)+1,0) from salary_management),#{emp_no},#{sal_total},#{sal_real},#{sal_national_pension},#{sal_health_insurance},#{sal_longterm_care_insurance},#{sal_employment_insurance}
+     	,#{sal_income_tax},#{sal_local_income_tax},#{sal_deducted},#{sal_basic_pay},#{sal_bonus},#{sal_food_pay},#{sal_year},#{sal_month})
+  </insert>
+  <select id="salSelect" resultType="lib.employee.management.model.SalaryDTO" parameterType="lib.employee.management.model.SalaryDTO">
+    select * from salary_management where sal_year=#{sal_year} and sal_month=#{sal_month}
+  </select>
+  <select id="empSearch" parameterType="map" resultType="lib.employee.management.model.EmployeeDTO">
+    select emp_no,emp_name,emp_telephone,emp_email,dept_name,emp_position,emp_join_date
+     from employee_management e, department d where emp_dept_code=dept_code and ${searchType} like #{searchWord}
+  </select>
+  <select id="empSelectOne" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
+    select * from employee_management where emp_no=#{emp_no}
+  </select>
+  <select id="empSelectDept" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
+    select emp_name from employee_management where emp_dept_code=#{emp_dept_code}
+  </select>
+  <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
+    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_address=#{emp_address}, emp_address_number=#{emp_address_number}
+    , emp_dept_code=#{emp_dept_code}, emp_jumin=#{emp_jumin}, emp_gender=#{emp_gender}, emp_join_date=to_date(#{emp_join_date},'YYYYMMDD'), emp_email=#{emp_email}
+    , emp_position=#{emp_position},emp_basic_pay=#{emp_basic_pay},emp_bank_name=#{emp_bank_name},emp_account_number=#{emp_account_number},emp_password=#{emp_password} where emp_no=#{emp_no}
+  </update>
+  <select id="cmtSearch" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+    select * 
+	  from commute_management 
+	  where (cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  )) and cmt_year=#{cmt_year} and cmt_month=#{cmt_month} order by cmt_no
+  </select>
+  <select id="cmtSearchOne" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+    select * 
+	  from commute_management 
+	  where (cmt_no in (
+	      select min(cmt_no) from commute_management
+	      	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='on'
+	  ) or cmt_no in (
+	      select max(cmt_no) from commute_management
+	     	group by emp_no, cmt_day, cmt_status
+	      	having cmt_status='off'
+	  )) and cmt_year=#{cmt_year} and cmt_month=#{cmt_month} and emp_no=#{emp_no} order by cmt_no
+  </select>
+</mapper>

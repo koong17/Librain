@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.facilityinspection.model.FacilitiesInspectionDAO">
+
+ 
+  
+  <!-- Facilities_Inspection List -->
+  <select id="facinselect" resultType="lib.employee.facilityinspection.model.FacilitiesInspectionDTO">
+  <![CDATA[
+select FacIn_serialnum ,                         
+FacIn_name ,    
+to_char(FacIn_INSPECTION_DATE,'yyyy"/"mm"/"DD""') FacIn_INSPECTION_DATE,   
+facin_address,
+to_char(FacIn_INSPECTION_DUE_DATE,'yyyy"/"MM"/"DD""') FacIn_INSPECTION_DUE_DATE , trunc((FacIn_INSPECTION_DUE_DATE-FacIn_INSPECTION_DATE),0) RemainingTime from Facilities_inspection
+
+  ]]>
+  
+  </select>
+  
+  <select id="facintotalcount"  resultType="int">
+	  select count(*) from Facilities_inspection
+  </select>
+  
+  
+  <insert id="facininsertprocedure" statementType="CALLABLE" parameterType="lib.employee.facilityinspection.model.FacinVO">
+    {
+ CALL facin_insert(#{facfacin_name} , #{facin_address}
+ 	<if test="f_cycle != null">
+ 	,#{f_cycle}
+ 	</if>
+ )
+ }
+  
+  </insert>
+  
+  <update id="facinupdateprocedure" statementType="CALLABLE" parameterType="map">
+  {
+  CALL facin_update(
+  	#{FacIn_serialnum},
+  	#{FacIn_name},
+  	#{facin_address}
+  )
+  }
+  </update>
+  
+</mapper>

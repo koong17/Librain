@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+<context:component-scan base-package="lib.employee.board.task"/>
+<task:annotation-driven/>
+<annotation-driven/>
+<context:component-scan base-package="lib.employee.facility.controller"/>
+<context:component-scan base-package="lib.employee.facility.model"/>
+<context:component-scan base-package="lib.employee.facility.service"/>
+<context:component-scan base-package="lib.employee.facilityinspection.controller"/>
+<context:component-scan base-package="lib.employee.facilityinspection.model"/>
+<context:component-scan base-package="lib.employee.facilityinspection.service"/>
+
+<context:component-scan base-package="lib.employee.member.*"/>
+<context:component-scan base-package="lib.employee.management.*"/>
+<context:component-scan base-package="lib.employee.mypage.*"/>
+<context:component-scan base-package="lib.employee.facility.*" />
+<context:component-scan base-package="lib.employee.book.*" />
+<context:component-scan base-package="lib.member.*"/>
+<context:component-scan base-package="lib.admin.book.*" />
+<!-- <context:component-scan base-package="lib.member.book.*" /> -->
+
+ 
+<context:component-scan base-package="lib.employee.board.controller"/>
+<context:component-scan base-package="lib.employee.login.controller"/>
+<context:component-scan base-package="lib.employee.board.model"/>
+<context:component-scan base-package="lib.employee.login.model"/>
+<!-- 서비스 등록 -->
+<context:component-scan base-package="lib.employee.board.service"/>
+<context:component-scan base-package="lib.employee.login.service"/>
+<mybatis-spring:scan base-package="lib.employee.board.mapper" />
+
+
+	 <resources mapping="/resources/**" location="/resources/" />
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+		
+</beans:beans>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib.member.book.model.MemBookDAO">
+	
+	<insert id="hopeInsertBook" parameterType="lib.employee.book.model.Hope_BookDTO">
+		insert into hope_book VALUES ((select nvl(max(hope_book_num)+1,1) from hope_book), 
+			#{ book_author }, #{ book_name }, #{ book_pub_house }, #{ book_pub_date }, 
+			#{ book_ISBN }, #{ book_price }, '신청 완료', sysdate)
+	</insert>
+	
+	<select id="hopeSelectRowNum" resultType="int">
+		select count(*) from hope_book
+	</select>
+	
+	<select id="hopeSelect" parameterType="int" resultType="lib.employee.book.model.Hope_BookDTO">
+		<![CDATA[
+			select * from 
+			    (select  rownum r, hope_book_num, book_author, book_name, book_pub_house, book_pub_date, book_isbn, book_price, hope_status, hope_input_date
+			        from (select * from hope_book order by hope_book_num desc))
+			    where r > #{ startRowNum } and r <= #{ endRowNum }
+		]]>
+	</select>
+	
+	<select id="hopeMemCheck" parameterType="java.lang.String" resultType="int">
+		select count(*) from member where mem_id = #{ mem_id }
+	</select>
+	
+	<select id="searchAll" parameterType="java.lang.String" resultType="lib.member.book.model.MemBookDTO">
+		select b.*,  nvl(rent_status, '대여가능') rent
+			from  (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }
+                        order by book_num desc) b 
+			left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
+			on b.book_num = r.book_num
+	</select>
+	
+	<select id="searchCtgr" parameterType="java.lang.String" resultType="lib.member.book.model.MemBookDTO">
+		select b.*, nvl(rent_status, '대여가능') rent
+		    from (select * from book where ${searchCtgr} like #{searchWord} order by book_num desc) b
+		    left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
+		    on b.book_num = r.book_num
+	</select>
+	
+	
+	<select id="newBook" parameterType="int" resultType="lib.member.book.model.MemBookDTO">
+	<![CDATA[
+		select * from 
+		    (select rownum rnum, b.*, nvl(rent_status, '대여가능') rent 
+		        from (select * from book where book_input_date <= sysdate and book_input_date >= sysdate - 30 
+		            order by  book_input_date desc, book_num desc) b
+		        left outer join rental r
+		        on b.book_num =r.book_num where rownum <= 20)
+			where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+	]]>
+	</select>
+	
+	<select id="mostRent" parameterType="int" resultType="lib.member.book.model.MemBookDTO">
+	<![CDATA[
+		  select * from 
+		    (select rownum rnum, b.*, nvl(rent_status, '대여가능') rent 
+		        from (select * from book where book_input_date <= sysdate and book_input_date >= sysdate - 30 
+		            order by book_rent_cnt desc, book_num desc) b
+		        left outer join rental r
+		        on b.book_num =r.book_num where rownum <= 20)
+		  where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+	]]>
+	</select>
+	
+</mapper>

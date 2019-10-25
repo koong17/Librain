@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lib.employee.mypage.model.MypageDAO">
+  <select id="empSelectOne" parameterType="lib.employee.management.model.EmployeeDTO" resultType="lib.employee.management.model.EmployeeDTO">
+    select * from employee_management emp,department dept where emp.emp_dept_code = dept.dept_code and emp_no=#{emp_no}
+  </select>
+  <update id="empUpdate" parameterType="lib.employee.management.model.EmployeeDTO">
+    update employee_management set emp_name=#{emp_name}, emp_telephone=#{emp_telephone}, emp_address=#{emp_address}, emp_address_number=#{emp_address_number}
+    , emp_dept_code=#{emp_dept_code}, emp_jumin=#{emp_jumin}, emp_gender=#{emp_gender}, emp_join_date=to_date(#{emp_join_date},'YYYYMMDD'), emp_email=#{emp_email}
+    , emp_position=#{emp_position},emp_basic_pay=#{emp_basic_pay},emp_bank_name=#{emp_bank_name},emp_account_number=#{emp_account_number},emp_password=#{emp_password} where emp_no=#{emp_no}
+  </update>
+  <select id="cmtSelectAll" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+  	select * from commute_management where emp_no=#{emp_no} and cmt_day=#{cmt_day}
+  </select>
+  <select id="cmtSelectOnOff" parameterType="lib.employee.mypage.model.CommuteDTO" resultType="lib.employee.mypage.model.CommuteDTO">
+  	select * 
+    from commute_management 
+    where cmt_no=
+        (select min(cmt_no)
+            from commute_management
+            where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='on'
+        ) or cmt_no =
+            (select max(cmt_no)
+                from commute_management
+                where  emp_no=#{emp_no} and cmt_day=#{cmt_day} and cmt_status='off'
+        )
+  </select>
+  <insert id="cmtInsert" parameterType="lib.employee.mypage.model.CommuteDTO">
+    insert into commute_management values((select nvl(max(cmt_no)+1,0) from commute_management),#{emp_no},#{cmt_status},#{cmt_year},#{cmt_month},#{cmt_day},#{cmt_hour},#{cmt_minute},#{cmt_second})
+  </insert>
+  <select id="salSelectOne" resultType="lib.employee.management.model.SalaryDTO" parameterType="lib.employee.management.model.SalaryDTO">
+  	select * from salary_management where sal_year=#{sal_year} and sal_month=#{sal_month} and emp_no=#{emp_no}
+  </select>
+  <select id="empCheckPwd" resultType="Integer" parameterType="lib.employee.management.model.EmployeeDTO">
+  	select count(*) from employee_management where emp_no=#{emp_no} and emp_password=#{emp_password}
+  </select>
+  <update id="empUpdatePwd" parameterType="lib.employee.management.model.EmployeeDTO">
+  	update employee_management set emp_password=#{emp_password} where emp_no=#{emp_no}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib.admin.book.model.AdminBookDAO">
+	
+	<select id="newSelect" resultType="lib.admin.book.model.New_BookDTO">
+		select new_book_num, sum(book_price) book_price, count(*) bookCnt, max(new_input_date) new_input_date, new_status from new_book 
+			where new_status in ('신청 완료', '반려')
+			group by new_book_num, new_status
+	</select>
+	
+	<update id="newApprove" parameterType="lib.admin.book.model.New_BookDTO">
+		update new_book set new_status='승인' where new_book_num = #{ new_book_num }
+	</update>
+	
+	<update id="newReturn" parameterType="lib.admin.book.model.New_BookDTO">
+		update new_book set new_status='반려' where new_book_num = #{ new_book_num }
+	</update>
+	
+	<select id="disSelect" resultType="lib.admin.book.model.BookRentDisDTO">
+		 select t.*,  dis_book_num, dis_input_date, dis_status 
+		    from (select b.*, nvl(r.rent_status, '대여가능') rent from book b
+	                left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
+	                on (b.book_num = r.book_num)) t
+	                join discard_book d on d.book_num = t.book_num
+	        order by dis_book_num desc
+	</select>
+	
+	<update id="disApprove" parameterType="lib.admin.book.model.BookRentDisDTO">
+		update discard_book set dis_status='승인' where dis_book_num = #{ dis_book_num }
+	</update>
+	
+	<update id="disReturn" parameterType="lib.admin.book.model.BookRentDisDTO">
+		update discard_book set dis_status='반려' where dis_book_num = #{ dis_book_num }
+	</update>
+	
+</mapper>
