@@ -1,9 +1,9 @@
 $(document).ready(function() {
-	$('#searchGrid').hide();
+	$('#searchGridDiv').hide();
 	
 	$('#searchBtn').click(function() {
 		$('#grid').hide();
-		$('#searchGrid').show();
+		$('#searchGridDiv').show();
 		searchAjax();
 	});
 	$('#addRowBtn').click(function() {
@@ -17,6 +17,9 @@ $(document).ready(function() {
 	});
 	$('#updateBtn').click(function() {
 		updateAjax();
+	});
+	$('#refreshBtn').click(function() {
+		confirm();
 	});
 	
 });
@@ -145,12 +148,13 @@ function updateAjax() {
 
 
 function confirm(){
+	$('#searchGridDiv').hide();
+	$('#grid').show();
 	grid.readData(1,true);
 	grid.sort("book_num",false);
 	$('#searchWord').val("");
 	$('#searchCtgr').val("전체");
-	$('#grid').show();
-	$('#searhGrid').hide();
+	
 }
 
 
