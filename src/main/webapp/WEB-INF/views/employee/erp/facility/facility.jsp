@@ -1,128 +1,189 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+<%@include file="../../includes/header.jsp"%>
 <body>
 
+     
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+   <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+ 
+   <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" />
+   <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+   <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.css" />
+ 
+ 
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+     <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+     <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script>
+     <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
+     <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+   <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>  
 <br>
-<input type="button" value="추가" onclick='gridaddgrid()'/>
-<input type="button" value="삭제" onclick='griddelete()'/>
-<input type="button" value="카테고리형식으로  몇개씩보기지원" onclick='aa()'/>
-<input type="button" value="수정" onclick='gridmodify()'/>
+<style>
+.btn.btn-primary{
+    margin: 10px;
+}
+.gorup.btn{
+    margin-left: 10px;
+}
 
+</style>
+<div class="gorup btn">
+    
+    <span class="btn btn-primary" aria-hidden="true" onclick='gridaddgrid()'>시설물추가</span>
+    <span class="btn btn-primary" aria-hidden="true" onclick='gridmodify()'>수정</span>
+    <span class="btn btn-primary" aria-hidden="true" onclick='griddelete()'>삭제</span>
+</div>
     <div id="grid"></div>
     
-    <br>
-    <br>
-    입력폼 모달로 만들지 생각해볼것sss
-    <div id="grid2"></div>
-    <input type="button" value="그리드2체크확인" onclick='grdi2checked()'/>
+    <div id="addgrid">
+        <span class="btn btn-primary" aria-hidden="true" onclick='grdi2checked()'>추가완료</span>
+        <div id="grid2"></div>
+    </div>
     
     
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/v4.5.2/tui-grid.js"></script>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-var a=10;
+   
+    <script>
+    $(window).on('load',function () {
+        $('#addgrid').hide()
+      })
 function gridmodify(){
 
-	grid.blur()
-	console.log(grid.getModifiedRows().updatedRows +"마지막전")
-	
-	setTimeout(()=>
+grid.blur()
 
-	$.ajax({
-		url:"/mvc/facility/modifyData",
-		data: JSON.stringify(grid.getModifiedRows().updatedRows),
-		type:"PUT",
-		contentType: 'application/json',
-		success:function(date){
-			alert("수정완료");
-			grid.reloadData();
-		}
-	}) 
-			,100)
+console.log(grid.getModifiedRows().updatedRows +"마지막전")
+
+setTimeout(()=>{
+var checkfilter=grid.getCheckedRows().filter((rows)=>{
+            console.log(rows)
+        return  rows.fac_status !='접수완료'   
+    } )
+    if(checkfilter.length==0){
+        alert('수정할 항목이 없습니다.')
+        return
+    }
+$.ajax({
+	url:"http://localhost:8080/librain/facility/modifyData",
+	data: JSON.stringify(grid.getModifiedRows().updatedRows),
+	type:"PUT",
+	contentType: 'application/json',
+	success:function(date){
+		alert("수정완료");
+		grid.reloadData();
+	}
+})} 
+		,100)
+
 	
- 	
 }
 const dataSource = {
-		  initialRequest: true,
-		  api: {
-		    readData: { url: 'http://localhost:8080/mvc/facility/readData', method: 'GET' },
-		    createData: { url: 'http://localhost:8080/mvc/facility/createData', method: 'POST' },
-		    updateData: { url: '/api/updateData', method: 'PUT' },
-		    modifyData: { url: '/api/modifyData', method: 'PUT' },
-		    deleteData: { url: '/api/deleteData', method: 'DELETE' }
-		  }
-		};
+	  initialRequest: true,
+	  api: {
+	    readData: { url: 'http://localhost:8080/librain/facility/readData', method: 'GET' },
+	    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
+	    updateData: { url: '/api/updateData', method: 'PUT' },
+	    modifyData: { url: '/api/modifyData', method: 'PUT' },
+	    deleteData: { url: '/api/deleteData', method: 'DELETE' }
+	  }
+	};
 
 const grid = new tui.Grid({
-	el: document.getElementById('grid'),
-	data:dataSource,
-	scrollX: false,
-	scrollY: false,
-	minBodyHeight: 30,
-	rowHeaders: ['checkbox'],
-	editingEvent:"click",
-	pageOptions: {
-	    perPage: a
-	  },
-	columns: [
-		{
-			header: '일련번호',
-			name: 'fac_serialnum',
-			sortingType: 'desc',
-	        sortable: true,
-	        width:90
-	     
+el: document.getElementById('grid'),
+data:dataSource,
+scrollX: false,
+scrollY: false,
+minBodyHeight: 30,
+rowHeaders: ['checkbox'],
+editingEvent:"click",
+pageOptions: {
+    perPage:100
+  },
+columns: [
+	{
+		header: '일련번호',
+		name: 'fac_serialnum',
+		sortingType: 'desc',
+        sortable: true,
+        width:90,
+        filter: {
+            type: 'number',
+            showApplyBtn: true,
+            showClearBtn: true
+          }
+     
+	},
+	{
+		header: '시설물이름',
+		name: 'fac_name',
+	      filter: {
+	          type: 'text',
+	          showApplyBtn: true,
+	          showClearBtn: true
+	        }
+	},
+	{
+		header: '장소',
+		name: 'fac_address',
+		editor:{
+			type:"text"
 		},
-		{
-			header: '시설물이름',
-			name: 'fac_name'
-		},
-		{
-			header: '장소',
-			name: 'fac_address',
-			editor:{
-				type:"text"
+	      filter: {
+	          type: 'text',
+	          showApplyBtn: true,
+	          showClearBtn: true
+	        },
+		 onAfterChange: function(ev) {
+	            grid.check(ev.rowKey);
+	          }
+	},
+	{
+		header: '시설물 상태',
+		name: 'fac_status',
+	      filter: {
+	          type: 'text',
+	          showApplyBtn: true,
+	          showClearBtn: true
+	        },
+		editor:{
+			type:"select",
+			options:{
+				listItems: [
+			          { text: '고장', value: '고장' },
+			          { text: '정상', value: '정상' },
+			          { text: '수리신청', value: '수리신청' },
+			          { text: '비가동', value: '비가동' },
+                      { text: '접수완료', value: '접수완료' }
+			        ]
 			}
 		},
-		{
-			header: '시설물 상태',
-			name: 'fac_status',
-			editor:{
-				type:"select",
-				options:{
-					listItems: [
-				          { text: '고장', value: '고장' },
-				          { text: '정상', value: '정상' },
-				          { text: '수리신청', value: '수리신청' },
-				          { text: '비가동', value: '비가동' }
-				        ]
-				}
-			},
-			 onAfterChange: function(ev) {
-		             console.log(ev.rowKey);
-		            grid.check(ev.rowKey);
-		          }
-		
-		},
-		{
-			header: '카테고리',
-			name: 'fac_category',
-		}
-	],
-	 columnOptions: {
-	      resizable: true
-	    }
+		 onAfterChange: function(ev) {
+	            grid.check(ev.rowKey);
+	          }
+	
+	},
+	{
+		header: '카테고리',
+		name: 'fac_category',
+	      filter: {
+	          type: 'text',
+	          showApplyBtn: true,
+	          showClearBtn: true
+	        }
+	}
+],
+ columnOptions: {
+      resizable: true
+    }
 });
+
+
 
 
 
@@ -136,9 +197,6 @@ const grid2 = new tui.Grid({
 	minBodyHeight: 30,
 	rowHeaders: ['checkbox'],
 	editingEvent:"click",
-	pageOptions: {
-	    perPage: 7
-	  },
 	columns: [
 	
 		{
@@ -175,7 +233,6 @@ const grid2 = new tui.Grid({
 					listItems: [
 				          { text: '고장', value: '고장' },
 				          { text: '정상', value: '정상' },
-				          { text: '수리신청', value: '수리신청' },
 				          { text: '비가동', value: '비가동' }
 				        ]
 				}
@@ -215,6 +272,7 @@ grid2.on('click',(ev)=>{
 })
 
 function gridaddgrid(){
+    $('#addgrid').show()
 	console.log('dd')
 		grid.blur()
 	setTimeout(()=>console.log(grid.getCheckedRows()),100)
@@ -227,9 +285,15 @@ function gridaddgrid(){
 }
 function griddelete(){
 	grid2.blur()
-	setTimeout(()=>
+    
+	setTimeout(()=>{
+    if(grid.getCheckedRows().length ==0){
+        alert('삭제할 데이터를 체크해주세요')
+        return
+    }
+    console.log(grid.getCheckedRows().length)
 	$.ajax({
-		url:'http://localhost:8080/mvc/facility/deleteData',
+		url:'http://localhost:8080/librain/facility/deleteData',
 		data:JSON.stringify(grid.getCheckedRows()),
 		contentType: 'application/json',
 		type:"DELETE",
@@ -237,8 +301,8 @@ function griddelete(){
 	        alert("success!");
 	    }
 		})
-
-	,100)
+    }
+	,100);
 	
 	console.log(grid.getCheckedRows())
 	grid.removeCheckedRows();
@@ -249,19 +313,17 @@ function griddelete(){
 
 function grdi2checked(){//데이터 보내기용
 	grid2.blur()
-	console.log(grid2.getCheckedRowKeys().length)
-	console.log(grid2.getModifiedRows().createdRows)
-	console.log(JSON.stringify(grid2.getModifiedRows().createdRows))
-	console.log(grid2.validate().length);
-	confirm()
 	setTimeout(()=>	
 	$.ajax({
-		url:'http://localhost:8080/mvc/facility/createData',
+		url:'http://localhost:8080/librain/facility/createData',
 		data:JSON.stringify(grid2.getModifiedRows().createdRows),
 		contentType: 'application/json',
 		type:"POST",
 		success : function(data) {
-	        alert("success!");
+	        alert("추가완료");
+            $('#addgrid').hide()
+            grid.reloadData()
+
 	    }
 		})
 	
@@ -274,10 +336,6 @@ function grdi2checked(){//데이터 보내기용
  tui.Grid.applyTheme('clean',{})
 </script>
 
-
-<br><br><Br>
-
-
-
+    <%@include file="../../includes/footer.jsp"%>
 </body>
 </html>

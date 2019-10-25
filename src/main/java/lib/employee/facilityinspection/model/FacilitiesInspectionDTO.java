@@ -5,9 +5,9 @@ import java.sql.Date;
 public class FacilitiesInspectionDTO{
 	public int FacIn_serialnum;
 	public String FacIn_name;
-	public String FacIn_address;
-	public Date FacIn_Inspection_Date;
-	public Date FacIn_Inspection_Due_Date;
+	public String facin_address;
+	public String FacIn_Inspection_Date;
+	public String FacIn_Inspection_Due_Date;
 	public int RemainingTime;
 	public int getFacIn_serialnum() {
 		return FacIn_serialnum;
@@ -21,22 +21,24 @@ public class FacilitiesInspectionDTO{
 	public void setFacIn_name(String facIn_name) {
 		FacIn_name = facIn_name;
 	}
-	public String getFacIn_address() {
-		return FacIn_address;
+	
+	
+	public String getFacin_address() {
+		return facin_address;
 	}
-	public void setFacIn_address(String facIn_address) {
-		FacIn_address = facIn_address;
+	public void setFacin_address(String facin_address) {
+		this.facin_address = facin_address;
 	}
-	public Date getFacIn_Inspection_Date() {
+	public String getFacIn_Inspection_Date() {
 		return FacIn_Inspection_Date;
 	}
-	public void setFacIn_Inspection_Date(Date facIn_Inspection_Date) {
+	public void setFacIn_Inspection_Date(String facIn_Inspection_Date) {
 		FacIn_Inspection_Date = facIn_Inspection_Date;
 	}
-	public Date getFacIn_Inspection_Due_Date() {
+	public String getFacIn_Inspection_Due_Date() {
 		return FacIn_Inspection_Due_Date;
 	}
-	public void setFacIn_Inspection_Due_Date(Date facIn_Inspection_Due_Date) {
+	public void setFacIn_Inspection_Due_Date(String facIn_Inspection_Due_Date) {
 		FacIn_Inspection_Due_Date = facIn_Inspection_Due_Date;
 	}
 	public int getRemainingTime() {
@@ -45,13 +47,6 @@ public class FacilitiesInspectionDTO{
 	public void setRemainingTime(int remainingTime) {
 		RemainingTime = remainingTime;
 	}
-	@Override
-	public String toString() {
-		return "FacilitiesInspectionDTO [FacIn_serialnum=" + FacIn_serialnum + ", FacIn_name=" + FacIn_name
-				+ ", FacIn_address=" + FacIn_address + ", FacIn_Inspection_Date=" + FacIn_Inspection_Date
-				+ ", FacIn_Inspection_Due_Date=" + FacIn_Inspection_Due_Date + ", RemainingTime=" + RemainingTime + "]";
-	}
-	
 	
 	
 	

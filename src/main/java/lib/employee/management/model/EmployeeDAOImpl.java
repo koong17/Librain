@@ -82,5 +82,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public List<CommuteDTO> cmtSearch(CommuteDTO commuteDTO) {
 		return sqlsession.getMapper(EmployeeDAO.class).cmtSearch(commuteDTO);
 	}
+	
+	@Override
+	public List<CommuteDTO> cmtSearchOne(CommuteDTO commuteDTO) {
+		return sqlsession.getMapper(EmployeeDAO.class).cmtSearchOne(commuteDTO);
+	}
+
+	@Override
+	public List<EmployeeDTO> empSelectDept(EmployeeDTO dto) {
+		return sqlsession.getMapper(EmployeeDAO.class).empSelectDept(dto);
+	}
 
 }

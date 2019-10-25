@@ -73,7 +73,4 @@
 
 <!-- bookJS -->
 <script src="${pageContext.request.contextPath}/resources/js/adminDisBook.js?after"></script>
-
-   
-   
 </html>

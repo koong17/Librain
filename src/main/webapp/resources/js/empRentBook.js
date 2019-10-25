@@ -10,6 +10,7 @@ $(document).ready(function() {
     });
     
     $('#bookBtn').click(function() {
+    	$('#bookGridDiv').show(); 
         bookAjax();
     });
     
@@ -140,17 +141,11 @@ function bookAjax() {
 				console.log(response);
 				console.log("1111 => " + bookGrid.findRows({book_num: response.book_num}));
 				console.log(bookGrid.getRowCount());
-				if($('#mem_id').val()!="" && response.rent == "대여중") {
-					alert(response.book_num +"는(은) 이미 대여중인 도서입니다.");
-				} else if($('#mem_id').val()=="" && response.rent == "대여가능") {
-					alert(response.book_num +"는(은) 대여가능한 도서입니다. \n" +
-							"대여를 원하시면 회원을 먼저 검색해주세요.");
-				} else if(bookGrid.getRowCount()==0){
-					$('#bookGrid').show(); 
+				$('#bookGrid').show(); 
+				if(bookGrid.getRowCount()==0){
 					bookGrid.resetData([response]);
 					bookGrid.checkAll();
 				} else if(bookGrid.findRows({book_num: response.book_num}).length == 0) {
-					$('#bookGrid').show(); 
 					bookGrid.appendRow(response, option);
 					bookGrid.check(bookGrid.getRowAt(0).rowKey);
 				};

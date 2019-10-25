@@ -166,7 +166,7 @@
                       <span class="icon blue"></span>
                       <span class="price-small blue" style="font-weight:bold">회원가입</span><br><br>
                       <p>회원가입 후 도서를 대출하실 수 있습니다.</p>
-                  <a class="btn btn-lg btn-info" href="${pageContext.request.contextPath}/memberjoin.do" role="button"  target="_blank">가입하기</a></p>
+                  <a class="btn btn-lg btn-info" href="${pageContext.request.contextPath}/member/join.do" role="button" target="_blank">가입하기</a></p>
                   </div>
               </div><!-- .Col-md-3 ends here -->
           
@@ -175,7 +175,7 @@
                       <span class="icon yellow"></span>
                       <span class="price-small yellow" style="font-weight:bold">정보수정</span><br><br>
                       <p>주소와 연락처는 최신상태로 유지하시기 바랍니다.</p>
-                      <a class="btn btn-lg btn-warning" href="#" role="button">정보수정</a>
+                      <a class="btn btn-lg btn-warning" href="${pageContext.request.contextPath}/member/login.do" role="button" target="_blank">정보수정</a>
                   </div>
               </div><!-- .Col-md-3 ends here -->
           

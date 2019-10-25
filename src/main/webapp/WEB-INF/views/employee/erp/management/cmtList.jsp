@@ -22,17 +22,15 @@
             </div>
 		</div>
 		<div class="row">
-			<div class="col-md-2 pt-3">
+			<div class="col-md-1 pt-3">
 				<div class="form-group">
 					<div class="years"></div>
 					<select id="cmt_year" name="cmt_year" class="form-control">
 						<option value="" disabled selected>년</option>
-						<option value="2018">2018</option>
-						<option value="2019">2019</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2 pt-3">
+			<div class="col-md-1 pt-3">
 				<div class="form-group">
 					<select id="cmt_month" name="cmt_month" class="form-control">
 						<option value="" disabled selected>월</option>
@@ -49,6 +47,12 @@
 						<option value="11">11</option>
 						<option value="12">12</option>
 					</select>
+				</div>
+			</div>
+			<div class="col-md-2 pt-3">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="사원번호(미입력시 전체사원 검색)"
+						id="emp_no" name="emp_no">
 				</div>
 			</div>
 			<div class="col-md-1">
@@ -69,18 +73,24 @@
 <script type="text/javascript">	
 
 	$(function(){
-		
+		var date = new Date();
+		var year = date.getFullYear();
+		//var month = new String(date.getMonth()+1);
+		for (var i = year-2; i <= year; i++) {
+			$("#cmt_year").append('<option value="'+i+'">'+i+'</option>');
+		}
 	});
 	
 	$("#search").click(function(){
 		var year = document.getElementById("cmt_year");
 		var month = document.getElementById("cmt_month");
+		var empNo = document.getElementById("emp_no").value;
 		var cmtObject = new Object();
 		cmtObject.cmt_year = year.options[year.selectedIndex].value;
 		cmtObject.cmt_month = month.options[month.selectedIndex].value;
 		
 		if (cmtObject.cmt_year != "" 
-				&& cmtObject.cmt_month != "") {
+				&& cmtObject.cmt_month != "" && empNo == "" ) {
 		   	$.ajax({											
 				type: "POST",
 				contentType : 'application/json;charset=UTF-8',
@@ -92,7 +102,21 @@
 					grid.resetData(result);
 			    }
 			});
-		} else alert("년, 월을 선택하세요.");
+		}else if(cmtObject.cmt_year != "" 
+				&& cmtObject.cmt_month != "" && empNo != "") {
+			cmtObject.emp_no = empNo;
+		   	$.ajax({											
+				type: "POST",
+				contentType : 'application/json;charset=UTF-8',
+				dataType : 'json',
+				url: "cmtSearchOne.do",
+				data: JSON.stringify(cmtObject),
+				success :function(result) {
+					console.log(result);
+					grid.resetData(result);
+			    }
+			});
+		}else alert("년, 월을 선택하세요.");
 	});
 	$("#update").click(function(){
 		console.log(grid.getCheckedRows());
@@ -105,6 +129,7 @@
 			url: "cmtlist.do",
 			data: JSON.stringify(grid.getCheckedRows()),
 			success :function(result) {
+				alert('수정되었습니다.');
 				console.log(result);
 				grid.resetData(result);
 		    }
@@ -129,10 +154,10 @@
 	}
 	minutes += " ]";
 
-	console.log(hours);
 	const grid = new tui.Grid({
 		el: document.getElementById('grid'),
 		data: ${gridData},
+		bodyHeight: 500,
 		rowHeaders: ['checkbox'],
 		columns: [
 			{

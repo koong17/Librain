@@ -53,6 +53,12 @@ public class MgmtController {
 		return "redirect:./totalpay.do";
 	}
 	
+	@PostMapping(value = "/empDept.do", produces = "application/json;charset=UTF-8")
+	public @ResponseBody String empDept(@RequestBody EmployeeDTO employeeDTO) {
+		JSONArray ja = mgmtService.empSelectDept(employeeDTO);
+		return ja.toString();
+	}
+	
 	@PostMapping("/totalpay1.do")
 	public @ResponseBody String totalPay1(@RequestBody EmployeeDTO employeeDTO) {
 		JSONObject jo = mgmtService.empSelectPay(employeeDTO);
@@ -133,5 +139,10 @@ public class MgmtController {
 	@PostMapping(value = "/cmtSearch.do", produces = "application/json;charset=UTF-8")
 	public @ResponseBody String cmtSearch(@RequestBody CommuteDTO commuteDTO) {
 		return mgmtService.cmtSearch(commuteDTO).toString();
+	}
+	
+	@PostMapping(value = "/cmtSearchOne.do", produces = "application/json;charset=UTF-8")
+	public @ResponseBody String cmtSearchOne(@RequestBody CommuteDTO commuteDTO) {
+		return mgmtService.cmtSearchOne(commuteDTO).toString();
 	}
 }

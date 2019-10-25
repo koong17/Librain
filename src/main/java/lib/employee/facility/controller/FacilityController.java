@@ -27,7 +27,7 @@ public String facility(Model model) {
 	@RequestMapping(value="/facilityapproval")
 public String facilityapproval(Model model) {
 	
-	return "admin/erp/facilityapproval";
+	return "admin/erp/facility/facilityapproval";
 }
 
 

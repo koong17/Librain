@@ -1,27 +1,19 @@
 package lib.employee.facilityinspection.controller;
 
-import java.awt.PageAttributes.MediaType;
-import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lib.employee.facility.model.FacilitiesDAO;
 import lib.employee.facility.model.FacilitiesDTO;
 import lib.employee.facilityinspection.model.FacilitiesInspectionDAO;
+import lib.employee.facilityinspection.model.FacilitiesInspectionDTO;
+import lib.employee.facilityinspection.model.FacinVO;
 
 
 @RestController
@@ -30,19 +22,20 @@ import lib.employee.facilityinspection.model.FacilitiesInspectionDAO;
 public class FacilityinspectionRestController {
 	@Autowired
 	FacilitiesInspectionDAO dao;
-@RequestMapping(value = "/readData",method = RequestMethod.GET)
-public HashMap check(@RequestParam int perPage,@RequestParam int page ) {
+@RequestMapping(value = "/readData",method = RequestMethod.GET,produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+
+public HashMap check() {
 	
 	
-	List list=dao.facinselect(perPage,page);
+	List list=dao.facinselect();
 	
 	
-	// �??���? 고칠 ?��?��?�� ?��?��. 
+	// 占�??占쏙옙占�? 怨좎튌 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙. 
 	HashMap total=new HashMap();
 	HashMap data=new HashMap();
 	HashMap pagenation=new HashMap();
-	pagenation.put("page",page);
-//	pagenation.put("totalCount",dao.factotalcount());
+	pagenation.put("page",1);
+	pagenation.put("totalCount",dao.facintotalcount());
 	data.put("contents",list);
 	
 	
@@ -54,32 +47,34 @@ public HashMap check(@RequestParam int perPage,@RequestParam int page ) {
 }
 
 
-@RequestMapping(value="/createData",method = RequestMethod.POST )
-public void insert(@RequestBody List<FacilitiesDTO> dto) {
-	System.out.println("?��?��");
-	for (FacilitiesDTO facilitiesDTO : dto) {
-	//facilitiesDAO.facinsert(facilitiesDTO);
-	}
+@RequestMapping(value="/createData",method = RequestMethod.POST ,produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+public HashMap insert(@RequestBody List<FacinVO> dto) {
+	 System.out.println(dto.size());
+	 
+	 for (FacinVO facinVO : dto) {
+		 dao.facininsertprocedure(facinVO);
+		 System.out.println(facinVO.toString());
+	 }	 
+	 return check();
 }
 	
-@RequestMapping(value="/modifyData",method = RequestMethod.PUT )
-	public void facupdate(@RequestBody List<FacilitiesDTO> dto) {
-		System.out.println("?��?��");
-		for (FacilitiesDTO facilitiesDTO : dto) {
-		//facilitiesDAO.facinsert(facilitiesDTO);
-		System.out.println(facilitiesDTO.toString());
-	//	facilitiesDAO.facupdate(facilitiesDTO);
+@RequestMapping(value="/modifyData",method = RequestMethod.PUT,produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public HashMap facupdate(@RequestBody List<FacilitiesInspectionDTO> dto) {
+		System.out.println("?占쏙옙?占쏙옙");
+		for (FacilitiesInspectionDTO FacilitiesInspectionDTO : dto) {
+		dao.facinupdateprocedure(FacilitiesInspectionDTO);
 		}	
 	
+			return check();
 			
 }
 
-@RequestMapping(value = "/deleteData",method = RequestMethod.DELETE)
-	public void facdelete(@RequestBody List<FacilitiesDTO> dto) {	
-	for (FacilitiesDTO facilitiesDTO : dto) {
+@RequestMapping(value = "/deleteData",method = RequestMethod.DELETE,produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public void facdelete(@RequestBody List<FacilitiesInspectionDTO> dto) {	
+	for (FacilitiesInspectionDTO FacilitiesInspectionDTO : dto) {
 	
-		//facilitiesDAO.facdelete(facilitiesDTO);
-	// ?��?��?��것들 ?���?.
+		dao.facindelete(FacilitiesInspectionDTO);
+	// ?占쏙옙?占쏙옙?占쏙옙寃껊뱾 ?占쏙옙占�?.
 	
 	}
 	

@@ -38,11 +38,13 @@ public class NoticeController {
 	private NoticeService service;
 	public HttpSession session;
 
+	//공지글 입력 폼
 	@GetMapping("/registerNotice.do")
 	public String boardRegisterForm() {
 		return "employee/board/registerNotice";
 	}
 
+	//실제 글 등록 처리
 	@PostMapping("/registerNotice.do")
 	public String noticeInsert(NoticeDTO notice, RedirectAttributes rttr) {
 		//첨부파일 처리
@@ -55,6 +57,7 @@ public class NoticeController {
 		return "redirect:./list.do";
 	}
 
+	//글 읽기
 	@GetMapping("/getNotice.do")
 	public String noticeSelectOne(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectOne(board_no));
@@ -62,25 +65,15 @@ public class NoticeController {
 		return "employee/board/getNotice";
 	}
 	
+	//글 수정 폼
 	@GetMapping("/modifyNotice.do")
 	public String noticeModifyForm(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("board", service.noticeSelectOne(board_no));
 		return "employee/board/modifyNotice";
 	}
 	
-	@GetMapping({"/getNextNotice.do"})
-	public String noticeSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", service.noticeSelectNext(board_no));
-		return "employee/board/getNextNotice"; 
-	}
 	
-	@GetMapping({"/getPrevNotice.do"})
-	public String noticeSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", service.noticeSelectPrev(board_no));
-		return "employee/board/getPrevNotice";
-	}
-	
-
+	//실제 수정 처리
 	@PostMapping("/modifyNotice.do")
 	public String noticeUpdate(NoticeDTO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
@@ -95,7 +88,23 @@ public class NoticeController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:./list.do";
 	}
+	
+	//다음 공지글
+	@GetMapping({"/getNextNotice.do"})
+	public String noticeSelectNext(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("board", service.noticeSelectNext(board_no));
+		return "employee/board/getNextNotice"; 
+	}
+	
+	//이전 공지글
+	@GetMapping({"/getPrevNotice.do"})
+	public String noticeSelectPrev(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("board", service.noticeSelectPrev(board_no));
+		return "employee/board/getPrevNotice";
+	}
 
+	
+	//글 삭제
 	@PostMapping("/removeNotice.do")
 	public String noticeDelete(@RequestParam("board_no") Long board_no, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 
@@ -127,12 +136,17 @@ public class NoticeController {
 		
 		attachList.forEach(attach -> {
 			try {
-				Path file = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+attach.getFileName());
+				Path file = Paths.get(
+									"C:\\upload\\"+attach.getUploadPath()+
+									"\\" + attach.getUuid()+
+									"_"+attach.getFileName());
 				Files.deleteIfExists(file);
 				
 				if(Files.probeContentType(file).startsWith("image")) {
-					Path thumNail = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid() + "_"
-							+ attach.getFileName());
+					Path thumNail = Paths.get(
+									"C:\\upload\\"+attach.getUploadPath()+
+									"\\s_" + attach.getUuid() + "_"+ 
+									attach.getFileName());
 					Files.delete(thumNail);
 				}
 				

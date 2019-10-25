@@ -26,10 +26,6 @@ public class LoginController {
 	public String login() {
 		return "employee/login/login";
 	}
-	@RequestMapping("/test.do")
-	public String test() {
-		return "employee/login/test";
-	}
 	
 	@RequestMapping("/main.do")
 	public String loginAns(Model model) {

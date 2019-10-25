@@ -31,16 +31,15 @@
 	<select id="searchAll" parameterType="java.lang.String" resultType="lib.member.book.model.MemBookDTO">
 		select b.*,  nvl(rent_status, '대여가능') rent
 			from  (select * from book where book_name like #{ searchWord } or book_author like #{ searchWord } or book_pub_house like #{ searchWord }
-                   order by book_num desc) b 
-			left outer join rental  r  
+                        order by book_num desc) b 
+			left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
 			on b.book_num = r.book_num
 	</select>
 	
 	<select id="searchCtgr" parameterType="java.lang.String" resultType="lib.member.book.model.MemBookDTO">
 		select b.*, nvl(rent_status, '대여가능') rent
-		    from (select * from book where ${searchCtgr} like #{ searchWord }
-		    	  order by book_num desc) b
-		    left outer join rental r
+		    from (select * from book where ${searchCtgr} like #{searchWord} order by book_num desc) b
+		    left outer join (select book_num, rent_status from rental where rent_startdate in (select max(rent_startdate) from rental group by book_num)) r
 		    on b.book_num = r.book_num
 	</select>
 	
@@ -49,11 +48,11 @@
 	<![CDATA[
 		select * from 
 		    (select rownum rnum, b.*, nvl(rent_status, '대여가능') rent 
-		        from (select * from book order by book_num desc, book_input_date desc) b
+		        from (select * from book where book_input_date <= sysdate and book_input_date >= sysdate - 30 
+		            order by  book_input_date desc, book_num desc) b
 		        left outer join rental r
 		        on b.book_num =r.book_num where rownum <= 20)
-		    where book_input_date <= sysdate and book_input_date >= sysdate - 30
-		        and rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+			where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
 	]]>
 	</select>
 	
@@ -61,11 +60,11 @@
 	<![CDATA[
 		  select * from 
 		    (select rownum rnum, b.*, nvl(rent_status, '대여가능') rent 
-		        from (select * from book order by book_rent_cnt desc, book_num desc) b
+		        from (select * from book where book_input_date <= sysdate and book_input_date >= sysdate - 30 
+		            order by book_rent_cnt desc, book_num desc) b
 		        left outer join rental r
 		        on b.book_num =r.book_num where rownum <= 20)
-		    where book_input_date <= sysdate and book_input_date >= sysdate - 30
-		        and rnum > #{ startRowNum } and rnum <= #{ endRowNum }
+		  where rnum > #{ startRowNum } and rnum <= #{ endRowNum }
 	]]>
 	</select>
 	

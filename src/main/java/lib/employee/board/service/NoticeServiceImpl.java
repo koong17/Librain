@@ -28,6 +28,30 @@ public class NoticeServiceImpl implements NoticeService{
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
 	
+	// 공지 등록
+	@Transactional
+	@Override
+	public void noticeInsert(NoticeDTO notice) {
+		mapper.insertSelectKey(notice);
+
+		// 파일첨부
+		if (notice.getAttachList() == null || notice.getAttachList().size() <= 0) {
+			return;
+		}
+
+		notice.getAttachList().forEach(attach -> {
+			attach.setBoard_no(notice.getBoard_no());
+			attachMapper.insert(attach);
+		});
+	}
+
+	//글 읽기
+	@Override
+	public NoticeDTO noticeSelectOne(Long board_no) {
+		return mapper.read(board_no);
+	}
+
+	//이전 글
 	@Override
 	public NoticeDTO noticeSelectPrev(Long board_no) {
 		
@@ -36,6 +60,7 @@ public class NoticeServiceImpl implements NoticeService{
 		else {return dto;}
 	}
 	
+	//다음 글
 	@Override
 	public NoticeDTO noticeSelectNext(Long board_no) {
 		NoticeDTO dto =  mapper.readNext(board_no);
@@ -43,25 +68,7 @@ public class NoticeServiceImpl implements NoticeService{
 		else {return dto;}
 	}
 	
-	@Transactional
-	@Override
-	public void noticeInsert(NoticeDTO notice) {
-		mapper.insertSelectKey(notice);
-		
-		//파일첨부
-		if(notice.getAttachList() == null || notice.getAttachList().size() <=0) {return;}
-		
-		notice.getAttachList().forEach(attach -> {
-			attach.setBoard_no(notice.getBoard_no());
-			attachMapper.insert(attach);
-		});
-	}
-
-	@Override
-	public NoticeDTO noticeSelectOne(Long board_no) {
-		return mapper.read(board_no);
-	}
-
+	//글 수정
 	@Transactional
 	@Override
 	public boolean noticeUpdate(NoticeDTO notice) {
@@ -74,26 +81,31 @@ public class NoticeServiceImpl implements NoticeService{
 				attachMapper.insert(attach);
 			});
 		}
-		return modifyResult;
+		return modifyResult;	//리턴 결과를 토대로 정상종료, 비정상종료 판단
 	}
+	
 
+	//공지 삭제
 	@Override
 	public boolean noticeDelete(Long board_no) {
 		attachMapper.deleteAll(board_no);
 		return mapper.delete(board_no)==1;
 	}
 
+	//페이징
 	@Override
 	public int noticeGetTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
 
+	//첨부파일
 	@Override
 	public List<BoardAttachDTO> getAttachList(Long board_no) {
 		log.info("get Attach List by board_no" + board_no);
 		return attachMapper.findByBno(board_no);
 	}
 	
+	//전체보기
 	@Override
 	public List<NoticeDTO> getNotices(){
 		return mapper.getNotices();
