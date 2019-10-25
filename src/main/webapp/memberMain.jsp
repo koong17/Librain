@@ -175,7 +175,7 @@
                       <span class="icon yellow"></span>
                       <span class="price-small yellow" style="font-weight:bold">정보수정</span><br><br>
                       <p>주소와 연락처는 최신상태로 유지하시기 바랍니다.</p>
-                      <a class="btn btn-lg btn-warning" href="${pageContext.request.contextPath}/member/login.do" role="button" target="_blank">정보수정</a>
+                      <a class="btn btn-lg btn-warning" href="${pageContext.request.contextPath}/member/login.do" role="button">정보수정</a>
                   </div>
               </div><!-- .Col-md-3 ends here -->
           

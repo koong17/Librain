@@ -180,7 +180,7 @@ public class EmpBookServiceImpl implements EmpBookService {
 	@Override
 	public void insert(List<EmpBookDTO> dto) {
 		for (EmpBookDTO empBookDTO : dto) {
-			empBookDTO.setBook_ctgr_num_db((Integer.parseInt(empBookDTO.getBook_ctgr_num())/100)+"00");
+			empBookDTO.setBook_ctgr_num_db((Double.parseDouble(empBookDTO.getBook_ctgr_num())/100)+"00");
 			System.out.println("empBookDTO.getBook_ctgr_num()" + empBookDTO.getBook_ctgr_num());
 			System.out.println("empBookDTO.getBook_ctgr_num_db()" + empBookDTO.getBook_ctgr_num_db());
 			bookDAO.insertBook(empBookDTO);

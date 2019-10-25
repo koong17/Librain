@@ -201,8 +201,8 @@
                         			
                         			
                         			<li>
-                                    <a href="#">시설관리 <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
+                                    <a href="#"><i class="fa fa-gear fa-fw"></i>시설관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
                                         <li>
                                             <a href="${pageContext.request.contextPath}/facility">시설</a>
                                         </li>

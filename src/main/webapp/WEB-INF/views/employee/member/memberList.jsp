@@ -56,7 +56,7 @@
 				</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-block" id="refresh" onclick="location.href='/mvc/memberList.do'">
+				<button type="button" class="btn btn-primary btn-block" id="refresh" onclick="location.href='memberList.do'">
 					<i class="fa fa-refresh" aria-hidden="true"></i>
 				</button>
 			</div>

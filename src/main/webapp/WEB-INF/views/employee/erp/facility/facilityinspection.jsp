@@ -67,7 +67,7 @@
       $('#grid2').hide()
 
       $.ajax({
-		url:"http://localhost:8080/librain/facilityinspection/readData",
+		url:"http://10.10.10.178:8080/librain/facilityinspection/readData",
 		type:"get",
 		contentType: 'application/json',
 		success:function(date){
@@ -200,7 +200,7 @@ grid.findRows((row) => {
 
           $.ajax({
          type: "PUT",
-         url: "http://localhost:8080/librain/facilityinspection/modifyData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/modifyData",
          data: JSON.stringify(object),
        	contentType: 'application/json',
 		success:function(date){
@@ -341,7 +341,7 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
 
           $.ajax({
          type: "post",
-         url: "http://localhost:8080/librain/facilityinspection/createData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/createData",
          data: JSON.stringify(object),
        	contentType: 'application/json',
 		success:function(date){
@@ -372,7 +372,7 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
 
           $.ajax({
          type: "POST",
-         url: "http://localhost:8080/librain/facilityinspection/createData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/createData",
          data: JSON.stringify(grid2.getCheckedRows()),
        	contentType: 'application/json',
 		success:function(date){
