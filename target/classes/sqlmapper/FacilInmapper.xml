@@ -28,6 +28,10 @@ to_char(FacIn_INSPECTION_DUE_DATE,'yyyy"/"MM"/"DD""') FacIn_INSPECTION_DUE_DATE 
   <insert id="facininsertprocedure" statementType="CALLABLE" parameterType="lib.employee.facilityinspection.model.FacinVO">
     {
  CALL facin_insert(#{facfacin_name} , #{facin_address}
+ <trim prefix="where" prefixOverrides="and|or">
+ <if test=""></if>
+ <if test=""></if>	
+ </trim>
  	<if test="f_cycle != null">
  	,#{f_cycle}
  	</if>

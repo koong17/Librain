@@ -23,22 +23,14 @@ public class FacilityController {
 	FacilitiesDAO facilitiesDAO; 
 	
 	@RequestMapping(value="/facility")
-public String facility(Model model) {
-	
-	return "employee/erp/facility/facility";
-}
+	public String facility(Model model) {
+		
+		return "employee/erp/facility/facility";
+	}
 	@RequestMapping(value="/facilityapproval")
-public String facilityapproval(Model model) {
-	
-	return "admin/erp/facility/facilityapproval";
-}
-
-
-	@Scheduled(fixedDelay = 1000)
-	public void sche() {
+	public String facilityapproval(Model model) {
 		
-		
-		System.out.println("d");
+		return "admin/erp/facility/facilityapproval";
 	}
 
 	
