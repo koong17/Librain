@@ -42,7 +42,7 @@
 </head>
 <body>
 <div class="container" id="contents">
-	<form action="member/join.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
+	<form action="join.do" method="post" name="joinForm" id="joinForm" onsubmit="javascript:return formCheck();">
 		<div class="form-group">
 			<div class="row form-group">
 				<label for="inputID" class="col-xs-2 control-label">아이디</label>
@@ -51,7 +51,7 @@
 						id="mem_id" name="mem_id" required>
 				</div>
 				<div>
-					<button type="button" id="mem_idCheck" class="btn btn-info btm-sm" >중복확인</button>
+					<button type="button" id="memberIDCheck" class="btn btn-info btm-sm" >중복확인</button>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -130,7 +130,7 @@
 				<div class="form-group">
 					<div class="col-xs-4">
 						<button type="button" class="btn btn-info btn-block" id="homeBtn"
-							onclick="location.href='index.jsp'">
+							onclick="location.href='${pageContext.request.contextPath}/memberMain.jsp'">
 							<i class="fa fa-home"></i>
 						</button>
 					</div>

@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +13,6 @@
   
   <%@include file="../../includes/header.jsp"%>
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 
   <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.css" />
@@ -22,10 +21,8 @@
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
     <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/v1.5.0/tui-time-picker.js"></script>
@@ -47,6 +44,15 @@
               display: inline;
           }
         </style>
+      	<div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">시설검사</h1>
+            </div>
+		</div>
+   </div>
+      
+      
       
             <div id="grid"></div>
           <br>
@@ -61,7 +67,7 @@
       $('#grid2').hide()
 
       $.ajax({
-		url:"http://localhost:8080/librain/facilityinspection/readData",
+		url:"http://10.10.10.178:8080/librain/facilityinspection/readData",
 		type:"get",
 		contentType: 'application/json',
 		success:function(date){
@@ -162,7 +168,8 @@ const grid = new tui.Grid({
 	      resizable: true
 	    }
 });
-var alerttextvalues='';
+var alerttextvalues='점검예정일까지 7일미만의 일련번호\n';
+
 grid.findRows((row) => {
     return (row.RemainingTime < 7)
       }  ).forEach((row2)=>{
@@ -171,7 +178,7 @@ grid.findRows((row) => {
 
           alerttextvalues+=row2.FacIn_serialnum +'번\n'
       })
-      alerttextvalues+='점검예정일까지 7일미만의 일련번호' 
+      alerttextvalues+='' 
       if(alerttextvalues.length>18) alert(alerttextvalues)
       alerttextvalues="";
 
@@ -193,7 +200,7 @@ grid.findRows((row) => {
 
           $.ajax({
          type: "PUT",
-         url: "http://localhost:8080/librain/facilityinspection/modifyData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/modifyData",
          data: JSON.stringify(object),
        	contentType: 'application/json',
 		success:function(date){
@@ -312,7 +319,7 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
 
    }
    grid2.on('click',function (ev) {
-      console.log(ev.columnName)
+      console.log(ev)
       if(ev.columnName=="checkbutton"){
 
      var trueorfalsevailidate=   grid2.validate().some((check)=>{
@@ -320,20 +327,21 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
         })
         console.log(trueorfalsevailidate)
         if(!trueorfalsevailidate) {
-
+	console.log(grid2.getRow(ev.rowKey).facfacin_name)
           var object=new Object()
           object=[
           {
           FacIn_serialnum:grid2.getRow(ev.rowKey).FacIn_serialnum
-          ,FacIn_name:grid2.getRow(ev.rowKey).FacIn_name,
+          ,facfacin_name:grid2.getRow(ev.rowKey).facfacin_name,
           facin_address:grid2.getRow(ev.rowKey).facin_address
           ,f_cycle:grid2.getRow(ev.rowKey).f_cycle
           }
           ]
+          console.log(object)
 
           $.ajax({
          type: "post",
-         url: "http://localhost:8080/librain/facilityinspection/createData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/createData",
          data: JSON.stringify(object),
        	contentType: 'application/json',
 		success:function(date){
@@ -364,7 +372,7 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
 
           $.ajax({
          type: "POST",
-         url: "http://localhost:8080/librain/facilityinspection/createData",
+         url: "http://10.10.10.178:8080/librain/facilityinspection/createData",
          data: JSON.stringify(grid2.getCheckedRows()),
        	contentType: 'application/json',
 		success:function(date){
@@ -384,5 +392,6 @@ grid2.appendRow({"facfacin_name":"","facin_address":"","f_cycle":"", "checkbutto
        
      }
             </script>
-            <br><br><br>
+            </body>
+           
 </html>

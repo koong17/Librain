@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!DOCTYPE html>
     <html>
         <head>
@@ -8,9 +9,7 @@
         </head>
         <%@include file="../../../employee/includes/header.jsp"%>
         
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
         <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
         <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
@@ -18,7 +17,16 @@
         <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <body>
-<br>
+        
+
+	<div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">시설승인</h1>
+            </div>
+		</div>
+   </div>        
+        
 <style>
 .glyphicon.glyphicon-plus.btn.btn-primary{
     width:5%;
@@ -50,7 +58,7 @@ function gridmodify(row){
 	setTimeout(()=>{
 
 	$.ajax({
-		url:"httP://localhost:8080/librain/facility/modifyDataRepair",
+		url:"httP://10.10.10.178:8080/librain/facility/modifyDataRepair",
 		data: JSON.stringify(grid.getRow(row)),
 		type:"PUT",
 		contentType: 'application/json',
@@ -63,8 +71,8 @@ function gridmodify(row){
 const dataSource = {
 		  initialRequest: true,
 		  api: {
-		    readData: { url: 'http://localhost:8080/librain/facility/readDataRepair', method: 'get' },
-		    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
+		    readData: { url: 'http://10.10.10.178:8080/librain/facility/readDataRepair', method: 'get' },
+		    createData: { url: 'http://10.10.10.178:8080/librain/facility/createData', method: 'POST' },
 		    updateData: { url: '/api/updateData', method: 'PUT' },
 		    modifyData: { url: '/api/modifyData', method: 'PUT' },
 		    deleteData: { url: '/api/deleteData', method: 'DELETE' }

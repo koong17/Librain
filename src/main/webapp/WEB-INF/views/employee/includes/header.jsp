@@ -198,7 +198,25 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        			
+                        			
+                        			<li>
+                                    <a href="#"><i class="fa fa-gear fa-fw"></i>시설관리 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/facility">시설</a>
+                                        </li>
+                                        <li>
+                                        	<a href="${pageContext.request.contextPath}/facilityapproval">시설승인</a>
+                                        </li>
+                                         <li>
+                                        	<a href="${pageContext.request.contextPath}/facilityinspection">시설검사</a>
+                                        </li>
+                                        
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li> 
+                                
                         <li>
                             <a href="${pageContext.request.contextPath}/memberList.do"><i class="fa fa-sitemap fa-fw"></i>회원조회</a>
                         </li>

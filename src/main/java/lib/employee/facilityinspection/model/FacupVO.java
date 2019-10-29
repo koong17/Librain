@@ -1,5 +1,7 @@
 package lib.employee.facilityinspection.model;
 
+import java.util.List;
+
 public class FacupVO {
 	String facin_address;
 	String FacIn_serialnum;

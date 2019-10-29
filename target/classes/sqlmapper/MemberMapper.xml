@@ -9,6 +9,7 @@
 		insert into member(mem_id,mem_pw,mem_name,mem_jumin,mem_address,mem_phone,mem_email,mem_address_number) values (#{mem_id},#{mem_pw},#{mem_name},#{mem_jumin},#{mem_address},#{mem_phone},#{mem_email},#{mem_address_number})
 	</insert>
 	
+	<!-- 중복확인 -->
 	<select id="memberSearchIDCount" parameterType="lib.member.model.MemberDTO" resultType="Integer">
 		select count(*) from member where mem_id = #{mem_id}
 	</select>

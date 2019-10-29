@@ -98,7 +98,9 @@
 		rowHeaders: ['checkbox'],
 		columns : [ {
 			header : '사원번호',
-			name : 'emp_no'
+			name : 'emp_no',
+	        sortable: true
+			
 		}, {
 			header : '기본급',
 			name : 'sal_basic_pay'

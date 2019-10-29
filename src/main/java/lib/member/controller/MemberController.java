@@ -41,10 +41,10 @@ public class MemberController {
 	public String memberjoin(@ModelAttribute MemberDTO memberDTO) {
 		System.out.println("join컨트롤탐");
 		memberService.memberjoin(memberDTO);
-		return "member/memberjoin";
+		return "redirect:../memberMain.jsp";
 	}
 	
-	@RequestMapping(value="/memberIDCheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/memberIDCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> idcheck(@RequestBody String mem_id){
 		int count=0;

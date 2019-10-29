@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
 </head>
 <%@include file="../../includes/header.jsp"%>
 <body>
+
 
      
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -25,6 +28,15 @@
      <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/v3.2.1/tui-date-picker.js"></script>
      <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>  
+   
+   <div class="wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">시설</h1>
+            </div>
+		</div>
+   </div>
+   
 <br>
 <style>
 .btn.btn-primary{
@@ -70,7 +82,7 @@ var checkfilter=grid.getCheckedRows().filter((rows)=>{
         return
     }
 $.ajax({
-	url:"http://localhost:8080/librain/facility/modifyData",
+	url:"http://10.10.10.178:8080/librain/facility/modifyData",
 	data: JSON.stringify(grid.getModifiedRows().updatedRows),
 	type:"PUT",
 	contentType: 'application/json',
@@ -86,8 +98,8 @@ $.ajax({
 const dataSource = {
 	  initialRequest: true,
 	  api: {
-	    readData: { url: 'http://localhost:8080/librain/facility/readData', method: 'GET' },
-	    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
+	    readData: { url: 'http://10.10.10.178:8080/librain/facility/readData', method: 'GET' },
+	    createData: { url: 'http://10.10.10.178:8080/librain/facility/createData', method: 'POST' },
 	    updateData: { url: '/api/updateData', method: 'PUT' },
 	    modifyData: { url: '/api/modifyData', method: 'PUT' },
 	    deleteData: { url: '/api/deleteData', method: 'DELETE' }
@@ -111,7 +123,7 @@ columns: [
 		name: 'fac_serialnum',
 		sortingType: 'desc',
         sortable: true,
-        width:90,
+        width:100,
         filter: {
             type: 'number',
             showApplyBtn: true,
@@ -293,7 +305,7 @@ function griddelete(){
     }
     console.log(grid.getCheckedRows().length)
 	$.ajax({
-		url:'http://localhost:8080/librain/facility/deleteData',
+		url:'http://10.10.10.178:8080/librain/facility/deleteData',
 		data:JSON.stringify(grid.getCheckedRows()),
 		contentType: 'application/json',
 		type:"DELETE",
@@ -315,7 +327,7 @@ function grdi2checked(){//데이터 보내기용
 	grid2.blur()
 	setTimeout(()=>	
 	$.ajax({
-		url:'http://localhost:8080/librain/facility/createData',
+		url:'http://10.10.10.178:8080/librain/facility/createData',
 		data:JSON.stringify(grid2.getModifiedRows().createdRows),
 		contentType: 'application/json',
 		type:"POST",

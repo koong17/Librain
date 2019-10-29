@@ -26,7 +26,7 @@
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-3">
 				    <div class="input-group">
-					    <input type="text" class="form-control" placeholder="회원번호" id="mem_id" name="mem_id">
+					    <input type="text" class="form-control" placeholder="회원ID" id="mem_id" name="mem_id">
 					    <span class="input-group-btn">
 						    <button class="btn btn-default" type="button" id="memBtn">
 						   		<i class="fa fa-search"></i>

@@ -45,7 +45,7 @@
 							value='<c:out value="${board.board_writer }"/>' readonly="readonly">
 						</div>
 						<c:choose>
-						<c:when test="${sessionScope.emp_name == board.board_writer || sessionScope.emp_position=='관장'}">
+						<c:when test="${sessionScope.emp_name == board.board_writer || sessionScope.emp_position=='관장' || sessionScope.emp_position=='팀장'}">
 								<button data-oper='modify' class="btn btn-warning">Modify</button>
 						</c:when>
 						</c:choose>
