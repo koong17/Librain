@@ -82,7 +82,7 @@ var checkfilter=grid.getCheckedRows().filter((rows)=>{
         return
     }
 $.ajax({
-	url:"http://10.10.10.178:8080/librain/facility/modifyData",
+	url:"http://localhost:8080/librain/facility/modifyData",
 	data: JSON.stringify(grid.getModifiedRows().updatedRows),
 	type:"PUT",
 	contentType: 'application/json',
@@ -98,8 +98,8 @@ $.ajax({
 const dataSource = {
 	  initialRequest: true,
 	  api: {
-	    readData: { url: 'http://10.10.10.178:8080/librain/facility/readData', method: 'GET' },
-	    createData: { url: 'http://10.10.10.178:8080/librain/facility/createData', method: 'POST' },
+	    readData: { url: 'http://localhost:8080/librain/facility/readData', method: 'GET' },
+	    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
 	    updateData: { url: '/api/updateData', method: 'PUT' },
 	    modifyData: { url: '/api/modifyData', method: 'PUT' },
 	    deleteData: { url: '/api/deleteData', method: 'DELETE' }
@@ -305,7 +305,7 @@ function griddelete(){
     }
     console.log(grid.getCheckedRows().length)
 	$.ajax({
-		url:'http://10.10.10.178:8080/librain/facility/deleteData',
+		url:'http://localhost:8080/librain/facility/deleteData',
 		data:JSON.stringify(grid.getCheckedRows()),
 		contentType: 'application/json',
 		type:"DELETE",
@@ -327,7 +327,7 @@ function grdi2checked(){//데이터 보내기용
 	grid2.blur()
 	setTimeout(()=>	
 	$.ajax({
-		url:'http://10.10.10.178:8080/librain/facility/createData',
+		url:'http://localhost:8080/librain/facility/createData',
 		data:JSON.stringify(grid2.getModifiedRows().createdRows),
 		contentType: 'application/json',
 		type:"POST",

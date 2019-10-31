@@ -58,7 +58,7 @@ function gridmodify(row){
 	setTimeout(()=>{
 
 	$.ajax({
-		url:"httP://10.10.10.178:8080/librain/facility/modifyDataRepair",
+		url:"httP://localhost:8080/librain/facility/modifyDataRepair",
 		data: JSON.stringify(grid.getRow(row)),
 		type:"PUT",
 		contentType: 'application/json',
@@ -71,8 +71,8 @@ function gridmodify(row){
 const dataSource = {
 		  initialRequest: true,
 		  api: {
-		    readData: { url: 'http://10.10.10.178:8080/librain/facility/readDataRepair', method: 'get' },
-		    createData: { url: 'http://10.10.10.178:8080/librain/facility/createData', method: 'POST' },
+		    readData: { url: 'http://localhost:8080/librain/facility/readDataRepair', method: 'get' },
+		    createData: { url: 'http://localhost:8080/librain/facility/createData', method: 'POST' },
 		    updateData: { url: '/api/updateData', method: 'PUT' },
 		    modifyData: { url: '/api/modifyData', method: 'PUT' },
 		    deleteData: { url: '/api/deleteData', method: 'DELETE' }
